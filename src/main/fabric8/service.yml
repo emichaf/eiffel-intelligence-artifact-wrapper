@@ -1,0 +1,10 @@
+metadata:
+  labels:
+    hystrix.enabled: "false"
+spec:
+    ports:
+    - name: http
+      port: 8090
+      protocol: TCP
+      targetPort: 8090
+    type: LoadBalancer
