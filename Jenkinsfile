@@ -11,8 +11,6 @@ podTemplate(label: 'mypod', containers: [
 
 
         String GIT_SHORT_COMMIT
-        String K8S_STAGE_NAMESPACE = "eiffelstage"
-
 
         stage ('GIT Checkout') {
             git branch: "master", url: 'https://github.com/emichaf/eiffel-intelligence-artifact-wrapper.git'
@@ -60,15 +58,18 @@ podTemplate(label: 'mypod', containers: [
                         usernameVariable: 'DOCKER_HUB_USER',
                         passwordVariable: 'DOCKER_HUB_PASSWORD']]) {
 
+
+               pom = readMavenPom file: 'pom.xml'
+
                sh "docker login -u ${env.DOCKER_HUB_USER} -p ${env.DOCKER_HUB_PASSWORD}"
 
-               sh "docker build --no-cache=true -t ${env.DOCKER_HUB_USER}/eiffel-intelligence-wrapper:latest -f src/main/docker/Dockerfile src/main/docker/"
+               sh "docker build --no-cache=true -t ${env.DOCKER_HUB_USER}/${pom.artifactId}:latest -f src/main/docker/Dockerfile src/main/docker/"
 
-               sh "docker push ${env.DOCKER_HUB_USER}/eiffel-intelligence-wrapper:latest"
+               sh "docker push ${env.DOCKER_HUB_USER}/${pom.artifactId}:latest"
 
-               sh "docker build --no-cache=true -t ${env.DOCKER_HUB_USER}/eiffel-intelligence-wrapper:${GIT_SHORT_COMMIT} -f src/main/docker/Dockerfile src/main/docker/"
+               sh "docker build --no-cache=true -t ${env.DOCKER_HUB_USER}/${pom.artifactId}:${GIT_SHORT_COMMIT} -f src/main/docker/Dockerfile src/main/docker/"
 
-               sh "docker push ${env.DOCKER_HUB_USER}/eiffel-intelligence-wrapper:${GIT_SHORT_COMMIT}"
+               sh "docker push ${env.DOCKER_HUB_USER}/${pom.artifactId}:${GIT_SHORT_COMMIT}"
 
                sh "docker logout"
 
@@ -87,8 +88,8 @@ podTemplate(label: 'mypod', containers: [
                     ]]){
 
 
-                         sh("kubectl --kubeconfig=$KUBECONFIG --namespace=${K8S_STAGE_NAMESPACE} create -f ./target/classes/META-INF/fabric8/kubernetes.yml")
-                         sh("kubectl --kubeconfig=$KUBECONFIG --namespace=${K8S_STAGE_NAMESPACE} get pods")
+                         sh("kubectl --kubeconfig=$KUBECONFIG create -f ./target/classes/META-INF/fabric8/kubernetes.yml")
+                         sh("kubectl --kubeconfig=$KUBECONFIG get pods")
 
                        }
                     }
