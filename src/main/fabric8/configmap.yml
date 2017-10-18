@@ -4,7 +4,7 @@ metadata:
 data:
   application.properties: |
     # spring application properties file
-    rabbitmq.host: myrabbitmq1-rabbitmq
+    rabbitmq.host: myrabbitmq-rabbitmq
     rabbitmq.port: 5672
     rabbitmq.user: myuser
     rabbitmq.password: myuser
