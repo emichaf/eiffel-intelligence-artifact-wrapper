@@ -1,6 +1,8 @@
 metadata:
   #  Must match the 'spring.application.name' property of the application
-  name: ${project.artifactId}
+  # name: ${project.artifactId}
+  # OBS name for imported EI jar (from JitPack)
+  name: eiffel-intelligence
 data:
   application.properties: |
     # spring application properties file
