@@ -2,7 +2,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.ericsson.emichaf</groupId>
-    <artifactId>eiffel-intelligence-artifact-wrapper</artifactId>
+    <artifactId>eiffel-intelligence</artifactId>
     <version>0.0.1-SNAPSHOT</version>
 
     <properties>
