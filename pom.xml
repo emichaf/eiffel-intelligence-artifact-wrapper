@@ -2,7 +2,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.ericsson.emichaf</groupId>
-    <artifactId>eiffel-intelligence</artifactId>
+    <artifactId>eiffel-intelligence-artifact-wrapper</artifactId>
     <version>0.0.1-SNAPSHOT</version>
 
     <properties>
@@ -89,7 +89,7 @@
                                     <artifactId>eiffel-intelligence</artifactId>
                                     <overWrite>true</overWrite>
                                     <outputDirectory>${basedir}/src/main/docker/maven</outputDirectory>
-                                    <destFileName>ei_fat.jar</destFileName>
+                                    <!--<destFileName>ei_fat.jar</destFileName>-->
                                     <!--<destFileName>${project.artifactId}-${project.version}-${maven.build.timestamp}.jar</destFileName>-->
                                 </artifactItem>
                             </artifactItems>
