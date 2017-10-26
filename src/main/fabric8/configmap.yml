@@ -10,3 +10,4 @@ data:
     rabbitmq.password: myuser
     mongodb.host: mymongodb-mongodb
     mongodb.port: 27017
+    spring.application.name: ${project.artifactId}
