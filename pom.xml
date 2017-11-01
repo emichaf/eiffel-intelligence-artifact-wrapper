@@ -28,7 +28,7 @@
 
     <dependencies>
         <dependency>
-            <groupId>com.github.tobiasake</groupId>
+            <groupId>com.github.ericsson</groupId>
             <artifactId>eiffel-intelligence</artifactId>
             <version>master-SNAPSHOT</version>
             <!--<version>v1.0.0-alpha</version>-->
@@ -85,7 +85,7 @@
                         <configuration>
                             <artifactItems>
                                 <artifactItem>
-                                    <groupId>com.github.tobiasake</groupId>
+                                    <groupId>com.github.ericsson</groupId>
                                     <artifactId>eiffel-intelligence</artifactId>
                                     <overWrite>true</overWrite>
                                     <outputDirectory>${basedir}/src/main/docker/maven</outputDirectory>
