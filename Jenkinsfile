@@ -17,7 +17,7 @@ podTemplate(label: 'mypod', containers: [
             stage ('GIT Checkout EI SC') {
 
                 dir ('sourcecode') {
-                                git branch: "master", url: 'https://github.com/Ericsson/https://github.com/Ericsson/eiffel-intelligence.git'
+                                git branch: "master", url: 'https://github.com/Ericsson/eiffel-intelligence.git'
                             }
 
 
