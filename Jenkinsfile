@@ -24,7 +24,32 @@ podTemplate(label: 'mypod', containers: [
             }
 
 
-            stage('Maven Build EI FrontEnd SC') {
+
+            stage('EI Front End Test (Unit & Flow)') {
+                    container('maven') {
+                    withCredentials([[$class: 'UsernamePasswordMultiBinding',
+                                credentialsId: 'e7de4146-4a59-4406-916e-d10506cfaeb8',
+                                usernameVariable: 'DOCKER_HUB_USER',
+                                passwordVariable: 'DOCKER_HUB_PASSWORD']]) {
+
+
+                     dir ('sourcecode') {
+
+                     def travis_datas = readYaml file: ".travis.yml"
+
+                     sh("mvn -DsomeModule.test.includes="**/FlowTest.java" test")
+
+                     //travis_datas.script.each { item ->
+
+                        //def frick_datas = travis_datas.script[0]
+
+                     //   sh "$item"
+
+                     //};
+
+
+
+            stage('Maven Build EI Front End SC') {
                     container('maven') {
                     withCredentials([[$class: 'UsernamePasswordMultiBinding',
                                 credentialsId: 'e7de4146-4a59-4406-916e-d10506cfaeb8',
@@ -49,25 +74,7 @@ podTemplate(label: 'mypod', containers: [
                 }
 
 
-            stage('Maven Build EI FrontEnd SC & test') {
-                    container('maven') {
-                    withCredentials([[$class: 'UsernamePasswordMultiBinding',
-                                credentialsId: 'e7de4146-4a59-4406-916e-d10506cfaeb8',
-                                usernameVariable: 'DOCKER_HUB_USER',
-                                passwordVariable: 'DOCKER_HUB_PASSWORD']]) {
 
-
-                     dir ('sourcecode') {
-
-                     def travis_datas = readYaml file: ".travis.yml"
-
-                     travis_datas.script.each { item ->
-
-                        //def frick_datas = travis_datas.script[0]
-
-                        sh "$item"
-
-                     };
 
 
 
