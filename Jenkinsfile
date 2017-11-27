@@ -37,7 +37,7 @@ podTemplate(label: 'mypod', containers: [
 
 									 def travis_datas = readYaml file: ".travis.yml"
 
-									 //sh('mvn -DsomeModule.test.includes="**/FlowTest.java" test')
+									 sh('mvn -DsomeModule.test.includes="**/FlowTest.java" test')
 
 									 //travis_datas.script.each { item ->
 
