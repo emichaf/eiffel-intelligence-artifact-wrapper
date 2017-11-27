@@ -24,6 +24,31 @@ podTemplate(label: 'mypod', containers: [
             }
 
 
+            stage('Maven Build EI FrontEnd SC') {
+                    container('maven') {
+                    withCredentials([[$class: 'UsernamePasswordMultiBinding',
+                                credentialsId: 'e7de4146-4a59-4406-916e-d10506cfaeb8',
+                                usernameVariable: 'DOCKER_HUB_USER',
+                                passwordVariable: 'DOCKER_HUB_PASSWORD']]) {
+
+                     dir ('sourcecode') {
+
+
+                         sh "mvn clean package -DskipTests"
+
+                         sh "ls"
+
+
+                     }
+
+
+
+                     }
+
+                    }
+                }
+
+
             stage('Maven Build EI FrontEnd SC & test') {
                     container('maven') {
                     withCredentials([[$class: 'UsernamePasswordMultiBinding',
@@ -71,35 +96,7 @@ podTemplate(label: 'mypod', containers: [
                 }
 
 
-        stage('Maven Build EI FrontEnd SC') {
-                    container('maven') {
-                    withCredentials([[$class: 'UsernamePasswordMultiBinding',
-                                credentialsId: 'e7de4146-4a59-4406-916e-d10506cfaeb8',
-                                usernameVariable: 'DOCKER_HUB_USER',
-                                passwordVariable: 'DOCKER_HUB_PASSWORD']]) {
 
-                     dir ('sourcecode') {
-                     sh "ls"
-                     sh "pwd"
-
-                     sh "mvn clean package -DskipTests"
-
-                     sh "ls"
-                     sh "pwd"
-                     sh "ls target"
-                     sh "cd target"
-                     sh "ls"
-
-                     //ei-frontend-0.0.1-SNAPSHOT.jar
-
-                            }
-
-
-
-                     }
-
-                    }
-                }
 
 
 
