@@ -47,7 +47,7 @@ podTemplate(label: 'mypod', containers: [
 
                      //};
 
-
+            }
 
             stage('Maven Build EI Front End SC') {
                     container('maven') {
@@ -71,7 +71,7 @@ podTemplate(label: 'mypod', containers: [
                      }
 
                     }
-                }
+                 }
 
 
 
