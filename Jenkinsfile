@@ -26,28 +26,37 @@ podTemplate(label: 'mypod', containers: [
 
 
             stage('EI Front End Test (Unit & Flow)') {
-                    container('maven') {
-                    withCredentials([[$class: 'UsernamePasswordMultiBinding',
-                                credentialsId: 'e7de4146-4a59-4406-916e-d10506cfaeb8',
-                                usernameVariable: 'DOCKER_HUB_USER',
-                                passwordVariable: 'DOCKER_HUB_PASSWORD']]) {
+                container('maven') {
+                            withCredentials([[$class: 'UsernamePasswordMultiBinding',
+                            credentialsId: 'e7de4146-4a59-4406-916e-d10506cfaeb8',
+                            usernameVariable: 'DOCKER_HUB_USER',
+                            passwordVariable: 'DOCKER_HUB_PASSWORD']]) {
 
 
-                     dir ('sourcecode') {
+							    dir ('sourcecode') {
 
-                     def travis_datas = readYaml file: ".travis.yml"
+									 def travis_datas = readYaml file: ".travis.yml"
 
-                     sh("mvn -DsomeModule.test.includes="**/FlowTest.java" test")
+									 sh("mvn -DsomeModule.test.includes="**/FlowTest.java" test")
 
-                     //travis_datas.script.each { item ->
+									 //travis_datas.script.each { item ->
 
-                        //def frick_datas = travis_datas.script[0]
+										//def frick_datas = travis_datas.script[0]
 
-                     //   sh "$item"
+									 //   sh "$item"
 
-                     //};
+									 //};
 
-            }
+							    }
+
+
+							}
+
+
+				}
+
+
+			}
 
             stage('Maven Build EI Front End SC') {
                     container('maven') {
@@ -79,28 +88,6 @@ podTemplate(label: 'mypod', containers: [
 
 
 
-
-                     sh "ls"
-                     sh "pwd"
-
-                     //sh "mvn clean package -DskipTests"
-
-                     sh "ls"
-                     sh "pwd"
-                     sh "ls target"
-                     sh "cd target"
-                     sh "ls"
-
-                     //ei-frontend-0.0.1-SNAPSHOT.jar
-
-                            }
-
-
-
-                     }
-
-                    }
-                }
 
 
 
