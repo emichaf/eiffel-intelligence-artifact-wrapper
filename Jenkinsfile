@@ -2,7 +2,8 @@ podTemplate(label: 'mypod', containers: [
     containerTemplate(name: 'docker', image: 'docker:latest', ttyEnabled: true, command: 'cat', alwaysPullImage: true),
     containerTemplate(name: 'kubectl', image: 'lachlanevenson/k8s-kubectl:v1.8.0', command: 'cat', ttyEnabled: true),
     containerTemplate(name: 'helm', image: 'lachlanevenson/k8s-helm:latest', command: 'cat', ttyEnabled: true, alwaysPullImage: true),
-    containerTemplate(name: 'maven', image: 'emtrout/dind:latest', command: 'cat', ttyEnabled: true, privileged: true, alwaysPullImage: true)
+    //containerTemplate(name: 'maven', image: 'emtrout/dind:latest', command: 'cat', ttyEnabled: true, privileged: true, alwaysPullImage: true)
+    containerTemplate(name: 'maven', image: 'emtrout/dind:latest', command: 'cat', ttyEnabled: true, alwaysPullImage: true)
   ],
   volumes: [
     hostPathVolume(mountPath: '/var/run/docker.sock', hostPath: '/var/run/docker.sock'),
@@ -53,8 +54,23 @@ podTemplate(label: 'mypod', containers: [
 
 
 
+            stage ('Upload to ARM') {
+                            container('maven') {
+                                  parallel (
+                                    'Test Server' : {
+                                      sh 'ls'
+                                    },
+                                    'Test Sample Client' : {
+                                      sh 'ls'
+                                    }
+                                  )
+                                }
+                            }
 
-        stage ('GIT Checkout EI Wrapper') {
+
+
+
+        stage ('GIT Checkout EI CI/CD Wrapper') {
 
             dir ('wrapper') {
             git branch: "master", url: 'https://github.com/emichaf/eiffel-intelligence-frontend-artifact-wrapper.git'
@@ -93,18 +109,7 @@ podTemplate(label: 'mypod', containers: [
         }
 
 
-         stage ('Upload to ARM') {
-                container('maven') {
-                      parallel (
-                        'Test Server' : {
-                          sh 'ls'
-                        },
-                        'Test Sample Client' : {
-                          sh 'ls'
-                        }
-                      )
-                    }
-                }
+
 
 
 
