@@ -1,12 +1,12 @@
 podTemplate(label: 'mypod', containers: [
-    containerTemplate(name: 'docker', image: 'docker', ttyEnabled: true, command: 'cat'),
+    containerTemplate(name: 'docker', image: 'docker:latest', ttyEnabled: true, command: 'cat', alwaysPullImage: true),
     containerTemplate(name: 'kubectl', image: 'lachlanevenson/k8s-kubectl:v1.8.0', command: 'cat', ttyEnabled: true),
-    containerTemplate(name: 'helm', image: 'lachlanevenson/k8s-helm:latest', command: 'cat', ttyEnabled: true),
+    containerTemplate(name: 'helm', image: 'lachlanevenson/k8s-helm:latest', command: 'cat', ttyEnabled: true, alwaysPullImage: true),
     containerTemplate(name: 'maven', image: 'emtrout/dind:latest', command: 'cat', ttyEnabled: true, privileged: true, alwaysPullImage: true)
   ],
   volumes: [
     hostPathVolume(mountPath: '/var/run/docker.sock', hostPath: '/var/run/docker.sock'),
-    emptyDirVolume(mountPath: '/tmp', memory: false),
+    //emptyDirVolume(mountPath: '/tmp', memory: false)
   ]) {
     node('mypod') {
 
@@ -36,16 +36,7 @@ podTemplate(label: 'mypod', containers: [
 
 									 def travis_datas = readYaml file: ".travis.yml"
 
-									 //sh('mvn -DsomeModule.test.includes="**/FlowTest.java" test')
-									 //sh('mvn -DsomeModule.test.excludes="**/FlowTest.java, **/FlowTest2.java, **/TrafficGeneratedTest.java, **/FlowTestExternalComposition.java" test')
-									 //sh('mvn -DsomeModule.test.includes="**/FlowTest.java" test')
-									 //sh('mvn -DsomeModule.test.includes="**/FlowTest2.java" test')
-									 //sh('mvn -DsomeModule.test.includes="**/TrafficGeneratedTest.java" test')
-									 //sh('mvn -DsomeModule.test.includes="**/FlowTestExternalComposition.java" test')
-
 									 travis_datas.script.each { item ->
-
-										//def frick_datas = travis_datas.script[0]
 
 									    sh "$item"
 
@@ -58,45 +49,8 @@ podTemplate(label: 'mypod', containers: [
 
 
 							}
-
-
 				}
-
-
 			}
-
-            stage('Maven Build EI Front End SC') {
-                    container('maven') {
-                    withCredentials([[$class: 'UsernamePasswordMultiBinding',
-                                credentialsId: 'e7de4146-4a59-4406-916e-d10506cfaeb8',
-                                usernameVariable: 'DOCKER_HUB_USER',
-                                passwordVariable: 'DOCKER_HUB_PASSWORD']]) {
-
-                     dir ('sourcecode') {
-
-
-                         sh "mvn clean package -DskipTests"
-
-                         sh "ls"
-
-
-                     }
-
-
-
-                     }
-
-                    }
-                 }
-
-
-
-
-
-
-
-
-
 
 
 
@@ -111,6 +65,9 @@ podTemplate(label: 'mypod', containers: [
 
         }
 
+
+
+
         stage('Maven Build') {
             container('maven') {
             withCredentials([[$class: 'UsernamePasswordMultiBinding',
@@ -118,24 +75,38 @@ podTemplate(label: 'mypod', containers: [
                         usernameVariable: 'DOCKER_HUB_USER',
                         passwordVariable: 'DOCKER_HUB_PASSWORD']]) {
 
-            dir ('wrapper') {
-               sh "pwd"
+                            dir ('wrapper') {
+                               sh "pwd"
 
-               sh "ls"
+                               sh "ls"
 
-               sh "mvn clean package -DskipTests"
+                               sh "mvn clean package -DskipTests"
 
-               sh "ls ../sourcecode/target/"
+                               sh "ls ../sourcecode/target/"
 
-               sh "cp ../sourcecode/target/ei-frontend-0.0.1-SNAPSHOT.jar src/main/docker/maven"
+                               sh "cp ../sourcecode/target/ei-frontend-0.0.1-SNAPSHOT.jar src/main/docker/maven"
 
-               sh "ls src/main/docker/maven"
-             }
+                               sh "ls src/main/docker/maven"
+                             }
 
-             }
-
+                        }
             }
         }
+
+
+         stage ('Upload to ARM') {
+                container('maven') {
+                      parallel (
+                        'Test Server' : {
+                          sh 'ls'
+                        },
+                        'Test Sample Client' : {
+                          sh 'ls'
+                        }
+                      )
+                    }
+                }
+
 
 
         stage ('Test') {
