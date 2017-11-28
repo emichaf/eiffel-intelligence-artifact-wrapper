@@ -20,13 +20,11 @@ podTemplate(label: 'mypod', containers: [
                 dir ('sourcecode') {
                                 git branch: "master", url: 'https://github.com/Ericsson/eiffel-intelligence.git'
                             }
-
-
             }
 
 
 
-            stage('EI Front End Test (Unit & Flow)') {
+            stage('UnitTests & FlowTests)') {
                 container('maven') {
                             withCredentials([[$class: 'UsernamePasswordMultiBinding',
                             credentialsId: 'e7de4146-4a59-4406-916e-d10506cfaeb8',
@@ -38,7 +36,13 @@ podTemplate(label: 'mypod', containers: [
 
 									 def travis_datas = readYaml file: ".travis.yml"
 
+									 //sh('mvn -DsomeModule.test.includes="**/FlowTest.java" test')
+
+									 sh('mvn -DsomeModule.test.excludes="**/FlowTest.java, **/FlowTest2.java, **/TrafficGeneratedTest.java, **/FlowTestExternalComposition.java" test')
 									 sh('mvn -DsomeModule.test.includes="**/FlowTest.java" test')
+									 sh('mvn -DsomeModule.test.includes="**/FlowTest2.java" test')
+									 sh('mvn -DsomeModule.test.includes="**/TrafficGeneratedTest.java" test')
+									 sh('mvn -DsomeModule.test.includes="**/FlowTestExternalComposition.java" test')
 
 									 //travis_datas.script.each { item ->
 
