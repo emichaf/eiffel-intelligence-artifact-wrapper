@@ -5,7 +5,7 @@ podTemplate(label: 'mypod', containers: [
     containerTemplate(name: 'maven', image: 'emtrout/dind:latest', command: 'cat', ttyEnabled: true, privileged: true, alwaysPullImage: true)
   ],
   volumes: [
-    hostPathVolume(mountPath: '/var/run/docker.sock', hostPath: '/var/run/docker.sock')
+    hostPathVolume(mountPath: '/var/run/docker.sock', hostPath: '/var/run/docker.sock'),
   ]) {
     node('mypod') {
 
