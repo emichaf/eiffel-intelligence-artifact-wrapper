@@ -37,20 +37,19 @@ podTemplate(label: 'mypod', containers: [
 									 def travis_datas = readYaml file: ".travis.yml"
 
 									 //sh('mvn -DsomeModule.test.includes="**/FlowTest.java" test')
+									 //sh('mvn -DsomeModule.test.excludes="**/FlowTest.java, **/FlowTest2.java, **/TrafficGeneratedTest.java, **/FlowTestExternalComposition.java" test')
+									 //sh('mvn -DsomeModule.test.includes="**/FlowTest.java" test')
+									 //sh('mvn -DsomeModule.test.includes="**/FlowTest2.java" test')
+									 //sh('mvn -DsomeModule.test.includes="**/TrafficGeneratedTest.java" test')
+									 //sh('mvn -DsomeModule.test.includes="**/FlowTestExternalComposition.java" test')
 
-									 sh('mvn -DsomeModule.test.excludes="**/FlowTest.java, **/FlowTest2.java, **/TrafficGeneratedTest.java, **/FlowTestExternalComposition.java" test')
-									 sh('mvn -DsomeModule.test.includes="**/FlowTest.java" test')
-									 sh('mvn -DsomeModule.test.includes="**/FlowTest2.java" test')
-									 sh('mvn -DsomeModule.test.includes="**/TrafficGeneratedTest.java" test')
-									 sh('mvn -DsomeModule.test.includes="**/FlowTestExternalComposition.java" test')
-
-									 //travis_datas.script.each { item ->
+									 travis_datas.script.each { item ->
 
 										//def frick_datas = travis_datas.script[0]
 
-									 //   sh "$item"
+									    sh "$item"
 
-									 //};
+									 };
 
 							    }
 
