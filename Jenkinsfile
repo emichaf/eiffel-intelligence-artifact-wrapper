@@ -51,6 +51,9 @@ podTemplate(label: 'mypod', containers: [
 
 									 };
 
+
+									 sh "ls"
+
 							    }
 
 
