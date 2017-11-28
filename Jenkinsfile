@@ -2,6 +2,7 @@ podTemplate(label: 'mypod', containers: [
     containerTemplate(name: 'docker', image: 'docker:latest', ttyEnabled: true, command: 'cat', alwaysPullImage: true),
     containerTemplate(name: 'kubectl', image: 'lachlanevenson/k8s-kubectl:v1.8.0', command: 'cat', ttyEnabled: true),
     containerTemplate(name: 'helm', image: 'lachlanevenson/k8s-helm:latest', command: 'cat', ttyEnabled: true, alwaysPullImage: true),
+    // OBS privileged: true for embedded mongodb (flapdoodle) to work
     containerTemplate(name: 'maven', image: 'emtrout/dind:latest', command: 'cat', ttyEnabled: true, privileged: true, alwaysPullImage: true)
   ],
   volumes: [
@@ -30,11 +31,13 @@ podTemplate(label: 'mypod', containers: [
                             usernameVariable: 'DOCKER_HUB_USER',
                             passwordVariable: 'DOCKER_HUB_PASSWORD']]) {
 
+                                // OBS privileged: true for image for embedded mongodb (flapdoodle) to work
 
 							    dir ('sourcecode') {
 
 									 def travis_datas = readYaml file: ".travis.yml"
 
+                                     // Execute tests in travis file
 									 travis_datas.script.each { item ->
 
 									    sh "$item"
