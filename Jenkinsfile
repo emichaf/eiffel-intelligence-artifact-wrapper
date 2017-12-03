@@ -1,89 +1,24 @@
 podTemplate(label: 'mypod', containers: [
-    containerTemplate(name: 'docker', image: 'docker:latest', ttyEnabled: true, command: 'cat', alwaysPullImage: true),
+    containerTemplate(name: 'docker', image: 'docker', ttyEnabled: true, command: 'cat'),
     containerTemplate(name: 'kubectl', image: 'lachlanevenson/k8s-kubectl:v1.8.0', command: 'cat', ttyEnabled: true),
-    containerTemplate(name: 'helm', image: 'lachlanevenson/k8s-helm:latest', command: 'cat', ttyEnabled: true, alwaysPullImage: true),
-    // OBS privileged: true for embedded mongodb (flapdoodle) to work
-    containerTemplate(name: 'maven', image: 'emtrout/dind:latest', command: 'cat', ttyEnabled: true, privileged: true, alwaysPullImage: true)
+    containerTemplate(name: 'helm', image: 'lachlanevenson/k8s-helm:latest', command: 'cat', ttyEnabled: true),
+    containerTemplate(name: 'maven', image: 'emtrout/dind:latest', command: 'cat', ttyEnabled: true)
   ],
   volumes: [
-    hostPathVolume(mountPath: '/var/run/docker.sock', hostPath: '/var/run/docker.sock')
+    hostPathVolume(mountPath: '/var/run/docker.sock', hostPath: '/var/run/docker.sock'),
   ]) {
     node('mypod') {
 
 
-
         String GIT_SHORT_COMMIT
 
-
-            stage ('GIT Checkout EI SC') {
-
-                dir ('sourcecode') {
-                                git branch: "master", url: 'https://github.com/Ericsson/eiffel-intelligence.git'
-                            }
-            }
-
-
-
-            stage('UnitTests & FlowTests)') {
-                container('maven') {
-                            withCredentials([[$class: 'UsernamePasswordMultiBinding',
-                            credentialsId: 'e7de4146-4a59-4406-916e-d10506cfaeb8',
-                            usernameVariable: 'DOCKER_HUB_USER',
-                            passwordVariable: 'DOCKER_HUB_PASSWORD']]) {
-
-                                // OBS privileged: true for image for embedded mongodb (flapdoodle) to work
-
-							    dir ('sourcecode') {
-
-									 def travis_datas = readYaml file: ".travis.yml"
-
-                                     // Execute tests in travis file
-									 travis_datas.script.each { item ->
-
-									    sh "$item"
-
-									 };
-
-
-									 sh "ls"
-
-							    }
-
-
-							}
-				}
-			}
-
-
-
-            stage ('Upload to ARM') {
-                            container('maven') {
-                                  parallel (
-                                    'Test Server' : {
-                                      sh 'ls'
-                                    },
-                                    'Test Sample Client' : {
-                                      sh 'ls'
-                                    }
-                                  )
-                                }
-                            }
-
-
-
-
-        stage ('GIT Checkout EI CI/CD Wrapper') {
-
-            dir ('wrapper') {
-            git branch: "master", url: 'https://github.com/emichaf/eiffel-intelligence-frontend-artifact-wrapper.git'
+        stage ('GIT Checkout') {
+            git branch: "master", url: 'https://github.com/emichaf/eiffel-intelligence-artifact-wrapper.git'
 
             GIT_SHORT_COMMIT = sh(returnStdout: true, script: "git log -n 1 --pretty=format:'%h'").trim()
-            }
+
 
         }
-
-
-
 
         stage('Maven Build') {
             container('maven') {
@@ -92,27 +27,13 @@ podTemplate(label: 'mypod', containers: [
                         usernameVariable: 'DOCKER_HUB_USER',
                         passwordVariable: 'DOCKER_HUB_PASSWORD']]) {
 
-                            dir ('wrapper') {
-                               sh "pwd"
 
-                               sh "ls"
+             sh "mvn clean package -DskipTests"
 
-                               sh "mvn clean package -DskipTests"
+             }
 
-                               sh "ls ../sourcecode/target/"
-
-                               sh "cp ../sourcecode/target/ei-frontend-0.0.1-SNAPSHOT.jar src/main/docker/maven"
-
-                               sh "ls src/main/docker/maven"
-                             }
-
-                        }
             }
         }
-
-
-
-
 
 
         stage ('Test') {
@@ -137,8 +58,8 @@ podTemplate(label: 'mypod', containers: [
                         usernameVariable: 'DOCKER_HUB_USER',
                         passwordVariable: 'DOCKER_HUB_PASSWORD']]) {
 
-               pom = readMavenPom file: 'pom.xml'
 
+               pom = readMavenPom file: 'pom.xml'
 
                sh "docker login -u ${env.DOCKER_HUB_USER} -p ${env.DOCKER_HUB_PASSWORD}"
 
