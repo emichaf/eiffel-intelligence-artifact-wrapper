@@ -52,7 +52,7 @@ podTemplate(label: 'mypod', containers: [
         stage('Build and Push Docker Image') {
             container('docker') {
             withCredentials([[$class: 'UsernamePasswordMultiBinding',
-                        credentialsId: 'e7de4146-4a59-4406-916e-d10506cfaeb8',
+                        credentialsId: '60cafeb7-9df5-47f5-a213-41713d632b7a',
                         usernameVariable: 'DOCKER_HUB_USER',
                         passwordVariable: 'DOCKER_HUB_PASSWORD']]) {
 
