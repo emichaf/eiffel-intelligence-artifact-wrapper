@@ -1,21 +1,8 @@
-pipeline {
-    agent none
-    stages {
-        stage('Back-end') {
-            agent {
-                docker { image 'maven:3-alpine' }
-            }
-            steps {
-                sh 'mvn --version'
-            }
-        }
-        stage('Front-end') {
-            agent {
-                docker { image 'node:7-alpine' }
-            }
-            steps {
-                sh 'node --version'
-            }
+node {
+    /* Requires the Docker Pipeline plugin to be installed */
+    docker.image('node:7-alpine').inside {
+        stage('Test') {
+            sh 'node --version'
         }
     }
 }
