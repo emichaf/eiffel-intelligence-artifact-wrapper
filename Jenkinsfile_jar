@@ -1,5 +1,4 @@
 podTemplate(label: 'mypod', containers: [
-    containerTemplate(name: 'docker', image: 'docker', ttyEnabled: true, command: 'cat'),
     containerTemplate(name: 'maven', image: 'emtrout/dind:latest', command: 'cat', ttyEnabled: true)
   ],
   volumes: [
@@ -32,50 +31,6 @@ podTemplate(label: 'mypod', containers: [
 
             }
         }
-
-
-        stage ('Test') {
-        container('maven') {
-              parallel (
-                'Test Server' : {
-                  sh 'ls'
-                },
-                'Test Sample Client' : {
-                  sh 'ls'
-                }
-              )
-            }
-        }
-
-
-
-        stage('Build and Push Docker Image') {
-            container('docker') {
-            withCredentials([[$class: 'UsernamePasswordMultiBinding',
-                        credentialsId: '60cafeb7-9df5-47f5-a213-41713d632b7a',
-                        usernameVariable: 'DOCKER_HUB_USER',
-                        passwordVariable: 'DOCKER_HUB_PASSWORD']]) {
-
-
-               pom = readMavenPom file: 'pom.xml'
-
-               sh "docker login -u ${env.DOCKER_HUB_USER} -p ${env.DOCKER_HUB_PASSWORD}"
-
-               sh "docker build --no-cache=true -t ${env.DOCKER_HUB_USER}/${pom.artifactId}:latest -f src/main/docker/Dockerfile src/main/docker/"
-
-               sh "docker push ${env.DOCKER_HUB_USER}/${pom.artifactId}:latest"
-
-               sh "docker build --no-cache=true -t ${env.DOCKER_HUB_USER}/${pom.artifactId}:${GIT_SHORT_COMMIT} -f src/main/docker/Dockerfile src/main/docker/"
-
-               sh "docker push ${env.DOCKER_HUB_USER}/${pom.artifactId}:${GIT_SHORT_COMMIT}"
-
-               sh "docker logout"
-
-               }
-            }
-        }
-
-
 
 
 
