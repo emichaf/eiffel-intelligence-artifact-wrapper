@@ -1,5 +1,7 @@
-   dockerNode(image: "emtrout/dind:latest"){
-
+   pipeline {
+       agent {
+           docker { image 'emtrout/dind:latest' }
+       }
 
         String GIT_SHORT_COMMIT
 
@@ -12,7 +14,7 @@
         }
 
         stage('Maven Build') {
-            container('maven') {
+
             withCredentials([[$class: 'UsernamePasswordMultiBinding',
                         credentialsId: '5c0cb64b-5ef1-43b4-aa83-3587ad4cec73',
                         usernameVariable: 'DOCKER_HUB_USER',
@@ -23,7 +25,7 @@
 
              }
 
-            }
+
         }
 
 
