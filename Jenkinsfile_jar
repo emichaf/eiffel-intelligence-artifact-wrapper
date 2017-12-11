@@ -1,9 +1,4 @@
-podTemplate(label: 'mypod', containers: [
-    containerTemplate(name: 'maven', image: 'emtrout/dind:latest', command: 'cat', ttyEnabled: true)
-  ],
-  volumes: [
-    hostPathVolume(mountPath: '/var/run/docker.sock', hostPath: '/var/run/docker.sock'),
-  ]) {
+
     node('mypod') {
 
 
@@ -20,7 +15,7 @@ podTemplate(label: 'mypod', containers: [
         stage('Maven Build') {
             container('maven') {
             withCredentials([[$class: 'UsernamePasswordMultiBinding',
-                        credentialsId: '60cafeb7-9df5-47f5-a213-41713d632b7a',
+                        credentialsId: '5c0cb64b-5ef1-43b4-aa83-3587ad4cec73',
                         usernameVariable: 'DOCKER_HUB_USER',
                         passwordVariable: 'DOCKER_HUB_PASSWORD']]) {
 
@@ -37,4 +32,3 @@ podTemplate(label: 'mypod', containers: [
 
 
     }
-}
