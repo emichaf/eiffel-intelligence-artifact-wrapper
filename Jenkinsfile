@@ -1,4 +1,4 @@
-   node{
+   node(image: "emtrout/dind:latest"){
 
 
         String GIT_SHORT_COMMIT
