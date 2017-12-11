@@ -13,7 +13,7 @@ pipeline {
                 stage('maven build') {
                     agent {
                         docker { image 'maven:3-alpine' }
-                    }
+
                     steps {
                          withCredentials([[$class: 'UsernamePasswordMultiBinding',
                                                 credentialsId: '5c0cb64b-5ef1-43b4-aa83-3587ad4cec73',
@@ -25,8 +25,8 @@ pipeline {
 
                                  }
                          }
+                    }
                 }
-
            }
 
 
