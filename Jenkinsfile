@@ -1,4 +1,4 @@
-   node('mypod') {
+   node{
 
 
         String GIT_SHORT_COMMIT
