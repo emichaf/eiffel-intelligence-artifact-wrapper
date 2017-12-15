@@ -2,5 +2,7 @@ node {
     stage "Container Prep"
     // do the thing in the container
 
-    sh "sudo docker ps"
+        sh "echo 'alias docker="sudo docker "' >> ~/.bashrc"
+
+        sh "docker ps"
 }
