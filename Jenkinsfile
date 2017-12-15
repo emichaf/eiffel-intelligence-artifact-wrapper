@@ -1,26 +1,13 @@
-node {
+node{
     stage "Container Prep"
     // do the thing in the container
 
-
-        sh "cat ~/.bashrc"
-
-        sh'''#!/bin/bash
-             docker ps
-        '''
-
-
-       sh "whoami"
-
-       sh "docker ps"
-
-       sh '''
-          alias docker="sudo docker " >> ~/.bashrc
-
-          docker ps
-        '''
-
-        sh "docker ps"
-
-
+    docker.image('maven:3.3.3-jdk-8').inside {
+        // get the codez
+        stage 'Checkout'
+        git url: 'https://github.com/damnhandy/Handy-URI-Templates.git'
+        stage 'Build'
+        // Do the build
+        sh "./mvnw clean install"
+    }
 }
