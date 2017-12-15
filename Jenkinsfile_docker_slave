@@ -1,6 +1,9 @@
 node('docker-slave') {
     stage "Container Prep"
     // do the thing in the container
+
+    sh "docker ps"
+
     docker.image('maven:3.3.3-jdk-8').inside {
         // get the codez
         stage 'Checkout'
