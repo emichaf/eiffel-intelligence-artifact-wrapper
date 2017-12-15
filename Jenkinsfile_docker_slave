@@ -1,9 +1,20 @@
 node{
     stage "Container Prep"
     // do the thing in the container
-    sh "echo 'alias docker="sudo docker "' >> ~/.bashrc"
 
-    sh "docker ps"
+ docker.withServer('tcp://swarm.example.com:2376', 'swarm-certs') {
+        docker.image('maven:3.3.3-jdk-8'').inside {
+            /* do things */
+            // get the codez
+                    stage 'Checkout'
+                    git url: 'https://github.com/damnhandy/Handy-URI-Templates.git'
+                    stage 'Build'
+                    // Do the build
+                    sh "mvn clean package -DskipTests"
+        }
+
+
+    }
 
     docker.image('maven:3.3.3-jdk-8').inside {
         // get the codez
