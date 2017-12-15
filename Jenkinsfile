@@ -4,7 +4,7 @@ node {
 
 
         sh'''#!/bin/bash -xe
-            docker ps
+            sudo docker ps
         '''
 
 
