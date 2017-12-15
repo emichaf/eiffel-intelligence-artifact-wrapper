@@ -4,8 +4,8 @@ node {
 
 
        sh '''
-          alias docker="sudo docker "
-          docker ps
+          alias docker="sudo docker "' >> ~/.bashrc
+
         '''
 
         sh "docker ps"
