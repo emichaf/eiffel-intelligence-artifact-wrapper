@@ -1,4 +1,4 @@
-node('docker-slave') {
+node{
     stage "Container Prep"
     // do the thing in the container
 
