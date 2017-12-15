@@ -4,7 +4,7 @@ node{
                 /* do things */
                 // get the codez
                         stage 'Checkout'
-                        git url: 'https://github.com/damnhandy/Handy-URI-Templates.git'
+                        git branch: "master", url: 'https://github.com/emichaf/eiffel-intelligence-artifact-wrapper.git'
                         stage 'Build'
                         // Do the build
                         sh "mvn clean package -DskipTests"
