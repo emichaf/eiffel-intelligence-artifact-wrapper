@@ -8,6 +8,6 @@ node{
         git branch: "master", url: 'https://github.com/emichaf/eiffel-intelligence-artifact-wrapper.git'
         stage 'Build'
         // Do the build
-        sh "./mvn clean install -DskipTests"
+        sh "mvn clean install -DskipTests"
     }
 }
