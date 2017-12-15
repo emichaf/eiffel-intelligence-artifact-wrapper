@@ -1,4 +1,4 @@
-node('docker-slave') {
+node {
     stage "Container Prep"
     // do the thing in the container
     docker.image('maven:3.3.3-jdk-8').inside {
