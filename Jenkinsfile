@@ -3,6 +3,8 @@ node {
     // do the thing in the container
 
 
+        sh "cat ~/.bashrc"
+
         sh'''#!/bin/bash
              docker ps
         '''
