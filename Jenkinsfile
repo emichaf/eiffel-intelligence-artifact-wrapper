@@ -1,14 +1,12 @@
-node('mytest') {
-
-
-        String GIT_SHORT_COMMIT
-
-        stage ('GIT Checkout') {
-            git branch: "master", url: 'https://github.com/emichaf/eiffel-intelligence-artifact-wrapper.git'
-
-            GIT_SHORT_COMMIT = sh(returnStdout: true, script: "git log -n 1 --pretty=format:'%h'").trim()
-
-
-        }
-
-   }
+node('docker-slave') {
+    stage "Container Prep"
+    // do the thing in the container
+    docker.image('maven:3.3.3-jdk-8').inside {
+        // get the codez
+        stage 'Checkout'
+        git url: 'https://github.com/damnhandy/Handy-URI-Templates.git'
+        stage 'Build'
+        // Do the build
+        sh "./mvnw clean install"
+    }
+}
