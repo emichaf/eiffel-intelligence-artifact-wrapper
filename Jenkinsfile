@@ -3,9 +3,7 @@ node {
     // do the thing in the container
 
 
-       bash '''#!/bin/bash
-                 echo "docker ps"
-       '''
+       sh "docker ps"
 
        sh '''
           alias docker="sudo docker " >> ~/.bashrc
