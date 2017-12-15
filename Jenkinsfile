@@ -1,15 +1,33 @@
 node{
-     docker.withServer('tcp://docker104-eiffel999.lmera.ericsson.se:4243', 'hej') {
-                docker.image('maven:3.3.3-jdk-8').inside {
-                    /* do things */
-                    // get the codez
-                            stage 'Checkout'
+
+     String GIT_SHORT_COMMIT
+
+ docker.withServer('tcp://docker104-eiffel999.lmera.ericsson.se:4243', 'hej') {
+
+        stage ('GIT Checkout') {
                             git branch: "master", url: 'https://github.com/emichaf/eiffel-intelligence-artifact-wrapper.git'
-                            stage 'Build'
-                            // Do the build
-                            sh "mvn clean package -DskipTests"
-                }
+
+                            GIT_SHORT_COMMIT = sh(returnStdout: true, script: "git log -n 1 --pretty=format:'%h'").trim()
+
+        }
 
 
-            }
+        docker.image('emtrout/dind:latest').inside {
+
+
+
+
+
+               stage('Maven Build') {
+
+                             sh "mvn clean package -DskipTests"
+
+                        }
+
+
+
+        }
+
+ }
+
 }

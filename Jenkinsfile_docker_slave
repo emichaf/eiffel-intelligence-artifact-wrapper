@@ -1,4 +1,7 @@
 node{
+
+     String GIT_SHORT_COMMIT
+
     stage "Container Prep"
     // do the thing in the container
 
