@@ -3,8 +3,8 @@ node {
     // do the thing in the container
 
 
-        sh'''#!/bin/bash -xe
-            sudo docker ps
+        sh'''#!/bin/bash
+             docker ps
         '''
 
 
