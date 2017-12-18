@@ -18,6 +18,10 @@ node{
 
                             GIT_SHORT_COMMIT = sh(returnStdout: true, script: "git log -n 1 --pretty=format:'%h'").trim()
 
+                            sh 'echo commit = ${GIT_SHORT_COMMIT} >> build_info.txt'
+
+                            sh 'cat build_info.txt'
+
         }
 
 
@@ -57,8 +61,6 @@ node{
                                     usernameVariable: 'DOCKER_HUB_USER',
                                     passwordVariable: 'DOCKER_HUB_PASSWORD']]) {
 
-                           sh "pwd"
-                           sh "ls"
 
                            pom = readMavenPom file: 'pom.xml'
 
@@ -73,26 +75,42 @@ node{
                            sh "docker push ${env.DOCKER_HUB_USER}/${pom.artifactId}:${GIT_SHORT_COMMIT}"
 
                            sh "docker logout"
-
-                           /*
-                           pom = readMavenPom file: 'pom.xml'
-
-                           sh "docker login -u ${env.DOCKER_HUB_USER} -p ${env.DOCKER_HUB_PASSWORD}"
-
-                           sh "docker build --no-cache=true -t ${env.DOCKER_HUB_USER}/${pom.artifactId}:latest -f src/main/docker/Dockerfile src/main/docker/"
-
-                           sh "docker push ${env.DOCKER_HUB_USER}/${pom.artifactId}:latest"
-
-                           sh "docker build --no-cache=true -t ${env.DOCKER_HUB_USER}/${pom.artifactId}:${GIT_SHORT_COMMIT} -f src/main/docker/Dockerfile src/main/docker/"
-
-                           sh "docker push ${env.DOCKER_HUB_USER}/${pom.artifactId}:${GIT_SHORT_COMMIT}"
-
-                           sh "docker logout"
-                           */
-
 
                         }
                     }
+
+
+               stage('Deploy to K8S Stage') {
+               /*
+                                   container('kubectl') {
+                                      withCredentials([[
+                                       $class: 'FileBinding',
+                                       credentialsId: '77bd756d-382a-4704-bb9c-9d52f023ac4d',
+                                       variable: 'KUBECONFIG'
+                                   ]]){
+
+
+                                        sh("kubectl --kubeconfig=$KUBECONFIG create -f ./target/classes/META-INF/fabric8/kubernetes.yml")
+                                        sh("kubectl --kubeconfig=$KUBECONFIG get pods")
+
+                                      }
+                                   }*/
+               }
+
+
+
+               stage ('Integration Test') {
+                               container('maven') {
+                                     parallel (
+                                       'Test Server' : {
+                                         sh 'ls'
+                                       },
+                                       'Test Sample Client' : {
+                                         sh 'ls'
+                                       }
+                                     )
+                                   }
+                               }
 
 
 
