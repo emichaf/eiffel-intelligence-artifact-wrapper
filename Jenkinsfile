@@ -60,6 +60,9 @@ node{
                            sh "pwd"
                            sh "ls"
 
+                           pom = readMavenPom file: 'pom.xml'
+                           sh "docker login -u ${env.DOCKER_HUB_USER} -p ${env.DOCKER_HUB_PASSWORD}"
+
                            /*
                            pom = readMavenPom file: 'pom.xml'
 
