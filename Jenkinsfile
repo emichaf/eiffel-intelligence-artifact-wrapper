@@ -1,6 +1,7 @@
 node{
 
      String GIT_SHORT_COMMIT
+     String GIT_LONG_COMMIT
 
  docker.withServer('tcp://docker104-eiffel999.lmera.ericsson.se:4243', 'hej') {
 
@@ -18,9 +19,12 @@ node{
 
                             GIT_SHORT_COMMIT = sh(returnStdout: true, script: "git log -n 1 --pretty=format:'%h'").trim()
 
-                            sh "echo testar: ${GIT_SHORT_COMMIT}"
+                            GIT_LONG_COMMIT =  sh(returnStdout: true, script: "git log --format='%H' -n 1").trim()
 
-                            sh 'echo commit = $GIT_SHORT_COMMIT >> build_info.txt'
+
+                            sh "echo testar: ${GIT_LONG_COMMIT}"
+
+                            sh "echo commit = $GIT_LONG_COMMIT >> build_info.txt"
 
                             sh "cat build_info.txt"
 
