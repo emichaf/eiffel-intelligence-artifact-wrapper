@@ -101,7 +101,7 @@ node{
 
 
                stage ('Integration Test') {
-                               container('maven') {
+
                                      parallel (
                                        'Test Server' : {
                                          sh 'ls'
@@ -110,9 +110,9 @@ node{
                                          sh 'ls'
                                        }
                                      )
-                                   }
-                               }
+
                }
+
 
 
         } /*docker.image('emtrout/dind:latest').inside {*/
