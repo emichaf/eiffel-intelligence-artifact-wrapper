@@ -19,7 +19,7 @@ node{
 
      */
 
-       stage ('GIT Checkout') {
+       stage ('GERRIT Checkout') {
 
               dir ('wrapper') {
                             git branch: "master", url: 'https://github.com/emichaf/eiffel-intelligence-artifact-wrapper.git'
@@ -73,7 +73,7 @@ node{
 
 
 
-
+/*
         docker.image('emtrout/dind:latest').inside {
 
 
@@ -83,7 +83,7 @@ node{
 
                         }
 
-
+*/
 
 
                stage ('Test') {
@@ -99,7 +99,7 @@ node{
                             }
 
 
-
+/*
                stage('Build and Push Docker Image') {
 
                         withCredentials([[$class: 'UsernamePasswordMultiBinding',
@@ -124,10 +124,11 @@ node{
 
                         }
                     }
+*/
 
-
+/*
                stage('Deploy to K8S Stage') {
-               /*
+
                                    container('kubectl') {
                                       withCredentials([[
                                        $class: 'FileBinding',
@@ -141,9 +142,9 @@ node{
 
                                       }
                                    }
-                                   */
-               }
 
+               }
+*/
 
 
                stage ('Integration Test') {
