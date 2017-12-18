@@ -13,8 +13,8 @@ node{
      When Jenkins detects that the agent is itself running inside a Docker container, it will automatically pass
      the --volumes-from argument to the inside container, ensuring that it can share a workspace with the agent.
 
-            sh "git rev-parse --short HEAD > .git/commit-id"
-            commit_id = readFile('.git/commit-id')
+              sh "git rev-parse --short HEAD > .git/commit-id"
+              commit_id = readFile('.git/commit-id')
 
      */
 
