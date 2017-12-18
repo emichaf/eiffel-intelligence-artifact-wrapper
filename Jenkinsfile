@@ -35,14 +35,16 @@ node{
                             sh "echo commit = $GIT_LONG_COMMIT >> build_info.txt"
 
 
-                            sh('git config user.email ${GITHUB_USER}')
-                            sh('git config user.name ${GITHUB_USER}')
-
-
+                            //sh('git config user.email ${GITHUB_USER}')
+                            //sh('git config user.name ${GITHUB_USER}')
 
 
                             sh('git add .')
                             sh('git commit -m "build info updated"')
+
+                            /*check new commit"
+                            sh(returnStdout: true, script: "git log --format='%H' -n 1")
+
                             sh("git push http://${GITHUB_USER}:${GITHUB_PASSWORD}@github.com/emichaf/eiffel-intelligence-artifact-wrapper.git")
 
                    }
