@@ -18,7 +18,13 @@ node{
 
                             GIT_SHORT_COMMIT = sh(returnStdout: true, script: "git log -n 1 --pretty=format:'%h'").trim()
 
-                            sh 'echo commit = $GIT_SHORT_COMMIT >> build_info.txt'
+                            //sh 'echo commit = ${GIT_SHORT_COMMIT} >> build_info.txt'
+
+                            //def fileContents = readFile file: "build_info.txt", encoding: "UTF-8"
+
+
+                            f = new File('build_info.txt')
+                            f.append("spec.version               = ${GIT_SHORT_COMMIT}\n")
 
                             sh 'cat build_info.txt'
 
