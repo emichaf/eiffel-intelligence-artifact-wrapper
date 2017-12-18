@@ -58,7 +58,7 @@ node{
                                     passwordVariable: 'DOCKER_HUB_PASSWORD']]) {
 
 
-                           /*
+
                            pom = readMavenPom file: 'pom.xml'
 
                            sh "docker login -u ${env.DOCKER_HUB_USER} -p ${env.DOCKER_HUB_PASSWORD}"
@@ -72,7 +72,7 @@ node{
                            sh "docker push ${env.DOCKER_HUB_USER}/${pom.artifactId}:${GIT_SHORT_COMMIT}"
 
                            sh "docker logout"
-                           */
+
 
 
                         }
