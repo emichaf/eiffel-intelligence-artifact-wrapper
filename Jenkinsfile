@@ -21,7 +21,7 @@ node{
 
 
 
-                            string f = new File('build_info.txt')
+                            def f = new File('build_info.txt')
                             f.append("commit = ${GIT_SHORT_COMMIT}\n")
 
                             sh 'cat build_info.txt'
