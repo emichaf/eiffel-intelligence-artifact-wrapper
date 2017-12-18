@@ -94,7 +94,8 @@ node{
                                         sh("kubectl --kubeconfig=$KUBECONFIG get pods")
 
                                       }
-                                   }*/
+                                   }
+                                   */
                }
 
 
@@ -111,10 +112,10 @@ node{
                                      )
                                    }
                                }
+               }
 
 
-
-        }
+        } /*docker.image('emtrout/dind:latest').inside {*/
 
  }
 
