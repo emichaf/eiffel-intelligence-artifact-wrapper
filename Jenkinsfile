@@ -3,7 +3,7 @@ node{
      String GIT_SHORT_COMMIT
      String GIT_LONG_COMMIT
 
- docker.withServer('tcp://docker104-eiffel999.lmera.ericsson.se:4243', 'hej') {
+ docker.withServer('tcp://docker104-eiffel999.lmera.ericsson.se:4243', 'remote_docker_host') {
 
    /*
      For inside() to work, the Docker server and the Jenkins agent must use the same filesystem,
@@ -22,19 +22,30 @@ node{
                             GIT_LONG_COMMIT =  sh(returnStdout: true, script: "git log --format='%H' -n 1").trim()
 
 
-                            sh "echo testar: ${GIT_LONG_COMMIT}"
+        }
+
+
+        stage ('Update Build Info and Push change') {
+
+                   withCredentials([[$class: 'UsernamePasswordMultiBinding',
+                                    credentialsId: 'fbb60332-6a43-489a-87f7-4cea380ad6ca',
+                                    usernameVariable: 'GITHUB_USER',
+                                    passwordVariable: 'GITHUB_PASSWORD']]) {
 
                             sh "echo commit = $GIT_LONG_COMMIT >> build_info.txt"
 
-                            sh "cat build_info.txt"
+                            sh('git add .')
+                            sh('git commit -m "build info updated')
+                            sh('git push https://${GITHUB_USER}:${GITHUB_PASSWORD}@github.com/emichaf/eiffel-intelligence-artifact-wrapper.git')
+
+                   }
 
         }
 
 
+
+
         docker.image('emtrout/dind:latest').inside {
-
-
-
 
 
                stage('Maven Build') {
