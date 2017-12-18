@@ -18,11 +18,11 @@ node{
 
                             GIT_SHORT_COMMIT = sh(returnStdout: true, script: "git log -n 1 --pretty=format:'%h'").trim()
 
-                            sh 'echo testar: ${GIT_SHORT_COMMIT}'
+                            sh "echo testar: ${GIT_SHORT_COMMIT}"
 
-                            sh 'echo commit = ${GIT_SHORT_COMMIT} >> build_info.txt'
+                            sh "echo commit = ${GIT_SHORT_COMMIT} >> build_info.txt"
 
-                            sh 'cat build_info.txt'
+                            sh "cat build_info.txt"
 
         }
 
