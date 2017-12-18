@@ -18,11 +18,9 @@ node{
 
                             GIT_SHORT_COMMIT = sh(returnStdout: true, script: "git log -n 1 --pretty=format:'%h'").trim()
 
+                            sh 'ls ${GIT_SHORT_COMMIT}'
 
-
-
-                            def f = new File('build_info.txt')
-                            f.append("commit = ${GIT_SHORT_COMMIT}\n")
+                            sh 'echo commit = ${GIT_SHORT_COMMIT} >> build_info.txt'
 
                             sh 'cat build_info.txt'
 
