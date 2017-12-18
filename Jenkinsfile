@@ -20,7 +20,7 @@ node{
 
                             sh "echo testar: ${GIT_SHORT_COMMIT}"
 
-                            sh "echo commit = ${GIT_SHORT_COMMIT} >> build_info.txt"
+                            sh 'echo commit = $GIT_SHORT_COMMIT >> build_info.txt'
 
                             sh "cat build_info.txt"
 
