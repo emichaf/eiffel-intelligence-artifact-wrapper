@@ -2,6 +2,7 @@ node{
 
      String GIT_SHORT_COMMIT
      String GIT_LONG_COMMIT
+     String GITHUB_HASH_TO_USE
 
 
  docker.withServer('tcp://docker104-eiffel999.lmera.ericsson.se:4243', 'remote_docker_host') {
@@ -19,12 +20,21 @@ node{
      */
 
        stage ('GIT Checkout') {
+
+              dir ('wrapper') {
                             git branch: "master", url: 'https://github.com/emichaf/eiffel-intelligence-artifact-wrapper.git'
 
                             GIT_SHORT_COMMIT = sh(returnStdout: true, script: "git log -n 1 --pretty=format:'%h'").trim()
 
                             GIT_LONG_COMMIT =  sh(returnStdout: true, script: "git log --format='%H' -n 1").trim()
 
+                            // Read build info file with github hash
+                            String file_name = 'build_info.yaml'
+                            def props = readYaml file: "$file_name"
+                            GITHUB_HASH_TO_USE = props.commit
+
+                            sh 'echo "$GITHUB_HASH_TO_USE"'
+              }
 
         }
 
