@@ -61,7 +61,18 @@ node{
                            sh "ls"
 
                            pom = readMavenPom file: 'pom.xml'
+
                            sh "docker login -u ${env.DOCKER_HUB_USER} -p ${env.DOCKER_HUB_PASSWORD}"
+
+                           sh "docker build --no-cache=true -t ${env.DOCKER_HUB_USER}/${pom.artifactId}:latest -f src/main/docker/Dockerfile src/main/docker/"
+
+                           sh "docker push ${env.DOCKER_HUB_USER}/${pom.artifactId}:latest"
+
+                           sh "docker build --no-cache=true -t ${env.DOCKER_HUB_USER}/${pom.artifactId}:${GIT_SHORT_COMMIT} -f src/main/docker/Dockerfile src/main/docker/"
+
+                           sh "docker push ${env.DOCKER_HUB_USER}/${pom.artifactId}:${GIT_SHORT_COMMIT}"
+
+                           sh "docker logout"
 
                            /*
                            pom = readMavenPom file: 'pom.xml'
