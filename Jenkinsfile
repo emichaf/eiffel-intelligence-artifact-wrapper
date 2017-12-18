@@ -43,7 +43,9 @@ node{
                             sh('git commit -m "build info updated"')
 
                             /*check new commit"
-                            sh(returnStdout: true, script: "git log --format='%H' -n 1")
+                            string my_commit = sh(returnStdout: true, script: "git log --format='%H' -n 1").trim()
+
+                            sh("echo my_commit = ${my_commit}")
 
                             sh("git push http://${GITHUB_USER}:${GITHUB_PASSWORD}@github.com/emichaf/eiffel-intelligence-artifact-wrapper.git")
 
