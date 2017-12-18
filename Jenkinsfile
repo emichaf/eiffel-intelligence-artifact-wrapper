@@ -13,9 +13,18 @@ node{
      When Jenkins detects that the agent is itself running inside a Docker container, it will automatically pass
      the --volumes-from argument to the inside container, ensuring that it can share a workspace with the agent.
 
+
+     triggers {
+                pollSCM 'H/1 * * * *'
+            }
+
+
+            sh "git rev-parse --short HEAD > .git/commit-id"
+            commit_id = readFile('.git/commit-id')
+
      */
 
-        stage ('GIT Checkout') {
+       stage ('GIT Checkout') {
                             git branch: "master", url: 'https://github.com/emichaf/eiffel-intelligence-artifact-wrapper.git'
 
                             GIT_SHORT_COMMIT = sh(returnStdout: true, script: "git log -n 1 --pretty=format:'%h'").trim()
@@ -24,6 +33,10 @@ node{
 
 
         }
+
+
+
+
 
 
         stage ('Update Build Info and Push change') {
