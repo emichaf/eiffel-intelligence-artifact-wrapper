@@ -75,7 +75,7 @@ node{
 
 
 
-    dir ('sourcecode') {  // work-around to change dir outside container, not working inside container execution.. yet, see issues stated on top of file!
+    dir ('sourcecode') {  // workaround to change dir outside container, not working inside container execution.. yet, see issues stated on top of file!
 
             stage ('SonarQube Code Analysis') {
 /*
@@ -110,6 +110,12 @@ node{
                       sh 'mvn clean package -DskipTests'
 
                       sh 'ls target'
+
+                      pom = readMavenPom file: 'pom.xml'
+
+                      sh "cp /target/${pom.artifactId}-${pom.version}.jar ./src/main/docker/maven/"
+
+                      sh 'ls /src/main/docker/maven/'
                 }
 
     /*
@@ -150,37 +156,55 @@ node{
 
 
 
-                stage('Build and Push Docker Image to Registry') {
 
-                            withCredentials([[$class: 'UsernamePasswordMultiBinding',
-                                        credentialsId: '7b05ac28-c1ae-4249-a0c6-7c54c74e3b67',
-                                        usernameVariable: 'DOCKER_HUB_USER',
-                                        passwordVariable: 'DOCKER_HUB_PASSWORD']]) {
-
-                               pom = readMavenPom file: 'pom.xml'
-
-
-                               sh "docker login -u ${env.DOCKER_HUB_USER} -p ${env.DOCKER_HUB_PASSWORD}"
-
-                               sh "docker build --no-cache=true -t ${env.DOCKER_HUB_USER}/${pom.artifactId}:latest -f src/main/docker/Dockerfile src/main/docker/"
-
-                               sh "docker push ${env.DOCKER_HUB_USER}/${pom.artifactId}:latest"
-
-                               sh "docker build --no-cache=true -t ${env.DOCKER_HUB_USER}/${pom.artifactId}:${GIT_SHORT_COMMIT} -f src/main/docker/Dockerfile src/main/docker/"
-
-                               sh "docker push ${env.DOCKER_HUB_USER}/${pom.artifactId}:${GIT_SHORT_COMMIT}"
-
-                               sh "docker logout"
-
-                               }
-
-                }
 
 
 
            } // docker.image('emtrout/dind:latest').inside
 
     } // dir ('sourcecode') {
+
+
+
+
+    dir ('wrapper') {  // workaround to change dir outside container, not working inside container execution.. yet, see issues stated on top of file!
+
+           stage('Build and Push Docker Image to Registry') {
+
+
+                                sh "pwd"
+                                sh "ls"
+
+                                // Create docker image
+                                // sh "mvn clean package fabric8:resources"
+
+
+
+                                withCredentials([[$class: 'UsernamePasswordMultiBinding',
+                                            credentialsId: '7b05ac28-c1ae-4249-a0c6-7c54c74e3b67',
+                                            usernameVariable: 'DOCKER_HUB_USER',
+                                            passwordVariable: 'DOCKER_HUB_PASSWORD']]) {
+
+                                   pom = readMavenPom file: 'pom.xml'
+
+
+                                   sh "docker login -u ${env.DOCKER_HUB_USER} -p ${env.DOCKER_HUB_PASSWORD}"
+
+                                   sh "docker build --no-cache=true -t ${env.DOCKER_HUB_USER}/${pom.artifactId}:latest -f src/main/docker/Dockerfile src/main/docker/"
+
+                                   sh "docker push ${env.DOCKER_HUB_USER}/${pom.artifactId}:latest"
+
+                                   sh "docker build --no-cache=true -t ${env.DOCKER_HUB_USER}/${pom.artifactId}:${GIT_SHORT_COMMIT} -f src/main/docker/Dockerfile src/main/docker/"
+
+                                   sh "docker push ${env.DOCKER_HUB_USER}/${pom.artifactId}:${GIT_SHORT_COMMIT}"
+
+                                   sh "docker logout"
+
+                                   }
+
+                    }
+
+    } // dir ('wrapper') {
 
 
 
