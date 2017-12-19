@@ -102,8 +102,8 @@ node{
                 }
 
 
-
-           docker.image('emtrout/dind:latest').inside("--privileged") {
+            // 	/var/jenkins_home
+           docker.image('emtrout/dind:latest').inside("--privileged -v /home/jenkins/workspace/${env.JOB_NAME}:/local") {
 
                 stage('Compile') {
 
@@ -113,7 +113,8 @@ node{
 
                       pom = readMavenPom file: 'pom.xml'
 
-                      sh "cp ./target/${pom.artifactId}-${pom.version}.jar ./src/main/docker/maven/"
+                      //sh "cp ./target/${pom.artifactId}-${pom.version}.jar ./src/main/docker/maven/"
+                      sh "cp ./target/${pom.artifactId}-${pom.version}.jar /local"
 
                       sh 'ls /src/main/docker/maven/'
                 }
