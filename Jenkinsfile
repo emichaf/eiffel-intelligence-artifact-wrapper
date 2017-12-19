@@ -96,17 +96,12 @@ node{
 // KÖRS VERKLIGEN TESTERNA -> No tests to run. ??
 // C:\Users\emichaf\@My_temp\eiffel-intelligence\target\eiffel-intelligence-0.0.1-SNAPSHOT.jar
 
+dir ('sourcecode') {  // work-around to change dir out side container
 
        docker.image('emtrout/dind:latest').inside {
 
-            // Warning: JAVA_HOME environment variable is not set.
             stage('Compile') {
                //dir ('sourcecode') {
-
-                checkout scm: [$class: 'GitSCM',
-                                           userRemoteConfigs: [[url: 'https://github.com/emichaf/eiffel-intelligence.git']],
-                                           branches: [[name: "$GITHUB_HASH_TO_USE"]]]
-
 
                   sh 'pwd'
 
@@ -133,7 +128,7 @@ node{
 
                                 // OBS privileged: true for image for embedded mongodb (flapdoodle) to work
 
-							    dir ('sourcecode') {
+							    //dir ('sourcecode') {
 
 									 def travis_datas = readYaml file: ".travis.yml"
 
@@ -146,12 +141,12 @@ node{
 
 									 sh "ls target"
 
-							    }
+							   // }
 
 			}
 
        } // docker.image('emtrout/dind:latest').inside
-
+} // dir ('sourcecode') {
 
             stage('Publish Artifact -> JAR)') {
                docker.image('emtrout/dind:latest').inside {
