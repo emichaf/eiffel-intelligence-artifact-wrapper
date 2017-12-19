@@ -94,19 +94,20 @@ node{
                dir ('sourcecode') {
 
                   unstash "first-stash"
-                  sh "ls"
-                  sh "ls target"
-                  sh "cd sourcecode"
-                  sh "cd sourcecode"
-                  sh "ls"
-                  sh "ls target"
+                  sh 'ls'
+                  sh 'ls target'
+                  sh 'cd sourcecode'
+                  sh 'cd sourcecode'
+                  sh 'ls'
+                  sh 'ls target'
+                  sh 'ls /sourcecode/target'
 
 
-                   sh 'mvn clean package -DskipTests'
+                  // sh 'mvn clean package -DskipTests'
 
-                    sh "ls"
+                    sh 'ls'
 
-                   	sh "ls target"
+                   	sh 'ls target'
                }
 
             }
