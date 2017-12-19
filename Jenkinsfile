@@ -106,7 +106,7 @@ node{
 
 					dir ('sourcecode') {
 
-                         curl -v -u eiffel-nexus-extension:eiffel-nexus-extension123  --upload-file /target/0.0.1-SNAPSHOT.jar https://eiffel.lmera.ericsson.se/nexus/content/repositories/releases/test/com/ericsson/eiffel/intelligence/0.0.1/eiffel-intelligence-0.0.1.jar
+                         sh 'curl -v -u eiffel-nexus-extension:eiffel-nexus-extension123  --upload-file /target/0.0.1-SNAPSHOT.jar https://eiffel.lmera.ericsson.se/nexus/content/repositories/releases/test/com/ericsson/eiffel/intelligence/0.0.1/eiffel-intelligence-0.0.1.jar'
 
 					}
 
