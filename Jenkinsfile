@@ -45,10 +45,12 @@ node{
                           userRemoteConfigs: [[url: 'https://github.com/emichaf/eiffel-intelligence.git']],
                           branches: [[name: "$GITHUB_HASH_TO_USE"]]]
 
-
+                          sh "pwd"
+                          sh "ls"
 
                           stash name: "first-stash", includes: "*"
 
+                          sh "pwd"
                           sh "ls"
               }
 
@@ -103,12 +105,16 @@ node{
                   sh 'ls target'
                   sh 'ls sourcecode'
 
+                  unstash "first-stash"
+                  sh 'pwd'
+                  sh 'ls'
+
 
                   // sh 'mvn clean package -DskipTests'
 
-                    sh 'ls'
+                  sh 'ls'
 
-                   	sh 'ls target'
+                  sh 'ls target'
                }
 
             }
