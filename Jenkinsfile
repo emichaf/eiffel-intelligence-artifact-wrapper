@@ -85,9 +85,15 @@ node{
 
        docker.image('emtrout/dind:latest').inside {
 
+
+            // Warning: JAVA_HOME environment variable is not set.
             stage('Compile)') {
                dir ('sourcecode') {
                    sh 'mvn clean package -DskipTests'
+
+                    sh "ls"
+
+                   	sh "ls target"
                }
 
             }
