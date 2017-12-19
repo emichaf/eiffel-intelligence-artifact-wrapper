@@ -18,7 +18,7 @@ node{
 
        stage ('GERRIT Checkout') {
 
-              dir ('wrapper') {
+              //dir ('wrapper') {
                             git branch: "master", url: 'https://github.com/emichaf/eiffel-intelligence-artifact-wrapper.git'
 
                             GIT_SHORT_COMMIT = sh(returnStdout: true, script: "git log -n 1 --pretty=format:'%h'").trim()
@@ -31,7 +31,10 @@ node{
                             GITHUB_HASH_TO_USE = props.commit
 
                             sh "echo $GITHUB_HASH_TO_USE"
-              }
+
+                            sh "pwd"
+                            sh "ls"
+             // }
 
         }
 
@@ -39,7 +42,7 @@ node{
 
        stage ("GITHUB Checkout: $GITHUB_HASH_TO_USE") {
 
-              dir ('sourcecode') {
+              //dir ('sourcecode') {
 
                   checkout scm: [$class: 'GitSCM',
                           userRemoteConfigs: [[url: 'https://github.com/emichaf/eiffel-intelligence.git']],
@@ -52,7 +55,7 @@ node{
 
                           sh "pwd"
                           sh "ls"
-              }
+              //}
 
         }
 
