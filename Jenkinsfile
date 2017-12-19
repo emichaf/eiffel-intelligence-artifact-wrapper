@@ -165,6 +165,9 @@ node{
 
                                // Create maven dir
                                sh "mkdir -p /src/main/docker/maven"
+                               sh "chmod 777 /src/main/docker/maven"
+
+                               sh "ls /src/main/docker/"
 
                                withCredentials([[$class: 'UsernamePasswordMultiBinding',
                                               credentialsId: '8829c73e-19b0-4f77-b74c-e112bbacd4d5',
