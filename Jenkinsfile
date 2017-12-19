@@ -84,8 +84,7 @@ node{
 
                                      dir ('sourcecode') {
                                              docker.image('emtrout/dind:latest').inside {
-                                                 /* Wait until mysql service is up */
-                                                 sh 'mvn sonar:sonar'
+                                                 sh 'mvn sonar:sonar -Dsonar.host.url=http://localhost:9000'
                                              }
 
                                      }
