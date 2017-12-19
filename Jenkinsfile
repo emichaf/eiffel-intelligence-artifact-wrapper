@@ -80,12 +80,13 @@ node{
                stage ('SonarQube Code Analysis') {
 
                               //docker.image('sonarqube').withRun('-p 9000:9000 -p 9092:9092 -e "SONARQUBE_JDBC_USERNAME=sonar" -e "SONARQUBE_JDBC_PASSWORD=sonar" -e "SONARQUBE_JDBC_URL=jdbc:postgresql://localhost/sonar"') { c ->
+                              docker.image('sonarqube').withRun('docker run -d --name sonarqube -p 9000:9000 -p 9092:9092 sonarqube') { c ->
 
 
                                      dir ('sourcecode') {
                                              docker.image('emtrout/dind:latest').inside {
-                                                 //sh 'mvn sonar:sonar -Dsonar.host.url=http://localhost:9000'
-                                                   sh 'mvn sonar:sonar -Dsonar.host.url=https://sonarqube.lmera.ericsson.se'
+                                                 sh 'mvn sonar:sonar -Dsonar.host.url=http://localhost:9000'
+                                                   //sh 'mvn sonar:sonar -Dsonar.host.url=https://sonarqube.lmera.ericsson.se'
                                              }
 
                                      }
