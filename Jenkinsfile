@@ -86,8 +86,9 @@ node{
        docker.image('emtrout/dind:latest').inside {
 
             stage('Compile)') {
-
-               sh 'mvn clean package -DskipTests'
+               dir ('sourcecode') {
+                   sh 'mvn clean package -DskipTests'
+               }
 
             }
 
@@ -113,6 +114,7 @@ node{
 			}
 
        } // docker.image('emtrout/dind:latest').inside
+
 
             stage('Publish Artifact -> JAR)') {
                docker.image('emtrout/dind:latest').inside {
