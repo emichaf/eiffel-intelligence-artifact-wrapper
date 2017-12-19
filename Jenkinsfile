@@ -189,6 +189,8 @@ node{
 
                                    sh "ls /src/main/docker/maven/"
 
+                                   sh "source /src/main/docker/maven/"
+
                                    pom = readMavenPom file: 'pom.xml'
 
                                    sh "docker login -u ${DOCKER_HUB_USER} -p ${DOCKER_HUB_PASSWORD}"
