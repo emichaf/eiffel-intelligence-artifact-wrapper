@@ -170,7 +170,7 @@ node{
                                               passwordVariable: 'EIFFEL_NEXUS_PASSWORD']]) {
 
                                    // Fetch Artifact (jar) from ARM
-                                   sh "curl -X GET -u ${EIFFEL_NEXUS_USER}:${EIFFEL_NEXUS_PASSWORD} ARM_ARTIFACT_PATH -o /src/main/docker/maven/"
+                                   sh "curl -X GET -u ${EIFFEL_NEXUS_USER}:${EIFFEL_NEXUS_PASSWORD} ${ARM_ARTIFACT_PATH} -o /src/main/docker/maven/"
 
 
                                    sh "ls /src/main/docker/maven/"
