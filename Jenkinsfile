@@ -98,7 +98,7 @@ node{
 
 dir ('sourcecode') {  // work-around to change dir out side container, not working inside container execution.. yet
 
-       docker.image('emtrout/dind:latest').inside {
+       docker.image('emtrout/dind:latest').inside("--privileged") {
 
             stage('Compile') {
 
@@ -129,10 +129,10 @@ dir ('sourcecode') {  // work-around to change dir out side container, not worki
 			}
 
 
-			stage('Publish Artifact -> JAR)') {
+			stage('Publish Artifact ARM -> JAR)') {
 
                   sh 'ls target'
-                  sh 'curl -v -u eiffel-nexus-extension:eiffel-nexus-extension123  --upload-file /target/0.0.1-SNAPSHOT.jar https://eiffel.lmera.ericsson.se/nexus/content/repositories/releases/test/com/ericsson/eiffel/intelligence/0.0.1/eiffel-intelligence-0.0.1.jar'
+                  sh 'curl -v -u eiffel-nexus-extension:eiffel-nexus-extension123  --upload-file /target/eiffel-intelligence-0.0.1-SNAPSHOT.jar https://eiffel.lmera.ericsson.se/nexus/content/repositories/releases/test/com/ericsson/eiffel/intelligence/0.0.1/eiffel-intelligence-0.0.1.jar'
 
             }
 
