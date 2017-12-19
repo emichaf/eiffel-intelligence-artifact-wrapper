@@ -119,6 +119,8 @@ node{
                       sh "cp ./target/${pom.artifactId}-${pom.version}.jar /output"
 
                       sh 'ls /output'
+
+                      sh 'ls'
                 }
 
     /*
