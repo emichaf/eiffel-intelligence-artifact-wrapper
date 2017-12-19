@@ -86,8 +86,8 @@ node{
 // C:\Users\emichaf\@My_temp\eiffel-intelligence\target\eiffel-intelligence-0.0.1-SNAPSHOT.jar
 
 
-       docker.image('emtrout/dind:latest').inside {
-
+       //docker.image('emtrout/dind:latest').inside {
+       withDockerContainer(image: 'emtrout/dind:latest') {  //bug can't change dir in containers
 
             // Warning: JAVA_HOME environment variable is not set.
             stage('Compile') {
@@ -100,7 +100,7 @@ node{
                   sh 'cd sourcecode'
                   sh 'ls'
                   sh 'ls target'
-                  sh 'ls /sourcecode/target'
+
 
 
                   // sh 'mvn clean package -DskipTests'
