@@ -71,7 +71,7 @@ node{
 									 sh "ls"
 
 							    }
-               } /*docker.image('emtrout/dind:latest').inside */
+               } // docker.image('emtrout/dind:latest').inside
 			}
 
 */
