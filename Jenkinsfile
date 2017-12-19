@@ -96,9 +96,9 @@ node{
                   //unstash "first-stash"
                   sh 'pwd'
 
-
+                  sh 'ls'
                   sh 'ls target'
-                  sh 'cd //sourcecode'
+                  sh 'cd sourcecode'
                   sh 'ls'
                   sh 'ls target'
                   sh 'ls sourcecode'
