@@ -94,48 +94,57 @@ node{
 
 
 
-dir ('sourcecode') {  // work-around to change dir out side container, not working inside container execution.. yet, see issues stated on top of file!
+    dir ('sourcecode') {  // work-around to change dir out side container, not working inside container execution.. yet, see issues stated on top of file!
 
-       docker.image('emtrout/dind:latest').inside("--privileged") {
+           docker.image('emtrout/dind:latest').inside("--privileged") {
 
-            stage('Compile') {
+                stage('Compile') {
 
-                  sh 'mvn clean package -DskipTests'
+                      sh 'mvn clean package -DskipTests'
 
-                  sh 'ls target'
-            }
+                      sh 'ls target'
+                }
 
-            stage('UnitTests & FlowTests)') {
-                  // OBS privileged: true for image for embedded mongodb (flapdoodle) to work
-                  // and glibc in image!
+    /*
+                stage('UnitTests & FlowTests with TestDoubles)') {
+                      // OBS privileged: true for image for embedded mongodb (flapdoodle) to work
+                      // and glibc in image!
 
- 				  def travis_datas = readYaml file: ".travis.yml"
+                      def travis_datas = readYaml file: ".travis.yml"
 
-                  // Execute tests (steps) in travis file, ie same file which is used in travis build (open source)
-				  travis_datas.script.each { item ->
-                          sh "$item"
-				  };
+                      // Execute tests (steps) in travis file, ie same file which is used in travis build (open source)
+                      travis_datas.script.each { item ->
+                              sh "$item"
+                      };
 
-				  sh "ls"
-				  sh "ls target"
-			}
+                      sh "ls"
+                      sh "ls target"
+                }
+    */
+
+                stage('Publish Artifact ARM -> JAR)') {
+
+                       withCredentials([[$class: 'UsernamePasswordMultiBinding',
+                                              credentialsId: '8829c73e-19b0-4f77-b74c-e112bbacd4d5',
+                                              usernameVariable: 'EIFFEL_NEXUS_USER',
+                                              passwordVariable: 'EIFFEL_NEXUS_PASSWORD']]) {
+
+                              sh 'ls target'
+
+                              // funkar
+                              //sh 'curl -v -u eiffel-nexus-extension:eiffel-nexus-extension123  --upload-file ./target/eiffel-intelligence-0.0.1-SNAPSHOT.jar https://eiffel.lmera.ericsson.se/nexus/content/repositories/releases/test/com/ericsson/eiffel/intelligence/0.0.1/eiffel-intelligence-0.0.1-SNAPSHOT.jar'
+                              sh "curl -v -u $EIFFEL_NEXUS_USER:$EIFFEL_NEXUS_PASSWORD --upload-file ./target/eiffel-intelligence-0.0.1-SNAPSHOT.jar https://eiffel.lmera.ericsson.se/nexus/content/repositories/releases/test/com/ericsson/eiffel/intelligence/0.0.1/eiffel-intelligence-0.0.1-SNAPSHOT.jar"
+
+                              // mvn test
+                      }
+
+                }
 
 
-			stage('Publish Artifact ARM -> JAR)') {
 
-                  sh 'ls target'
+           } // docker.image('emtrout/dind:latest').inside
 
-                  sh 'curl -v -u eiffel-nexus-extension:eiffel-nexus-extension123  --upload-file ./target/eiffel-intelligence-0.0.1-SNAPSHOT.jar https://eiffel.lmera.ericsson.se/nexus/content/repositories/releases/test/com/ericsson/eiffel/intelligence/0.0.1/eiffel-intelligence-0.0.1-SNAPSHOT.jar'
-
-
-
-
-            }
-
-
-
-       } // docker.image('emtrout/dind:latest').inside
-} // dir ('sourcecode') {
+    } // dir ('sourcecode') {
 
 
 
