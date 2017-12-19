@@ -88,7 +88,7 @@ node{
 // C:\Users\emichaf\@My_temp\eiffel-intelligence\target\eiffel-intelligence-0.0.1-SNAPSHOT.jar
 
 
-       docker.image('emtrout/dind:latest').inside('-v $WORKSPACE:/output -u root') {
+       docker.image('emtrout/dind:latest').inside('-v $WORKSPACE:/output') {
        //withDockerContainer(image: 'emtrout/dind:latest') {  //bug can't change dir in containers
 
             // Warning: JAVA_HOME environment variable is not set.
