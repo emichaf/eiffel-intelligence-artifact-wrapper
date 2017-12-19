@@ -113,7 +113,7 @@ node{
 
                       pom = readMavenPom file: 'pom.xml'
 
-                      sh "cp /target/${pom.artifactId}-${pom.version}.jar ./src/main/docker/maven/"
+                      sh "cp ./target/${pom.artifactId}-${pom.version}.jar ./src/main/docker/maven/"
 
                       sh 'ls /src/main/docker/maven/'
                 }
