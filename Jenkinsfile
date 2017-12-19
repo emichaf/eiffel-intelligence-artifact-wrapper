@@ -167,7 +167,7 @@ node{
 
                                // Create maven dir, if not exist
                                sh "mkdir -p /src/main/docker/maven"
-
+                               sh "chmod 777 /src/main/docker/maven"
 
                                withCredentials([[$class: 'UsernamePasswordMultiBinding',
                                               credentialsId: '8829c73e-19b0-4f77-b74c-e112bbacd4d5',
@@ -190,7 +190,6 @@ node{
                                    sh "ls /src/main/docker/maven/"
 
                                    pom = readMavenPom file: 'pom.xml'
-
 
                                    sh "docker login -u ${DOCKER_HUB_USER} -p ${DOCKER_HUB_PASSWORD}"
 
