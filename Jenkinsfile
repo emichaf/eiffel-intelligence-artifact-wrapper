@@ -96,80 +96,51 @@ node{
 // KÖRS VERKLIGEN TESTERNA -> No tests to run. ??
 // C:\Users\emichaf\@My_temp\eiffel-intelligence\target\eiffel-intelligence-0.0.1-SNAPSHOT.jar
 
-dir ('sourcecode') {  // work-around to change dir out side container
+dir ('sourcecode') {  // work-around to change dir out side container, not working inside container execution.. yet
 
        docker.image('emtrout/dind:latest').inside {
 
             stage('Compile') {
-               //dir ('sourcecode') {
 
                   sh 'pwd'
-
                   sh 'ls'
                   sh 'ls target'
-                  sh 'cd sourcecode'
-                  sh 'ls'
-                  sh 'ls target'
-                  sh 'ls sourcecode'
-
-                  unstash "first-stash"
-                  sh 'pwd'
-                  sh 'ls'
-
 
                   // sh 'mvn clean package -DskipTests'
 
-
-               //}
 
             }
 
             stage('UnitTests & FlowTests)') {
 
-                                // OBS privileged: true for image for embedded mongodb (flapdoodle) to work
+                  // OBS privileged: true for image for embedded mongodb (flapdoodle) to work
 
-							    //dir ('sourcecode') {
+ 				  def travis_datas = readYaml file: ".travis.yml"
 
-									 def travis_datas = readYaml file: ".travis.yml"
+                  // Execute tests in travis file
+				  travis_datas.script.each { item ->
+                          sh "$item"
+				  };
 
-                                     // Execute tests in travis file
-									 travis_datas.script.each { item ->
-                                          sh "$item"
-									 };
-
-									 sh "ls"
-
-									 sh "ls target"
-
-							   // }
-
+				  sh "ls"
+				  sh "ls target"
 			}
+
+
+			stage('Publish Artifact -> JAR)') {
+
+                  sh 'ls target'
+                  sh 'curl -v -u eiffel-nexus-extension:eiffel-nexus-extension123  --upload-file /target/0.0.1-SNAPSHOT.jar https://eiffel.lmera.ericsson.se/nexus/content/repositories/releases/test/com/ericsson/eiffel/intelligence/0.0.1/eiffel-intelligence-0.0.1.jar'
+
+            }
+
+
 
        } // docker.image('emtrout/dind:latest').inside
 } // dir ('sourcecode') {
 
-            stage('Publish Artifact -> JAR)') {
-               docker.image('emtrout/dind:latest').inside {
-
-					dir ('sourcecode') {
-
-                         sh 'ls target'
-                         sh 'curl -v -u eiffel-nexus-extension:eiffel-nexus-extension123  --upload-file /target/0.0.1-SNAPSHOT.jar https://eiffel.lmera.ericsson.se/nexus/content/repositories/releases/test/com/ericsson/eiffel/intelligence/0.0.1/eiffel-intelligence-0.0.1.jar'
-
-					}
-
-               } // docker.image('emtrout/dind:latest').inside
-			}
 
 
+ } //  docker.withServer('tcp://docker104-eiffel999.lmera.ericsson.se:4243', 'remote_docker_host')
 
-
-
-
-
-
-
-
- }
-
-}
+} // node
