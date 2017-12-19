@@ -98,11 +98,10 @@ node{
 
 
                   sh 'ls target'
-                  sh 'cd sourcecode'
-                  sh 'cd sourcecode'
+                  sh 'cd //sourcecode'
                   sh 'ls'
                   sh 'ls target'
-
+                  sh 'ls sourcecode'
 
 
                   // sh 'mvn clean package -DskipTests'
