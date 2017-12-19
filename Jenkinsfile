@@ -73,7 +73,6 @@ node{
 
 
 
-/*
         docker.image('emtrout/dind:latest').inside {
 
 
@@ -83,7 +82,7 @@ node{
 
                         }
 
-*/
+
 
 
                stage ('Test') {
@@ -99,7 +98,7 @@ node{
                             }
 
 
-/*
+
                stage('Build and Push Docker Image') {
 
                         withCredentials([[$class: 'UsernamePasswordMultiBinding',
@@ -124,9 +123,9 @@ node{
 
                         }
                     }
-*/
 
-/*
+
+
                stage('Deploy to K8S Stage') {
 
                                    container('kubectl') {
@@ -144,7 +143,7 @@ node{
                                    }
 
                }
-*/
+
 
 
                stage ('Integration Test') {
