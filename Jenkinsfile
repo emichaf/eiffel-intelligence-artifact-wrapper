@@ -150,6 +150,34 @@ node{
 
 
 
+                stage('Build and Push Docker Image to Registry') {
+                            container('docker') {
+                            withCredentials([[$class: 'UsernamePasswordMultiBinding',
+                                        credentialsId: '7b05ac28-c1ae-4249-a0c6-7c54c74e3b67',
+                                        usernameVariable: 'DOCKER_HUB_USER',
+                                        passwordVariable: 'DOCKER_HUB_PASSWORD']]) {
+
+                               pom = readMavenPom file: 'pom.xml'
+
+
+                               sh "docker login -u ${env.DOCKER_HUB_USER} -p ${env.DOCKER_HUB_PASSWORD}"
+
+                               sh "docker build --no-cache=true -t ${env.DOCKER_HUB_USER}/${pom.artifactId}:latest -f src/main/docker/Dockerfile src/main/docker/"
+
+                               sh "docker push ${env.DOCKER_HUB_USER}/${pom.artifactId}:latest"
+
+                               sh "docker build --no-cache=true -t ${env.DOCKER_HUB_USER}/${pom.artifactId}:${GIT_SHORT_COMMIT} -f src/main/docker/Dockerfile src/main/docker/"
+
+                               sh "docker push ${env.DOCKER_HUB_USER}/${pom.artifactId}:${GIT_SHORT_COMMIT}"
+
+                               sh "docker logout"
+
+                               }
+                            }
+                }
+
+
+
            } // docker.image('emtrout/dind:latest').inside
 
     } // dir ('sourcecode') {
