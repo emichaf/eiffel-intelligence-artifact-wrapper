@@ -55,24 +55,33 @@ node{
 
         docker.image('emtrout/dind:latest').inside {
 
-//privileged: true
-
             stage('UnitTests & FlowTests)') {
 
                                 // OBS privileged: true for image for embedded mongodb (flapdoodle) to work
 
+
+
+
+
+
+
+
 							    dir ('sourcecode') {
 
 									 def travis_datas = readYaml file: ".travis.yml"
-
+ parallel (
                                      // Execute tests in travis file
 									 travis_datas.script.each { item ->
 
-									    sh "$item"
+
+                                 'Test Server' : {
+                                  sh "$item"
+                                },
+
 
 									 };
 
-
+)
 									 sh "ls"
 
 							    }
