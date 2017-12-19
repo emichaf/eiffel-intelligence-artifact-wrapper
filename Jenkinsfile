@@ -53,127 +53,53 @@ node{
 
 
 
-        docker.image('emtrout/dind:latest').inside {
+
 
             stage('UnitTests & FlowTests)') {
-
+               docker.image('emtrout/dind:latest').inside {
                                 // OBS privileged: true for image for embedded mongodb (flapdoodle) to work
-
-
-
-
-
-
-
 
 							    dir ('sourcecode') {
 
 									 def travis_datas = readYaml file: ".travis.yml"
- //parallel (
+
                                      // Execute tests in travis file
 									 travis_datas.script.each { item ->
-
-
-                               //  'Test Server' : {
-                                  sh "$item"
-                               //   },
-
-
+                                          sh "$item"
 									 };
 
-         // )
 									 sh "ls"
 
 							    }
-
-
-
+               } /*docker.image('emtrout/dind:latest').inside */
 			}
 
 
 
 
+               stage ('SonarQube Code Analysis') {
+
+                              docker.image('sonarqube').withRun('-p 9000:9000 -p 9092:9092 -e SONARQUBE_JDBC_USERNAME=sonar -e SONARQUBE_JDBC_PASSWORD=sonar -e SONARQUBE_JDBC_URL=jdbc:postgresql://localhost/sonar') { c ->
+
+
+                                     dir ('sourcecode') {
+                                             docker.image('emtrout/dind:latest').inside {
+                                                 /* Wait until mysql service is up */
+                                                 sh 'mv sonar:sonar'
+                                             }
+
+                                     }
+
+                                 }
+
+
+                }
 
 
 
 
-               stage ('Test') {
-
-                              parallel (
-                                'Test Server' : {
-                                  sh 'ls'
-                                },
-                                'Test Sample Client' : {
-                                  sh 'ls'
-                                }
-                              )
-                            }
 
 
-/*
-               stage('Build and Push Docker Image') {
-
-                        withCredentials([[$class: 'UsernamePasswordMultiBinding',
-                                    credentialsId: '7b05ac28-c1ae-4249-a0c6-7c54c74e3b67',
-                                    usernameVariable: 'DOCKER_HUB_USER',
-                                    passwordVariable: 'DOCKER_HUB_PASSWORD']]) {
-
-
-                           pom = readMavenPom file: 'pom.xml'
-
-                           sh "docker login -u ${env.DOCKER_HUB_USER} -p ${env.DOCKER_HUB_PASSWORD}"
-
-                           sh "docker build --no-cache=true -t ${env.DOCKER_HUB_USER}/${pom.artifactId}:latest -f src/main/docker/Dockerfile src/main/docker/"
-
-                           sh "docker push ${env.DOCKER_HUB_USER}/${pom.artifactId}:latest"
-
-                           sh "docker build --no-cache=true -t ${env.DOCKER_HUB_USER}/${pom.artifactId}:${GIT_SHORT_COMMIT} -f src/main/docker/Dockerfile src/main/docker/"
-
-                           sh "docker push ${env.DOCKER_HUB_USER}/${pom.artifactId}:${GIT_SHORT_COMMIT}"
-
-                           sh "docker logout"
-
-                        }
-                    }
-*/
-/*
-
-               stage('Deploy to K8S Stage') {
-
-                                   container('kubectl') {
-                                      withCredentials([[
-                                       $class: 'FileBinding',
-                                       credentialsId: '77bd756d-382a-4704-bb9c-9d52f023ac4d',
-                                       variable: 'KUBECONFIG'
-                                   ]]){
-
-
-                                        sh("kubectl --kubeconfig=$KUBECONFIG create -f ./target/classes/META-INF/fabric8/kubernetes.yml")
-                                        sh("kubectl --kubeconfig=$KUBECONFIG get pods")
-
-                                      }
-                                   }
-
-               }
-
-*/
-
-               stage ('Integration Test') {
-
-                                     parallel (
-                                       'Test Server' : {
-                                         sh 'ls'
-                                       },
-                                       'Test Sample Client' : {
-                                         sh 'ls'
-                                       }
-                                     )
-
-               }
-
-
-
-        } /*docker.image('emtrout/dind:latest').inside {*/
 
  }
 
