@@ -59,11 +59,6 @@ node{
 
             stage('UnitTests & FlowTests)') {
 
-                            withCredentials([[$class: 'UsernamePasswordMultiBinding',
-                            credentialsId: 'e7de4146-4a59-4406-916e-d10506cfaeb8',
-                            usernameVariable: 'DOCKER_HUB_USER',
-                            passwordVariable: 'DOCKER_HUB_PASSWORD']]) {
-
                                 // OBS privileged: true for image for embedded mongodb (flapdoodle) to work
 
 							    dir ('sourcecode') {
@@ -83,7 +78,6 @@ node{
 							    }
 
 
-							}
 
 			}
 
