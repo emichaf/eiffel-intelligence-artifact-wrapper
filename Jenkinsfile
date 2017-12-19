@@ -82,7 +82,7 @@ node{
 // KÖRS VERKLIGEN TESTERNA -> No tests to run. ??
 // C:\Users\emichaf\@My_temp\eiffel-intelligence\target\eiffel-intelligence-0.0.1-SNAPSHOT.jar
 
-/*
+
        docker.image('emtrout/dind:latest').inside {
 
             stage('Compile)') {
