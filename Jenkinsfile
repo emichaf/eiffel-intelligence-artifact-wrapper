@@ -53,30 +53,6 @@ node{
 
 
 
-
-
-            stage('UnitTests & FlowTests)') {
-               docker.image('emtrout/dind:latest').inside {
-                                // OBS privileged: true for image for embedded mongodb (flapdoodle) to work
-
-							    dir ('sourcecode') {
-
-									 def travis_datas = readYaml file: ".travis.yml"
-
-                                     // Execute tests in travis file
-									 travis_datas.script.each { item ->
-                                          sh "$item"
-									 };
-
-									 sh "ls"
-
-							    }
-               } // docker.image('emtrout/dind:latest').inside
-			}
-
-
-
-
                stage ('SonarQube Code Analysis') {
 /*
                               //docker.image('sonarqube').withRun('-p 9000:9000 -p 9092:9092 -e "SONARQUBE_JDBC_USERNAME=sonar" -e "SONARQUBE_JDBC_PASSWORD=sonar" -e "SONARQUBE_JDBC_URL=jdbc:postgresql://localhost/sonar"') { c ->
@@ -100,6 +76,45 @@ node{
 
 */
                 }
+
+
+
+
+            stage('UnitTests & FlowTests)') {
+               docker.image('emtrout/dind:latest').inside {
+                                // OBS privileged: true for image for embedded mongodb (flapdoodle) to work
+
+							    dir ('sourcecode') {
+
+									 def travis_datas = readYaml file: ".travis.yml"
+
+                                     // Execute tests in travis file
+									 travis_datas.script.each { item ->
+                                          sh "$item"
+									 };
+
+									 sh "ls"
+
+							    }
+               } // docker.image('emtrout/dind:latest').inside
+			}
+
+
+
+            stage('Publish Artifact -> JAR)') {
+               docker.image('emtrout/dind:latest').inside {
+
+					dir ('sourcecode') {
+
+                         curl -v -u eiffel-nexus-extension:eiffel-nexus-extension123  --upload-file /target/0.0.1-SNAPSHOT.jar https://eiffel.lmera.ericsson.se/nexus/content/repositories/releases/test/com/ericsson/eiffel/intelligence/0.0.1/eiffel-intelligence-0.0.1.jar
+
+					}
+
+               } // docker.image('emtrout/dind:latest').inside
+			}
+
+
+
 
 
 
