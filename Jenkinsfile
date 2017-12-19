@@ -29,12 +29,15 @@ node{
 
                             GIT_LONG_COMMIT =  sh(returnStdout: true, script: "git log --format='%H' -n 1").trim()
 
+
+
                             // Read build info file with github hash
                             String file_name = 'build_info.yaml'
-                            def props = readYaml file: 'build_info.yaml'
+                            sh "cat $file_name"
+                            def props = readYaml file: "$file_name"
                             GITHUB_HASH_TO_USE = props.commit
 
-                            sh "echo $GITHUB_HASH_TO_USE"
+                            sh "echo hash -> $GITHUB_HASH_TO_USE"
 
                             sh "pwd"
                             sh "ls"
@@ -67,7 +70,14 @@ node{
 
 
 
-               stage ('SonarQube Code Analysis') {
+
+
+
+
+
+    dir ('sourcecode') {  // work-around to change dir outside container, not working inside container execution.. yet, see issues stated on top of file!
+
+            stage ('SonarQube Code Analysis') {
 /*
                               //docker.image('sonarqube').withRun('-p 9000:9000 -p 9092:9092 -e "SONARQUBE_JDBC_USERNAME=sonar" -e "SONARQUBE_JDBC_PASSWORD=sonar" -e "SONARQUBE_JDBC_URL=jdbc:postgresql://localhost/sonar"') { c ->
                               //docker.image('sonarqube').withRun('docker run -d --name sonarqube -p 9000:9000 -p 9092:9092 sonarqube') { c ->
@@ -92,9 +102,6 @@ node{
                 }
 
 
-
-
-    dir ('sourcecode') {  // work-around to change dir outside container, not working inside container execution.. yet, see issues stated on top of file!
 
            docker.image('emtrout/dind:latest').inside("--privileged") {
 
@@ -129,12 +136,12 @@ node{
                                               usernameVariable: 'EIFFEL_NEXUS_USER',
                                               passwordVariable: 'EIFFEL_NEXUS_PASSWORD']]) {
 
-                              sh 'ls target'
+                              sh 'ls'
 
                               pom = readMavenPom file: 'pom.xml'
 
                               // Upload to ARM (ex eiffel-intelligence-0.0.1-SNAPSHOT.jar)
-                              sh "curl -v -u $EIFFEL_NEXUS_USER:$EIFFEL_NEXUS_PASSWORD --upload-file ./target/$pom.artifactId-$pom.version.jar https://eiffel.lmera.ericsson.se/nexus/content/repositories/releases/test/com/ericsson/eiffel/intelligence/$pom.version/$pom.artifactId-$pom.version.jar"
+                              sh "curl -v -u ${EIFFEL_NEXUS_USER}:${EIFFEL_NEXUS_PASSWORD} --upload-file ./target/${pom.artifactId}-${pom.version}.jar https://eiffel.lmera.ericsson.se/nexus/content/repositories/releases/test/com/ericsson/eiffel/intelligence/${pom.version}/${pom.artifactId}-${pom.version}.jar"
 
                               // mvn test
                       }
