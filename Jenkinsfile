@@ -106,14 +106,16 @@ dir ('sourcecode') {  // work-around to change dir out side container, not worki
                   sh 'ls'
                   sh 'ls target'
 
-                  // sh 'mvn clean package -DskipTests'
+                  sh 'mvn clean package -DskipTests'
 
-
+                  sh 'pwd'
+                  sh 'ls'
+                  sh 'ls target'
             }
 
             stage('UnitTests & FlowTests)') {
-
                   // OBS privileged: true for image for embedded mongodb (flapdoodle) to work
+                  // and glibc in image!
 
  				  def travis_datas = readYaml file: ".travis.yml"
 
