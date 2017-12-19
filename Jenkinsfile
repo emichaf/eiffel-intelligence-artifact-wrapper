@@ -76,12 +76,12 @@ node{
 
                                  'Test Server' : {
                                   sh "$item"
-                                },
+                                  },
 
 
 									 };
 
-)
+          )
 									 sh "ls"
 
 							    }
