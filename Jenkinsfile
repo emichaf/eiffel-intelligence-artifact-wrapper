@@ -83,7 +83,7 @@ node{
                               //docker.image('sonarqube').withRun('docker run -d --name sonarqube -p 9000:9000 -p 9092:9092 sonarqube') { c ->
 
 
-                                     dir ('sourcecode') {
+                                     dir ('wrapper') {
                                              docker.image('emtrout/dind:latest').inside {
                                                    //sh 'mvn sonar:sonar -Dsonar.host.url=http://localhost:9000'
                                                    //sh 'mvn sonar:sonar -Dsonar.host.url=https://sonarqube.lmera.ericsson.se'
