@@ -33,7 +33,7 @@ node{
                             def props = readYaml file: "$file_name"
                             GITHUB_HASH_TO_USE = props.commit
 
-                            sh 'echo "$GITHUB_HASH_TO_USE"'
+                            sh 'echo $GITHUB_HASH_TO_USE'
               }
 
         }
