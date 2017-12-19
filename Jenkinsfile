@@ -91,12 +91,12 @@ node{
 
             // Warning: JAVA_HOME environment variable is not set.
             stage('Compile') {
-               dir ('sourcecode_stash') {
+               dir ('sourcecode') {
 
                   unstash "first-stash"
                   sh "ls"
                   sh "ls target"
-                  sh "cd sourcecode_stash"
+                  sh "cd sourcecode"
                   sh "ls"
                   sh "ls target"
 
