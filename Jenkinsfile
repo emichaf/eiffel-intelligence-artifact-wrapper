@@ -96,7 +96,7 @@ node{
                dir ('sourcecode') {
 
 
-                 ls /output
+                 sh 'ls /output'
 
 
                   //unstash "first-stash"
