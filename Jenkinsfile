@@ -30,10 +30,13 @@ node{
 
                             // Read build info file with github hash
                             String file_name = 'build_info.yaml'
-                            def props = readYaml file: "$file_name"
+                            def props = readYaml file: 'build_info.yaml'
+
+                            sh "echo $props"
+
                             GITHUB_HASH_TO_USE = props.commit
 
-                            sh 'echo $GITHUB_HASH_TO_USE'
+                            sh "echo $GITHUB_HASH_TO_USE"
               }
 
         }
