@@ -1,5 +1,9 @@
 node{
 
+  // OBS change dir in containers not working, so fetching scm in containers is required. Stash/unstash dir() not working..
+  // https://issues.jenkins-ci.org/browse/JENKINS-46636
+  // https://issues.jenkins-ci.org/browse/JENKINS-33510
+
      String GIT_SHORT_COMMIT
      String GIT_LONG_COMMIT
      String GITHUB_HASH_TO_USE
@@ -93,18 +97,17 @@ node{
 // C:\Users\emichaf\@My_temp\eiffel-intelligence\target\eiffel-intelligence-0.0.1-SNAPSHOT.jar
 
 
-       docker.image('emtrout/dind:latest').inside('-v $WORKSPACE:/output') {
-       //withDockerContainer(image: 'emtrout/dind:latest') {  //bug can't change dir in containers
+       docker.image('emtrout/dind:latest').inside {
 
             // Warning: JAVA_HOME environment variable is not set.
             stage('Compile') {
-               dir ('sourcecode') {
+               //dir ('sourcecode') {
+
+                checkout scm: [$class: 'GitSCM',
+                                           userRemoteConfigs: [[url: 'https://github.com/emichaf/eiffel-intelligence.git']],
+                                           branches: [[name: "$GITHUB_HASH_TO_USE"]]]
 
 
-                 sh 'ls /output'
-
-
-                  //unstash "first-stash"
                   sh 'pwd'
 
                   sh 'ls'
@@ -121,10 +124,8 @@ node{
 
                   // sh 'mvn clean package -DskipTests'
 
-                  sh 'ls'
 
-                  sh 'ls target'
-               }
+               //}
 
             }
 
