@@ -46,7 +46,7 @@ node{
                           branches: [[name: "$GITHUB_HASH_TO_USE"]]]
 
 
-                          sh "echo ls"
+                          sh "ls"
               }
 
         }
