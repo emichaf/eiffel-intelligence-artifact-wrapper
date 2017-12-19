@@ -143,7 +143,7 @@ node{
                               ARM_ARTIFACT_PATH = "https://eiffel.lmera.ericsson.se/nexus/content/repositories/releases/test/com/ericsson/eiffel/intelligence/${pom.version}/${ARM_ARTIFACT}"
 
                               // Upload to ARM (ex eiffel-intelligence-0.0.1-SNAPSHOT.jar)
-                              sh "curl -v -u ${EIFFEL_NEXUS_USER}:${EIFFEL_NEXUS_PASSWORD} --upload-file ./target/${ARM_ARTIFACT} "
+                              sh "curl -v -u ${EIFFEL_NEXUS_USER}:${EIFFEL_NEXUS_PASSWORD} --upload-file ./target/${ARM_ARTIFACT} ${ARM_ARTIFACT_PATH}"
                       }
                 }
 
@@ -175,9 +175,8 @@ node{
 
                                    sh "ls /src/main/docker/maven/"
 
-//https://eiffel.lmera.ericsson.se/nexus/content/repositories/releases/test/com/ericsson/eiffel/intelligence/0.0.1-SNAPSHOT/eiffel-intelligence-0.0.1-SNAPSHOT.jar
-
                                 }
+
 
                                 withCredentials([[$class: 'UsernamePasswordMultiBinding',
                                             credentialsId: '7b05ac28-c1ae-4249-a0c6-7c54c74e3b67',
