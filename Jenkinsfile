@@ -165,7 +165,7 @@ node{
 
                                // Create maven dir
                                sh "mkdir -p /src/main/docker/maven"
-                               sh "chmod 777 /src/main/docker/maven"
+                               //sh "chmod 777 /src/main/docker/maven"
 
 
 
@@ -179,9 +179,6 @@ node{
                                    // Fetch Artifact (jar) from ARM
                                    sh "curl -X GET -u ${EIFFEL_NEXUS_USER}:${EIFFEL_NEXUS_PASSWORD} ${ARM_ARTIFACT_PATH} -o /src/main/docker/maven/${ARM_ARTIFACT}"
 
-
-                                   sh "ls /src/main/docker/maven/"
-
                                 }
 
 
@@ -190,18 +187,21 @@ node{
                                             usernameVariable: 'DOCKER_HUB_USER',
                                             passwordVariable: 'DOCKER_HUB_PASSWORD']]) {
 
+                                   sh "ls /src/main/docker/maven/"
+
                                    pom = readMavenPom file: 'pom.xml'
 
 
-                                   sh "docker login -u ${env.DOCKER_HUB_USER} -p ${env.DOCKER_HUB_PASSWORD}"
 
-                                   sh "docker build --no-cache=true -t ${env.DOCKER_HUB_USER}/${pom.artifactId}:latest -f src/main/docker/Dockerfile src/main/docker/"
+                                   sh "docker login -u ${DOCKER_HUB_USER} -p ${DOCKER_HUB_PASSWORD}"
 
-                                   sh "docker push ${env.DOCKER_HUB_USER}/${pom.artifactId}:latest"
+                                   sh "docker build --no-cache=true -t ${DOCKER_HUB_USER}/${pom.artifactId}:latest -f src/main/docker/Dockerfile src/main/docker/"
 
-                                   sh "docker build --no-cache=true -t ${env.DOCKER_HUB_USER}/${pom.artifactId}:${GIT_SHORT_COMMIT} -f src/main/docker/Dockerfile src/main/docker/"
+                                   sh "docker push ${DOCKER_HUB_USER}/${pom.artifactId}:latest"
 
-                                   sh "docker push ${env.DOCKER_HUB_USER}/${pom.artifactId}:${GIT_SHORT_COMMIT}"
+                                   sh "docker build --no-cache=true -t ${DOCKER_HUB_USER}/${pom.artifactId}:${GIT_SHORT_COMMIT} -f src/main/docker/Dockerfile src/main/docker/"
+
+                                   sh "docker push ${DOCKER_HUB_USER}/${pom.artifactId}:${GIT_SHORT_COMMIT}"
 
                                    sh "docker logout"
 
