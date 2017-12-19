@@ -93,23 +93,15 @@ node{
 
 
 
-// KÖRS VERKLIGEN TESTERNA -> No tests to run. ??
-// C:\Users\emichaf\@My_temp\eiffel-intelligence\target\eiffel-intelligence-0.0.1-SNAPSHOT.jar
 
-dir ('sourcecode') {  // work-around to change dir out side container, not working inside container execution.. yet
+dir ('sourcecode') {  // work-around to change dir out side container, not working inside container execution.. yet, see issues stated on top of file!
 
        docker.image('emtrout/dind:latest').inside("--privileged") {
 
             stage('Compile') {
 
-                  sh 'pwd'
-                  sh 'ls'
-                  sh 'ls target'
-
                   sh 'mvn clean package -DskipTests'
 
-                  sh 'pwd'
-                  sh 'ls'
                   sh 'ls target'
             }
 
@@ -119,7 +111,7 @@ dir ('sourcecode') {  // work-around to change dir out side container, not worki
 
  				  def travis_datas = readYaml file: ".travis.yml"
 
-                  // Execute tests in travis file
+                  // Execute tests (steps) in travis file, ie same file which is used in travis build (open source)
 				  travis_datas.script.each { item ->
                           sh "$item"
 				  };
@@ -132,7 +124,11 @@ dir ('sourcecode') {  // work-around to change dir out side container, not worki
 			stage('Publish Artifact ARM -> JAR)') {
 
                   sh 'ls target'
-                  sh 'curl -v -u eiffel-nexus-extension:eiffel-nexus-extension123  --upload-file /target/eiffel-intelligence-0.0.1-SNAPSHOT.jar https://eiffel.lmera.ericsson.se/nexus/content/repositories/releases/test/com/ericsson/eiffel/intelligence/0.0.1/eiffel-intelligence-0.0.1.jar'
+
+                  sh 'curl -v -u eiffel-nexus-extension:eiffel-nexus-extension123  --upload-file ./target/eiffel-intelligence-0.0.1-SNAPSHOT.jar https://eiffel.lmera.ericsson.se/nexus/content/repositories/releases/test/com/ericsson/eiffel/intelligence/0.0.1/eiffel-intelligence-0.0.1-SNAPSHOT.jar'
+
+
+
 
             }
 
