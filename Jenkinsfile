@@ -99,7 +99,7 @@ node{
                 }
 
 
-            // 	/var/jenkins_home
+
            docker.image('emtrout/dind:latest').inside("--privileged") {
 
                 stage('Compile') {
@@ -157,16 +157,16 @@ node{
 
     dir ('wrapper') {  // workaround to change dir outside container, not working inside container execution.. yet, see issues stated on top of file!
 
+       docker.image('emtrout/dind:latest').inside {
+
            stage('Build and Push Docker Image to Registry') {
 
 
                                 sh "pwd"
                                 sh "ls"
 
-                               // Create maven dir
+                               // Create maven dir, if not exist
                                sh "mkdir -p /src/main/docker/maven"
-                               //sh "chmod 777 /src/main/docker/maven"
-
 
 
                                withCredentials([[$class: 'UsernamePasswordMultiBinding',
@@ -192,7 +192,6 @@ node{
                                    pom = readMavenPom file: 'pom.xml'
 
 
-
                                    sh "docker login -u ${DOCKER_HUB_USER} -p ${DOCKER_HUB_PASSWORD}"
 
                                    sh "docker build --no-cache=true -t ${DOCKER_HUB_USER}/${pom.artifactId}:latest -f src/main/docker/Dockerfile src/main/docker/"
@@ -207,7 +206,9 @@ node{
 
                                    }
 
-                    }
+           } // stage('..
+
+       } // docker.image('emtrout/dind:latest').inside
 
     } // dir ('wrapper') {
 
