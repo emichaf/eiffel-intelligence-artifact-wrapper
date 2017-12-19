@@ -94,7 +94,7 @@ node{
 
 
 
-    dir ('sourcecode') {  // work-around to change dir out side container, not working inside container execution.. yet, see issues stated on top of file!
+    dir ('sourcecode') {  // work-around to change dir outside container, not working inside container execution.. yet, see issues stated on top of file!
 
            docker.image('emtrout/dind:latest').inside("--privileged") {
 
@@ -131,9 +131,10 @@ node{
 
                               sh 'ls target'
 
-                              // funkar
-                              //sh 'curl -v -u eiffel-nexus-extension:eiffel-nexus-extension123  --upload-file ./target/eiffel-intelligence-0.0.1-SNAPSHOT.jar https://eiffel.lmera.ericsson.se/nexus/content/repositories/releases/test/com/ericsson/eiffel/intelligence/0.0.1/eiffel-intelligence-0.0.1-SNAPSHOT.jar'
-                              sh "curl -v -u $EIFFEL_NEXUS_USER:$EIFFEL_NEXUS_PASSWORD --upload-file ./target/eiffel-intelligence-0.0.1-SNAPSHOT.jar https://eiffel.lmera.ericsson.se/nexus/content/repositories/releases/test/com/ericsson/eiffel/intelligence/0.0.1/eiffel-intelligence-0.0.1-SNAPSHOT.jar"
+                              pom = readMavenPom file: 'pom.xml'
+
+                              // Upload to ARM (ex eiffel-intelligence-0.0.1-SNAPSHOT.jar)
+                              sh "curl -v -u $EIFFEL_NEXUS_USER:$EIFFEL_NEXUS_PASSWORD --upload-file ./target/$pom.artifactId-$pom.version.jar https://eiffel.lmera.ericsson.se/nexus/content/repositories/releases/test/com/ericsson/eiffel/intelligence/$pom.version/$pom.artifactId-$pom.version.jar"
 
                               // mvn test
                       }
