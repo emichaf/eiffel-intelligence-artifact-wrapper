@@ -43,8 +43,14 @@ node{
        stage ("GITHUB Checkout: $GITHUB_HASH_TO_USE") {
 
               dir ('sourcecode') {
-                            git branch: "master:$GITHUB_HASH_TO_USE", url: 'https://github.com/emichaf/eiffel-intelligence.git'
+                            //git branch: "master:$GITHUB_HASH_TO_USE", url: 'https://github.com/emichaf/eiffel-intelligence.git'
 
+
+                            checkout scm:( [$class: 'GitSCM',
+                                    branches: [[name: $GITHUB_HASH_TO_USE ]],
+                                    userRemoteConfigs: [[
+                                        //credentialsId: 'deploy key for your repo',
+                                        url: 'https://github.com/emichaf/eiffel-intelligence.git']]])
 
                             sh "echo $GITHUB_HASH_TO_USE"
               }
