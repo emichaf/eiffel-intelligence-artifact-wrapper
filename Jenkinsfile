@@ -69,19 +69,19 @@ node{
 							    dir ('sourcecode') {
 
 									 def travis_datas = readYaml file: ".travis.yml"
- parallel (
+ //parallel (
                                      // Execute tests in travis file
 									 travis_datas.script.each { item ->
 
 
-                                 'Test Server' : {
+                               //  'Test Server' : {
                                   sh "$item"
-                                  },
+                               //   },
 
 
 									 };
 
-          )
+         // )
 									 sh "ls"
 
 							    }
