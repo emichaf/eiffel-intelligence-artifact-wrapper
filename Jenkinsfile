@@ -97,6 +97,7 @@ node{
                   sh "ls"
                   sh "ls target"
                   sh "cd sourcecode"
+                  sh "cd sourcecode"
                   sh "ls"
                   sh "ls target"
 
