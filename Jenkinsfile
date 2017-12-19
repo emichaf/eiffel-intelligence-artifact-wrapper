@@ -46,6 +46,9 @@ node{
                           branches: [[name: "$GITHUB_HASH_TO_USE"]]]
 
 
+
+                          stash name: "first-stash", includes: "*"
+
                           sh "ls"
               }
 
@@ -87,8 +90,11 @@ node{
 
 
             // Warning: JAVA_HOME environment variable is not set.
-            stage('Compile)') {
+            stage('Compile') {
                dir ('sourcecode') {
+
+                  unstash "first-stash"
+
                    sh 'mvn clean package -DskipTests'
 
                     sh "ls"
