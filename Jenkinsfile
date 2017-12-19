@@ -91,9 +91,15 @@ node{
 
             // Warning: JAVA_HOME environment variable is not set.
             stage('Compile') {
-               dir ('sourcecode') {
+               dir ('sourcecode_stash') {
 
                   unstash "first-stash"
+                  sh "ls"
+                  sh "ls target"
+                  sh "cd first-stash"
+                  sh "ls"
+                  sh "ls target"
+
 
                    sh 'mvn clean package -DskipTests'
 
