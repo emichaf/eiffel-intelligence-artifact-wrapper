@@ -79,9 +79,20 @@ node{
 
 
 
+// KÖRS VERKLIGEN TESTERNA -> No tests to run. ??
+// C:\Users\emichaf\@My_temp\eiffel-intelligence\target\eiffel-intelligence-0.0.1-SNAPSHOT.jar
+
+/*
+       docker.image('emtrout/dind:latest').inside {
+
+            stage('Compile)') {
+
+               sh "mvn clean package -DskipTests"
+
+            }
 
             stage('UnitTests & FlowTests)') {
-               docker.image('emtrout/dind:latest').inside {
+
                                 // OBS privileged: true for image for embedded mongodb (flapdoodle) to work
 
 							    dir ('sourcecode') {
@@ -98,10 +109,10 @@ node{
 									 sh "ls target"
 
 							    }
-               } // docker.image('emtrout/dind:latest').inside
+
 			}
 
-
+       } // docker.image('emtrout/dind:latest').inside
 
             stage('Publish Artifact -> JAR)') {
                docker.image('emtrout/dind:latest').inside {
