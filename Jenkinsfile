@@ -7,15 +7,12 @@ node{
 
  docker.withServer('tcp://docker104-eiffel999.lmera.ericsson.se:4243', 'remote_docker_host') {
 
-   /*
+     /*
      For inside() to work, the Docker server and the Jenkins agent must use the same filesystem,
      so that the workspace can be mounted.
 
      When Jenkins detects that the agent is itself running inside a Docker container, it will automatically pass
      the --volumes-from argument to the inside container, ensuring that it can share a workspace with the agent.
-
-              sh "git rev-parse --short HEAD > .git/commit-id"
-              commit_id = readFile('.git/commit-id')
 
      */
 
@@ -43,49 +40,14 @@ node{
        stage ("GITHUB Checkout: $GITHUB_HASH_TO_USE") {
 
               dir ('sourcecode') {
-                            //git branch: "master:$GITHUB_HASH_TO_USE", url: 'https://github.com/emichaf/eiffel-intelligence.git'
+
+                  checkout scm: [$class: 'GitSCM',
+                          userRemoteConfigs: [[url: 'https://github.com/emichaf/eiffel-intelligence.git']],
+                          branches: [[name: "$GITHUB_HASH_TO_USE"]]]
 
 
-
-
-              checkout scm: [$class: 'GitSCM',
-                      userRemoteConfigs: [[url: 'https://github.com/emichaf/eiffel-intelligence.git']],
-                      branches: [[name: "$GITHUB_HASH_TO_USE"]]]
-
-
-                            sh "echo $GITHUB_HASH_TO_USE"
+                          sh "echo ls"
               }
-
-        }
-
-
-
-
-        stage ('Update Build Info and Push change') {
-
-                   withCredentials([[$class: 'UsernamePasswordMultiBinding',
-                                    credentialsId: 'fbb60332-6a43-489a-87f7-4cea380ad6ca',
-                                    usernameVariable: 'GITHUB_USER',
-                                    passwordVariable: 'GITHUB_PASSWORD']]) {
-
-                            sh "echo commit = $GIT_LONG_COMMIT >> build_info.txt"
-
-
-                            //sh('git config user.email ${GITHUB_USER}')
-                            //sh('git config user.name ${GITHUB_USER}')
-
-
-                            sh('git add .')
-                            sh('git commit -m "build info updated"')
-
-                            /*check new commit*/
-                            String my_commit = sh(returnStdout: true, script: "git log --format='%H' -n 1").trim()
-
-                            sh("echo my_commit = ${my_commit}")
-
-                            sh("git push http://${GITHUB_USER}:${GITHUB_PASSWORD}@github.com/emichaf/eiffel-intelligence-artifact-wrapper.git")
-
-                   }
 
         }
 
@@ -93,12 +55,41 @@ node{
 
         docker.image('emtrout/dind:latest').inside {
 
+//privileged: true
 
-               stage('Maven Build') {
+            stage('UnitTests & FlowTests)') {
 
-                             sh "mvn clean package -DskipTests"
+                            withCredentials([[$class: 'UsernamePasswordMultiBinding',
+                            credentialsId: 'e7de4146-4a59-4406-916e-d10506cfaeb8',
+                            usernameVariable: 'DOCKER_HUB_USER',
+                            passwordVariable: 'DOCKER_HUB_PASSWORD']]) {
 
-                        }
+                                // OBS privileged: true for image for embedded mongodb (flapdoodle) to work
+
+							    dir ('sourcecode') {
+
+									 def travis_datas = readYaml file: ".travis.yml"
+
+                                     // Execute tests in travis file
+									 travis_datas.script.each { item ->
+
+									    sh "$item"
+
+									 };
+
+
+									 sh "ls"
+
+							    }
+
+
+							}
+
+			}
+
+
+
+
 
 
 
@@ -116,7 +107,7 @@ node{
                             }
 
 
-
+/*
                stage('Build and Push Docker Image') {
 
                         withCredentials([[$class: 'UsernamePasswordMultiBinding',
@@ -141,8 +132,8 @@ node{
 
                         }
                     }
-
-
+*/
+/*
 
                stage('Deploy to K8S Stage') {
 
@@ -162,7 +153,7 @@ node{
 
                }
 
-
+*/
 
                stage ('Integration Test') {
 
