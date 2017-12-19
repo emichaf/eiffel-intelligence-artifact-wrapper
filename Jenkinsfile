@@ -34,6 +34,7 @@ node{
 
                             sh "pwd"
                             sh "ls"
+                            sh "ls src"
              // }
 
         }
@@ -55,6 +56,7 @@ node{
 
                           sh "pwd"
                           sh "ls"
+                          sh "ls src"
               //}
 
         }
