@@ -46,11 +46,12 @@ node{
                             //git branch: "master:$GITHUB_HASH_TO_USE", url: 'https://github.com/emichaf/eiffel-intelligence.git'
 
 
-                            checkout scm:( [$class: 'GitSCM',
-                                    branches: [[name: $GITHUB_HASH_TO_USE ]],
-                                    userRemoteConfigs: [[
-                                        //credentialsId: 'deploy key for your repo',
-                                        url: 'https://github.com/emichaf/eiffel-intelligence.git']]])
+
+
+              checkout scm: [$class: 'GitSCM',
+                      userRemoteConfigs: [[url: 'https://github.com/emichaf/eiffel-intelligence.git']],
+                      branches: [[name: "$GITHUB_HASH_TO_USE"]]]
+
 
                             sh "echo $GITHUB_HASH_TO_USE"
               }
