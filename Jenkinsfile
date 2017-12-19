@@ -7,6 +7,8 @@ node{
      String GIT_SHORT_COMMIT
      String GIT_LONG_COMMIT
      String GITHUB_HASH_TO_USE
+     String ARM_ARTIFACT
+     String ARM_ARTIFACT_PATH
 
 
  docker.withServer('tcp://docker104-eiffel999.lmera.ericsson.se:4243', 'remote_docker_host') {
@@ -58,11 +60,6 @@ node{
 
                           sh "pwd"
                           sh "ls"
-
-                          stash name: "first-stash", includes: "*"
-
-                          sh "pwd"
-                          sh "ls"
                           sh "ls src"
               }
 
@@ -103,24 +100,14 @@ node{
 
 
             // 	/var/jenkins_home
-           docker.image('emtrout/dind:latest').inside("--privileged -v $WORKSPACE:/output") {
+           docker.image('emtrout/dind:latest').inside("--privileged") {
 
                 stage('Compile') {
-
-                      sh 'ls /output'
 
                       sh 'mvn clean package -DskipTests'
 
                       sh 'ls target'
 
-                      pom = readMavenPom file: 'pom.xml'
-
-                      //sh "cp ./target/${pom.artifactId}-${pom.version}.jar ./src/main/docker/maven/"
-                      sh "cp ./target/${pom.artifactId}-${pom.version}.jar /output"
-
-                      sh 'ls /output'
-
-                      sh 'ls'
                 }
 
     /*
@@ -151,18 +138,14 @@ node{
 
                               pom = readMavenPom file: 'pom.xml'
 
+                              ARM_ARTIFACT = "${pom.artifactId}-${pom.version}.jar"
+
+                              ARM_ARTIFACT_PATH = "https://eiffel.lmera.ericsson.se/nexus/content/repositories/releases/test/com/ericsson/eiffel/intelligence/${pom.version}/${ARM_ARTIFACT}"
+
                               // Upload to ARM (ex eiffel-intelligence-0.0.1-SNAPSHOT.jar)
-                              sh "curl -v -u ${EIFFEL_NEXUS_USER}:${EIFFEL_NEXUS_PASSWORD} --upload-file ./target/${pom.artifactId}-${pom.version}.jar https://eiffel.lmera.ericsson.se/nexus/content/repositories/releases/test/com/ericsson/eiffel/intelligence/${pom.version}/${pom.artifactId}-${pom.version}.jar"
-
-                              // mvn test
+                              sh "curl -v -u ${EIFFEL_NEXUS_USER}:${EIFFEL_NEXUS_PASSWORD} --upload-file ./target/${ARM_ARTIFACT} "
                       }
-
                 }
-
-
-
-
-
 
 
            } // docker.image('emtrout/dind:latest').inside
@@ -179,12 +162,22 @@ node{
 
                                 sh "pwd"
                                 sh "ls"
-                                sh "ls /output"
-
-                                // Create docker image
-                                // sh "mvn clean package fabric8:resources"
 
 
+                               withCredentials([[$class: 'UsernamePasswordMultiBinding',
+                                              credentialsId: '8829c73e-19b0-4f77-b74c-e112bbacd4d5',
+                                              usernameVariable: 'EIFFEL_NEXUS_USER',
+                                              passwordVariable: 'EIFFEL_NEXUS_PASSWORD']]) {
+
+                                   // Fetch Artifact (jar) from ARM
+                                   sh "curl -X GET -u ${EIFFEL_NEXUS_USER}:${EIFFEL_NEXUS_PASSWORD} ARM_ARTIFACT_PATH -o /src/main/docker/maven/"
+
+
+                                   sh "ls /src/main/docker/maven/"
+
+//https://eiffel.lmera.ericsson.se/nexus/content/repositories/releases/test/com/ericsson/eiffel/intelligence/0.0.1-SNAPSHOT/eiffel-intelligence-0.0.1-SNAPSHOT.jar
+
+                                }
 
                                 withCredentials([[$class: 'UsernamePasswordMultiBinding',
                                             credentialsId: '7b05ac28-c1ae-4249-a0c6-7c54c74e3b67',
