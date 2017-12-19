@@ -151,7 +151,7 @@ node{
 
 
                 stage('Build and Push Docker Image to Registry') {
-                            container('docker') {
+
                             withCredentials([[$class: 'UsernamePasswordMultiBinding',
                                         credentialsId: '7b05ac28-c1ae-4249-a0c6-7c54c74e3b67',
                                         usernameVariable: 'DOCKER_HUB_USER',
@@ -173,7 +173,7 @@ node{
                                sh "docker logout"
 
                                }
-                            }
+
                 }
 
 
