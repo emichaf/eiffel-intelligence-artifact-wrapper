@@ -93,8 +93,10 @@ node{
             stage('Compile') {
                dir ('sourcecode') {
 
-                  unstash "first-stash"
-                  sh 'ls'
+                  //unstash "first-stash"
+                  sh 'pwd'
+
+
                   sh 'ls target'
                   sh 'cd sourcecode'
                   sh 'cd sourcecode'
