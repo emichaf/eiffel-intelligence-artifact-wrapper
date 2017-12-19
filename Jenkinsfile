@@ -96,7 +96,7 @@ node{
                   unstash "first-stash"
                   sh "ls"
                   sh "ls target"
-                  sh "cd first-stash"
+                  sh "cd sourcecode_stash"
                   sh "ls"
                   sh "ls target"
 
