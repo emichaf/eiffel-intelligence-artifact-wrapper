@@ -103,9 +103,11 @@ node{
 
 
             // 	/var/jenkins_home
-           docker.image('emtrout/dind:latest').inside("--privileged -v /home/jenkins/workspace/${env.JOB_NAME}:/local") {
+           docker.image('emtrout/dind:latest').inside("--privileged -v $WORKSPACE:/output") {
 
                 stage('Compile') {
+
+                      sh 'ls /output'
 
                       sh 'mvn clean package -DskipTests'
 
@@ -114,7 +116,7 @@ node{
                       pom = readMavenPom file: 'pom.xml'
 
                       //sh "cp ./target/${pom.artifactId}-${pom.version}.jar ./src/main/docker/maven/"
-                      sh "cp ./target/${pom.artifactId}-${pom.version}.jar /local"
+                      sh "cp ./target/${pom.artifactId}-${pom.version}.jar /output"
 
                       sh 'ls /src/main/docker/maven/'
                 }
@@ -175,6 +177,7 @@ node{
 
                                 sh "pwd"
                                 sh "ls"
+                                sh "ls /output"
 
                                 // Create docker image
                                 // sh "mvn clean package fabric8:resources"
