@@ -95,6 +95,8 @@ node{
 
 									 sh "ls"
 
+									 sh "ls target"
+
 							    }
                } // docker.image('emtrout/dind:latest').inside
 			}
