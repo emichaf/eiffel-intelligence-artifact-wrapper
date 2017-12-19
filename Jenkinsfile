@@ -163,6 +163,8 @@ node{
                                 sh "pwd"
                                 sh "ls"
 
+                               // Create maven dir
+                               sh "mkdir -p /src/main/docker/maven"
 
                                withCredentials([[$class: 'UsernamePasswordMultiBinding',
                                               credentialsId: '8829c73e-19b0-4f77-b74c-e112bbacd4d5',
