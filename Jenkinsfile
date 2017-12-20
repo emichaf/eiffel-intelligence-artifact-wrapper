@@ -9,7 +9,7 @@ node{
      String GITHUB_HASH_TO_USE
      String ARM_ARTIFACT
      String ARM_ARTIFACT_PATH
-
+     string GITHUB_POM
 
 ARM_ARTIFACT = "eiffel-intelligence-0.0.1-SNAPSHOT.jar"
 
@@ -66,6 +66,9 @@ ARM_ARTIFACT_PATH = "https://eiffel.lmera.ericsson.se/nexus/content/repositories
                           sh "pwd"
                           sh "ls"
                           sh "ls src"
+
+
+                          GITHUB_POM = readMavenPom file: 'pom.xml'
               }
 
         }
@@ -114,8 +117,8 @@ ARM_ARTIFACT_PATH = "https://eiffel.lmera.ericsson.se/nexus/content/repositories
 
 
 
+                                   pom = GITHUB_POM
 
-                                   pom = readMavenPom file: '../pom.xml'
 
                                    //sh "cd /src/main/docker/"
                                    //sh "pwd"
