@@ -9,7 +9,7 @@ node{
      String GITHUB_HASH_TO_USE
      String ARM_ARTIFACT
      String ARM_ARTIFACT_PATH
-     string GITHUB_POM
+     String GITHUB_POM
 
 ARM_ARTIFACT = "eiffel-intelligence-0.0.1-SNAPSHOT.jar"
 
