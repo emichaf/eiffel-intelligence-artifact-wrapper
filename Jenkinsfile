@@ -1,11 +1,15 @@
 node{
 
   // ######### NOTES & INFORMATION & WARNINGS ##############################################################################
+  //
   // OBS change dir in containers not working, so fetching scm in containers is required. Stash/unstash dir() not working..
   // https://issues.jenkins-ci.org/browse/JENKINS-46636
   // https://issues.jenkins-ci.org/browse/JENKINS-33510
   // Even context (docker build -f xxxx/Dockerfile  yy/context) when copying files from host to image in Dockerfile is not working
   //  - Solution: Add jar file (to be copied in the Dockerfile) in the same dir as the Dockerfile
+  //
+  // ######### NOTES & INFORMATION & WARNINGS ##############################################################################
+
 
      String GIT_SHORT_COMMIT
      String GIT_LONG_COMMIT
@@ -21,14 +25,14 @@ node{
 
  docker.withServer("$DOCKER_HOST", 'remote_docker_host') {
 
-     /*
+     /*------------------------------------------------------------------------------------------
      For inside() to work, the Docker server and the Jenkins agent must use the same filesystem,
      so that the workspace can be mounted.
 
      When Jenkins detects that the agent is itself running inside a Docker container, it will automatically pass
      the --volumes-from argument to the inside container, ensuring that it can share a workspace with the agent.
 
-     */
+     */------------------------------------------------------------------------------------------
 
        stage ('GERRIT Checkout') {
 
@@ -91,7 +95,7 @@ node{
     dir ('sourcecode') {  // workaround to change dir outside container, not working inside container execution.. yet, see issues stated on top of file!
 
             stage ('SonarQube Code Analysis') {
-/*
+
                               //docker.image('sonarqube').withRun('-p 9000:9000 -p 9092:9092 -e "SONARQUBE_JDBC_USERNAME=sonar" -e "SONARQUBE_JDBC_PASSWORD=sonar" -e "SONARQUBE_JDBC_URL=jdbc:postgresql://localhost/sonar"') { c ->
                               //docker.image('sonarqube').withRun('docker run -d --name sonarqube -p 9000:9000 -p 9092:9092 sonarqube') { c ->
 
@@ -99,10 +103,11 @@ node{
                                      dir ('wrapper') {
                                              docker.image('emtrout/dind:latest').inside {
                                                    //sh 'mvn sonar:sonar -Dsonar.host.url=http://localhost:9000'
-                                                   //sh 'mvn sonar:sonar -Dsonar.host.url=https://sonarqube.lmera.ericsson.se'
+
+                                                   sh 'mvn sonar:sonar -Dsonar.host.url=https://sonarqube.lmera.ericsson.se'
 
 
-                                                   sh 'mvn sonar:sonar -Dsonar.host.url=http://docker104-eiffel999.lmera.ericsson.se:9000 -Dsonar.login=1c8363811fc123582a60ed4607782902e2f5ecc9'
+                                                  // sh 'mvn sonar:sonar -Dsonar.host.url=http://docker104-eiffel999.lmera.ericsson.se:9000 -Dsonar.login=1c8363811fc123582a60ed4607782902e2f5ecc9'
 
 
                                              }
@@ -111,7 +116,7 @@ node{
 
                               //}
 
-*/
+
                 }
 
 
