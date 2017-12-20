@@ -188,7 +188,7 @@ node{
                                             passwordVariable: 'DOCKER_HUB_PASSWORD']]) {
 
                                    sh "ls /src/main/docker/maven/"
-
+                                   sh "ls /src/main/docker/"
 
                                    pom = readMavenPom file: 'pom.xml'
 
