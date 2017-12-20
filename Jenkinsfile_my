@@ -72,6 +72,89 @@ node{
 
 
 
+    dir ('sourcecode') {  // workaround to change dir outside container, not working inside container execution.. yet, see issues stated on top of file!
+
+            stage ('SonarQube Code Analysis') {
+/*
+                              //docker.image('sonarqube').withRun('-p 9000:9000 -p 9092:9092 -e "SONARQUBE_JDBC_USERNAME=sonar" -e "SONARQUBE_JDBC_PASSWORD=sonar" -e "SONARQUBE_JDBC_URL=jdbc:postgresql://localhost/sonar"') { c ->
+                              //docker.image('sonarqube').withRun('docker run -d --name sonarqube -p 9000:9000 -p 9092:9092 sonarqube') { c ->
+
+
+                                     dir ('wrapper') {
+                                             docker.image('emtrout/dind:latest').inside {
+                                                   //sh 'mvn sonar:sonar -Dsonar.host.url=http://localhost:9000'
+                                                   //sh 'mvn sonar:sonar -Dsonar.host.url=https://sonarqube.lmera.ericsson.se'
+
+
+                                                   sh 'mvn sonar:sonar -Dsonar.host.url=http://docker104-eiffel999.lmera.ericsson.se:9000 -Dsonar.login=1c8363811fc123582a60ed4607782902e2f5ecc9'
+
+
+                                             }
+
+                                     }
+
+                              //}
+
+*/
+                }
+
+
+
+           docker.image('emtrout/dind:latest').inside("--privileged") {
+
+                stage('Compile') {
+
+                      sh 'mvn clean package -DskipTests'
+
+                      sh 'ls target'
+
+                }
+
+    /*
+                stage('UnitTests & FlowTests with TestDoubles)') {
+                      // OBS privileged: true for image for embedded mongodb (flapdoodle) to work
+                      // and glibc in image!
+
+                      def travis_datas = readYaml file: ".travis.yml"
+
+                      // Execute tests (steps) in travis file, ie same file which is used in travis build (open source)
+                      travis_datas.script.each { item ->
+                              sh "$item"
+                      };
+
+                      sh "ls"
+                      sh "ls target"
+                }
+    */
+
+                stage('Publish Artifact ARM -> JAR)') {
+
+                       withCredentials([[$class: 'UsernamePasswordMultiBinding',
+                                              credentialsId: '8829c73e-19b0-4f77-b74c-e112bbacd4d5',
+                                              usernameVariable: 'EIFFEL_NEXUS_USER',
+                                              passwordVariable: 'EIFFEL_NEXUS_PASSWORD']]) {
+
+                              sh 'ls'
+
+                              pom = readMavenPom file: 'pom.xml'
+
+                              ARM_ARTIFACT = "${pom.artifactId}-${pom.version}.jar"
+
+                              ARM_ARTIFACT_PATH = "https://eiffel.lmera.ericsson.se/nexus/content/repositories/releases/test/com/ericsson/eiffel/intelligence/${pom.version}/${ARM_ARTIFACT}"
+
+                              // Upload to ARM (ex eiffel-intelligence-0.0.1-SNAPSHOT.jar)
+                              sh "curl -v -u ${EIFFEL_NEXUS_USER}:${EIFFEL_NEXUS_PASSWORD} --upload-file ./target/${ARM_ARTIFACT} ${ARM_ARTIFACT_PATH}"
+                      }
+                }
+
+
+           } // docker.image('emtrout/dind:latest').inside
+
+    } // dir ('sourcecode') {
+
+
+
+
     dir ('wrapper/src/main/docker/') {  // workaround to change dir outside container, not working inside container execution.. yet, see issues stated on top of file!
 
        docker.image('emtrout/dind:latest').inside {
