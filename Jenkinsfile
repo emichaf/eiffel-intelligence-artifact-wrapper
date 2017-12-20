@@ -9,11 +9,8 @@ node{
      String GITHUB_HASH_TO_USE
      String ARM_ARTIFACT
      String ARM_ARTIFACT_PATH
-     String GITHUB_POM
+     String pom
 
-ARM_ARTIFACT = "eiffel-intelligence-0.0.1-SNAPSHOT.jar"
-
-ARM_ARTIFACT_PATH = "https://eiffel.lmera.ericsson.se/nexus/content/repositories/releases/test/com/ericsson/eiffel/intelligence/0.0.1-SNAPSHOT/eiffel-intelligence-0.0.1-SNAPSHOT.jar"
 
 
  docker.withServer('tcp://docker104-eiffel999.lmera.ericsson.se:4243', 'remote_docker_host') {
@@ -67,8 +64,11 @@ ARM_ARTIFACT_PATH = "https://eiffel.lmera.ericsson.se/nexus/content/repositories
                           sh "ls"
                           sh "ls src"
 
+ARM_ARTIFACT = "eiffel-intelligence-0.0.1-SNAPSHOT.jar"
 
-                          GITHUB_POM = readMavenPom file: 'pom.xml'
+ARM_ARTIFACT_PATH = "https://eiffel.lmera.ericsson.se/nexus/content/repositories/releases/test/com/ericsson/eiffel/intelligence/0.0.1-SNAPSHOT/eiffel-intelligence-0.0.1-SNAPSHOT.jar"
+
+                          pom = readMavenPom file: 'pom.xml'
               }
 
         }
@@ -117,11 +117,8 @@ ARM_ARTIFACT_PATH = "https://eiffel.lmera.ericsson.se/nexus/content/repositories
 
 
 
-                                   pom = GITHUB_POM
 
 
-                                   //sh "cd /src/main/docker/"
-                                   //sh "pwd"
 
                                    sh "docker login -u ${DOCKER_HUB_USER} -p ${DOCKER_HUB_PASSWORD}"
 
