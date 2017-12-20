@@ -94,8 +94,14 @@ ARM_ARTIFACT_PATH = "https://eiffel.lmera.ericsson.se/nexus/content/repositories
                                 sh "ls"
 
                                // Create maven dir, if not exist
-                               sh "mkdir -p /src/main/docker/maven"
-                               sh "chmod 777 /src/main/docker/maven"
+                               //sh "mkdir -p /src/main/docker/maven"
+                               //sh "chmod 777 /src/main/docker/maven"
+
+
+                                def exists = fileExists 'app.jar'
+                                if (exists) {
+                                    sh "rm ${ARM_ARTIFACT}"
+                                }
 
                                withCredentials([[$class: 'UsernamePasswordMultiBinding',
                                               credentialsId: '8829c73e-19b0-4f77-b74c-e112bbacd4d5',
@@ -105,7 +111,7 @@ ARM_ARTIFACT_PATH = "https://eiffel.lmera.ericsson.se/nexus/content/repositories
                                    sh "ls /src/main/docker/"
 
                                    // Fetch Artifact (jar) from ARM
-                                   sh "curl -X GET -u ${EIFFEL_NEXUS_USER}:${EIFFEL_NEXUS_PASSWORD} ${ARM_ARTIFACT_PATH} -o /src/main/docker/maven/${ARM_ARTIFACT}"
+                                   sh "curl -X GET -u ${EIFFEL_NEXUS_USER}:${EIFFEL_NEXUS_PASSWORD} ${ARM_ARTIFACT_PATH} -o /src/main/docker/app.jar"
 
                                 }
 
