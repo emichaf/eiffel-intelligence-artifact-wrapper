@@ -108,7 +108,6 @@ ARM_ARTIFACT_PATH = "https://eiffel.lmera.ericsson.se/nexus/content/repositories
                                               usernameVariable: 'EIFFEL_NEXUS_USER',
                                               passwordVariable: 'EIFFEL_NEXUS_PASSWORD']]) {
 
-                                   sh "ls /src/main/docker/"
 
                                    // Fetch Artifact (jar) from ARM
                                    sh "curl -X GET -u ${EIFFEL_NEXUS_USER}:${EIFFEL_NEXUS_PASSWORD} ${ARM_ARTIFACT_PATH} -o /src/main/docker/app.jar"
