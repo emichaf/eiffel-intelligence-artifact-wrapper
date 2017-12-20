@@ -83,7 +83,7 @@ ARM_ARTIFACT_PATH = "https://eiffel.lmera.ericsson.se/nexus/content/repositories
 
 
 
-    dir ('wrapper/src/main/docker/') {  // workaround to change dir outside container, not working inside container execution.. yet, see issues stated on top of file!
+    dir ('wrapper') {  // workaround to change dir outside container, not working inside container execution.. yet, see issues stated on top of file!
 
        docker.image('emtrout/dind:latest').inside {
 
@@ -98,7 +98,7 @@ ARM_ARTIFACT_PATH = "https://eiffel.lmera.ericsson.se/nexus/content/repositories
                                //sh "chmod 777 /src/main/docker/maven"
 
 
-                                def exists = fileExists 'app.jar'
+                                def exists = fileExists 'src/main/docker/app.jar'
                                 if (exists) {
                                     sh "rm ${ARM_ARTIFACT}"
                                 }
@@ -110,7 +110,7 @@ ARM_ARTIFACT_PATH = "https://eiffel.lmera.ericsson.se/nexus/content/repositories
 
 
                                    // Fetch Artifact (jar) from ARM
-                                   sh "curl -X GET -u ${EIFFEL_NEXUS_USER}:${EIFFEL_NEXUS_PASSWORD} ${ARM_ARTIFACT_PATH} -o app.jar"
+                                   sh "curl -X GET -u ${EIFFEL_NEXUS_USER}:${EIFFEL_NEXUS_PASSWORD} ${ARM_ARTIFACT_PATH} -o src/main/docker/app.jar"
 
                                 }
 
@@ -130,6 +130,10 @@ ARM_ARTIFACT_PATH = "https://eiffel.lmera.ericsson.se/nexus/content/repositories
 
 
                                    sh "docker login -u ${DOCKER_HUB_USER} -p ${DOCKER_HUB_PASSWORD}"
+
+                                   sh "docker build --no-cache=true -t ${DOCKER_HUB_USER}/${pom.artifactId}:${GIT_SHORT_COMMIT} -f src/main/docker/Dockerfile src/main/docker/"
+
+                                   sh "docker push ${DOCKER_HUB_USER}/${pom.artifactId}:${GIT_SHORT_COMMIT}"
 
                                    sh "docker build --no-cache=true -t ${DOCKER_HUB_USER}/${pom.artifactId}:latest ."
 
