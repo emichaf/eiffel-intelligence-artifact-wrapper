@@ -122,7 +122,7 @@ ARM_ARTIFACT_PATH = "https://eiffel.lmera.ericsson.se/nexus/content/repositories
                                             passwordVariable: 'DOCKER_HUB_PASSWORD']]) {
 
 
-                                   sh "ls /src/main/docker/"
+
 
 
 
