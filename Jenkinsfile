@@ -1,10 +1,11 @@
 node{
 
+  // ######### NOTES & INFORMATION & WARNINGS ##############################################################################
   // OBS change dir in containers not working, so fetching scm in containers is required. Stash/unstash dir() not working..
   // https://issues.jenkins-ci.org/browse/JENKINS-46636
   // https://issues.jenkins-ci.org/browse/JENKINS-33510
   // Even context (docker build -f xxxx/Dockerfile  yy/context) when copying files from host to image in Dockerfile is not working
-  //  - Solution to include file in host in the same dir as the Dockerfile
+  //  - Solution: Add jar file (to be copied in the Dockerfile) in the same dir as the Dockerfile
 
      String GIT_SHORT_COMMIT
      String GIT_LONG_COMMIT
@@ -189,12 +190,14 @@ node{
                                    sh "rm /src/main/docker/${ARM_ARTIFACT}"
                                }
 
+                               sh "ls"
+
                                withCredentials([[$class: 'UsernamePasswordMultiBinding',
                                               credentialsId: '8829c73e-19b0-4f77-b74c-e112bbacd4d5',
                                               usernameVariable: 'EIFFEL_NEXUS_USER',
                                               passwordVariable: 'EIFFEL_NEXUS_PASSWORD']]) {
 
-                                   sh "ls /src/main/docker/"
+                                   //sh "ls /src/main/docker/"
 
                                    // Fetch Artifact (jar) from ARM
                                    sh "curl -X GET -u ${EIFFEL_NEXUS_USER}:${EIFFEL_NEXUS_PASSWORD} ${ARM_ARTIFACT_PATH} -o /src/main/docker/${ARM_ARTIFACT}"
@@ -208,7 +211,7 @@ node{
                                             passwordVariable: 'DOCKER_HUB_PASSWORD']]) {
 
                                    //sh "ls /src/main/docker/maven/"
-                                   sh "ls /src/main/docker/"
+                                   //sh "ls /src/main/docker/"
 
 
 
@@ -220,11 +223,11 @@ node{
 
                                    sh "docker login -u ${DOCKER_HUB_USER} -p ${DOCKER_HUB_PASSWORD}"
 
-                                   sh "docker build --no-cache=true -t ${DOCKER_HUB_USER}/${pom.artifactId}:latest -f src/main/docker/Dockerfile ./src/main/docker/"
+                                   sh "docker build --no-cache=true -t ${DOCKER_HUB_USER}/${pom.artifactId}:latest -f src/main/docker/Dockerfile src/main/docker/"
 
                                    sh "docker push ${DOCKER_HUB_USER}/${pom.artifactId}:latest"
 
-                                   sh "docker build --no-cache=true -t ${DOCKER_HUB_USER}/${pom.artifactId}:${GIT_SHORT_COMMIT} -f src/main/docker/Dockerfile ./src/main/docker/"
+                                   sh "docker build --no-cache=true -t ${DOCKER_HUB_USER}/${pom.artifactId}:${GIT_SHORT_COMMIT} -f src/main/docker/Dockerfile src/main/docker/"
 
                                    sh "docker push ${DOCKER_HUB_USER}/${pom.artifactId}:${GIT_SHORT_COMMIT}"
 
