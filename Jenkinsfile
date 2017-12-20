@@ -98,9 +98,9 @@ ARM_ARTIFACT_PATH = "https://eiffel.lmera.ericsson.se/nexus/content/repositories
                                //sh "chmod 777 /src/main/docker/maven"
 
 
-                                def exists = fileExists 'src/main/docker/app.jar'
+                                def exists = fileExists '/src/main/docker/app.jar'
                                 if (exists) {
-                                    sh "rm ${ARM_ARTIFACT}"
+                                    sh "rm /src/main/docker/${ARM_ARTIFACT}"
                                 }
 
                                withCredentials([[$class: 'UsernamePasswordMultiBinding',
