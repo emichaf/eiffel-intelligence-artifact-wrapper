@@ -110,10 +110,11 @@ ARM_ARTIFACT_PATH = "https://eiffel.lmera.ericsson.se/nexus/content/repositories
 
 
                                    // Fetch Artifact (jar) from ARM
-                                   sh "curl -X GET -u ${EIFFEL_NEXUS_USER}:${EIFFEL_NEXUS_PASSWORD} ${ARM_ARTIFACT_PATH} -o /app.jar"
+                                   sh "curl -X GET -u ${EIFFEL_NEXUS_USER}:${EIFFEL_NEXUS_PASSWORD} ${ARM_ARTIFACT_PATH} -o app.jar"
 
                                 }
 
+                                sh "ls"
 
                                 withCredentials([[$class: 'UsernamePasswordMultiBinding',
                                             credentialsId: '7b05ac28-c1ae-4249-a0c6-7c54c74e3b67',
