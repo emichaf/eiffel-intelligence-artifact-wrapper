@@ -13,9 +13,13 @@ node{
      String ARM_ARTIFACT
      String ARM_ARTIFACT_PATH
      Object pom
+     String ARM_URL = "https://eiffel.lmera.ericsson.se/nexus/content/repositories/releases/test/com/ericsson/eiffel/intelligence"
+     String DOCKER_HOST = "tcp://docker104-eiffel999.lmera.ericsson.se:4243"
+     String WRAPPER_REPO = "https://github.com/emichaf/eiffel-intelligence-artifact-wrapper.git"
+     String SOURCE_CODE_REPO = "https://github.com/emichaf/eiffel-intelligence.git"
 
 
- docker.withServer('tcp://docker104-eiffel999.lmera.ericsson.se:4243', 'remote_docker_host') {
+ docker.withServer("$DOCKER_HOST", 'remote_docker_host') {
 
      /*
      For inside() to work, the Docker server and the Jenkins agent must use the same filesystem,
@@ -29,13 +33,7 @@ node{
        stage ('GERRIT Checkout') {
 
               dir ('wrapper') {
-                            git branch: "master", url: 'https://github.com/emichaf/eiffel-intelligence-artifact-wrapper.git'
-
-                            GIT_SHORT_COMMIT = sh(returnStdout: true, script: "git log -n 1 --pretty=format:'%h'").trim()
-
-                            GIT_LONG_COMMIT =  sh(returnStdout: true, script: "git log --format='%H' -n 1").trim()
-
-
+                            git branch: "master", url: "$WRAPPER_REPO"
 
                             // Read build info file with github hash
                             String file_name = 'build_info.yaml'
@@ -59,20 +57,22 @@ node{
               dir ('sourcecode') {
 
                   checkout scm: [$class: 'GitSCM',
-                          userRemoteConfigs: [[url: 'https://github.com/emichaf/eiffel-intelligence.git']],
+                          userRemoteConfigs: [[url: "$SOURCE_CODE_REPO"]],
                           branches: [[name: "$GITHUB_HASH_TO_USE"]]]
 
                           sh "pwd"
                           sh "ls"
                           sh "ls src"
 
-                    pom = readMavenPom file: 'pom.xml'
+                          GIT_SHORT_COMMIT = sh(returnStdout: true, script: "git log -n 1 --pretty=format:'%h'").trim()
 
-                    ARM_ARTIFACT = "${pom.artifactId}-${pom.version}.jar"
+                          GIT_LONG_COMMIT =  sh(returnStdout: true, script: "git log --format='%H' -n 1").trim()
 
-                    ARM_ARTIFACT_PATH = "https://eiffel.lmera.ericsson.se/nexus/content/repositories/releases/test/com/ericsson/eiffel/intelligence/${pom.version}/${ARM_ARTIFACT}"
+                          pom = readMavenPom file: 'pom.xml'
 
+                          ARM_ARTIFACT = "${pom.artifactId}-${pom.version}.jar"
 
+                          ARM_ARTIFACT_PATH = "${ARM_URL}/${pom.version}/${ARM_ARTIFACT}"
 
                           sh "pwd"
                           sh "ls"
@@ -126,7 +126,7 @@ node{
 
                 }
 
-    /*
+
                 stage('UnitTests & FlowTests with TestDoubles)') {
                       // OBS privileged: true for image for embedded mongodb (flapdoodle) to work
                       // and glibc in image!
@@ -141,7 +141,7 @@ node{
                       sh "ls"
                       sh "ls target"
                 }
-    */
+
 
                 stage('Publish Artifact ARM -> JAR)') {
 
@@ -152,19 +152,13 @@ node{
 
                               sh 'ls'
 
-                              //pom = readMavenPom file: 'pom.xml'
-
-                              //ARM_ARTIFACT = "${pom.artifactId}-${pom.version}.jar"
-
-                              //ARM_ARTIFACT_PATH = "https://eiffel.lmera.ericsson.se/nexus/content/repositories/releases/test/com/ericsson/eiffel/intelligence/${pom.version}/${ARM_ARTIFACT}"
-
                               // Upload to ARM (ex eiffel-intelligence-0.0.1-SNAPSHOT.jar)
                               sh "curl -v -u ${EIFFEL_NEXUS_USER}:${EIFFEL_NEXUS_PASSWORD} --upload-file ./target/${ARM_ARTIFACT} ${ARM_ARTIFACT_PATH}"
                       }
                 }
 
 
-           } // docker.image('emtrout/dind:latest').inside
+           } // docker.image(.....
 
     } // dir ('sourcecode') {
 
@@ -178,30 +172,23 @@ node{
            stage('Build and Push Docker Image to Registry') {
 
 
-                                sh "pwd"
-                                sh "ls"
-
-                               // Create maven dir, if not exist
-                               //sh "mkdir -p /src/main/docker/maven"
-                               //sh "chmod 777 /src/main/docker/maven"
-
                                def exists = fileExists '/src/main/docker/app.jar'
                                if (exists) {
                                    sh "rm /src/main/docker/app.jar"
                                }
 
-                               sh "ls"
 
                                withCredentials([[$class: 'UsernamePasswordMultiBinding',
                                               credentialsId: '8829c73e-19b0-4f77-b74c-e112bbacd4d5',
                                               usernameVariable: 'EIFFEL_NEXUS_USER',
                                               passwordVariable: 'EIFFEL_NEXUS_PASSWORD']]) {
 
-                                   sh "ls src/main/docker/"
+
 
                                    // Fetch Artifact (jar) from ARM
                                    sh "curl -X GET -u ${EIFFEL_NEXUS_USER}:${EIFFEL_NEXUS_PASSWORD} ${ARM_ARTIFACT_PATH} -o src/main/docker/app.jar"
 
+                                   sh "ls src/main/docker/"
 
                                 }
 
@@ -211,16 +198,7 @@ node{
                                             usernameVariable: 'DOCKER_HUB_USER',
                                             passwordVariable: 'DOCKER_HUB_PASSWORD']]) {
 
-                                   //sh "ls src/main/docker/maven/"
                                    sh "ls src/main/docker/"
-
-
-
-
-                                   //pom = readMavenPom file: '../pom.xml'
-
-                                   //sh "cd /src/main/docker/"
-                                   //sh "pwd"
 
                                    sh "docker login -u ${DOCKER_HUB_USER} -p ${DOCKER_HUB_PASSWORD}"
 
@@ -238,12 +216,12 @@ node{
 
            } // stage('..
 
-       } // docker.image('emtrout/dind:latest').inside
+       } // docker.image('....
 
     } // dir ('wrapper') {
 
 
 
- } //  docker.withServer('tcp://docker104-eiffel999.lmera.ericsson.se:4243', 'remote_docker_host')
+ } //  docker.withServer(...
 
 } // node
