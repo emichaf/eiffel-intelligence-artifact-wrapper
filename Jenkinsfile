@@ -11,6 +11,11 @@ node{
      String ARM_ARTIFACT_PATH
 
 
+ARM_ARTIFACT = "eiffel-intelligence-0.0.1-SNAPSHOT.jar"
+
+ARM_ARTIFACT_PATH = "https://eiffel.lmera.ericsson.se/nexus/content/repositories/releases/test/com/ericsson/eiffel/intelligence/${pom.version}/${ARM_ARTIFACT}"
+
+
  docker.withServer('tcp://docker104-eiffel999.lmera.ericsson.se:4243', 'remote_docker_host') {
 
      /*
