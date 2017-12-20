@@ -155,7 +155,7 @@ node{
 
 
 
-    dir ('wrapper') {  // workaround to change dir outside container, not working inside container execution.. yet, see issues stated on top of file!
+    dir ('wrapper/src/main/docker/') {  // workaround to change dir outside container, not working inside container execution.. yet, see issues stated on top of file!
 
        docker.image('emtrout/dind:latest').inside {
 
@@ -195,8 +195,8 @@ node{
 
                                    pom = readMavenPom file: 'pom.xml'
 
-                                   sh "cd /src/main/docker/"
-                                   sh "pwd"
+                                   //sh "cd /src/main/docker/"
+                                   //sh "pwd"
 
                                    sh "docker login -u ${DOCKER_HUB_USER} -p ${DOCKER_HUB_PASSWORD}"
 
