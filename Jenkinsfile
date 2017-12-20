@@ -38,6 +38,8 @@ node{
 
               dir ('wrapper') {
                             git branch: "master", url: "$WRAPPER_REPO"
+                            //git branch: "$env.BRANCH_NAME", url: "$WRAPPER_REPO"
+
 
                             // Read build info file with github hash
                             String file_name = 'build_info.yaml'
