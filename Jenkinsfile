@@ -190,11 +190,17 @@ node{
                                    sh "ls /src/main/docker/maven/"
                                    sh "ls /src/main/docker/"
 
+
+
+
                                    pom = readMavenPom file: 'pom.xml'
+
+                                   sh "cd /src/main/docker/"
+                                   sh "pwd"
 
                                    sh "docker login -u ${DOCKER_HUB_USER} -p ${DOCKER_HUB_PASSWORD}"
 
-                                   sh "docker build --no-cache=true -t ${DOCKER_HUB_USER}/${pom.artifactId}:latest -f src/main/docker/Dockerfile src/main/docker/"
+                                   sh "docker build --no-cache=true -t ${DOCKER_HUB_USER}/${pom.artifactId}:latest ."
 
                                    sh "docker push ${DOCKER_HUB_USER}/${pom.artifactId}:latest"
 
