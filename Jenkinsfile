@@ -32,7 +32,7 @@ node{
      When Jenkins detects that the agent is itself running inside a Docker container, it will automatically pass
      the --volumes-from argument to the inside container, ensuring that it can share a workspace with the agent.
 
-     */------------------------------------------------------------------------------------------
+     ------------------------------------------------------------------------------------------*/
 
        stage ('GERRIT Checkout') {
 
