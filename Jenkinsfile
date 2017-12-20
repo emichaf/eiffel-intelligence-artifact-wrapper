@@ -69,6 +69,9 @@ ARM_ARTIFACT = "eiffel-intelligence-0.0.1-SNAPSHOT.jar"
 ARM_ARTIFACT_PATH = "https://eiffel.lmera.ericsson.se/nexus/content/repositories/releases/test/com/ericsson/eiffel/intelligence/0.0.1-SNAPSHOT/eiffel-intelligence-0.0.1-SNAPSHOT.jar"
 
                           pom = readMavenPom file: 'pom.xml'
+
+
+                          sh "$pom"
               }
 
         }
