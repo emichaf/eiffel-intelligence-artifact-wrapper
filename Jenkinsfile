@@ -193,7 +193,7 @@ node{
 
 
 
-                                   pom = readMavenPom file: 'pom.xml'
+                                   pom = readMavenPom file: './pom.xml'
 
                                    //sh "cd /src/main/docker/"
                                    //sh "pwd"
