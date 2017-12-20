@@ -61,7 +61,9 @@ node{
                           userRemoteConfigs: [[url: 'https://github.com/emichaf/eiffel-intelligence.git']],
                           branches: [[name: "$GITHUB_HASH_TO_USE"]]]
 
-
+                          sh "pwd"
+                          sh "ls"
+                          sh "ls src"
 
                     pom = readMavenPom file: 'pom.xml'
 
