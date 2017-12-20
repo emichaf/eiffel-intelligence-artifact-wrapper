@@ -187,7 +187,7 @@ node{
 
                                def exists = fileExists '/src/main/docker/app.jar'
                                if (exists) {
-                                   sh "rm /src/main/docker/${ARM_ARTIFACT}"
+                                   sh "rm /src/main/docker/app.jar"
                                }
 
                                sh "ls"
@@ -200,7 +200,7 @@ node{
                                    //sh "ls /src/main/docker/"
 
                                    // Fetch Artifact (jar) from ARM
-                                   sh "curl -X GET -u ${EIFFEL_NEXUS_USER}:${EIFFEL_NEXUS_PASSWORD} ${ARM_ARTIFACT_PATH} -o /src/main/docker/${ARM_ARTIFACT}"
+                                   sh "curl -X GET -u ${EIFFEL_NEXUS_USER}:${EIFFEL_NEXUS_PASSWORD} ${ARM_ARTIFACT_PATH} -o /src/main/docker/app.jar"
 
                                 }
 
