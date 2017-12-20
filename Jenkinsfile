@@ -197,10 +197,11 @@ node{
                                               usernameVariable: 'EIFFEL_NEXUS_USER',
                                               passwordVariable: 'EIFFEL_NEXUS_PASSWORD']]) {
 
-                                   //sh "ls /src/main/docker/"
+                                   sh "ls src/main/docker/"
 
                                    // Fetch Artifact (jar) from ARM
-                                   sh "curl -X GET -u ${EIFFEL_NEXUS_USER}:${EIFFEL_NEXUS_PASSWORD} ${ARM_ARTIFACT_PATH} -o /src/main/docker/app.jar"
+                                   sh "curl -X GET -u ${EIFFEL_NEXUS_USER}:${EIFFEL_NEXUS_PASSWORD} ${ARM_ARTIFACT_PATH} -o src/main/docker/app.jar"
+
 
                                 }
 
@@ -210,8 +211,8 @@ node{
                                             usernameVariable: 'DOCKER_HUB_USER',
                                             passwordVariable: 'DOCKER_HUB_PASSWORD']]) {
 
-                                   //sh "ls /src/main/docker/maven/"
-                                   //sh "ls /src/main/docker/"
+                                   sh "ls src/main/docker/maven/"
+                                   sh "ls src/main/docker/"
 
 
 
