@@ -71,7 +71,7 @@ ARM_ARTIFACT_PATH = "https://eiffel.lmera.ericsson.se/nexus/content/repositories
                           pom = readMavenPom file: 'pom.xml'
 
 
-                          sh "$pom"
+                          sh "echo $pom"
               }
 
         }
