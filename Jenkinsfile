@@ -9,7 +9,7 @@ node{
      String GITHUB_HASH_TO_USE
      String ARM_ARTIFACT
      String ARM_ARTIFACT_PATH
-     String pom
+     Object pom
 
 
 
