@@ -17,7 +17,7 @@ node{
      String ARM_ARTIFACT
      String ARM_ARTIFACT_PATH
      Object pom
-     String ARM_URL = "https://eiffel.lmera.ericsson.se/nexus/content/repositories/releases/test/com/ericsson/eiffel/intelligence"
+     String ARM_URL = "https://eiffel.lmera.ericsson.se/nexus/content/repositories/releases/test/com/ericsson/eiffel/eiffel-intelligence-artifact-wrapper"
      String DOCKER_HOST = "tcp://docker104-eiffel999.lmera.ericsson.se:4243"
      String WRAPPER_REPO = "https://github.com/emichaf/eiffel-intelligence-artifact-wrapper.git"
      String SOURCE_CODE_REPO = "https://github.com/emichaf/eiffel-intelligence.git"
