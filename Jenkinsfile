@@ -21,7 +21,7 @@ node{
      String DOCKER_HOST = "tcp://docker104-eiffel999.lmera.ericsson.se:4243"
      String WRAPPER_REPO = "https://github.com/emichaf/eiffel-intelligence-artifact-wrapper.git"
      String SOURCE_CODE_REPO = "https://github.com/emichaf/eiffel-intelligence.git"
-
+     String SONARQUBE_LOGIN_TOKEN = "f93132c682628757d441937d803f8c2c2c280b16"
 
  docker.withServer("$DOCKER_HOST", 'remote_docker_host') {
 
@@ -133,7 +133,7 @@ node{
                 stage('SonarQube Code Analysis') {
 
                    //sh 'mvn sonar:sonar -Dsonar.host.url=https://sonarqube.lmera.ericsson.se'
-                   sh 'mvn sonar:sonar -Dsonar.host.url=http://docker104-eiffel999.lmera.ericsson.se:9000 -Dsonar.login=1c8363811fc123582a60ed4607782902e2f5ecc9'
+                   sh "mvn sonar:sonar -Dsonar.host.url=http://docker104-eiffel999.lmera.ericsson.se:9000 -Dsonar.login=$SONARQUBE_LOGIN_TOKEN"
 
 
                 }
