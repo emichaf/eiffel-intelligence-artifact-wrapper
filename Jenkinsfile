@@ -22,6 +22,8 @@ node{
      String WRAPPER_REPO = "https://github.com/emichaf/eiffel-intelligence-artifact-wrapper.git"
      String SOURCE_CODE_REPO = "https://github.com/emichaf/eiffel-intelligence.git"
      String SONARQUBE_LOGIN_TOKEN = "f93132c682628757d441937d803f8c2c2c280b16"
+     String build_info_file = 'build_info.yml'
+
 
  docker.withServer("$DOCKER_HOST", 'remote_docker_host') {
 
@@ -42,9 +44,8 @@ node{
 
 
                             // Read build info file with github hash
-                            String file_name = 'build_info.yml'
-                            sh "cat $file_name"
-                            def props = readYaml file: "$file_name"
+                            sh "cat $build_info_file"
+                            def props = readYaml file: "$build_info_file"
                             GITHUB_HASH_TO_USE = props.commit
 
                             sh "echo hash -> $GITHUB_HASH_TO_USE"
