@@ -36,7 +36,7 @@ node{
 
      ------------------------------------------------------------------------------------------*/
 
-       stage ('GERRIT Checkout') {
+       stage ('GERRIT Wrapper Checkout') {
 
               dir ('wrapper') {
                             git branch: "master", url: "$WRAPPER_REPO"
