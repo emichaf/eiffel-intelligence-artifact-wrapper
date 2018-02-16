@@ -98,7 +98,7 @@ node{
     dir ('sourcecode') {  // workaround to change dir outside container, not working inside container execution.. yet, see issues stated on top of file!
 
 
-           docker.image('emtrout/dind:latest').inside {
+           docker.image('docker/dind').inside("--privileged") {
 
 
            /*
@@ -148,6 +148,7 @@ node{
                       sh "ls src"
 
                      // sh 'mvn clean package -DskipTests'
+                      sh 'docker ps'
 
                       sh 'ls target'
 
