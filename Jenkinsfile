@@ -147,7 +147,7 @@ node{
                       sh "ls"
                       sh "ls src"
 
-                      sh 'mvn clean package -DskipTests'
+                     // sh 'mvn clean package -DskipTests'
 
                       sh 'ls target'
 
