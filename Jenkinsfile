@@ -21,7 +21,7 @@ node{
      String DOCKER_HOST = "tcp://docker104-eiffel999.lmera.ericsson.se:4243"
      String WRAPPER_REPO = "https://github.com/emichaf/eiffel-intelligence-artifact-wrapper.git"
      String SOURCE_CODE_REPO = "https://github.com/emichaf/eiffel-intelligence.git"
-     String SONARQUBE_LOGIN_TOKEN = "f93132c682628757d441937d803f8c2c2c280b16"
+     String SONARQUBE_LOGIN_TOKEN = "8829c73e-19b0-4f77-b74c-e112bbacd4d5"
      String build_info_file = 'build_info.yml'
 
 
