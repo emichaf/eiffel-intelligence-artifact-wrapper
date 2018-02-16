@@ -98,7 +98,7 @@ node{
     dir ('sourcecode') {  // workaround to change dir outside container, not working inside container execution.. yet, see issues stated on top of file!
 
 
-           docker.image('docker/dind').inside("--privileged") {
+           docker.image('docker:dind').inside("--privileged") {
 
 
            /*
