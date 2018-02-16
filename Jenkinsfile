@@ -148,10 +148,10 @@ node{
                       sh "ls"
                       sh "ls src"
 
-                     // sh 'mvn clean package -DskipTests'
-                      sh 'docker ps'
-                      sh 'docker-compose'
-                      //sh 'ls target'
+                      sh 'mvn clean package -DskipTests'
+                      //sh 'docker ps'
+                      //sh 'docker-compose'
+                      sh 'ls target'
 
                 }
 
