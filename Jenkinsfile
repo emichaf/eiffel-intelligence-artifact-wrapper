@@ -130,7 +130,7 @@ node{
            */
 
 
-
+/*
                 stage('SonarQube Code Analysis') {
 
                    //sh 'mvn sonar:sonar -Dsonar.host.url=https://sonarqube.lmera.ericsson.se'
@@ -138,7 +138,7 @@ node{
 
 
                 }
-
+*/
 
 
                 stage('Compile') {
