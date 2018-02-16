@@ -77,7 +77,7 @@ node{
 
                           pom = readMavenPom file: 'pom.xml'
 
-                          ARM_ARTIFACT = "${pom.artifactId}-${pom.version}.jar"
+                          ARM_ARTIFACT = "${pom.artifactId}-${pom.version}.war"
 
                           ARM_ARTIFACT_PATH = "${ARM_URL}/${pom.version}/${ARM_ARTIFACT}"
 
@@ -142,6 +142,10 @@ node{
 
 
                 stage('Compile') {
+
+                      sh "pwd"
+                      sh "ls"
+                      sh "ls src"
 
                       sh 'mvn clean package -DskipTests'
 
