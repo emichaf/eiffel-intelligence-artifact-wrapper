@@ -149,8 +149,8 @@ node{
 
                      // sh 'mvn clean package -DskipTests'
                       sh 'docker ps'
-
-                      sh 'ls target'
+                      sh 'docker-compose'
+                      //sh 'ls target'
 
                 }
 
