@@ -4,6 +4,7 @@
     <groupId>com.ericsson.ei</groupId>
     <artifactId>eiffel-intelligence-artifact-wrapper</artifactId>
     <version>0.0.1-SNAPSHOT</version>
+    <packaging>jar</packaging>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -28,7 +29,7 @@
 
     <dependencies>
         <dependency>
-            <groupId>com.github.tobiasake</groupId>
+            <groupId>com.github.emichaf</groupId>
             <artifactId>eiffel-intelligence</artifactId>
             <version>master-SNAPSHOT</version>
             <!--<version>v1.0.0-alpha</version>-->
@@ -85,7 +86,7 @@
                         <configuration>
                             <artifactItems>
                                 <artifactItem>
-                                    <groupId>com.github.tobiasake</groupId>
+                                    <groupId>com.github.emichaf</groupId>
                                     <artifactId>eiffel-intelligence</artifactId>
                                     <overWrite>true</overWrite>
                                     <outputDirectory>${basedir}/src/main/docker/maven</outputDirectory>
