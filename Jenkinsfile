@@ -98,9 +98,9 @@ node{
     dir ('sourcecode') {  // workaround to change dir outside container, not working inside container execution.. yet, see issues stated on top of file!
 
 
-           docker.image('emtrout/cdind5').inside("--privileged") {
-           //docker.image('emtrout/cdind5').inside("--privileged", "-v /var/run/docker.sock:/var/run/docker.sock") {
-
+           //docker.image('emtrout/cdind5').inside("--privileged") {
+           //docker.image('emtrout/nind23').inside("--privileged", "-v /var/run/docker.sock:/var/run/docker.sock") {
+             docker.image('emtrout/nind23').inside("--privileged"){
 
            /*
                        stage ('SonarQube Code Analysis') {
@@ -196,7 +196,8 @@ node{
 
     dir ('wrapper') {  // workaround to change dir outside container, not working inside container execution.. yet, see issues stated on top of file!
 
-       docker.image('emtrout/dind:latest').inside {
+       //docker.image('emtrout/dind:latest').inside {
+       docker.image('emtrout/nind23').inside("--privileged"){
 
            stage('Build and Push Docker Image to Registry') {
 
