@@ -1,5 +1,11 @@
-FROM alpine:3.7
+FROM frolvlad/alpine-glibc
 LABEL maintainer "Michael Frick <michael.frick@ericsson.se>" architecture="AMD64/x86_64"  alpineversion="3.7.0" build="21122017"
+
+# Default to UTF-8 file.encoding
+ENV LANG C.UTF-8
+
+# Required för embedded mongo DB (flapdoodle)
+ENV LC_ALL=C
 
 RUN apk add --no-cache btrfs-progs e2fsprogs e2fsprogs-extra iptables xfsprogs xz
 
@@ -18,6 +24,7 @@ RUN apk --update --no-cache \
     rm -rf /var/cache/apk/* && \
     pip install docker-compose==${DOCKER_COMPOSE_VERSION}
 
+# Install Docker
 RUN apk add --no-cache ca-certificates curl openssl git openssh-client docker
 
 
