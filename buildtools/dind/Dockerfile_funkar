@@ -1,5 +1,5 @@
-FROM alpine:3.7
-LABEL maintainer "Michael Frick <michael.frick@ericsson.se>" architecture="AMD64/x86_64"  alpineversion="3.7.0" build="21122017"
+FROM yobasystems/alpine-docker:amd64
+LABEL maintainer "Dominic Taylor <dominic@yobasystems.co.uk>" architecture="AMD64/x86_64"  alpineversion="3.7.0" build="21122017"
 
 RUN apk add --no-cache btrfs-progs e2fsprogs e2fsprogs-extra iptables xfsprogs xz
 
@@ -12,14 +12,10 @@ RUN set -x \
 ################################################
 # Install Docker and Docker Compose
 ENV DOCKER_COMPOSE_VERSION=1.11.1
-#ENV DOCKER_VERSION=1.13.1
 RUN apk --update --no-cache \
     add curl device-mapper py-pip iptables openjdk8 && \
     rm -rf /var/cache/apk/* && \
     pip install docker-compose==${DOCKER_COMPOSE_VERSION}
-
-RUN apk add --no-cache ca-certificates curl openssl git openssh-client docker
-
 
 # Install kubectl (kubernetes)
 ENV runDependencies curl jq bash
