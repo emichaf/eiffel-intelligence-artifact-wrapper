@@ -155,7 +155,7 @@ node{
 
                 }
 
-
+/*
                 stage('UnitTests & FlowTests with TestDoubles)') {
                       // OBS privileged: true for image for embedded mongodb (flapdoodle) to work
                       // and glibc in image!
@@ -170,7 +170,7 @@ node{
                       sh "ls"
                       sh "ls target"
                 }
-
+*/
 
                 stage('Publish Artifact ARM -> JAR)') {
 
