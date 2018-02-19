@@ -26,7 +26,7 @@ node{
 
 
      //properties([GroovyTrigger([pollSCM('* * * * *')])])
-     properties([GroovyTrigger()
+     properties([GroovyTrigger()])
 
  docker.withServer("$DOCKER_HOST", 'remote_docker_host') {
 
