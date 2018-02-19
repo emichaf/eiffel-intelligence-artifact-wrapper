@@ -25,8 +25,7 @@ node{
      String build_info_file = 'build_info.yml'
 
 
-     //properties([GroovyTrigger([pollSCM('* * * * *')])])
-     properties([GroovyTrigger()])
+
 
  docker.withServer("$DOCKER_HOST", 'remote_docker_host') {
 
