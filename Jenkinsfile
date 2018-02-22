@@ -246,6 +246,9 @@ node{
 
                                    }
 
+
+
+
            } // stage('..
 
        } // docker.image('....
@@ -253,6 +256,8 @@ node{
     } // dir ('wrapper') {
 
 
+         // Clean up workspace
+         step([$class: 'WsCleanup'])
 
  } //  docker.withServer(...
 
