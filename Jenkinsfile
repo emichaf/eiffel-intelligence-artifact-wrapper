@@ -177,7 +177,7 @@ node{
                 stage('Publish Artifact ARM -> JAR)') {
 
                        withCredentials([[$class: 'UsernamePasswordMultiBinding',
-                                              credentialsId: '8829c73e-19b0-4f77-b74c-e112bbacd4d5',
+                                              credentialsId: 'NEXUS_CREDENTIALS_EIFFEL_NEXUS_EXTENSION',
                                               usernameVariable: 'EIFFEL_NEXUS_USER',
                                               passwordVariable: 'EIFFEL_NEXUS_PASSWORD']]) {
 
