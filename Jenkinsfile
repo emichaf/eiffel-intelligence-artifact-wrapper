@@ -211,7 +211,7 @@ node{
 
 
                                withCredentials([[$class: 'UsernamePasswordMultiBinding',
-                                              credentialsId: '8829c73e-19b0-4f77-b74c-e112bbacd4d5',
+                                              credentialsId: 'NEXUS_CREDENTIALS_EIFFEL_NEXUS_EXTENSION',
                                               usernameVariable: 'EIFFEL_NEXUS_USER',
                                               passwordVariable: 'EIFFEL_NEXUS_PASSWORD']]) {
 
@@ -226,7 +226,7 @@ node{
 
 
                                 withCredentials([[$class: 'UsernamePasswordMultiBinding',
-                                            credentialsId: '7b05ac28-c1ae-4249-a0c6-7c54c74e3b67',
+                                            credentialsId: 'DOCKERHUB_CREDENTIALS',
                                             usernameVariable: 'DOCKER_HUB_USER',
                                             passwordVariable: 'DOCKER_HUB_PASSWORD']]) {
 
