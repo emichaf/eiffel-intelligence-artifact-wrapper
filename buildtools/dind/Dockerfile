@@ -27,6 +27,7 @@ RUN apk --update --no-cache \
 # Install Docker
 RUN apk add --no-cache ca-certificates curl openssl git openssh-client docker
 
+ENV DOCKER_API_VERSION=1.24
 
 # Install kubectl (kubernetes)
 ENV runDependencies curl jq bash

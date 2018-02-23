@@ -101,8 +101,8 @@ node{
 
 
            //docker.image('emtrout/cdind5').inside("--privileged") {
-           //docker.image('emtrout/nind23').inside("--privileged", "-v /var/run/docker.sock:/var/run/docker.sock") {
-             docker.image('emtrout/nind23').inside("--privileged"){
+           docker.image('emtrout/nind23').inside("--privileged", "-v /var/run/docker.sock:/var/run/docker.sock") {
+           //  docker.image('emtrout/nind23').inside("--privileged"){
 
            /*
                        stage ('SonarQube Code Analysis') {
