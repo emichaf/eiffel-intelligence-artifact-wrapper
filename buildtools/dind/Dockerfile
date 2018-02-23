@@ -20,14 +20,20 @@ RUN set -x \
 ENV DOCKER_COMPOSE_VERSION=1.11.1
 #ENV DOCKER_VERSION=1.13.1
 RUN apk --update --no-cache \
-    add curl device-mapper py-pip iptables openjdk8 && \
+    add curl device-mapper py-pip iptables openjdk8 su-exec shadow && \
     rm -rf /var/cache/apk/* && \
     pip install docker-compose==${DOCKER_COMPOSE_VERSION}
 
 # Install Docker
 RUN apk add --no-cache ca-certificates curl openssl git openssh-client docker
 
-ENV DOCKER_API_VERSION=1.24
+#ENV JENKINS_USER=root
+#ENV DOCKER_API_VERSION=1.24
+#RUN apk add --no-cache ca-certificates curl openssl git openssh-client
+#RUN curl https://get.docker.com/builds/Linux/x86_64/docker-latest.tgz | tar xvz -C /tmp/ && mv /tmp/docker/docker /usr/bin/docker
+#COPY entrypoint.sh /usr/local/bin/entrypoint.sh
+#RUN chmod +x /usr/local/bin/entrypoint.sh
+
 
 # Install kubectl (kubernetes)
 ENV runDependencies curl jq bash
@@ -64,4 +70,6 @@ VOLUME /var/lib/docker
 EXPOSE 2375
 
 ENTRYPOINT ["/usr/local/bin/dockerd-entrypoint.sh"]
+#ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
+#ENTRYPOINT ["/sbin/tini", "--", "/usr/local/bin/entrypoint.sh"]
 CMD []
