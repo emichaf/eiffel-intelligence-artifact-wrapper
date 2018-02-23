@@ -100,8 +100,6 @@ node{
     dir ('sourcecode') {  // workaround to change dir outside container, not working inside container execution.. yet, see issues stated on top of file!
 
 
-           //docker.image('emtrout/cdind5').inside("--privileged") {
-           //docker.image('emtrout/nind23').inside("-v /var/run/docker.sock:/var/run/docker.sock") {
              docker.image('emtrout/nind23').inside("--privileged"){
 
            /*
@@ -198,7 +196,6 @@ node{
 
     dir ('wrapper') {  // workaround to change dir outside container, not working inside container execution.. yet, see issues stated on top of file!
 
-       //docker.image('emtrout/dind:latest').inside {
        docker.image('emtrout/nind23').inside("--privileged"){
 
            stage('Build and Push Docker Image to Registry') {
@@ -232,7 +229,7 @@ node{
 
                                    sh "ls src/main/docker/"
 
-                                   sh "docker login -u ${DOCKER_HUB_USER} -p ${DOCKER_HUB_PASSWORD} --no-include-email"
+                                   sh "docker login -u ${DOCKER_HUB_USER} -p ${DOCKER_HUB_PASSWORD}"
 
                                    sh "docker build --no-cache=true -t ${DOCKER_HUB_USER}/${pom.artifactId}:latest -f src/main/docker/Dockerfile src/main/docker/"
 
