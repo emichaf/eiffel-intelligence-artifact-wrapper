@@ -25,11 +25,11 @@ node{
      String build_info_file = 'build_info.yml'
 
 
-parameters {
+parameters [
         string(defaultValue: '', description: 'Delivery name', name: 'PARAM1')
         string(defaultValue: '', description: 'Delivery name', name: 'PARAM2')
         string(defaultValue: '', description: 'Delivery name', name: '_id')
-    }
+    ]
 //
 //echo "${PARAM1}"
 //echo "${PARAM2}"
