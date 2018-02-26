@@ -53,7 +53,7 @@ parameters {
 
               dir ('wrapper') {
 
-              sh "echo ${param.PARAM1}"
+              sh "echo ${params.PARAM1}"
 
                             git branch: "master", url: "$WRAPPER_REPO"
                             //git branch: "$env.BRANCH_NAME", url: "$WRAPPER_REPO"
