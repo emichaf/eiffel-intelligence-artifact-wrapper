@@ -30,12 +30,29 @@ parameters: [
         {string(defaultValue: '', description: 'Delivery name', name: 'PARAM2')},
         {string(defaultValue: '', description: 'Delivery name', name: '_id')}
     ]
+
+
+
 //
 //echo "${PARAM1}"
 //echo "${PARAM2}"
 //echo "${_id}"
 
-
+def params = input message: 'Define versions to use:', parameters: [
+    [
+        $class: 'RunParameterDefinition',
+        description: '',
+        filter: 'SUCCESSFUL',
+        name: 'PARAM1',
+        projectName: 'MyProject1'
+    ], [
+        $class: 'RunParameterDefinition',
+        description: '',
+        filter: 'SUCCESSFUL',
+        name: 'PARAM2',
+        projectName: 'MyProject2'
+    ]
+]
 
  docker.withServer("$DOCKER_HOST", 'remote_docker_host') {
 
