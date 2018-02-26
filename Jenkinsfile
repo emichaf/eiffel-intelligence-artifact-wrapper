@@ -25,34 +25,18 @@ node{
      String build_info_file = 'build_info.yml'
 
 
-parameters: [
-        {string(defaultValue: '', description: 'Delivery name', name: 'PARAM1')},
-        {string(defaultValue: '', description: 'Delivery name', name: 'PARAM2')},
-        {string(defaultValue: '', description: 'Delivery name', name: '_id')}
-    ]
-
-
+parameters {
+    string( name: 'PARAM1',
+            defaultValue: 'Release',
+            description: 'Configuration to build (Debug/Release/...)')
+  }
 
 //
 //echo "${PARAM1}"
 //echo "${PARAM2}"
 //echo "${_id}"
 
-def params = input message: 'Define versions to use:', parameters: [
-    [
-        $class: 'RunParameterDefinition',
-        description: '',
-        filter: 'SUCCESSFUL',
-        name: 'PARAM1',
-        projectName: 'MyProject1'
-    ], [
-        $class: 'RunParameterDefinition',
-        description: '',
-        filter: 'SUCCESSFUL',
-        name: 'PARAM2',
-        projectName: 'MyProject2'
-    ]
-]
+
 
  docker.withServer("$DOCKER_HOST", 'remote_docker_host') {
 
@@ -67,7 +51,7 @@ def params = input message: 'Define versions to use:', parameters: [
 
        stage ('GERRIT Wrapper Checkout') {
 
-
+           echo "Building configuration: ${params.PARAM1}"
 
               dir ('wrapper') {
 
@@ -90,6 +74,8 @@ def params = input message: 'Define versions to use:', parameters: [
 
 
                             sh "echo ${params.PARAM1}"
+
+                            echo "Building configuration: ${params.PARAM1}"
               }
 
         }
