@@ -72,7 +72,7 @@ parameters: [
                             sh "ls src"
 
 
-                            sh "echo $PARAM1"
+                            sh "echo $params.PARAM1"
               }
 
         }
