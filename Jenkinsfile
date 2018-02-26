@@ -27,9 +27,7 @@ node{
 
 properties([
   parameters([
-    string(name: 'PARAM1', defaultValue: '', description: 'The target environment'),
-    string(name: 'PARAM2', defaultValue: '', description: 'The target environment'),
-    string(name: '_id', defaultValue: '', description: 'The target environment')
+    string(name: 'PARAM1', defaultValue: '', description: 'The target environment')
    ])
 ])
 
