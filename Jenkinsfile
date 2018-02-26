@@ -49,9 +49,12 @@ parameters {
 
        stage ('GERRIT Wrapper Checkout') {
 
-       echo sh(returnStdout: true, script: "${params.PARAM1}")
+
 
               dir ('wrapper') {
+
+              sh "echo ${params.PARAM1}"
+
                             git branch: "master", url: "$WRAPPER_REPO"
                             //git branch: "$env.BRANCH_NAME", url: "$WRAPPER_REPO"
 
