@@ -36,6 +36,8 @@ parameters {
 //echo "${PARAM2}"
 //echo "${_id}"
 
+sh "echo ${params.PARAM1}"
+
  docker.withServer("$DOCKER_HOST", 'remote_docker_host') {
 
      /*------------------------------------------------------------------------------------------
@@ -53,7 +55,7 @@ parameters {
 
               dir ('wrapper') {
 
-              sh "echo ${params.PARAM1}"
+
 
                             git branch: "master", url: "$WRAPPER_REPO"
                             //git branch: "$env.BRANCH_NAME", url: "$WRAPPER_REPO"
