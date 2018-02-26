@@ -26,8 +26,8 @@ node{
 
 
 parameters [
-        string(defaultValue: '', description: 'Delivery name', name: 'PARAM1')
-        string(defaultValue: '', description: 'Delivery name', name: 'PARAM2')
+        string(defaultValue: '', description: 'Delivery name', name: 'PARAM1'),
+        string(defaultValue: '', description: 'Delivery name', name: 'PARAM2'),
         string(defaultValue: '', description: 'Delivery name', name: '_id')
     ]
 //
