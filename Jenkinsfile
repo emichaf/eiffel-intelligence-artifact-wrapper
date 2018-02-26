@@ -26,9 +26,9 @@ node{
 
 
 json.parameters: [
-        string(defaultValue: '', description: 'Delivery name', name: 'PARAM1'),
-        string(defaultValue: '', description: 'Delivery name', name: 'PARAM2'),
-        string(defaultValue: '', description: 'Delivery name', name: '_id')
+        {string(defaultValue: '', description: 'Delivery name', name: 'PARAM1')},
+        {string(defaultValue: '', description: 'Delivery name', name: 'PARAM2')},
+        {string(defaultValue: '', description: 'Delivery name', name: '_id')}
     ]
 //
 //echo "${PARAM1}"
