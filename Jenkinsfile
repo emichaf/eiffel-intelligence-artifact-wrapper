@@ -25,11 +25,13 @@ node{
      String build_info_file = 'build_info.yml'
 
 
-parameters {
-    string( name: 'PARAM1',
-            defaultValue: 'Release',
-            description: 'Configuration to build (Debug/Release/...)')
-  }
+properties([
+  parameters([
+    string(name: 'PARAM1', defaultValue: 'TESTING', description: 'The target environment', )
+   ])
+])
+
+
 
 //
 //echo "${PARAM1}"
