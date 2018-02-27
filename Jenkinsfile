@@ -81,7 +81,7 @@ node{
                              //}
 
                              props_ActT = readJSON text: "${RESPONSE_ActT}"
-                             if(props_ActT.events[0].status_code == 200)
+                             if(props_ActT.events[0].status_code != 200)
                              {
                                println "frick"
                                throw new Exception()
