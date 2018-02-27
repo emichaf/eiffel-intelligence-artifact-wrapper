@@ -71,9 +71,31 @@ node{
                                                  "meta.security.sdm":"<%DELETE%>"
                                                }"""
 
-                             // Create SCS Event and publish
+                             // Create ActT Event and publish
                              def RESPONSE_ActT = sh(returnStdout: true, script: "curl -H 'Content-Type: application/json' -X POST --data-binary '${json_ActT}' ${EVENT_PARSER_PUB_GEN_URI}EiffelActivityTriggeredEvent").trim()
+                             props_ActT = readJSON text: "${RESPONSE_ActT}"
+
                              sh "echo ${RESPONSE_ActT}"
+
+
+                            // EiffelActivityStartedEvent
+                             def json_ActS = """{
+                                                  "meta.source.domainId":"${DOMAIN_ID}",
+                                                  "meta.source.host":"${HOST_NAME}",
+                                                  "meta.source.name":"${SOURCE_NAME}",
+                                                  "meta.source.uri":"${jenkins_display_url}",
+                                                  "data.executionUri":"${jenkins_display_url}",
+                                                  "data.liveLogs[0]": {"name" : "my.data.data.liveLogs[0]name", "uri" : "my.data.data.liveLogs[0]uri"},
+                                                  "data.customData[0]": {"key" : "EI Subscription", "value" : "Subscription XX"},
+                                                  "links[0]": {"type" : "ACTIVITY_EXECUTION", "target" : "{props_ActT.events[0].id}"},
+                                                  "meta.tags":"<%DELETE%>",
+                                                  "meta.security.sdm":"<%DELETE%>"
+                                                }"""
+
+                             // Create ActS Event and publish
+                             def RESPONSE_ActS = sh(returnStdout: true, script: "curl -H 'Content-Type: application/json' -X POST --data-binary '${json_ActS}' ${EVENT_PARSER_PUB_GEN_URI}EiffelActivityStartedEvent").trim()
+                             sh "echo ${RESPONSE_ActS}"
+
 
 
                             git branch: "master", url: "$WRAPPER_REPO"
