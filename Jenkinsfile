@@ -27,12 +27,12 @@ node{
 
 properties([
 parameters([
-string(name: 'VAR_FOO', defaultValue: 'undefined')
+string(name: 'mybranch', defaultValue: 'undefined')
 
 ])
 ])
 
-echo "{$VAR_FOO}"
+echo "${mybranch}"
 
 
 
