@@ -77,7 +77,7 @@ properties([parameters([string(name: "mybranch2", defaultValue: "undefined")])])
                             props_scc = readJSON text: "${params.mybranch2}"
 
                             //sh "echo ${RESPONSE_SCC}"
-                            sh "echo ${props_scc.id}"
+                            sh "echo ${props_scc._id}"
               }
 
         }
