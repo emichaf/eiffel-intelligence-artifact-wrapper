@@ -74,6 +74,10 @@ node{
                              // Create ActT Event and publish
                              def RESPONSE_ActT = sh(returnStdout: true, script: "curl -H 'Content-Type: application/json' -X POST --data-binary '${json_ActT}' ${EVENT_PARSER_PUB_GEN_URI}EiffelActivityTriggeredEvent").trim()
                              props_ActT = readJSON text: "${RESPONSE_ActT}"
+
+                             if(props_ActT.status == 500)
+                             { println "errors fr"}
+
                              sh "echo ${RESPONSE_ActT}"
 
 
