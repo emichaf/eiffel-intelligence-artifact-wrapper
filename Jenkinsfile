@@ -75,10 +75,10 @@ properties([parameters([string(name: "mybranch2", defaultValue: "undefined")])])
 
                             props_scc = readJSON text: "${params.mybranch2}"
 
-                            sh "echo ${props_scc._id}"
+                            //sh "echo ${props_scc._id}"
                             sh "echo ${props_scc.aggregatedObject.submission.sourceChanges[0].eventId}"
                             sh "echo ${props_scc.aggregatedObject.submission.sourceChanges[0].gitIdentifier.commitId}"
-                            sh "echo ${props_scc.aggregatedObject.submission.sourceChanges[0].svnIdentifier.submitter.name}"
+                            sh "echo ${props_scc.aggregatedObject.submission.sourceChanges[0].submitter.name}"
               }
 
         }
