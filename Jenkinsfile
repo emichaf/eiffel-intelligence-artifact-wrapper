@@ -1,6 +1,6 @@
 node{
 
-properties([parameters([string(name: "mybranch", defaultValue: "undefined")])])
+
 
 
   // ######### NOTES & INFORMATION & WARNINGS ##############################################################################
@@ -45,7 +45,7 @@ properties([parameters([string(name: "mybranch", defaultValue: "undefined")])])
      ------------------------------------------------------------------------------------------*/
 
        stage ('GERRIT Wrapper Checkout') {
-
+properties([parameters([string(name: "mybranch", defaultValue: "undefined")])])
            echo "Building configuration: ${params.mybranch}"
 
               dir ('wrapper') {
