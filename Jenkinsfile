@@ -55,6 +55,8 @@ node{
                              HOST_NAME = sh(returnStdout: true, script: "hostname").trim()
                              DOMAIN_ID = sh(returnStdout: true, script: " domainname").trim()
 
+                             jenkins_display_url = "${RUN_DISPLAY_URL}".replaceAll("unconfigured-jenkins-location","$JENKINS_HOSTNAME"+":"+"${JENKINS_HOSTPORT}")
+
                             // EiffelActivityTriggeredEvent
                              def json_ActT = """{
                                                  "meta.source.domainId":"${DOMAIN_ID}",
