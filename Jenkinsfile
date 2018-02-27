@@ -76,6 +76,7 @@ node{
                              props_ActT = readJSON text: "${RESPONSE_ActT}"
 
                              sh "echo ${RESPONSE_ActT}"
+                             sh "echo ${RESPONSE_ActT.status}"
 
 
                             // EiffelActivityStartedEvent
@@ -87,7 +88,7 @@ node{
                                                   "data.executionUri":"${jenkins_display_url}",
                                                   "data.liveLogs[0]": {"name" : "my.data.data.liveLogs[0]name", "uri" : "my.data.data.liveLogs[0]uri"},
                                                   "data.customData[0]": {"key" : "EI Subscription", "value" : "Subscription XX"},
-                                                  "links[0]": {"type" : "ACTIVITY_EXECUTION", "target" : "{props_ActT.events[0].id}"},
+                                                  "links[0]": {"type" : "ACTIVITY_EXECUTION", "target" : "${props_ActT.events[0].id}"},
                                                   "meta.tags":"<%DELETE%>",
                                                   "meta.security.sdm":"<%DELETE%>"
                                                 }"""
@@ -95,7 +96,7 @@ node{
                              // Create ActS Event and publish
                              def RESPONSE_ActS = sh(returnStdout: true, script: "curl -H 'Content-Type: application/json' -X POST --data-binary '${json_ActS}' ${EVENT_PARSER_PUB_GEN_URI}EiffelActivityStartedEvent").trim()
                              sh "echo ${RESPONSE_ActS}"
-
+                             sh "echo ${RESPONSE_ActS.status}"
 
 
                             git branch: "master", url: "$WRAPPER_REPO"
