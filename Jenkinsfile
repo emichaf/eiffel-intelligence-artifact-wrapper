@@ -14,6 +14,14 @@ node{
   // ######### NOTES & INFORMATION & WARNINGS ##############################################################################
 
 
+     properties([parameters([string(name: "JSON_PARAMETERS", defaultValue: "undefined")])])
+     props_json_params = readJSON text: "${params.JSON_PARAMETERS}"
+
+
+     // Post Aggregated id, and fetch object via curl in EI persistent storage
+     // def RESPONSE_SCC = sh(returnStdout: true, script: "curl -H 'Content-Type: application/json' -X GET --data-binary '${json_scc}' ${EVENT_PARSER_PUB_GEN_URI}EiffelSourceChangeCreatedEvent").trim()
+     //sh "echo ${RESPONSE_SCC}"
+
      String GIT_SHORT_COMMIT
      String GIT_LONG_COMMIT
      String GITHUB_HASH_TO_USE
@@ -27,7 +35,6 @@ node{
      String SONARQUBE_LOGIN_TOKEN = "8829c73e-19b0-4f77-b74c-e112bbacd4d5"
      String build_info_file = 'build_info.yml'
 
-properties([parameters([string(name: "mybranch2", defaultValue: "undefined")])])
 
 
 
@@ -66,19 +73,10 @@ properties([parameters([string(name: "mybranch2", defaultValue: "undefined")])])
 
 
 
-
-                           // Posta hela , eller fråga EI om aggregerade objectet via curl mot EI query
-                           // def RESPONSE_SCC = sh(returnStdout: true, script: "curl -H 'Content-Type: application/json' -X POST --data-binary '${json_scc}' ${EVENT_PARSER_PUB_GEN_URI}EiffelSourceChangeCreatedEvent").trim()
-                           //sh "echo ${RESPONSE_SCC}"
-
-                            echo "Building configuration: ${params.mybranch2}"
-
-                            props_scc = readJSON text: "${params.mybranch2}"
-
                             //sh "echo ${props_scc._id}"
-                            sh "echo ${props_scc.aggregatedObject.submission.sourceChanges[0].eventId}"
-                            sh "echo ${props_scc.aggregatedObject.submission.sourceChanges[0].gitIdentifier.commitId}"
-                            sh "echo ${props_scc.aggregatedObject.submission.sourceChanges[0].submitter.name}"
+                            sh "echo ${props_json_params.aggregatedObject.submission.sourceChanges[0].eventId}"
+                            sh "echo ${props_json_params.aggregatedObject.submission.sourceChanges[0].gitIdentifier.commitId}"
+                            sh "echo ${props_json_params.aggregatedObject.submission.sourceChanges[0].submitter.name}"
               }
 
         }
