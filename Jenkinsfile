@@ -14,7 +14,7 @@ node{
   // ######### NOTES & INFORMATION & WARNINGS ##############################################################################
 
 
-     properties([parameters([string(name: "json_parameters", defaultValue: "undefined")])])
+     properties([parameters([string(name: "jsonparameters", defaultValue: "undefined")])])
 
 
 
@@ -71,7 +71,7 @@ node{
                             sh "ls"
                             sh "ls src"
 
-props_json_params = readJSON text: "${params.json_parameters}"
+props_json_params = readJSON text: "${params.jsonparameters}"
 
                             //sh "echo ${props_scc._id}"
                             sh "echo ${props_json_params.aggregatedObject.submission.sourceChanges[0].eventId}"
