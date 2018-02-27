@@ -76,7 +76,7 @@ node{
                              props_ActT = readJSON text: "${RESPONSE_ActT}"
 
                              sh "echo ${RESPONSE_ActT}"
-                             sh "echo '${RESPONSE_ActT.events[0].id}'"
+                             sh "echo \"${RESPONSE_ActT.events[0].id}\""
 
 
                             // EiffelActivityStartedEvent
