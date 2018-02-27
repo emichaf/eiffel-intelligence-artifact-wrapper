@@ -66,8 +66,14 @@ properties([parameters([string(name: "mybranch2", defaultValue: "undefined")])])
 
 
 
+                           // {"_id" : "788d642f-572d-4232-84fe-6a1a246e2288"}
 
                             echo "Building configuration: ${params.mybranch2}"
+
+                            props_scc = readJSON text: "${params.mybranch2}"
+
+                            sh "echo ${RESPONSE_SCC}"
+                            sh "echo ${props_scc.id}"
               }
 
         }
