@@ -34,6 +34,7 @@ node{
      String jenkins_display_url = "${RUN_DISPLAY_URL}".replaceAll("unconfigured-jenkins-location","$JENKINS_HOSTNAME"+":"+"${JENKINS_HOSTPORT}")
 
      String EiffelActivityStartedEvent_id
+     String outcome_conclusion
 
      // OBS if changing params in properties, job needs to be re-imported
      properties([parameters([string(name: "jsonparams", defaultValue: "undefined")])])
@@ -57,11 +58,11 @@ try {
      ------------------------------------------------------------------------------------------*/
 
 
- // print existing env vars
- echo sh(returnStdout: true, script: 'env')
-
-
        stage ('GERRIT Wrapper Checkout') {
+
+        // print existing env vars
+        echo sh(returnStdout: true, script: 'env')
+
 
                             // EiffelActivityTriggeredEvent
                              def json_ActT = """{
