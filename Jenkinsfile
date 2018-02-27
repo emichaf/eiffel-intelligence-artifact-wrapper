@@ -29,7 +29,7 @@ properties([parameters([string(name: "mybranch", defaultValue: "undefined")])])
 
 
 
-echo "${params.mybranch}"
+//echo "${params.mybranch}"
 
 
 
