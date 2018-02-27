@@ -86,9 +86,9 @@ node{
                                                   "meta.source.name":"${SOURCE_NAME}",
                                                   "meta.source.uri":"${jenkins_display_url}",
                                                   "data.executionUri":"${jenkins_display_url}",
-                                                  "datax.customData[0]": {"key" : "EI Subscription", "value" : "Subscription XX"},
+                                                  "data.customData[0]": {"key" : "EI Subscription", "value" : "Subscription XX"},
                                                   "links[0]": {"type" : "ACTIVITY_EXECUTION", "target" : "${props_ActT.events[0].id}"},
-                                                  "meta.tags":"<%DELETE%>",
+                                                  "metax.tags":"<%DELETE%>",
                                                   "meta.security.sdm":"<%DELETE%>",
                                                   data.liveLogs[0]:"<%DELETE%>"
                                                 }"""
