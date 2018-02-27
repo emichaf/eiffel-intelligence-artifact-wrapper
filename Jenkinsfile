@@ -72,7 +72,7 @@ node{
                                                }"""
 
                              // Create ActT Event and publish
-                             def RESPONSE_ActT = sh(returnStdout: true, script: "curl -H 'Content-Type: application/json' -X POST --data-binary '${json_ActT}' ${EVENT_PARSER_PUB_GEN_URI}EiffelActivityTriggeredEventx").trim()
+                             def RESPONSE_ActT = sh(returnStdout: true, script: "curl -H 'Content-Type: application/json' -X POST --data-binary '${json_ActT}' ${EVENT_PARSER_PUB_GEN_URI}EiffelActivityTriggeredEvent").trim()
                              sh "echo ${RESPONSE_ActT}"
                              props_ActT = readJSON text: "${RESPONSE_ActT}"
                              if(props_ActT.events[0].status_code != 200){throw new Exception()}
@@ -93,7 +93,7 @@ node{
                                                 }"""
 
                              // Create ActS Event and publish
-                             def RESPONSE_ActS = sh(returnStdout: true, script: "curl -H 'Content-Type: application/json' -X POST --data-binary '${json_ActS}' ${EVENT_PARSER_PUB_GEN_URI}EiffelActivityStartedEvent").trim()
+                             def RESPONSE_ActS = sh(returnStdout: true, script: "curl -H 'Content-Type: application/json' -X POST --data-binary '${json_ActS}' ${EVENT_PARSER_PUB_GEN_URI}EiffelActivityStartedEventx").trim()
                              sh "echo ${RESPONSE_ActS}"
                              props_ActS = readJSON text: "${RESPONSE_ActS}"
                              if(props_ActS.events[0].status_code != 200){throw new Exception()}
