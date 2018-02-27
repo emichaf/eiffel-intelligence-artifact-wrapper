@@ -19,7 +19,7 @@ node{
      String GITHUB_HASH_TO_USE
      String ARM_ARTIFACT
      String ARM_ARTIFACT_PATH
-     Object pom
+     Object POM
      String ARM_URL = "https://eiffel.lmera.ericsson.se/nexus/content/repositories/releases/test/com/ericsson/eiffel/eiffel-intelligence-artifact-wrapper"
      String DOCKER_HOST = "tcp://docker104-eiffel999.lmera.ericsson.se:4243"
      String WRAPPER_REPO = "https://github.com/emichaf/eiffel-intelligence-artifact-wrapper.git"
@@ -31,10 +31,13 @@ node{
      String DOMAIN_ID = sh(returnStdout: true, script: " domainname").trim()
      String SOURCE_NAME = "Jenkins"
 
-     String jenkins_display_url = "${RUN_DISPLAY_URL}".replaceAll("unconfigured-jenkins-location","$JENKINS_HOSTNAME"+":"+"${JENKINS_HOSTPORT}")
+     String JENKINS_DISPLAY_URL = "${RUN_DISPLAY_URL}".replaceAll("unconfigured-jenkins-location","$JENKINS_HOSTNAME"+":"+"${JENKINS_HOSTPORT}")
+     String JENKINS_JOB_CONSOLE_URL = "${JENKINS_DISPLAY_URL}".replaceAll("","")
+     //http://unconfigured-jenkins-location/job/eiffel-intelligence-artifact-wrapper/job/master/80/display/redirect
+
 
      String EiffelActivityStartedEvent_id
-     String outcome_conclusion
+     String OUTCOME_CONCLUSION
 
      // OBS if changing params in properties, job needs to be re-imported
      properties([parameters([string(name: "jsonparams", defaultValue: "undefined")])])
@@ -69,7 +72,7 @@ try {
                                                  "meta.source.domainId":"${DOMAIN_ID}",
                                                  "meta.source.host":"${HOST_NAME}",
                                                  "meta.source.name":"${SOURCE_NAME}",
-                                                 "meta.source.uri":"${jenkins_display_url}",
+                                                 "meta.source.uri":"${JENKINS_DISPLAY_URL}",
                                                  "data.name":"Eiffel Intelligence Artifact Backend Component Build started",
                                                  "data.categories[0]":"System Eiffel 2.0 Component Eiffel Intelligence Artifact Backend Build",
                                                  "data.triggers[0]":{"type": "SOURCE_CHANGE", "description": "EI Artifact Aggregation Subscription Trigger"},
@@ -93,8 +96,8 @@ try {
                                                   "meta.source.domainId":"${DOMAIN_ID}",
                                                   "meta.source.host":"${HOST_NAME}",
                                                   "meta.source.name":"${SOURCE_NAME}",
-                                                  "meta.source.uri":"${jenkins_display_url}",
-                                                  "data.executionUri":"${jenkins_display_url}",
+                                                  "meta.source.uri":"${JENKINS_DISPLAY_URL}",
+                                                  "data.executionUri":"${JENKINS_DISPLAY_URL}",
                                                   "data.customData[0]": {"key" : "EI Subscription", "value" : "Subscription XX"},
                                                   "links[0]": {"type" : "ACTIVITY_EXECUTION", "target" : "${props_ActT.events[0].id}"},
                                                   "meta.tags":"<%DELETE%>",
@@ -158,11 +161,11 @@ try {
 
                           GIT_LONG_COMMIT =  sh(returnStdout: true, script: "git log --format='%H' -n 1").trim()
 
-                          pom = readMavenPom file: 'pom.xml'
+                          POM = readMavenPom file: 'pom.xml'
 
-                          ARM_ARTIFACT = "${pom.artifactId}-${pom.version}.war"
+                          ARM_ARTIFACT = "${POM.artifactId}-${POM.version}.war"
 
-                          ARM_ARTIFACT_PATH = "${ARM_URL}/${pom.version}/${ARM_ARTIFACT}"
+                          ARM_ARTIFACT_PATH = "${ARM_URL}/${POM.version}/${ARM_ARTIFACT}"
 
                           sh "pwd"
                           sh "ls"
@@ -312,20 +315,20 @@ try {
 
                                    sh "docker login -u ${DOCKER_HUB_USER} -p ${DOCKER_HUB_PASSWORD}"
 
-                                   sh "docker build --no-cache=true -t ${DOCKER_HUB_USER}/${pom.artifactId}:latest -f src/main/docker/Dockerfile src/main/docker/"
+                                   sh "docker build --no-cache=true -t ${DOCKER_HUB_USER}/${POM.artifactId}:latest -f src/main/docker/Dockerfile src/main/docker/"
 
-                                   sh "docker push ${DOCKER_HUB_USER}/${pom.artifactId}:latest"
+                                   sh "docker push ${DOCKER_HUB_USER}/${POM.artifactId}:latest"
 
-                                   sh "docker build --no-cache=true -t ${DOCKER_HUB_USER}/${pom.artifactId}:${GIT_SHORT_COMMIT} -f src/main/docker/Dockerfile src/main/docker/"
+                                   sh "docker build --no-cache=true -t ${DOCKER_HUB_USER}/${POM.artifactId}:${GIT_SHORT_COMMIT} -f src/main/docker/Dockerfile src/main/docker/"
 
-                                   sh "docker push ${DOCKER_HUB_USER}/${pom.artifactId}:${GIT_SHORT_COMMIT}"
+                                   sh "docker push ${DOCKER_HUB_USER}/${POM.artifactId}:${GIT_SHORT_COMMIT}"
 
                                    sh "docker logout"
 
                                    }
 
 
-
+                       OUTCOME_CONCLUSION = "SUCCESSFUL"
 
            } // stage('..
 
@@ -347,7 +350,7 @@ try {
                               "meta.source.domainId":"${DOMAIN_ID}",
                               "meta.source.host":"${HOST_NAME}",
                               "meta.source.name":"${SOURCE_NAME}",
-                              "meta.source.uri":"${jenkins_display_url}",
+                              "meta.source.uri":"${JENKINS_DISPLAY_URL}",
                               "data.reason":"Jenkins Job Cancelled",
                               "data.customData[0]": {"key" : "EI Subscription", "value" : "Subscription XX"},
                               "links[0]": {"type" : "ACTIVITY_EXECUTION", "target" : "${EiffelActivityStartedEvent_id}"},
@@ -362,6 +365,8 @@ try {
          props_ActC = readJSON text: "${RESPONSE_ActC}"
          if(props_ActC.events[0].status_code != 200){throw new Exception()}
 
+         OUTCOME_CONCLUSION = "ABORTED"
+
          // Throw
          throw interruptEx
 
@@ -373,8 +378,8 @@ try {
                               "meta.source.domainId":"${DOMAIN_ID}",
                               "meta.source.host":"${HOST_NAME}",
                               "meta.source.name":"${SOURCE_NAME}",
-                              "meta.source.uri":"${jenkins_display_url}",
-                              "data.outcome.conclusion":"SUCCESSFUL",
+                              "meta.source.uri":"${JENKINS_DISPLAY_URL}",
+                              "data.outcome.conclusion":"${OUTCOME_CONCLUSION}",
                               "data.outcome.description":"Eiffel Intelligence Artifact Backend Component Build finished",
                               "data.customData[0]": {"key" : "EI Subscription", "value" : "Subscription XX"},
                               "data.persistentLogs[0]": {"name" : "Jenkins log", "uri" : "my_data.persistentLogs[0]uri"},
