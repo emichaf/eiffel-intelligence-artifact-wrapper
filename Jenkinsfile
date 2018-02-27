@@ -15,7 +15,7 @@ node{
 
 
      properties([parameters([string(name: "JSON_PARAMETERS", defaultValue: "undefined")])])
-     props_json_params = readJSON text: "${params.JSON_PARAMETERS}"
+
 
 
      // Post Aggregated id, and fetch object via curl in EI persistent storage
@@ -71,7 +71,7 @@ node{
                             sh "ls"
                             sh "ls src"
 
-
+props_json_params = readJSON text: "${params.JSON_PARAMETERS}"
 
                             //sh "echo ${props_scc._id}"
                             sh "echo ${props_json_params.aggregatedObject.submission.sourceChanges[0].eventId}"
