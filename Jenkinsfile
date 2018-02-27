@@ -27,9 +27,7 @@ node{
      String SONARQUBE_LOGIN_TOKEN = "8829c73e-19b0-4f77-b74c-e112bbacd4d5"
      String build_info_file = 'build_info.yml'
 
-properties([parameters([string(name: "mybranch2", defaultValue: "undefined")])])
-
-
+     properties([parameters([string(name: "mybranch2", defaultValue: "undefined")])])
 
 
  docker.withServer("$DOCKER_HOST", 'remote_docker_host') {
@@ -71,7 +69,7 @@ properties([parameters([string(name: "mybranch2", defaultValue: "undefined")])])
                            // def RESPONSE_SCC = sh(returnStdout: true, script: "curl -H 'Content-Type: application/json' -X POST --data-binary '${json_scc}' ${EVENT_PARSER_PUB_GEN_URI}EiffelSourceChangeCreatedEvent").trim()
                            //sh "echo ${RESPONSE_SCC}"
 
-                            echo "Building configuration: ${params.mybranch2}"
+                            //echo "Building configuration: ${params.mybranch2}"
 
                             props_scc = readJSON text: "${params.mybranch2}"
 
