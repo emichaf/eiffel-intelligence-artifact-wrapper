@@ -380,7 +380,7 @@ try {
                               "meta.source.name":"${SOURCE_NAME}",
                               "meta.source.uri":"${JENKINS_DISPLAY_URL}",
                               "data.outcome.conclusion":"${OUTCOME_CONCLUSION}",
-                              "data.outcome.description":"Eiffel Intelligence Artifact Backend Component Build finished",
+                              "data.outcome.description":"Eiffel Intelligence Artifact Backend Component Build ${OUTCOME_CONCLUSION}",
                               "data.customData[0]": {"key" : "EI Subscription", "value" : "Subscription XX"},
                               "data.persistentLogs[0]": {"name" : "Jenkins log", "uri" : "my_data.persistentLogs[0]uri"},
                               "links[0]": {"type" : "ACTIVITY_EXECUTION", "target" : "e269b37d-17a1-4a10-aafb-c108735ee51f"},
