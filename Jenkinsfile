@@ -27,7 +27,7 @@ node{
      String SONARQUBE_LOGIN_TOKEN = "8829c73e-19b0-4f77-b74c-e112bbacd4d5"
      String build_info_file = 'build_info.yml'
 
-properties([parameters([string(name: "mybranch2.test[0].id", defaultValue: "undefined")])])
+properties([parameters([string(name: "mybranch2.test.id", defaultValue: "undefined")])])
 
 
 
@@ -67,7 +67,7 @@ properties([parameters([string(name: "mybranch2.test[0].id", defaultValue: "unde
 
 
 
-                            echo "Building configuration: ${params.mybranch2.test[0].id}"
+                            echo "Building configuration: ${params.mybranch2.test.id}"
               }
 
         }
