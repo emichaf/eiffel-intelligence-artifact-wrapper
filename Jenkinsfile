@@ -29,8 +29,7 @@ node{
 
      // OBS if changing params in properties, job needs to be re-imported
      properties([parameters([string(name: "jsonparams", defaultValue: "undefined")])])
-     String props_json_params
-     props_json_params = readJSON text: "${params.jsonparams}"
+     def props_json_params = readJSON text: "${params.jsonparams}"
 
  docker.withServer("$DOCKER_HOST", 'remote_docker_host') {
 
