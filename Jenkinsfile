@@ -1,10 +1,6 @@
 node{
 
-properties([
-parameters([
-string(name: 'mybranch', defaultValue: 'undefined')
-])
-])
+properties([parameters([string(name: "mybranch", defaultValue: "undefined")])])
 
 
   // ######### NOTES & INFORMATION & WARNINGS ##############################################################################
