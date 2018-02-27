@@ -366,7 +366,7 @@ throw new Exception()
          OUTCOME_CONCLUSION = "ABORTED"
 
          // Throw
-         throw interruptEx
+         throw new Exception()
 
 } catch (err) {
 
