@@ -364,7 +364,6 @@ try {
          // Throw
          throw interruptEx
 
-}
 } finally {
 
 
