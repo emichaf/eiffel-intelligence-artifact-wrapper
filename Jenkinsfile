@@ -28,9 +28,11 @@ node{
      String SONARQUBE_LOGIN_TOKEN = "8829c73e-19b0-4f77-b74c-e112bbacd4d5"
      String build_info_file = 'build_info.yml'
 
-     String HOST_NAME
-     String DOMAIN_ID
+     String HOST_NAME = sh(returnStdout: true, script: "hostname").trim()
+     String DOMAIN_ID = sh(returnStdout: true, script: " domainname").trim()
      String SOURCE_NAME = "Jenkins"
+
+     String jenkins_display_url = "${RUN_DISPLAY_URL}".replaceAll("unconfigured-jenkins-location","$JENKINS_HOSTNAME"+":"+"${JENKINS_HOSTPORT}")
 
 
      // OBS if changing params in properties, job needs to be re-imported
@@ -52,10 +54,6 @@ node{
 
            dir ('wrapper') {
 
-                             HOST_NAME = sh(returnStdout: true, script: "hostname").trim()
-                             DOMAIN_ID = sh(returnStdout: true, script: " domainname").trim()
-
-                             jenkins_display_url = "${RUN_DISPLAY_URL}".replaceAll("unconfigured-jenkins-location","$JENKINS_HOSTNAME"+":"+"${JENKINS_HOSTPORT}")
 
                             // EiffelActivityTriggeredEvent
                              def json_ActT = """{
