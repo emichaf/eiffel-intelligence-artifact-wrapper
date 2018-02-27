@@ -43,8 +43,7 @@ node{
 try {
 
 
- // print existing env vars
- echo sh(returnStdout: true, script: 'env')
+
 
  docker.withServer("$DOCKER_HOST", 'remote_docker_host') {
 
@@ -58,7 +57,8 @@ try {
      ------------------------------------------------------------------------------------------*/
 
 
-
+ // print existing env vars
+ echo sh(returnStdout: true, script: 'env')
 
 
        stage ('GERRIT Wrapper Checkout') {
