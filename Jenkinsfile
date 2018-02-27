@@ -29,7 +29,7 @@ node{
 
 properties([parameters([string(name: "mybranch2", defaultValue: "undefined")])])
 
-println "${params.mybranch2}"
+//println "${params.mybranch2}"
 
 
 
@@ -70,9 +70,9 @@ println "${params.mybranch2}"
                             sh "ls src"
 
 
-                            sh "echo ${params.PARAM1}"
+                            sh "echo ${params.mybranch2}"
 
-                            echo "Building configuration: ${params.PARAM1}"
+                            echo "Building configuration: ${params.mybranch2}"
               }
 
         }
