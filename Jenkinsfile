@@ -46,7 +46,7 @@ println "${params.mybranch2}"
 
        stage ('GERRIT Wrapper Checkout') {
 
-
+            println "${params.mybranch2}"
 
            echo "Building configuration: ${params.mybranch2}"
 
