@@ -32,9 +32,7 @@ node{
      String SOURCE_NAME = "Jenkins"
 
      String JENKINS_DISPLAY_URL = "${RUN_DISPLAY_URL}".replaceAll("unconfigured-jenkins-location","$JENKINS_HOSTNAME"+":"+"${JENKINS_HOSTPORT}")
-     String JENKINS_JOB_CONSOLE_URL = "${JENKINS_DISPLAY_URL}".replaceAll("","")
-     //http://unconfigured-jenkins-location/job/eiffel-intelligence-artifact-wrapper/job/master/80/display/redirect
-
+     String JENKINS_JOB_CONSOLE_URL = "${JENKINS_DISPLAY_URL}".replaceAll("display/redirect","console")
 
      String EiffelActivityStartedEvent_id
      String OUTCOME_CONCLUSION
@@ -382,8 +380,8 @@ try {
                               "data.outcome.conclusion":"${OUTCOME_CONCLUSION}",
                               "data.outcome.description":"Eiffel Intelligence Artifact Backend Component Build ${OUTCOME_CONCLUSION}",
                               "data.customData[0]": {"key" : "EI Subscription", "value" : "Subscription XX"},
-                              "data.persistentLogs[0]": {"name" : "Jenkins log", "uri" : "my_data.persistentLogs[0]uri"},
-                              "links[0]": {"type" : "ACTIVITY_EXECUTION", "target" : "e269b37d-17a1-4a10-aafb-c108735ee51f"},
+                              "data.persistentLogs[0]": {"name" : "Jenkins Console Log", "uri" : "${JENKINS_JOB_CONSOLE_URL}"},
+                              "links[0]": {"type" : "ACTIVITY_EXECUTION", "target" : "${EiffelActivityStartedEvent_id}"},
                               "meta.tags":"<%DELETE%>",
                               "meta.security.sdm":"<%DELETE%>"
                             }
