@@ -32,7 +32,7 @@ string(name: 'VAR_FOO', defaultValue: 'undefined')
 ])
 ])
 
-echo "{$VAR_FOO}
+echo "{$VAR_FOO}"
 
 
 
