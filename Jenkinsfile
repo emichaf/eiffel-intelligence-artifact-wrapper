@@ -1,5 +1,12 @@
 node{
 
+properties([
+parameters([
+string(name: 'mybranch', defaultValue: 'undefined')
+])
+])
+
+
   // ######### NOTES & INFORMATION & WARNINGS ##############################################################################
   //
   // OBS change dir in containers not working, so fetching scm in containers is required. Stash/unstash dir() not working..
@@ -25,12 +32,6 @@ node{
      String build_info_file = 'build_info.yml'
 
 
-properties([
-parameters([
-string(name: 'mybranch', defaultValue: 'undefined')
-
-])
-])
 
 echo "${mybranch}"
 
