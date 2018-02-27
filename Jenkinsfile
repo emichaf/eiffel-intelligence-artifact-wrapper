@@ -42,6 +42,10 @@ node{
 
 try {
 
+
+ // print existing env vars
+ echo sh(returnStdout: true, script: 'env')
+
  docker.withServer("$DOCKER_HOST", 'remote_docker_host') {
 
      /*------------------------------------------------------------------------------------------
@@ -65,7 +69,7 @@ try {
                                                  "meta.source.host":"${HOST_NAME}",
                                                  "meta.source.name":"${SOURCE_NAME}",
                                                  "meta.source.uri":"${jenkins_display_url}",
-                                                 "data.name":"Eiffel Intelligence Artifact Backend Component Build started ",
+                                                 "data.name":"Eiffel Intelligence Artifact Backend Component Build started",
                                                  "data.categories[0]":"System Eiffel 2.0 Component Eiffel Intelligence Artifact Backend Build",
                                                  "data.triggers[0]":{"type": "SOURCE_CHANGE", "description": "EI Artifact Aggregation Subscription Trigger"},
                                                  "data.executionType": "AUTOMATED",
@@ -104,7 +108,7 @@ try {
                              if(props_ActS.events[0].status_code != 200){throw new Exception()}
 
 
-                       throw new FlowInterruptedException()
+
 
            dir ('wrapper') {
 
@@ -357,13 +361,39 @@ try {
          props_ActC = readJSON text: "${RESPONSE_ActC}"
          if(props_ActC.events[0].status_code != 200){throw new Exception()}
 
-
-
-        println "stopped by user:"
-        sh "echo ${EiffelActivityStartedEvent_id}"
-        throw interruptEx
+         // Throw
+         throw interruptEx
 
 }
+} finally {
+
+
+        // EiffelActivityFinishedEvent
+         def json_ActF = """{
+                              "meta.source.domainId":"${DOMAIN_ID}",
+                              "meta.source.host":"${HOST_NAME}",
+                              "meta.source.name":"${SOURCE_NAME}",
+                              "meta.source.uri":"${jenkins_display_url}",
+                              "data.outcome.conclusion":"SUCCESSFUL",
+                              "data.outcome.description":"Eiffel Intelligence Artifact Backend Component Build finished",
+                              "data.customData[0]": {"key" : "EI Subscription", "value" : "Subscription XX"},
+                              "data.persistentLogs[0]": {"name" : "Jenkins log", "uri" : "my_data.persistentLogs[0]uri"},
+                              "links[0]": {"type" : "ACTIVITY_EXECUTION", "target" : "e269b37d-17a1-4a10-aafb-c108735ee51f"},
+                              "meta.tags":"<%DELETE%>",
+                              "meta.security.sdm":"<%DELETE%>"
+                            }
+                            """
+
+         // Create ActF Event and publish
+         def RESPONSE_ActF = sh(returnStdout: true, script: "curl -H 'Content-Type: application/json' -X POST --data-binary '${json_ActF}' ${EVENT_PARSER_PUB_GEN_URI}EiffelActivityFinishedEvent").trim()
+         sh "echo ${RESPONSE_ActF}"
+         props_ActF = readJSON text: "${RESPONSE_ActF}"
+         if(props_ActF.events[0].status_code != 200){throw new Exception()}
+
+
+
+} // finally
+
 
 } // node
 
