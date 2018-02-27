@@ -78,7 +78,7 @@ node{
                              //min = "${RESPONSE_ActT.events[0].id}"
 
                              sh "echo ${RESPONSE_ActT}"
-                             sh "echo ${min}"
+
 
 
                             // EiffelActivityStartedEvent
