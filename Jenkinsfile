@@ -14,6 +14,7 @@ node{
   // ######### NOTES & INFORMATION & WARNINGS ##############################################################################
 
 
+     String EVENT_PARSER_PUB_GEN_URI = 'http://docker104-eiffel999.lmera.ericsson.se:9900/doit/?msgType='
      String GIT_SHORT_COMMIT
      String GIT_LONG_COMMIT
      String GITHUB_HASH_TO_USE
@@ -26,6 +27,11 @@ node{
      String SOURCE_CODE_REPO = "https://github.com/emichaf/eiffel-intelligence.git"
      String SONARQUBE_LOGIN_TOKEN = "8829c73e-19b0-4f77-b74c-e112bbacd4d5"
      String build_info_file = 'build_info.yml'
+
+     String HOST_NAME
+     String DOMAIN_ID
+     String SOURCE_NAME = "Jenkins"
+
 
      // OBS if changing params in properties, job needs to be re-imported
      properties([parameters([string(name: "jsonparams", defaultValue: "undefined")])])
@@ -46,6 +52,28 @@ node{
 
            dir ('wrapper') {
 
+                             HOST_NAME = sh(returnStdout: true, script: "hostname").trim()
+                             DOMAIN_ID = sh(returnStdout: true, script: " domainname").trim()
+
+                            // EiffelActivityTriggeredEvent
+                             def json_ActT = """{
+                                                 "meta.source.domainId":"${DOMAIN_ID}",
+                                                 "meta.source.host":"${HOST_NAME}",
+                                                 "meta.source.name":"${SOURCE_NAME}",
+                                                 "meta.source.uri":"${jenkins_display_url}"
+                                                 "data.name":"Eiffel Intelligence Artifact Backend Component Build started ",
+                                                 "data.categories[0]":"System Eiffel 2.0 Component Eiffel Intelligence Artifact Backend Build",
+                                                 "data.triggers[0]":{"type": "SOURCE_CHANGE", "description": "EI Artifact Aggregation Subscription Trigger"},
+                                                 "data.executionType": "AUTOMATED",
+                                                 "data.customData[0]": {"key" : "EI Subscription", "value" : "Subscription XX"},
+                                                 "links[0]": {"type" : "CAUSE", "target" : "${props_json_params.aggregatedObject.submission.sourceChanges[0].eventId}"},
+                                                 "meta.tags":"<%DELETE%>",
+                                                 "meta.security.sdm":"<%DELETE%>"
+                                               }"""
+
+                             // Create SCS Event and publish
+                             def RESPONSE_ActT = sh(returnStdout: true, script: "curl -H 'Content-Type: application/json' -X POST --data-binary '${json_ActT}' ${EVENT_PARSER_PUB_GEN_URI}EiffelActivityTriggeredEvent").trim()
+                             sh "echo ${RESPONSE_ActT}"
 
 
                             git branch: "master", url: "$WRAPPER_REPO"
@@ -63,14 +91,6 @@ node{
                             sh "ls"
                             sh "ls src"
 
-
-
-
-                           // Posta hela , eller fråga EI om aggregerade objectet via curl mot EI query
-                           // def RESPONSE_SCC = sh(returnStdout: true, script: "curl -H 'Content-Type: application/json' -X POST --data-binary '${json_scc}' ${EVENT_PARSER_PUB_GEN_URI}EiffelSourceChangeCreatedEvent").trim()
-                           //sh "echo ${RESPONSE_SCC}"
-
-                            //echo "Building configuration: ${params.mybranch2}"
 
 
 
@@ -282,3 +302,5 @@ node{
  } //  docker.withServer(...
 
 } // node
+
+
