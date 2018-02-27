@@ -75,8 +75,10 @@ node{
                              def RESPONSE_ActT = sh(returnStdout: true, script: "curl -H 'Content-Type: application/json' -X POST --data-binary '${json_ActT}' ${EVENT_PARSER_PUB_GEN_URI}EiffelActivityTriggeredEvent").trim()
                              props_ActT = readJSON text: "${RESPONSE_ActT}"
 
+                             min = "${RESPONSE_ActT.events[0].id}"
+
                              sh "echo ${RESPONSE_ActT}"
-                             sh "echo \"${RESPONSE_ActT.events[0].id}\""
+                             sh "echo ${min}"
 
 
                             // EiffelActivityStartedEvent
