@@ -36,6 +36,7 @@ try {
 
      String jenkins_display_url = "${RUN_DISPLAY_URL}".replaceAll("unconfigured-jenkins-location","$JENKINS_HOSTNAME"+":"+"${JENKINS_HOSTPORT}")
 
+     String EiffelActivityStartedEvent_id
 
      // OBS if changing params in properties, job needs to be re-imported
      properties([parameters([string(name: "jsonparams", defaultValue: "undefined")])])
@@ -80,6 +81,7 @@ try {
                              props_ActT = readJSON text: "${RESPONSE_ActT}"
                              if(props_ActT.events[0].status_code != 200){throw new Exception()}
 
+                             EiffelActivityStartedEvent_id = "${props_ActT.events[0].id}"
 
                             // EiffelActivityStartedEvent
                              def json_ActS = """{
@@ -336,7 +338,7 @@ try {
         // Send EiffelActivityCanceledEvent
 
         println "stopped by user:"
-        sh "echo ${RESPONSE_ActT}"
+        sh "echo ${EiffelActivityStartedEvent_id}"
         throw interruptEx
 
 }
