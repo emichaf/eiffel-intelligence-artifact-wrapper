@@ -67,12 +67,12 @@ node{
                                                  "data.executionType": "AUTOMATED",
                                                  "data.customData[0]": {"key" : "EI Subscription", "value" : "Subscription XX"},
                                                  "links[0]": {"type" : "CAUSE", "target" : "${props_json_params.aggregatedObject.submission.sourceChanges[0].eventId}"},
-                                                 "metax.tags":"<%DELETE%>",
+                                                 "meta.tags":"<%DELETE%>",
                                                  "meta.security.sdm":"<%DELETE%>"
                                                }"""
 
                              // Create ActT Event and publish
-                             def RESPONSE_ActT = sh(returnStdout: true, script: "curl -H 'Content-Type: application/json' -X POST --data-binary '${json_ActT}' ${EVENT_PARSER_PUB_GEN_URI}EiffelActivityTriggeredEvent").trim()
+                             def RESPONSE_ActT = sh(returnStdout: true, script: "curl -H 'Content-Type: application/json' -X POST --data-binary '${json_ActT}' ${EVENT_PARSER_PUB_GEN_URI}EiffelActivityTriggeredEventx").trim()
                              sh "echo ${RESPONSE_ActT}"
                              props_ActT = readJSON text: "${RESPONSE_ActT}"
                              if(props_ActT.events[0].status_code != 200){throw new Exception()}
