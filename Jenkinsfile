@@ -67,16 +67,13 @@ node{
                                                  "data.executionType": "AUTOMATED",
                                                  "data.customData[0]": {"key" : "EI Subscription", "value" : "Subscription XX"},
                                                  "links[0]": {"type" : "CAUSE", "target" : "${props_json_params.aggregatedObject.submission.sourceChanges[0].eventId}"},
-                                                 "meta.tags":"<%DELETE%>",
+                                                 "metaxxxx.tags":"<%DELETE%>",
                                                  "meta.security.sdm":"<%DELETE%>"
                                                }"""
 
                              // Create ActT Event and publish
                              def RESPONSE_ActT = sh(returnStdout: true, script: "curl -H 'Content-Type: application/json' -X POST --data-binary '${json_ActT}' ${EVENT_PARSER_PUB_GEN_URI}EiffelActivityTriggeredEvent").trim()
                              props_ActT = readJSON text: "${RESPONSE_ActT}"
-
-                             //min = "${RESPONSE_ActT.events[0].id}"
-
                              sh "echo ${RESPONSE_ActT}"
 
 
@@ -88,17 +85,16 @@ node{
                                                   "meta.source.name":"${SOURCE_NAME}",
                                                   "meta.source.uri":"${jenkins_display_url}",
                                                   "data.executionUri":"${jenkins_display_url}",
-                                                  "data.liveLogs[0]": {"name" : "my.data.data.liveLogs[0]name", "uri" : "my.data.data.liveLogs[0]uri"},
                                                   "data.customData[0]": {"key" : "EI Subscription", "value" : "Subscription XX"},
                                                   "links[0]": {"type" : "ACTIVITY_EXECUTION", "target" : "${props_ActT.events[0].id}"},
                                                   "meta.tags":"<%DELETE%>",
-                                                  "meta.security.sdm":"<%DELETE%>"
+                                                  "meta.security.sdm":"<%DELETE%>",
+                                                  data.liveLogs[0]:"<%DELETE%>"
                                                 }"""
 
                              // Create ActS Event and publish
                              def RESPONSE_ActS = sh(returnStdout: true, script: "curl -H 'Content-Type: application/json' -X POST --data-binary '${json_ActS}' ${EVENT_PARSER_PUB_GEN_URI}EiffelActivityStartedEvent").trim()
                              sh "echo ${RESPONSE_ActS}"
-                             //sh "echo '${RESPONSE_ActS.events[0].id}'"
 
 
                             git branch: "master", url: "$WRAPPER_REPO"
