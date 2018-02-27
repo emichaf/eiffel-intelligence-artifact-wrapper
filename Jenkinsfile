@@ -76,7 +76,7 @@ node{
                              props_ActT = readJSON text: "${RESPONSE_ActT}"
 
                              sh "echo ${RESPONSE_ActT}"
-                             sh "echo ${RESPONSE_ActT.status}"
+                             //sh "echo ${RESPONSE_ActT.status_code}"
 
 
                             // EiffelActivityStartedEvent
@@ -96,7 +96,7 @@ node{
                              // Create ActS Event and publish
                              def RESPONSE_ActS = sh(returnStdout: true, script: "curl -H 'Content-Type: application/json' -X POST --data-binary '${json_ActS}' ${EVENT_PARSER_PUB_GEN_URI}EiffelActivityStartedEvent").trim()
                              sh "echo ${RESPONSE_ActS}"
-                             sh "echo ${RESPONSE_ActS.status}"
+                             sh "echo ${RESPONSE_ActS.status_code}"
 
 
                             git branch: "master", url: "$WRAPPER_REPO"
