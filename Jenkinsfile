@@ -110,7 +110,7 @@ try {
                              if(props_ActS.events[0].status_code != 200){throw new Exception()}
 
 
-                            // error()
+                            error()
 
            dir ('wrapper') {
 
