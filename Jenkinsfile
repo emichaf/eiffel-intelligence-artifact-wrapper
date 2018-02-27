@@ -2,7 +2,7 @@ import org.jenkinsci.plugins.workflow.steps.FlowInterruptedException
 
 node{
 
-try {
+
 
 
   // ######### NOTES & INFORMATION & WARNINGS ##############################################################################
@@ -41,6 +41,9 @@ try {
      // OBS if changing params in properties, job needs to be re-imported
      properties([parameters([string(name: "jsonparams", defaultValue: "undefined")])])
      def props_json_params = readJSON text: "${params.jsonparams}"
+
+
+try {
 
  docker.withServer("$DOCKER_HOST", 'remote_docker_host') {
 
