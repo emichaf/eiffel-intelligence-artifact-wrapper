@@ -71,12 +71,12 @@ node{
 
                             //echo "Building configuration: ${params.mybranch2}"
 
-                            props_scc = readJSON text: "${params.mybranch2}"
+                            props_json = readJSON text: "${params.mybranch2}"
 
                             //sh "echo ${props_scc._id}"
-                            sh "echo ${props_scc.aggregatedObject.submission.sourceChanges[0].eventId}"
-                            sh "echo ${props_scc.aggregatedObject.submission.sourceChanges[0].gitIdentifier.commitId}"
-                            sh "echo ${props_scc.aggregatedObject.submission.sourceChanges[0].submitter.name}"
+                            sh "echo ${props_json.aggregatedObject.submission.sourceChanges[0].eventId}"
+                            sh "echo ${props_json.aggregatedObject.submission.sourceChanges[0].gitIdentifier.commitId}"
+                            sh "echo ${props_json.aggregatedObject.submission.sourceChanges[0].submitter.name}"
               }
 
         }
