@@ -2,9 +2,6 @@ import org.jenkinsci.plugins.workflow.steps.FlowInterruptedException
 
 node{
 
-
-
-
   // ######### NOTES & INFORMATION & WARNINGS ##############################################################################
   //
   // OBS change dir in containers not working, so fetching scm in containers is required. Stash/unstash dir() not working..
@@ -338,7 +335,28 @@ try {
 
 } catch (FlowInterruptedException interruptEx) {
 
-        // Send EiffelActivityCanceledEvent
+
+        // EiffelActivityCanceledEvent
+         def json_ActC = """{
+                              "meta.source.domainId":"${DOMAIN_ID}",
+                              "meta.source.host":"${HOST_NAME}",
+                              "meta.source.name":"${SOURCE_NAME}",
+                              "meta.source.uri":"${jenkins_display_url}",
+                              "data.reason":"Jenkins Job Cancelled",
+                              "data.customData[0]": {"key" : "EI Subscription", "value" : "Subscription XX"},
+                              "links[0]": {"type" : "ACTIVITY_EXECUTION", "target" : "${EiffelActivityStartedEvent_id}"},
+                              "meta.tags":"<%DELETE%>",
+                              "meta.security.sdm":"<%DELETE%>"
+                            }
+                            """
+
+         // Create ActC Event and publish
+         def RESPONSE_ActC = sh(returnStdout: true, script: "curl -H 'Content-Type: application/json' -X POST --data-binary '${json_ActC}' ${EVENT_PARSER_PUB_GEN_URI}EiffelActivityCanceledEvent").trim()
+         sh "echo ${RESPONSE_ActC}"
+         props_ActC = readJSON text: "${RESPONSE_ActC}"
+         if(props_ActC.events[0].status_code != 200){throw new Exception()}
+
+
 
         println "stopped by user:"
         sh "echo ${EiffelActivityStartedEvent_id}"
