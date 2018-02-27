@@ -74,6 +74,8 @@ node{
                              // Create ActT Event and publish
                              def RESPONSE_ActT = sh(returnStdout: true, script: "curl -H 'Content-Type: application/json' -X POST --data-binary '${json_ActT}' ${EVENT_PARSER_PUB_GEN_URI}EiffelActivityTriggeredEvent").trim()
                              sh "echo ${RESPONSE_ActT}"
+                             if(RESPONSE_ActT.status != 200){ throw new Exception() }
+
                              props_ActT = readJSON text: "${RESPONSE_ActT}"
 
 
@@ -94,6 +96,8 @@ node{
                              // Create ActS Event and publish
                              def RESPONSE_ActS = sh(returnStdout: true, script: "curl -H 'Content-Type: application/json' -X POST --data-binary '${json_ActS}' ${EVENT_PARSER_PUB_GEN_URI}EiffelActivityStartedEvent").trim()
                              sh "echo ${RESPONSE_ActS}"
+                             if(RESPONSE_ActS.status != 200){ throw new Exception() }
+
 
 
 
