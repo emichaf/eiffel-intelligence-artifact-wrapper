@@ -33,7 +33,7 @@ string(name: 'mybranch', defaultValue: 'undefined')
 
 
 
-echo "${mybranch}"
+echo "${params.mybranch}"
 
 
 
@@ -50,7 +50,7 @@ echo "${mybranch}"
 
        stage ('GERRIT Wrapper Checkout') {
 
-           echo "Building configuration: ${params.PARAM1}"
+           echo "Building configuration: ${params.mybranch}"
 
               dir ('wrapper') {
 
