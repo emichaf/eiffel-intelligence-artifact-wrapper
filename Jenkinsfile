@@ -32,7 +32,7 @@ node{
      String build_info_file = 'build_info.yml'
 
 
-     properties([parameters([string(name: "jsonparameters", defaultValue: "undefined")])])
+     properties([parameters([string(name: "mybranch", defaultValue: "undefined")])])
 
 
 
@@ -68,7 +68,7 @@ node{
                             sh "ls"
                             sh "ls src"
 
-props_json_params = readJSON text: "${params.jsonparameters}"
+                             props_json_params = readJSON text: "${params.mybranch}"
 
                             //sh "echo ${props_scc._id}"
                             sh "echo ${props_json_params.aggregatedObject.submission.sourceChanges[0].eventId}"
