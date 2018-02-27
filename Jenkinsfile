@@ -67,7 +67,7 @@ node{
                                                  "data.executionType": "AUTOMATED",
                                                  "data.customData[0]": {"key" : "EI Subscription", "value" : "Subscription XX"},
                                                  "links[0]": {"type" : "CAUSE", "target" : "${props_json_params.aggregatedObject.submission.sourceChanges[0].eventId}"},
-                                                 "meta.tags":"<%DELETE%>",
+                                                 "metax.tags":"<%DELETE%>",
                                                  "meta.security.sdm":"<%DELETE%>"
                                                }"""
 
