@@ -26,17 +26,13 @@ node{
 
 
 properties([
-  parameters([
-    string(name: 'PARAM1', defaultValue: '', description: 'The target environment')
-   ])
+parameters([
+string(name: 'VAR_FOO', defaultValue: 'undefined')
+
+])
 ])
 
-
-
-//
-//echo "${PARAM1}"
-//echo "${PARAM2}"
-//echo "${_id}"
+echo "{$VAR_FOO}
 
 
 
