@@ -69,15 +69,17 @@ properties([parameters([string(name: "mybranch2", defaultValue: "undefined")])])
 
                            // Posta hela , eller fråga EI om aggregerade objectet via curl mot EI query
                            // def RESPONSE_SCC = sh(returnStdout: true, script: "curl -H 'Content-Type: application/json' -X POST --data-binary '${json_scc}' ${EVENT_PARSER_PUB_GEN_URI}EiffelSourceChangeCreatedEvent").trim()
-
-                           // {"_id" : "788d642f-572d-4232-84fe-6a1a246e2288"}
+                           //sh "echo ${RESPONSE_SCC}"
 
                             echo "Building configuration: ${params.mybranch2}"
 
                             props_scc = readJSON text: "${params.mybranch2}"
 
-                            //sh "echo ${RESPONSE_SCC}"
+
                             sh "echo ${props_scc._id}"
+                            sh "echo ${props_scc.aggregatedObject.submission.sourceChanges.eventId}"
+                            sh "echo ${props_scc.aggregatedObject.submission.sourceChanges.gitIdentifier.commitId}"
+                            sh "echo ${props_scc.aggregatedObject.submission.sourceChanges.svnIdentifier.submitter.name}"
               }
 
         }
