@@ -28,7 +28,7 @@ node{
      String build_info_file = 'build_info.yml'
 
      properties([parameters([string(name: "jsonparams", defaultValue: "undefined")])])
-
+     String props_json_params = readJSON text: "${params.jsonparams}"
 
  docker.withServer("$DOCKER_HOST", 'remote_docker_host') {
 
@@ -71,12 +71,12 @@ node{
 
                             //echo "Building configuration: ${params.mybranch2}"
 
-                            props_json = readJSON text: "${params.jsonparams}"
+
 
                             //sh "echo ${props_scc._id}"
-                            sh "echo ${props_json.aggregatedObject.submission.sourceChanges[0].eventId}"
-                            sh "echo ${props_json.aggregatedObject.submission.sourceChanges[0].gitIdentifier.commitId}"
-                            sh "echo ${props_json.aggregatedObject.submission.sourceChanges[0].submitter.name}"
+                            sh "echo ${props_json_params.aggregatedObject.submission.sourceChanges[0].eventId}"
+                            sh "echo ${props_json_params.aggregatedObject.submission.sourceChanges[0].gitIdentifier.commitId}"
+                            sh "echo ${props_json_params.aggregatedObject.submission.sourceChanges[0].submitter.name}"
               }
 
         }
