@@ -89,7 +89,7 @@ node{
                                                   "links[0]": {"type" : "ACTIVITY_EXECUTION", "target" : "${props_ActT.events[0].id}"},
                                                   "meta.tags":"<%DELETE%>",
                                                   "meta.security.sdm":"<%DELETE%>",
-                                                  "data.liveLogs[0]:"<%DELETE%>"
+                                                  "data.liveLogs[0]":"<%DELETE%>"
                                                 }"""
 
                              // Create ActS Event and publish
