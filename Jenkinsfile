@@ -27,9 +27,8 @@ node{
      String SONARQUBE_LOGIN_TOKEN = "8829c73e-19b0-4f77-b74c-e112bbacd4d5"
      String build_info_file = 'build_info.yml'
 
-properties([parameters([string(name: "mybranch2", defaultValue: "undefined")])])
+properties([parameters([string(name: "mybranch2.test[0].id", defaultValue: "undefined")])])
 
-//println "${params.mybranch2}"
 
 
 
@@ -46,11 +45,7 @@ properties([parameters([string(name: "mybranch2", defaultValue: "undefined")])])
 
        stage ('GERRIT Wrapper Checkout') {
 
-            println "${params.mybranch2}"
-
-           echo "Building configuration: ${params.mybranch2}"
-
-              dir ('wrapper') {
+           dir ('wrapper') {
 
 
 
@@ -70,9 +65,9 @@ properties([parameters([string(name: "mybranch2", defaultValue: "undefined")])])
                             sh "ls src"
 
 
-                            sh "echo ${params.mybranch2}"
 
-                            echo "Building configuration: ${params.mybranch2}"
+
+                            echo "Building configuration: ${params.mybranch2.test[0].id}"
               }
 
         }
