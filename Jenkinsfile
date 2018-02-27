@@ -110,7 +110,7 @@ try {
                              if(props_ActS.events[0].status_code != 200){throw new Exception()}
 
 
-throw new Exception()
+                             error()
 
            dir ('wrapper') {
 
@@ -366,7 +366,7 @@ throw new Exception()
          OUTCOME_CONCLUSION = "ABORTED"
 
          // Throw
-         error()
+         throw interruptEx
 
 } catch (err) {
 
