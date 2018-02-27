@@ -368,6 +368,12 @@ throw new Exception()
          // Throw
          throw interruptEx
 
+} catch (err) {
+
+ println "fricken"
+ echo "Caught: ${err}"
+
+
 } finally {
 
 
