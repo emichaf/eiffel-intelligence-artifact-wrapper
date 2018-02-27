@@ -62,7 +62,7 @@ node{
                                                  "meta.source.domainId":"${DOMAIN_ID}",
                                                  "meta.source.host":"${HOST_NAME}",
                                                  "meta.source.name":"${SOURCE_NAME}",
-                                                 "meta.source.uri":"${jenkins_display_url}"
+                                                 "meta.source.uri":"${jenkins_display_url}",
                                                  "data.name":"Eiffel Intelligence Artifact Backend Component Build started ",
                                                  "data.categories[0]":"System Eiffel 2.0 Component Eiffel Intelligence Artifact Backend Build",
                                                  "data.triggers[0]":{"type": "SOURCE_CHANGE", "description": "EI Artifact Aggregation Subscription Trigger"},
