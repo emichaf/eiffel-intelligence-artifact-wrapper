@@ -1,6 +1,6 @@
 node{
 
-
+try {
 
 
   // ######### NOTES & INFORMATION & WARNINGS ##############################################################################
@@ -328,6 +328,12 @@ node{
          step([$class: 'WsCleanup'])
 
  } //  docker.withServer(...
+
+} catch (FlowInterruptedException interruptEx) {
+        println "stopped by user"
+        throw interruptEx
+
+}
 
 } // node
 
