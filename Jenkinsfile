@@ -28,9 +28,8 @@ node{
      String build_info_file = 'build_info.yml'
 
 properties([parameters([string(name: "mybranch2", defaultValue: "undefined")])])
-println "${params.myparam}"
 
-//echo "${params.mybranch}"
+println "${params.mybranch2}"
 
 
 
@@ -47,7 +46,6 @@ println "${params.myparam}"
 
        stage ('GERRIT Wrapper Checkout') {
 
-//properties([parameters([string(name: "mybranch2", defaultValue: "undefined")])])
 
 
            echo "Building configuration: ${params.mybranch2}"
