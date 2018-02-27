@@ -50,10 +50,11 @@ node{
 
      ------------------------------------------------------------------------------------------*/
 
+
+
+
+
        stage ('GERRIT Wrapper Checkout') {
-
-           dir ('wrapper') {
-
 
                             // EiffelActivityTriggeredEvent
                              def json_ActT = """{
@@ -97,6 +98,10 @@ node{
                              sh "echo ${RESPONSE_ActS}"
                              props_ActS = readJSON text: "${RESPONSE_ActS}"
                              if(props_ActS.events[0].status_code != 200){throw new Exception()}
+
+
+
+           dir ('wrapper') {
 
 
                             git branch: "master", url: "$WRAPPER_REPO"
