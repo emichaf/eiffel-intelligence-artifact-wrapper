@@ -370,11 +370,7 @@ try {
 
 } catch (err) {
 
-
- OUTCOME_CONCLUSION = "FAILED"
- println "fricken"
- echo "Caught: ${err}"
-
+        OUTCOME_CONCLUSION = "FAILED"
 
 } finally {
 
