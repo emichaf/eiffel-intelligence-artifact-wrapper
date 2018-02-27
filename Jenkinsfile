@@ -14,10 +14,6 @@ node{
   // ######### NOTES & INFORMATION & WARNINGS ##############################################################################
 
 
-     properties([parameters([string(name: "jsonparameters", defaultValue: "undefined")])])
-
-
-
      // Post Aggregated id, and fetch object via curl in EI persistent storage
      // def RESPONSE_SCC = sh(returnStdout: true, script: "curl -H 'Content-Type: application/json' -X GET --data-binary '${json_scc}' ${EVENT_PARSER_PUB_GEN_URI}EiffelSourceChangeCreatedEvent").trim()
      //sh "echo ${RESPONSE_SCC}"
@@ -36,6 +32,7 @@ node{
      String build_info_file = 'build_info.yml'
 
 
+     properties([parameters([string(name: "jsonparameters", defaultValue: "undefined")])])
 
 
 
