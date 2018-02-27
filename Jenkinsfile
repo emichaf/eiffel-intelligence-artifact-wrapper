@@ -27,7 +27,7 @@ node{
      String SONARQUBE_LOGIN_TOKEN = "8829c73e-19b0-4f77-b74c-e112bbacd4d5"
      String build_info_file = 'build_info.yml'
 
-     properties([parameters([string(name: "jsonparams", defaultValue: "undefined")])])
+     properties([parameters([string(name: "myjsonparams", defaultValue: "undefined")])])
 
 
  docker.withServer("$DOCKER_HOST", 'remote_docker_host') {
@@ -71,7 +71,7 @@ node{
 
                             //echo "Building configuration: ${params.mybranch2}"
 
-                            props_json = readJSON text: "${params.jsonparams}"
+                            props_json = readJSON text: "${params.myjsonparams}"
 
                             //sh "echo ${props_scc._id}"
                             sh "echo ${props_json.aggregatedObject.submission.sourceChanges[0].eventId}"
