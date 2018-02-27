@@ -67,7 +67,7 @@ node{
                                                  "data.executionType": "AUTOMATED",
                                                  "data.customData[0]": {"key" : "EI Subscription", "value" : "Subscription XX"},
                                                  "links[0]": {"type" : "CAUSE", "target" : "${props_json_params.aggregatedObject.submission.sourceChanges[0].eventId}"},
-                                                 "meta.tags":"<%DELETE%>",
+                                                 "metax.tags":"<%DELETE%>",
                                                  "meta.security.sdm":"<%DELETE%>"
                                                }"""
 
@@ -88,7 +88,7 @@ node{
                                                   "data.executionUri":"${jenkins_display_url}",
                                                   "data.customData[0]": {"key" : "EI Subscription", "value" : "Subscription XX"},
                                                   "links[0]": {"type" : "ACTIVITY_EXECUTION", "target" : "${props_ActT.events[0].id}"},
-                                                  "metax.tags":"<%DELETE%>",
+                                                  "meta.tags":"<%DELETE%>",
                                                   "meta.security.sdm":"<%DELETE%>",
                                                   data.liveLogs[0]:"<%DELETE%>"
                                                 }"""
