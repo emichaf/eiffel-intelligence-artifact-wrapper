@@ -332,7 +332,11 @@ try {
  } //  docker.withServer(...
 
 } catch (FlowInterruptedException interruptEx) {
-        println "stopped by user"
+
+        // Send EiffelActivityCanceledEvent
+
+        println "stopped by user:"
+        sh "echo ${RESPONSE_ActT}"
         throw interruptEx
 
 }
