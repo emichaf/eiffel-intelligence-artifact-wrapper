@@ -226,6 +226,8 @@ try {
                 }
 
 */
+
+/*
                 stage('Compile') {
 
                       sh "pwd"
