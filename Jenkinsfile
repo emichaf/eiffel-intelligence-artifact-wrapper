@@ -235,7 +235,7 @@ try {
                       //sh 'mvn clean package -DskipTests'
                       //sh "${BUILD_COMMAND}"
 
-                      sh 'ls target'
+                     // sh 'ls target'
 
                 }
 /*
