@@ -2,7 +2,7 @@ import org.jenkinsci.plugins.workflow.steps.FlowInterruptedException
 
 node{
 
-build job: 'job2',
+
     parameters: [
         [
          $class: 'LabelParameterValue',
