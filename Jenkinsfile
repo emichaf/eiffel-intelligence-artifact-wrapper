@@ -302,13 +302,38 @@ try {
                         if(props_TCT.events[0].status_code != 200){throw new Exception()}
 
 
+                        // EiffelTestCaseStartedEvent
+                        def json_TCS = """{
+                                           "meta.source.domainId":"${DOMAIN_ID}",
+                                           "meta.source.host":"${HOST_NAME}",
+                                           "meta.source.name":"${SOURCE_NAME}",
+                                           "meta.source.uri":"${JENKINS_DISPLAY_URL}",
+                                           "data.executor":"Maven Unit & Flow Tests",
+                                           "data.liveLogs[0]":{"name" : "Jenkins", "uri" : "${JENKINS_JOB_CONSOLE_URL}"},
+                                           "links[0]": {"type" : "TEST_CASE_EXECUTION", "target" : "${props_TCT.events[0].id}"},
+                                           "meta.tags":"<%DELETE%>",
+                                           "meta.security":"<%DELETE%>",
+                                           "data.customData":"<%DELETE%>"
+                                         }"""
+
+
+
+                        // Create TCS Event and publish
+                        def RESPONSE_TCS = sh(returnStdout: true, script: "curl -H 'Content-Type: application/json' -X POST --data-binary '${json_TCS}' ${EVENT_PARSER_PUB_GEN_URI}EiffelTestCaseStartedEvent").trim()
+                        sh "echo ${RESPONSE_TCS}"
+                        props_TCS = readJSON text: "${RESPONSE_TCS}"
+                        if(props_TCS.events[0].status_code != 200){throw new Exception()}
+
+
+
                       // Execute tests (steps) in travis file, ie same file which is used in travis build (open source)
                       travis_datas.script.each { item ->
-                              sh "$item"
+                         //     sh "$item"
                       };
 
                       sh "ls"
                       sh "ls target"
+
 
 
 
