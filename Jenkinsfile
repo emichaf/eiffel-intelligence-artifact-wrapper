@@ -278,8 +278,7 @@ try {
                         def travis_datas = readYaml file: ".travis.yml"
 
                         def travis_text = readFile file: ".travis.yml"
-
-                        travis_text = "${travis_text}".replaceAll("\"","'")
+                        travis_text = "${travis_text}".replaceAll("\"","'").replaceAll(":",";")
 
                         // EiffelTestCaseTriggeredEvent
                         def json_TCT = """{
@@ -432,6 +431,8 @@ try {
          step([$class: 'WsCleanup'])
 
  } //  docker.withServer(...
+
+currentBuild.result = 'SUCCESS'
 
 } catch (FlowInterruptedException interruptEx) {
 
