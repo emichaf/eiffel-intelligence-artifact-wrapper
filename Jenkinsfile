@@ -2,6 +2,16 @@ import org.jenkinsci.plugins.workflow.steps.FlowInterruptedException
 
 node{
 
+build job: 'job2',
+    parameters: [
+        [
+         $class: 'LabelParameterValue',
+           name: 'NODE_NAME',
+
+          label: 'label1'
+        ]
+    ]
+
   // ######### NOTES & INFORMATION & WARNINGS ##############################################################################
   //
   // OBS change dir in containers not working, so fetching scm in containers is required. Stash/unstash dir() not working..
