@@ -224,9 +224,8 @@ try {
 
 
                 }
+
 */
-
-
                 stage('Compile') {
 
                       sh "pwd"
@@ -234,15 +233,15 @@ try {
                       sh "ls src"
 
                       //sh 'mvn clean package -DskipTests'
-                      sh "${BUILD_COMMAND"}"
+                      sh "${BUILD_COMMAND}"
 
                       //sh 'docker ps'
                       //sh 'docker-compose'
                       sh 'ls target'
 
                 }
-
 /*
+
 stage('Compile') {
 
 
