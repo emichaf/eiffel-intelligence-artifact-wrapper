@@ -242,39 +242,39 @@ try {
                 }
 */
 
-         stage('Compile') {
+             stage('Compile') {
 
 
-         // EiffelArtifactCreatedEvent
-          def json_ArtC = """{
-                               "meta.source.domainId":"${DOMAIN_ID}",
-                               "meta.source.host":"${HOST_NAME}",
-                               "meta.source.name":"${SOURCE_NAME}",
-                               "meta.source.uri":"${JENKINS_DISPLAY_URL}",
-                               "data.gav":{"groupId" : "${POM.groupId}", "artifactId" : "${POM.artifactId}", "version" : "${POM.version}"},
-                               "data.fileInformation[0]":{"classifier" : "my_data.fileInformation[0].classifier", "extension" : "my_data.fileInformation[0].extension"},
-                               "data.buildCommand": "${BUILD_COMMAND}",
-                               "data.requiresImplementation": "NONE",
-                               "data.name" : "System Eiffel 2.0 Component Eiffel Intelligence Artifact Backend",
-                               "links[0]": {"type" : "CONTEXT", "target" : "${EiffelActivityTriggeredEvent_id}"},
-                               "meta.tags":"<%DELETE%>",
-                               "meta.security.sdm":"<%DELETE%>",
-                               "data.dependsOn[0]" :"<%DELETE%>",
-                               "data.implements[0]" :"<%DELETE%>",
-                               "data.customData[0]":"<%DELETE%>"
-                             }"""
+             // EiffelArtifactCreatedEvent
+              def json_ArtC = """{
+                                   "meta.source.domainId":"${DOMAIN_ID}",
+                                   "meta.source.host":"${HOST_NAME}",
+                                   "meta.source.name":"${SOURCE_NAME}",
+                                   "meta.source.uri":"${JENKINS_DISPLAY_URL}",
+                                   "data.gav":{"groupId" : "${POM.groupId}", "artifactId" : "${POM.artifactId}", "version" : "${POM.version}"},
+                                   "data.fileInformation[0]":{"classifier" : "my_data.fileInformation[0].classifier", "extension" : "my_data.fileInformation[0].extension"},
+                                   "data.buildCommand": "${BUILD_COMMAND}",
+                                   "data.requiresImplementation": "NONE",
+                                   "data.name" : "System Eiffel 2.0 Component Eiffel Intelligence Artifact Backend",
+                                   "links[0]": {"type" : "CONTEXT", "target" : "${EiffelActivityTriggeredEvent_id}"},
+                                   "meta.tags":"<%DELETE%>",
+                                   "meta.security.sdm":"<%DELETE%>",
+                                   "data.dependsOn[0]" :"<%DELETE%>",
+                                   "data.implements[0]" :"<%DELETE%>",
+                                   "data.customData[0]":"<%DELETE%>"
+                                 }"""
 
-          // Create ArtC Event and publish
-          def RESPONSE_ArtC = sh(returnStdout: true, script: "curl -H 'Content-Type: application/json' -X POST --data-binary '${json_ArtC}' ${EVENT_PARSER_PUB_GEN_URI}EiffelArtifactCreatedEvent").trim()
-          sh "echo ${RESPONSE_ArtC}"
-          props_ArtC = readJSON text: "${RESPONSE_ArtC}"
-          if(props_ArtC.events[0].status_code != 200){throw new Exception()}
-
-
-
-          }
+              // Create ArtC Event and publish
+              def RESPONSE_ArtC = sh(returnStdout: true, script: "curl -H 'Content-Type: application/json' -X POST --data-binary '${json_ArtC}' ${EVENT_PARSER_PUB_GEN_URI}EiffelArtifactCreatedEvent").trim()
+              sh "echo ${RESPONSE_ArtC}"
+              props_ArtC = readJSON text: "${RESPONSE_ArtC}"
+              if(props_ArtC.events[0].status_code != 200){throw new Exception()}
 
 
+
+              }
+
+/*
                 stage('UnitTests & FlowTests with TestDoubles)') {
                       // OBS privileged: true for image for embedded mongodb (flapdoodle) to work
                       // and glibc in image!
