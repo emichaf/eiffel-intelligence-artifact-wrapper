@@ -329,7 +329,7 @@ try {
                         if(props_TCS.events[0].status_code != 200){throw new Exception()}
 
 
-                      def travis_datas = readYaml file: ".travis.yml"
+
                       // Execute tests (steps) in travis file, ie same file which is used in travis build (open source)
                       travis_datas.script.each { item ->
                          //     sh "$item"
