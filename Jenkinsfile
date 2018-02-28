@@ -51,7 +51,7 @@ node{
      // Test NodeLabel Parameter Plugin
 
 properties(
-parameters: [
+[parameters: [
         [
          $class: 'LabelParameterValue',
            name: 'NODE_NAME',
@@ -59,6 +59,7 @@ parameters: [
           label: 'label1'
         ]
     ]
+ ]
 )
 
 try {
