@@ -227,23 +227,17 @@ try {
 
 */
 
-/*
-                stage('Compile') {
+
+
+             stage('Compile') {
 
                       sh "pwd"
                       sh "ls"
                       sh "ls src"
 
-                      //sh 'mvn clean package -DskipTests'
-                      //sh "${BUILD_COMMAND}"
+                      sh "${BUILD_COMMAND}"
 
-                     // sh 'ls target'
-
-                }
-*/
-
-             stage('Compile') {
-
+                      // sh 'ls target'
 
              // EiffelArtifactCreatedEvent
               def json_ArtC = """{
@@ -252,7 +246,7 @@ try {
                                    "meta.source.name":"${SOURCE_NAME}",
                                    "meta.source.uri":"${JENKINS_DISPLAY_URL}",
                                    "data.gav":{"groupId" : "${POM.groupId}", "artifactId" : "${POM.artifactId}", "version" : "${POM.version}"},
-                                   "data.fileInformation[0]":{"classifier" : "my_data.fileInformation[0].classifier", "extension" : "my_data.fileInformation[0].extension"},
+                                   "data.fileInformation[0]":{"classifier" : "", "extension" : "jar"},
                                    "data.buildCommand": "${BUILD_COMMAND}",
                                    "data.requiresImplementation": "NONE",
                                    "data.name" : "System Eiffel 2.0 Component Eiffel Intelligence Artifact Backend",
