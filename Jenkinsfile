@@ -35,6 +35,7 @@ node{
      String JENKINS_JOB_CONSOLE_URL = "${JENKINS_DISPLAY_URL}".replaceAll("display/redirect","console")
 
      String EiffelActivityTriggeredEvent_id
+     String EiffelArtifactCreatedEvent_id
 
      String OUTCOME_CONCLUSION
 
@@ -217,13 +218,13 @@ try {
 
 
 /*
-                stage('SonarQube Code Analysis') {
+             stage('SonarQube Code Analysis') {
 
                    //sh 'mvn sonar:sonar -Dsonar.host.url=https://sonarqube.lmera.ericsson.se'
                  //  sh "mvn sonar:sonar -Dsonar.host.url=http://docker104-eiffel999.lmera.ericsson.se:9000 -Dsonar.login=$SONARQUBE_LOGIN_TOKEN"
 
 
-                }
+             }
 
 */
 
@@ -235,7 +236,7 @@ try {
                       sh "ls"
                       sh "ls src"
 
-                      sh "${BUILD_COMMAND}"
+                      //sh "${BUILD_COMMAND}"
 
                       // sh 'ls target'
 
@@ -264,16 +265,42 @@ try {
               props_ArtC = readJSON text: "${RESPONSE_ArtC}"
               if(props_ArtC.events[0].status_code != 200){throw new Exception()}
 
+              EiffelArtifactCreatedEvent_id = = "${props_ArtC.events[0].id}"
 
 
               }
 
-/*
-                stage('UnitTests & FlowTests with TestDoubles)') {
+
+              stage('UnitTests & FlowTests with TestDoubles)') {
                       // OBS privileged: true for image for embedded mongodb (flapdoodle) to work
                       // and glibc in image!
 
                       def travis_datas = readYaml file: ".travis.yml"
+
+                        // EiffelTestCaseTriggeredEvent
+                        def json_TCT = """{
+                                           "meta.source.domainId":"${DOMAIN_ID}",
+                                           "meta.source.host":"${HOST_NAME}",
+                                           "meta.source.name":"${SOURCE_NAME}",
+                                           "meta.source.uri":"${JENKINS_DISPLAY_URL}",
+                                           "data.testCase":{"tracker" : "", "id" : "Unit & Flow Tests", "uri" : "", "version" : ""},
+                                           "data.triggers[0]":{"type" : "OTHER", "description" : "Artifact Created Start Unit & Flow Tests"},
+                                           "data.executionType":"AUTOMATED",
+                                           "data.parameters[0]":{"name" : "Travis File" : "${travis_datas}"},
+                                           "links[0]": {"type" : "IUT", "target" : "${EiffelArtifactCreatedEvent_id}"},
+                                           "meta.tags":"<%DELETE%>",
+                                           "meta.security":"<%DELETE%>",
+                                           "data.recipeId":"<%DELETE%>",
+                                           "data.customData":"<%DELETE%>",
+                                           "data.parameters":"<%DELETE%>"
+                                         }"""
+
+                        // Create TCT Event and publish
+                        def RESPONSE_TCT = sh(returnStdout: true, script: "curl -H 'Content-Type: application/json' -X POST --data-binary '${json_TCT}' ${EVENT_PARSER_PUB_GEN_URI}EiffelTestCaseTriggeredEvent").trim()
+                        sh "echo ${RESPONSE_TCT}"
+                        props_TCT = readJSON text: "${RESPONSE_TCT}"
+                        if(props_TCT.events[0].status_code != 200){throw new Exception()}
+
 
                       // Execute tests (steps) in travis file, ie same file which is used in travis build (open source)
                       travis_datas.script.each { item ->
@@ -282,10 +309,17 @@ try {
 
                       sh "ls"
                       sh "ls target"
-                }
-*/
 
-                stage('Publish Artifact ARM -> JAR)') {
+
+
+
+
+              }
+
+
+
+
+              stage('Publish Artifact ARM -> JAR)') {
 
                        withCredentials([[$class: 'UsernamePasswordMultiBinding',
                                               credentialsId: 'NEXUS_CREDENTIALS_EIFFEL_NEXUS_EXTENSION',
