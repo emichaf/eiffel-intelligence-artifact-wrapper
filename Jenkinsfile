@@ -275,7 +275,7 @@ try {
                       // OBS privileged: true for image for embedded mongodb (flapdoodle) to work
                       // and glibc in image!
 
-                      def travis_datas = readYaml file: ".travis.yml"
+                        def travis_datas = readYaml file: ".travis.yml"
 
                         // EiffelTestCaseTriggeredEvent
                         def json_TCT = """{
@@ -286,7 +286,7 @@ try {
                                            "data.testCase":{"tracker" : "", "id" : "Unit & Flow Tests", "uri" : "", "version" : ""},
                                            "data.triggers[0]":{"type" : "OTHER", "description" : "Artifact Created Start Unit & Flow Tests"},
                                            "data.executionType":"AUTOMATED",
-                                           "data.parameters[0]":{"name" : "Travis File" : "${travis_datas}"},
+                                           "data.parameters[0]":{"name" : "Travis File" : "${travis_datas.replaAll("\"","\\"")}"},
                                            "links[0]": {"type" : "IUT", "target" : "${EiffelArtifactCreatedEvent_id}"},
                                            "meta.tags":"<%DELETE%>",
                                            "meta.security":"<%DELETE%>",
@@ -325,7 +325,7 @@ try {
                         if(props_TCS.events[0].status_code != 200){throw new Exception()}
 
 
-
+                      def travis_datas = readYaml file: ".travis.yml"
                       // Execute tests (steps) in travis file, ie same file which is used in travis build (open source)
                       travis_datas.script.each { item ->
                          //     sh "$item"
