@@ -49,18 +49,8 @@ node{
      def props_json_params = readJSON text: "${params.jsonparams}"
 
      // Test NodeLabel Parameter Plugin
+     properties([parameters([$class: 'LabelParameterValue'(name: "NODE_NAME", label: "label1")])])
 
-properties(
-[parameters: [
-        [
-         $class: 'LabelParameterValue',
-           name: 'NODE_NAME',
-
-          label: 'label1'
-        ]
-    ]
- ]
-)
 
 try {
 
