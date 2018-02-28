@@ -262,7 +262,7 @@ stage('Compile') {
                                "meta.source.host":"${HOST_NAME}",
                                "meta.source.name":"${SOURCE_NAME}",
                                "meta.source.uri":"${JENKINS_DISPLAY_URL}",
-                               "data.gav":{"groupId" : "${POM.groupId}", "artifactId" : "${POM.artifactId}", "version" : "${POM.version}",
+                               "data.gav":{"groupId" : "${POM.groupId}", "artifactId" : "${POM.artifactId}", "version" : "${POM.version}"},
                                "data.fileInformation[0]":{"classifier" : "my_data.fileInformation[0].classifier", "extension" : "my_data.fileInformation[0].extension"},
                                "data.buildCommand": "${BUILD_COMMAND}",
                                "data.requiresImplementation": "NONE",
@@ -275,7 +275,7 @@ stage('Compile') {
                                "data.customData[0]":"<%DELETE%>"
                              }"""
 
-          // Create ActS Event and publish
+          // Create ArtC Event and publish
           def RESPONSE_ArtC = sh(returnStdout: true, script: "curl -H 'Content-Type: application/json' -X POST --data-binary '${json_ArtC}' ${EVENT_PARSER_PUB_GEN_URI}EiffelArtifactCreatedEvent").trim()
           sh "echo ${RESPONSE_ArtC}"
           props_ArtC = readJSON text: "${RESPONSE_ArtC}"
