@@ -3,14 +3,7 @@ import org.jenkinsci.plugins.workflow.steps.FlowInterruptedException
 node{
 
 
-    parameters: [
-        [
-         $class: 'LabelParameterValue',
-           name: 'NODE_NAME',
 
-          label: 'label1'
-        ]
-    ]
 
   // ######### NOTES & INFORMATION & WARNINGS ##############################################################################
   //
@@ -55,6 +48,18 @@ node{
      properties([parameters([string(name: "jsonparams", defaultValue: "undefined")])])
      def props_json_params = readJSON text: "${params.jsonparams}"
 
+     // Test NodeLabel Parameter Plugin
+
+properties(
+parameters: [
+        [
+         $class: 'LabelParameterValue',
+           name: 'NODE_NAME',
+
+          label: 'label1'
+        ]
+    ]
+)
 
 try {
 
