@@ -334,7 +334,7 @@ try {
                         };
 
                         sh "ls"
-                        sh "ls target"
+                        //sh "ls target"
 
 
                         // EiffelTestCaseFinishedEvent
