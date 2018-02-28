@@ -38,7 +38,7 @@ node{
 
      String OUTCOME_CONCLUSION
 
-     String BUILD_COMMAND = 'mvn clean package -DskipTests'
+     String BUILD_COMMAND = "mvn clean package -DskipTests"
 
      // OBS if changing params in properties, job needs to be re-imported
      properties([parameters([string(name: "jsonparams", defaultValue: "undefined")])])
@@ -264,7 +264,7 @@ stage('Compile') {
                                "meta.source.uri":"${JENKINS_DISPLAY_URL}",
                                "data.gav":{"groupId" : "${POM.groupId}", "artifactId" : "${POM.artifactId}", "version" : "${POM.version}",
                                "data.fileInformation[0]":{"classifier" : "my_data.fileInformation[0].classifier", "extension" : "my_data.fileInformation[0].extension"},
-                               "data.buildCommand": "${BUILD_COMMAND"}",
+                               "data.buildCommand": "${BUILD_COMMAND}",
                                "data.requiresImplementation": "NONE",
                                "data.name" : "System Eiffel 2.0 Component Eiffel Intelligence Artifact Backend",
                                "links[0]": {"type" : "CONTEXT", "target" : "${EiffelActivityTriggeredEvent_id}"},
