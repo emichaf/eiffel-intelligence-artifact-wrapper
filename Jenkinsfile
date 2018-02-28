@@ -265,7 +265,7 @@ try {
               props_ArtC = readJSON text: "${RESPONSE_ArtC}"
               if(props_ArtC.events[0].status_code != 200){throw new Exception()}
 
-              EiffelArtifactCreatedEvent_id = = "${props_ArtC.events[0].id}"
+              EiffelArtifactCreatedEvent_id = "${props_ArtC.events[0].id}"
 
 
               }
