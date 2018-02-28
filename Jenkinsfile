@@ -277,7 +277,9 @@ try {
 
                         def travis_datas = readYaml file: ".travis.yml"
 
-                        def travis = "${travis_datas}".replaceAll("\"","\\"")
+                        def travis_text = readFile file: ".travis.yml"
+
+                        travis_text = "${travis_text}".replaceAll("\"","\\"")
 
                         // EiffelTestCaseTriggeredEvent
                         def json_TCT = """{
