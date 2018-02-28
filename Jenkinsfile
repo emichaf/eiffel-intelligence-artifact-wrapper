@@ -258,10 +258,10 @@ try {
                                    "data.name" : "System Eiffel 2.0 Component Eiffel Intelligence Artifact Backend",
                                    "links[0]": {"type" : "CONTEXT", "target" : "${EiffelActivityTriggeredEvent_id}"},
                                    "meta.tags":"<%DELETE%>",
-                                   "meta.security.sdm":"<%DELETE%>",
-                                   "data.dependsOn[0]" :"<%DELETE%>",
-                                   "data.implements[0]" :"<%DELETE%>",
-                                   "data.customData[0]":"<%DELETE%>"
+                                   "meta.security":"<%DELETE%>",
+                                   "data.dependsOn" :"<%DELETE%>",
+                                   "data.implements" :"<%DELETE%>",
+                                   "data.customData":"<%DELETE%>"
                                  }"""
 
               // Create ArtC Event and publish
