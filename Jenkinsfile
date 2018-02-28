@@ -277,8 +277,9 @@ try {
 
                         def travis_datas = readYaml file: ".travis.yml"
 
-                        def travis_text = readFile file: ".travis.yml"
-                        travis_text = "${travis_text}".replaceAll("\"","'").replaceAll(":",";")
+                        //def travis_text = readFile file: ".travis.yml"
+                        //travis_text = "${travis_text}".replaceAll("\"","'").replaceAll(":",";")
+                        //"data.parameters[0]":{"name" : "Travis File" : "${travis_text}"},
 
                         // EiffelTestCaseTriggeredEvent
                         def json_TCT = """{
@@ -287,9 +288,8 @@ try {
                                            "meta.source.name":"${SOURCE_NAME}",
                                            "meta.source.uri":"${JENKINS_DISPLAY_URL}",
                                            "data.testCase":{"tracker" : "", "id" : "Unit & Flow Tests", "uri" : "", "version" : ""},
-                                           "data.triggers[0]":{"type" : "OTHER", "description" : "Artifact Created Start Unit & Flow Tests"},
+                                           "data.triggers[0]":{"type" : "OTHER", "description" : "EI Backend Artifact Created Start Unit & Flow Tests"},
                                            "data.executionType":"AUTOMATED",
-                                           "data.parameters[0]":{"name" : "Travis File" : "${travis_text}"},
                                            "links[0]": {"type" : "IUT", "target" : "${EiffelArtifactCreatedEvent_id}"},
                                            "meta.tags":"<%DELETE%>",
                                            "meta.security":"<%DELETE%>",
@@ -328,17 +328,39 @@ try {
                         if(props_TCS.events[0].status_code != 200){throw new Exception()}
 
 
-                      // Execute tests (steps) in travis file, ie same file which is used in travis build (open source)
-                      travis_datas.script.each { item ->
-                         //     sh "$item"
-                      };
+                        // Execute tests (steps) in travis file, ie same file which is used in travis build (open source)
+                        travis_datas.script.each { item ->
+                           //     sh "$item"
+                        };
 
-                      sh "ls"
-                      sh "ls target"
-
-
+                        sh "ls"
+                        sh "ls target"
 
 
+                        // EiffelTestCaseFinishedEvent
+                        def json_TCF = """{
+                                          "meta.source.domainId":"${DOMAIN_ID}",
+                                          "meta.source.host":"${HOST_NAME}",
+                                          "meta.source.name":"${SOURCE_NAME}",
+                                          "meta.source.uri":"${JENKINS_DISPLAY_URL}",
+                                          "data.outcome.verdict": "PASSED",
+                                          "data.outcome.conclusion": "SUCCESSFUL",
+                                          "data.outcome.description": "EI Backend Unit & Flow Tests Passed",
+                                          "data.persistentLogs[0]":{"name" : "data.outcome.persistentLogs[0].name", "uri" : "data.outcome.persistentLogs[0].uri"},
+                                          "links[0]": {"type" : "TEST_CASE_EXECUTION", "target" : "${props_TCT.events[0].id}"},
+                                          "links[1]": {"type" : "CONTEXT", "target" : "${EiffelActivityTriggeredEvent_id}"},
+                                          "meta.tags":"<%DELETE%>",
+                                          "meta.security":"<%DELETE%>",
+                                          "data.customData":"<%DELETE%>",
+                                          "data.outcome.metrics":"<%DELETE%>"
+                                        }"""
+
+
+                        // Create TCF Event and publish
+                        def RESPONSE_TCF = sh(returnStdout: true, script: "curl -H 'Content-Type: application/json' -X POST --data-binary '${json_TCF}' ${EVENT_PARSER_PUB_GEN_URI}EiffelTestCaseFinishedEvent").trim()
+                        sh "echo ${RESPONSE_TCF}"
+                        props_TCF = readJSON text: "${RESPONSE_TCF}"
+                        if(props_TCF.events[0].status_code != 200){throw new Exception()}
 
 
               }
