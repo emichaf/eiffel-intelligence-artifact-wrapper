@@ -236,9 +236,9 @@ try {
                       sh "ls"
                       sh "ls src"
 
-                      //sh "${BUILD_COMMAND}"
+                      sh "${BUILD_COMMAND}"
 
-                      // sh 'ls target'
+                      sh 'ls target'
 
              // EiffelArtifactCreatedEvent
               def json_ArtC = """{
