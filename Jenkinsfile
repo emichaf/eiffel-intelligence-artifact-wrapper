@@ -233,7 +233,7 @@ try {
                       sh "ls src"
 
                       //sh 'mvn clean package -DskipTests'
-                      sh "${BUILD_COMMAND}"
+                      sh "echo ${BUILD_COMMAND}"
 
                       //sh 'docker ps'
                       //sh 'docker-compose'
