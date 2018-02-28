@@ -336,7 +336,7 @@ try {
                         sh "ls"
                         //sh "ls target"
 
-
+/*  Wait for version fix in remrem gen/ semantics  version in template 1.0.0 -> gen requires 1.0.1
                         // EiffelTestCaseFinishedEvent
                         def json_TCF = """{
                                           "meta.source.domainId":"${DOMAIN_ID}",
@@ -361,6 +361,35 @@ try {
                         sh "echo ${RESPONSE_TCF}"
                         props_TCF = readJSON text: "${RESPONSE_TCF}"
                         if(props_TCF.events[0].status_code != 200){throw new Exception()}
+*/
+
+
+                        // EiffelConfidenceLevelModifiedEvent
+                        def json_CLM = """{
+                                            "meta.source.domainId":"${DOMAIN_ID}",
+                                            "meta.source.host":"${HOST_NAME}",
+                                            "meta.source.name":"${SOURCE_NAME}",
+                                            "meta.source.uri":"${JENKINS_DISPLAY_URL}",
+                                            "data.name": "EiBackendComponentStable",
+                                            "data.value": "SUCCESS",
+                                            "links[0]": {"type" : "SUBJECT", "target" : "${EiffelArtifactCreatedEvent_id}"},
+                                            "links[1]": {"type" : "CONTEXT", "target" : "${EiffelActivityTriggeredEvent_id}"},
+                                            "meta.tags":"<%DELETE%>",
+                                            "meta.security":"<%DELETE%>",
+                                            "data.customData":"<%DELETE%>",
+                                            "data.issuer.name":"<%DELETE%>",
+                                            "data.issuer.email":"<%DELETE%>",
+                                            "data.issuer.id":"<%DELETE%>",
+                                            "data.issuer.group":"<%DELETE%>"
+                                          }"""
+
+
+                        // Create CLM Event and publish
+                        def RESPONSE_CLM = sh(returnStdout: true, script: "curl -H 'Content-Type: application/json' -X POST --data-binary '${json_CLM}' ${EVENT_PARSER_PUB_GEN_URI}EiffelConfidenceLevelModifiedEvent").trim()
+                        sh "echo ${RESPONSE_CLM}"
+                        props_CLM = readJSON text: "${RESPONSE_CLM}"
+                        if(props_CLM.events[0].status_code != 200){throw new Exception()}
+
 
 
               }
