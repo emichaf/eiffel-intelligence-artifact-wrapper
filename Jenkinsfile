@@ -242,24 +242,7 @@ try {
                 }
 /*
 
-stage('Compile') {
 
-
-/*   // COMPOSITION ?  ENVIRONMENT  dockerhost, K8S.. etc enc vars ? docker-compose ??
-
-                               "links[0]": {"type" : "COMPOSITION", "target" : "e269b37d-17a1-4a10-aafb-c108735ee51f"},
-                               "links[1]": {"type" : "ENVIRONMENT", "target" : "e269b37d-17a1-4a10-aafb-c108735ee50a"},
-                               "links[2]": {"type" : "PREVIOUS_VERSION", "target" : "e269b37d-17a1-4a10-aafb-c108735ee50a"},
-                               "links[3]": {"type" : "CONTEXT", "target" : "e269b37d-17a1-4a10-aafb-c108735ee50a"},
-                               "links[4]": {"type" : "FLOW_CONTEXT", "target" : "e269b37d-17a1-4a10-aafb-c108735ee48a"},
-
-*/
-
-
-
-
-
-}
 
 
                 stage('UnitTests & FlowTests with TestDoubles)') {
