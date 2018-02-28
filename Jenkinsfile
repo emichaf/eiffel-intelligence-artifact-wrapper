@@ -277,7 +277,7 @@ try {
 
                         def travis_datas = readYaml file: ".travis.yml"
 
-                        def travis_text = readFile file: ".travis.yml"
+                        //def travis_text = readFile file: ".travis.yml"
 
 
 
