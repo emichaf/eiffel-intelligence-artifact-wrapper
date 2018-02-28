@@ -279,7 +279,7 @@ try {
 
                         //def travis_text = readFile file: ".travis.yml"
 
-
+                        travis_text = "${travis_text}".replaceAll("\"","\\"")
 
                         // EiffelTestCaseTriggeredEvent
                         def json_TCT = """{
@@ -290,7 +290,7 @@ try {
                                            "data.testCase":{"tracker" : "", "id" : "Unit & Flow Tests", "uri" : "", "version" : ""},
                                            "data.triggers[0]":{"type" : "OTHER", "description" : "Artifact Created Start Unit & Flow Tests"},
                                            "data.executionType":"AUTOMATED",
-                                           "data.parameters[0]":{"name" : "Travis File" : "hej"},
+                                           "data.parameters[0]":{"name" : "Travis File" : "${travis_text}"},
                                            "links[0]": {"type" : "IUT", "target" : "${EiffelArtifactCreatedEvent_id}"},
                                            "meta.tags":"<%DELETE%>",
                                            "meta.security":"<%DELETE%>",
@@ -327,7 +327,6 @@ try {
                         sh "echo ${RESPONSE_TCS}"
                         props_TCS = readJSON text: "${RESPONSE_TCS}"
                         if(props_TCS.events[0].status_code != 200){throw new Exception()}
-
 
 
                       // Execute tests (steps) in travis file, ie same file which is used in travis build (open source)
