@@ -240,7 +240,7 @@ try {
                      // sh 'ls target'
 
                 }
-/*
+*/
 
          stage('Compile') {
 
