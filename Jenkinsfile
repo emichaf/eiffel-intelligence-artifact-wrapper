@@ -34,8 +34,11 @@ node{
      String JENKINS_DISPLAY_URL = "${RUN_DISPLAY_URL}".replaceAll("unconfigured-jenkins-location","$JENKINS_HOSTNAME"+":"+"${JENKINS_HOSTPORT}")
      String JENKINS_JOB_CONSOLE_URL = "${JENKINS_DISPLAY_URL}".replaceAll("display/redirect","console")
 
-     String EiffelActivityStartedEvent_id
+     String EiffelActivityTriggeredEvent_id
+
      String OUTCOME_CONCLUSION
+
+     String BUILD_COMMAND = "mvn clean package -DskipTests"
 
      // OBS if changing params in properties, job needs to be re-imported
      properties([parameters([string(name: "jsonparams", defaultValue: "undefined")])])
@@ -87,7 +90,7 @@ try {
                              props_ActT = readJSON text: "${RESPONSE_ActT}"
                              if(props_ActT.events[0].status_code != 200){throw new Exception()}
 
-                             EiffelActivityStartedEvent_id = "${props_ActT.events[0].id}"
+                             EiffelActivityTriggeredEvent_id = "${props_ActT.events[0].id}"
 
                             // EiffelActivityStartedEvent
                              def json_ActS = """{
@@ -109,8 +112,8 @@ try {
                              props_ActS = readJSON text: "${RESPONSE_ActS}"
                              if(props_ActS.events[0].status_code != 200){throw new Exception()}
 
-
-                            throw new Exception()
+                             // Test Fault
+                            //throw new Exception()
 
            dir ('wrapper') {
 
@@ -230,7 +233,9 @@ try {
                       sh "ls"
                       sh "ls src"
 
-                      sh 'mvn clean package -DskipTests'
+                      //sh 'mvn clean package -DskipTests'
+                      sh "${BUILD_COMMAND"}"
+
                       //sh 'docker ps'
                       //sh 'docker-compose'
                       sh 'ls target'
@@ -238,6 +243,50 @@ try {
                 }
 
 /*
+stage('Compile') {
+
+
+/*   // COMPOSITION ?  ENVIRONMENT  dockerhost, K8S.. etc enc vars ? docker-compose ??
+
+                               "links[0]": {"type" : "COMPOSITION", "target" : "e269b37d-17a1-4a10-aafb-c108735ee51f"},
+                               "links[1]": {"type" : "ENVIRONMENT", "target" : "e269b37d-17a1-4a10-aafb-c108735ee50a"},
+                               "links[2]": {"type" : "PREVIOUS_VERSION", "target" : "e269b37d-17a1-4a10-aafb-c108735ee50a"},
+                               "links[3]": {"type" : "CONTEXT", "target" : "e269b37d-17a1-4a10-aafb-c108735ee50a"},
+                               "links[4]": {"type" : "FLOW_CONTEXT", "target" : "e269b37d-17a1-4a10-aafb-c108735ee48a"},
+
+*/
+
+
+         // EiffelArtifactCreatedEvent
+          def json_ArtC = """{
+                               "meta.source.domainId":"${DOMAIN_ID}",
+                               "meta.source.host":"${HOST_NAME}",
+                               "meta.source.name":"${SOURCE_NAME}",
+                               "meta.source.uri":"${JENKINS_DISPLAY_URL}",
+                               "data.gav":{"groupId" : "${POM.groupId}", "artifactId" : "${POM.artifactId}", "version" : "${POM.version}",
+                               "data.fileInformation[0]":{"classifier" : "my_data.fileInformation[0].classifier", "extension" : "my_data.fileInformation[0].extension"},
+                               "data.buildCommand": "${BUILD_COMMAND"}",
+                               "data.requiresImplementation": "NONE",
+                               "data.name" : "System Eiffel 2.0 Component Eiffel Intelligence Artifact Backend",
+                               "links[0]": {"type" : "CONTEXT", "target" : "${EiffelActivityTriggeredEvent_id}"},
+                               "meta.tags":"<%DELETE%>",
+                               "meta.security.sdm":"<%DELETE%>",
+                               "data.dependsOn[0]" :"<%DELETE%>",
+                               "data.implements[0]" :"<%DELETE%>",
+                               "data.customData[0]":"<%DELETE%>"
+                             }"""
+
+          // Create ActS Event and publish
+          def RESPONSE_ArtC = sh(returnStdout: true, script: "curl -H 'Content-Type: application/json' -X POST --data-binary '${json_ArtC}' ${EVENT_PARSER_PUB_GEN_URI}EiffelArtifactCreatedEvent").trim()
+          sh "echo ${RESPONSE_ArtC}"
+          props_ArtC = readJSON text: "${RESPONSE_ArtC}"
+          if(props_ArtC.events[0].status_code != 200){throw new Exception()}
+
+
+
+}
+
+
                 stage('UnitTests & FlowTests with TestDoubles)') {
                       // OBS privileged: true for image for embedded mongodb (flapdoodle) to work
                       // and glibc in image!
@@ -351,7 +400,7 @@ try {
                               "meta.source.uri":"${JENKINS_DISPLAY_URL}",
                               "data.reason":"Jenkins Job Cancelled",
                               "data.customData[0]": {"key" : "EI Subscription", "value" : "Subscription XX"},
-                              "links[0]": {"type" : "ACTIVITY_EXECUTION", "target" : "${EiffelActivityStartedEvent_id}"},
+                              "links[0]": {"type" : "ACTIVITY_EXECUTION", "target" : "${EiffelActivityTriggeredEvent_id}"},
                               "meta.tags":"<%DELETE%>",
                               "meta.security.sdm":"<%DELETE%>"
                             }
@@ -385,7 +434,7 @@ try {
                               "data.outcome.description":"Eiffel Intelligence Artifact Backend Component Build ${OUTCOME_CONCLUSION}",
                               "data.customData[0]": {"key" : "EI Subscription", "value" : "Subscription XX"},
                               "data.persistentLogs[0]": {"name" : "Jenkins Console Log", "uri" : "${JENKINS_JOB_CONSOLE_URL}"},
-                              "links[0]": {"type" : "ACTIVITY_EXECUTION", "target" : "${EiffelActivityStartedEvent_id}"},
+                              "links[0]": {"type" : "ACTIVITY_EXECUTION", "target" : "${EiffelActivityTriggeredEvent_id}"},
                               "meta.tags":"<%DELETE%>",
                               "meta.security.sdm":"<%DELETE%>"
                             }
