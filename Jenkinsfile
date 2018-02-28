@@ -457,6 +457,7 @@ try {
          if(props_ActC.events[0].status_code != 200){throw new Exception()}
 
          OUTCOME_CONCLUSION = "ABORTED"
+         currentBuild.result = 'ABORTED'
 
          // Throw
          throw interruptEx
@@ -464,6 +465,7 @@ try {
 } catch (err) {
 
         OUTCOME_CONCLUSION = "FAILED"
+        currentBuild.result = 'FAILURE'
 
 } finally {
 
