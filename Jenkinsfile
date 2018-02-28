@@ -286,7 +286,7 @@ try {
                                            "data.testCase":{"tracker" : "", "id" : "Unit & Flow Tests", "uri" : "", "version" : ""},
                                            "data.triggers[0]":{"type" : "OTHER", "description" : "Artifact Created Start Unit & Flow Tests"},
                                            "data.executionType":"AUTOMATED",
-                                           "data.parameters[0]":{"name" : "Travis File" : "${travis_datas.replaceAll("\"","\\"")}"},
+                                           "data.parameters[0]":{"name" : "Travis File" : "${travis_datas}.replaceAll("\"","\\"")"},
                                            "links[0]": {"type" : "IUT", "target" : "${EiffelArtifactCreatedEvent_id}"},
                                            "meta.tags":"<%DELETE%>",
                                            "meta.security":"<%DELETE%>",
