@@ -19,3 +19,4 @@ stage("Checkout") {
         launchIntegrationTests = userInput['launchIntegrationTests']
         launchBehatTests = userInput['launchBehatTests']
     }
+}
