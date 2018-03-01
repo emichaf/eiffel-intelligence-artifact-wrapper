@@ -2,7 +2,7 @@
 
 stage("Checkout") {
     //milestone 1
-    if (env.BRANCH_NAME == master) {
+    if (env.BRANCH_NAME == 'master') {
         userInput = input(message: 'Launch tests?', parameters: [
             choice(choices: 'yes\nno', description: 'Run unit tests and code style checks', name: 'launchUnitTests'),
             choice(choices: 'yes\nno', description: 'Run integration tests', name: 'launchIntegrationTests'),
@@ -12,11 +12,13 @@ stage("Checkout") {
             choice(choices: '7.1', description: 'PHP version to run behat with', name: 'phpVersion'),
         ])
 
+        /*
         editions = userInput['editions'].tokenize(',')
         features = userInput['features']
         phpVersion = userInput['phpVersion']
         launchUnitTests = userInput['launchUnitTests']
         launchIntegrationTests = userInput['launchIntegrationTests']
         launchBehatTests = userInput['launchBehatTests']
+        */
     }
 }
