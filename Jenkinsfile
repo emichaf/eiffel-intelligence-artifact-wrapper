@@ -8,7 +8,7 @@ def launchIntegrationTests = "yes"
 def launchBehatTests = "yes"
 
 stage("Checkout") {
-    milestone 1
+    //milestone 1
     if (env.BRANCH_NAME == "master") {
         userInput = input(message: 'Launch tests?', parameters: [
             choice(choices: 'yes\nno', description: 'Run unit tests and code style checks', name: 'launchUnitTests'),
