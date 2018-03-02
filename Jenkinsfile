@@ -51,7 +51,7 @@ stage("Checkout") {
             }
         }
 
-
+   parallel checkouts
 }
 
 
