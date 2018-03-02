@@ -20,7 +20,7 @@ stage("Checkout") {
 
     checkouts = [:];
         checkouts['community'] = {
-            node('docker') {
+            node {
 
                 deleteDir()
 
