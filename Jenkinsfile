@@ -24,7 +24,7 @@ stage("Checkout") {
 
                 deleteDir()
 
-                docker.image('emtrout/nind23').inside("--privileged"){
+                docker.image('emtrout/nind23').inside("--privileged -v var/run/docker.sock:var/run/docker.sock"){
                 unstash "eiffel-intelligence-artifact-wrapper"
 
                 // Read build info file with github hash
