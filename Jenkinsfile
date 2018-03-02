@@ -31,27 +31,6 @@ stage("Checkout") {
 
                 }
 
-                /*
-                docker.image("carcel/php:${phpVersion}").inside("-v /home/akeneo/.composer:/home/docker/.composer") {
-                    unstash "pim_community_dev"
-
-                    sh "composer update --optimize-autoloader --no-interaction --no-progress --prefer-dist"
-                    sh "app/console assets:install"
-                    sh "app/console pim:installer:dump-require-paths"
-
-                    stash "pim_community_dev_full"
-                }
-
-                docker.image('node').inside {
-                    unstash "pim_community_dev_full"
-
-                    sh "npm install"
-                    sh "npm run webpack"
-
-                    stash "pim_community_dev_full"
-                }
-
-                */
 
 
                 deleteDir()
