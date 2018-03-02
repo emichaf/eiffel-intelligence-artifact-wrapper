@@ -4,7 +4,7 @@ stage("Checkout") {
 
 
     node {
-        checkout scm
+        def scmVars = checkout scm
 
     }
 
