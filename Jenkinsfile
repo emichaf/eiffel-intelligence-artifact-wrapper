@@ -9,7 +9,7 @@ def launchBehatTests = "yes"
 
 stage("Checkout") {
     milestone 1
-    if (env.BRANCH_NAME == master) {
+    if (env.BRANCH_NAME == "master") {
     //if (env.BRANCH_NAME =~ /^PR-/) {
         userInput = input(message: 'Launch tests?', parameters: [
             choice(choices: 'yes\nno', description: 'Run unit tests and code style checks', name: 'launchUnitTests'),
