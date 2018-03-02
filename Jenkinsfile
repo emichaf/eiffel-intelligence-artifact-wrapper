@@ -13,7 +13,7 @@ stage("Checkout") {
         checkout scm
         stash "eiffel-intelligence-artifact-wrapper"
 
-        sh "mvn clean package"
+        //sh "mvn clean package"
 
 
     }
