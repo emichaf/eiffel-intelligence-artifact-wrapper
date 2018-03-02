@@ -2,6 +2,7 @@
 
 def build_info_file = 'build_info.yml'
 def GITHUB_HASH_TO_USE
+def SOURCE_CODE_REPO = "https://github.com/emichaf/eiffel-intelligence.git"
 
 
 stage("Checkout") {
@@ -31,7 +32,13 @@ stage("Checkout") {
                 def props = readYaml file: "$build_info_file"
                 GITHUB_HASH_TO_USE = props.commit
 
-                sh "mvn clean package"
+
+                checkout scm: [$class: 'GitSCM',
+                               userRemoteConfigs: [[url: "$SOURCE_CODE_REPO"]],
+                               branches: [[name: "$GITHUB_HASH_TO_USE"]]]
+
+                sh "ls"
+                sh "mvn clean package -DskipTests"
 
                 }
 
