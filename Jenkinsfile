@@ -12,18 +12,19 @@ stage("Checkout") {
     node {
         deleteDir()
         checkout scm
+
         //stash "eiffel-intelligence-artifact-wrapper"
+
+        // Read build info file with github hash
+        sh "cat $build_info_file"
+        def props = readYaml file: "$build_info_file"
+        GITHUB_HASH_TO_USE = props.commit
 
         sh "ls"
 
         checkout scm: [$class: 'GitSCM',
                        userRemoteConfigs: [[url: "$SOURCE_CODE_REPO"]],
                        branches: [[name: "$GITHUB_HASH_TO_USE"]]]
-
-        // Read build info file with github hash
-        sh "cat $build_info_file"
-        def props = readYaml file: "$build_info_file"
-        GITHUB_HASH_TO_USE = props.commit
 
         stash "eiffel-intelligence"
         sh "ls"
