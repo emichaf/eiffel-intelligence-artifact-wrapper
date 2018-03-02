@@ -32,6 +32,7 @@ stage("Checkout") {
                 def props = readYaml file: "$build_info_file"
                 GITHUB_HASH_TO_USE = props.commit
 
+                deleteDir()
 
                 checkout scm: [$class: 'GitSCM',
                                userRemoteConfigs: [[url: "$SOURCE_CODE_REPO"]],
