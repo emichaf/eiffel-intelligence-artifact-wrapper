@@ -32,7 +32,7 @@ stage("Checkout") {
     node {
         deleteDir()
         checkout scm
-        stash "pim_community_dev"
+        //stash "pim_community_dev"
 
 
     }
