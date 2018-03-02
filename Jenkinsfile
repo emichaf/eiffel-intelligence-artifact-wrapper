@@ -13,13 +13,14 @@ stage("Checkout") {
         deleteDir()
         checkout scm
 
-        //stash "eiffel-intelligence-artifact-wrapper"
+
 
         // Read build info file with github hash
         sh "cat $build_info_file"
         def props = readYaml file: "$build_info_file"
         GITHUB_HASH_TO_USE = props.commit
 
+        stash "eiffel-intelligence-artifact-wrapper"
         sh "ls"
 
         checkout scm: [$class: 'GitSCM',
