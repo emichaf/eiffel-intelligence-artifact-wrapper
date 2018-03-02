@@ -1,10 +1,13 @@
- node {
+
+
 stage("Checkout") {
 
 
 
-
-        def scmVars = checkout scm
+    node {
+        deleteDir()
+        checkout scm
+        sh "ls"
 
     }
 
