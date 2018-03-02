@@ -1,64 +1,41 @@
-node{
+#!groovy
 
-     String GIT_SHORT_COMMIT
+def editions = ["ce"]
+def phpVersion = "7.1"
+def features = "features"
+def launchUnitTests = "yes"
+def launchIntegrationTests = "yes"
+def launchBehatTests = "yes"
 
-    stage "Container Prep"
-    // do the thing in the container
+stage("Checkout") {
+    milestone 1
+    if (env.BRANCH_NAME =~ /^PR-/) {
+        userInput = input(message: 'Launch tests?', parameters: [
+            choice(choices: 'yes\nno', description: 'Run unit tests and code style checks', name: 'launchUnitTests'),
+            choice(choices: 'yes\nno', description: 'Run integration tests', name: 'launchIntegrationTests'),
+            choice(choices: 'yes\nno', description: 'Run behat tests', name: 'launchBehatTests'),
+            string(defaultValue: 'ee,ce', description: 'PIM edition the behat tests should run on (comma separated values)', name: 'editions'),
+            string(defaultValue: 'features,vendor/akeneo/pim-community-dev/features', description: 'Behat scenarios to build', name: 'features'),
+            choice(choices: '7.1', description: 'PHP version to run behat with', name: 'phpVersion'),
+        ])
 
-node('docker-slave'){
-     docker.withServer('tcp://docker104-eiffel999.lmera.ericsson.se:4243', 'hej') {
-                docker.image('maven:3.3.3-jdk-8').inside {
-                    /* do things */
-                    // get the codez
-                            stage 'Checkout'
-                            git branch: "master", url: 'https://github.com/emichaf/eiffel-intelligence-artifact-wrapper.git'
-                            stage 'Build'
-                            // Do the build
-                            sh "mvn clean package -DskipTests"
-                }
-
-
-            }
-}
-
-
-node{
-     docker.withServer('tcp://docker104-eiffel999.lmera.ericsson.se:4243', 'hej') {
-            docker.image('maven:3.3.3-jdk-8').inside {
-                /* do things */
-                // get the codez
-                        stage 'Checkout'
-                        git branch: "master", url: 'https://github.com/emichaf/eiffel-intelligence-artifact-wrapper.git'
-                        stage 'Build'
-                        // Do the build
-                        sh "mvn clean package -DskipTests"
-            }
+        editions = userInput['editions'].tokenize(',')
+        features = userInput['features']
+        phpVersion = userInput['phpVersion']
+        launchUnitTests = userInput['launchUnitTests']
+        launchIntegrationTests = userInput['launchIntegrationTests']
+        launchBehatTests = userInput['launchBehatTests']
+    }
+    milestone 2
 
 
-        }
-}
-
-
- docker.withServer('tcp://swarm.example.com:2376', 'swarm-certs') {
-        docker.image('maven:3.3.3-jdk-8'').inside {
-            /* do things */
-            // get the codez
-                    stage 'Checkout'
-                    git branch: "master", url: 'https://github.com/emichaf/eiffel-intelligence-artifact-wrapper.git'
-                    stage 'Build'
-                    // Do the build
-                    sh "mvn clean package -DskipTests"
-        }
+    node {
+        deleteDir()
+        checkout scm
+        stash "pim_community_dev"
 
 
     }
 
-    docker.image('maven:3.3.3-jdk-8').inside {
-        // get the codez
-        stage 'Checkout'
-        git branch: "master", url: 'https://github.com/emichaf/eiffel-intelligence-artifact-wrapper.git'
-        stage 'Build'
-        // Do the build
-        sh "mvn clean package -DskipTests"
-    }
+
 }
