@@ -30,9 +30,6 @@ stage("Checkout") {
 
 
     node {
-        dir('eiffel-intelligance-artifact-wrapper') {
-            deleteDir()
-        }
         checkout scm
         stash "eiffel-intelligence-artifact-wrapper"
     }
