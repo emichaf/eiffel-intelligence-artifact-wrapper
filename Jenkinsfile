@@ -13,6 +13,7 @@ stage("Checkout") {
         checkout scm
         stash "eiffel-intelligence-artifact-wrapper"
 
+        sh "mvn clean package"
 
 
     }
@@ -33,7 +34,7 @@ stage("Checkout") {
                 def props = readYaml file: "$build_info_file"
                 GITHUB_HASH_TO_USE = props.commit
 
-                sh "mvn"
+                sh "mvn clean package"
 
                 }
 
