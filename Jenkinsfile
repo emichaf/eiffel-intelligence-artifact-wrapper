@@ -30,9 +30,9 @@ stage("Checkout") {
 
 
     node {
-        println "${env.BRANCH_NAME}"
+        //println "${env.BRANCH_NAME}"
         checkout scm
-        stash "eiffel-intelligence-artifact-wrapper"
+        //stash "eiffel-intelligence-artifact-wrapper"
     }
 
 
