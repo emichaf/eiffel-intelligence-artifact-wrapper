@@ -26,7 +26,7 @@ stage("Checkout") {
         launchIntegrationTests = userInput['launchIntegrationTests']
         launchBehatTests = userInput['launchBehatTests']
     }
-    milestone 2
+    //milestone 2
 
 
     node {
