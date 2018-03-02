@@ -12,10 +12,6 @@ stage("Checkout") {
         deleteDir()
         checkout scm
         stash "eiffel-intelligence-artifact-wrapper"
-
-        //sh "mvn clean package"
-
-
     }
 
 
@@ -27,6 +23,7 @@ stage("Checkout") {
 
                 docker.image('emtrout/nind23').inside("--privileged"){
                 unstash "eiffel-intelligence-artifact-wrapper"
+                sh "ls"
 
 
                 // Read build info file with github hash
