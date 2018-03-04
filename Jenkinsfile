@@ -1,7 +1,7 @@
 library identifier: 'pipeline-library-demo@master', retriever: modernSCM(
   [$class: 'GitSCMSource',
    remote: 'https://github.com/emichaf/jenkins-pipeline-libraries',
-   credentialsId: ''])
+   credentialsId: 'emichaf'])
 
 @Library('buildit')
 
@@ -10,6 +10,9 @@ def pomLib = new pom()
 def gitLib = new git()
 def bintray = new bintray()
 
+println "hello"
+
+/*
 try {
 
     node() {
@@ -77,3 +80,4 @@ def calculateNewPomVersion(pomLocation){
     }
     return newVersion
 }
+*/
