@@ -1,8 +1,8 @@
 
 
-library identifier: 'buildit@master', retriever: modernSCM(
+library identifier: 'buildit.shell@master', retriever: modernSCM(
   [$class: 'GitSCMSource',
-   remote: 'https://github.com/buildit/jenkins-pipeline-libraries',
+   remote: 'https://github.com/buildit/jenkins-pipeline-libraries/buildit',
    credentialsId: 'GITHUB_CREDENTIALS'])
 
 
