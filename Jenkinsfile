@@ -9,10 +9,12 @@ library identifier: 'buildit@master', retriever: modernSCM(
 //@Library('buildit@master')
 //library "jenkins-pipeline-libraries@master"
 
+/*
 def shellLib = new shell()
 def pomLib = new pom()
 def gitLib = new git()
 def bintray = new bintray()
+*/
 
 println "hello"
 
