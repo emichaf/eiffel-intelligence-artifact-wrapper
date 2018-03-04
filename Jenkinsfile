@@ -6,10 +6,10 @@ library identifier: 'buildit@master', retriever: modernSCM(
    credentialsId: 'GITHUB_CREDENTIALS'])
 
 
-@Library('buildit@master')
+//@Library('buildit@master')
 //library "jenkins-pipeline-libraries@master"
 
-def shellLib = new shell()
+def shellLib = new buildit.shell()
 
 
 /*
