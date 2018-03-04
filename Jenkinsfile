@@ -1,15 +1,15 @@
 
 
-library identifier: 'buildit.shell@master', retriever: modernSCM(
+library identifier: 'buildit@master', retriever: modernSCM(
   [$class: 'GitSCMSource',
-   remote: 'https://github.com/buildit/jenkins-pipeline-libraries/buildit',
+   remote: 'https://github.com/emichaf/jenkins-pipeline-libraries',
    credentialsId: 'GITHUB_CREDENTIALS'])
 
 
 //@Library('buildit@master')
 //library "jenkins-pipeline-libraries@master"
 
-def shellLib = new buildit.shell()
+def shellLib = new shell()
 
 
 /*
