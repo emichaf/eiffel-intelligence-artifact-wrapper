@@ -1,12 +1,10 @@
+
 library identifier: 'pipeline-library-demo@master', retriever: modernSCM(
   [$class: 'GitSCMSource',
    remote: 'https://github.com/emichaf/jenkins-pipeline-libraries.git',
    credentialsId: 'GITHUB_CREDENTIALS'])
 
-
-
-
-@Library('buildit')
+//@Library('buildit')
 
 def shellLib = new shell()
 def pomLib = new pom()
