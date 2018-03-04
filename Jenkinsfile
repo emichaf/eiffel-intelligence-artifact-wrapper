@@ -5,30 +5,24 @@ library identifier: 'buildit@master', retriever: modernSCM(
    remote: 'https://github.com/emichaf/jenkins-pipeline-libraries',
    credentialsId: 'GITHUB_CREDENTIALS'])
 */
-
 //@Library('buildit@master')
 //library "jenkins-pipeline-libraries@master"
-
 //def shellLib = buildit.new.shell()
-
 //@Library(['github.com/emichaf/jenkins-pipeline-libraries@master']) _
 
 @Library(['github.com/emichaf/jenkins-pipeline-libraries@master']) _
 
 
-def shellLib = new shell()
 
-
-/*
 def shellLib = new shell()
 def pomLib = new pom()
 def gitLib = new git()
 def bintray = new bintray()
-*/
+
 
 println "hello"
 
-/*
+
 
 try {
 
@@ -97,4 +91,3 @@ def calculateNewPomVersion(pomLocation){
     }
     return newVersion
 }
-*/
