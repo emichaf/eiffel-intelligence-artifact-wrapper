@@ -1,0 +1,16 @@
+
+library identifier: 'pipeline-library-demo@master', retriever: modernSCM(
+  [$class: 'GitSCMSource',
+   remote: 'https://github.com/monodot/pipeline-library-demo.git',
+   credentialsId: ''])
+
+// Obs require configuration in -> Manage Jenkins → Configure System. Under Global Pipeline Libraries
+//@Library('pipeline-library-demo')_
+
+stage('Demo') {
+
+  echo 'Hello World'
+
+  sayHello 'Dave'
+
+}
