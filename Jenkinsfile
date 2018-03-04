@@ -5,7 +5,7 @@ library identifier: 'buildit@master', retriever: modernSCM(
    credentialsId: 'GITHUB_CREDENTIALS'])
 
 //@Library('buildit')_
-library "buildit@master
+library "buildit@master"
 
 def shellLib = new shell()
 def pomLib = new pom()
