@@ -3,9 +3,9 @@ library identifier: 'pipeline-library-demo@master', retriever: modernSCM(
    remote: 'https://github.com/emichaf/jenkins-pipeline-libraries.git',
    credentialsId: 'GITHUB_CREDENTIALS'])
 
-println "hello"
 
-/*
+
+
 @Library('buildit')
 
 def shellLib = new shell()
@@ -13,8 +13,9 @@ def pomLib = new pom()
 def gitLib = new git()
 def bintray = new bintray()
 
+println "hello"
 
-
+/*
 
 try {
 
