@@ -9,7 +9,7 @@ library identifier: 'emichaf@master', retriever: modernSCM(
 //@Library('buildit@master')
 //library "jenkins-pipeline-libraries@master"
 
-def shellLib = new shell()
+def shellLib = new emichaf.shell()
 
 
 /*
