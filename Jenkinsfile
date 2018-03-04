@@ -9,7 +9,7 @@ library identifier: 'buildit@master', retriever: modernSCM(
 //@Library('buildit@master')
 //library "jenkins-pipeline-libraries@master"
 
-def shellLib = new buildit.shell()
+def shellLib = new buildit@master.shell()
 
 
 /*
