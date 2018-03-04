@@ -11,6 +11,8 @@ library identifier: 'buildit@master', retriever: modernSCM(
 
 //def shellLib = buildit.new.shell()
 
+@Library(['github.com//emichaf/jenkins-pipeline-libraries']) _
+
 
 def shellLib = new shell()
 
