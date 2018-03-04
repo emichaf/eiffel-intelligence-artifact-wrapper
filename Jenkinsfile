@@ -1,7 +1,7 @@
 library identifier: 'pipeline-library-demo@master', retriever: modernSCM(
   [$class: 'GitSCMSource',
    remote: 'https://github.com/emichaf/jenkins-pipeline-libraries',
-   credentialsId: 'emichaf'])
+   credentialsId: 'GITHUB_CREDENTIALS'])
 
 @Library('buildit')
 
