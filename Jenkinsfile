@@ -1,7 +1,7 @@
 
 library identifier: 'pipeline-library-demo@master', retriever: modernSCM(
   [$class: 'GitSCMSource',
-   remote: 'git@github.com/monodot/pipeline-library-demo.git',
+   remote: 'git@https://github.com/monodot/pipeline-library-demo.git',
    credentialsId: ''])
 
 
