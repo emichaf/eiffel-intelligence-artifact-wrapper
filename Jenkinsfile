@@ -4,8 +4,8 @@ library identifier: 'jenkins-pipeline-libraries@master', retriever: modernSCM(
    remote: 'https://github.com/emichaf/jenkins-pipeline-libraries.git',
    credentialsId: 'GITHUB_CREDENTIALS'])
 
-//@Library('buildit')_
-library "jenkins-pipeline-libraries@master"
+@Library('buildit')
+//library "jenkins-pipeline-libraries@master"
 
 def shellLib = new shell()
 def pomLib = new pom()
