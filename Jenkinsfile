@@ -1,10 +1,10 @@
 
-
+/*
 library identifier: 'buildit@master', retriever: modernSCM(
   [$class: 'GitSCMSource',
    remote: 'https://github.com/emichaf/jenkins-pipeline-libraries',
    credentialsId: 'GITHUB_CREDENTIALS'])
-
+*/
 
 //@Library('buildit@master')
 //library "jenkins-pipeline-libraries@master"
@@ -13,7 +13,7 @@ library identifier: 'buildit@master', retriever: modernSCM(
 
 //@Library(['github.com/emichaf/jenkins-pipeline-libraries@master']) _
 
-@Library(['jenkins-pipeline-libraries@master']) _
+@Library(['github.com/emichaf/jenkins-pipeline-libraries@master']) _
 
 
 def shellLib = new shell()
