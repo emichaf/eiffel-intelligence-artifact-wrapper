@@ -1,6 +1,6 @@
 library identifier: 'pipeline-library-demo@master', retriever: modernSCM(
   [$class: 'GitSCMSource',
-   remote: 'https://github.com/emichaf/jenkins-pipeline-libraries',
+   remote: 'https://github.com/emichaf/jenkins-pipeline-libraries.git',
    credentialsId: 'GITHUB_CREDENTIALS'])
 
 println "hello"
