@@ -1,15 +1,15 @@
 
 
-library identifier: 'emichaf@master', retriever: modernSCM(
+library identifier: 'buildit@master', retriever: modernSCM(
   [$class: 'GitSCMSource',
-   remote: 'https://github.com/emichaf/jenkins-pipeline-libraries.git',
+   remote: 'https://github.com/buildit/jenkins-pipeline-libraries',
    credentialsId: 'GITHUB_CREDENTIALS'])
 
 
 //@Library('buildit@master')
 //library "jenkins-pipeline-libraries@master"
 
-def shellLib = new emichaf.shell()
+def shellLib = new shell()
 
 
 /*
