@@ -2,7 +2,7 @@
 
 
 //@Library('buildit')
-def mylibs = @Library(['github.com/emichaf/jenkins-pipeline-libraries@master']) _
+@Library(['github.com/emichaf/jenkins-pipeline-libraries@master']) _
 
 
 def shellLib = new shell()

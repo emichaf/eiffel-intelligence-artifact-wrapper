@@ -1,5 +1,7 @@
 import org.jenkinsci.plugins.workflow.steps.FlowInterruptedException
 
+import com.wiprodigital.buildit.*
+
 
 def testar() {
     String DOCKER_HOST = "tcp://docker104-eiffel999.lmera.ericsson.se:4243"
