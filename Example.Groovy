@@ -4,14 +4,14 @@ def exampleMethod() {
 
 def otherExampleMethod() {
 
-    node {
+    //node {
         stage('Stage Groovy') {
             unstash "eiffel-intelligence-artifact-wrapper"
             println "in stage"
 
             sh "ls"
         }
-    }
+    //}
 
     println("otherExampleMethod")
 }
