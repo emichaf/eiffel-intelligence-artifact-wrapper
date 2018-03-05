@@ -2,7 +2,7 @@
 
 
 //@Library('buildit')
-@Library(['github.com/emichaf/jenkins-pipeline-libraries@master']) _
+//@Library(['github.com/emichaf/jenkins-pipeline-libraries@master']) _
 
 
 def shellLib = new shell()
@@ -33,9 +33,7 @@ node{
 
             stash "eiffel-intelligence-artifact-wrapper"
 
-            def commitId = shellLib.pipe("git rev-parse HEAD")
 
-            println commitId
 
 
             rootDir = pwd()
@@ -73,3 +71,17 @@ node{       // Node needed
             // TODO: Test : use shared libs in local libs
 
 } // node
+
+
+// Lägg denna som shared lib
+def calculateNewPomVersion(pomLocation){
+    def pomLib = new pom()
+    def majorVersion = pomLib.majorVersion(pomLocation)
+    def minorVersion = pomLib.minorVersion(pomLocation).toInteger()
+    def patchVersion = pomLib.patchVersion(pomLocation).toInteger()
+    def newVersion = "${majorVersion}.${minorVersion + 1}.0"
+    if (patchVersion > 0) {
+        newVersion = "${majorVersion}.${minorVersion}.${patchVersion + 1}"
+    }
+    return newVersion
+}
