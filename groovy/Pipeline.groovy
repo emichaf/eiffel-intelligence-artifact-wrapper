@@ -1,5 +1,5 @@
 import org.jenkinsci.plugins.workflow.steps.FlowInterruptedException
-
+@Library(['github.com/emichaf/jenkins-pipeline-libraries@master']) _
 
 def testar() {
     String DOCKER_HOST = "tcp://docker104-eiffel999.lmera.ericsson.se:4243"
