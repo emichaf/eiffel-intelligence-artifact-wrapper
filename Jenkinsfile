@@ -32,7 +32,7 @@ node{
 
 
             def example_2 = load "${rootDir}/stdPipeline.groovy"
-
+            example_2.execute()
 
             sh "echo ${props_json_params.aggregatedObject.submission.sourceChanges[0].eventId}"
          }
