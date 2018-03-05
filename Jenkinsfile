@@ -19,7 +19,7 @@ pipeline {
         }
         stage('Prepare Workspace') {
             steps {
-                //notifyAtomist("UNSTABLE", "STARTED")
+                notifyAtomist("UNSTABLE", "STARTED")
             }
         }
         stage('Build') {
