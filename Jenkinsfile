@@ -11,11 +11,18 @@
 
 node{
 
-    stage ('GERRIT Wrapper Checkout') {
+    stage ('mystage_1') {
 
-     sh "echo ${props_json_params.aggregatedObject.submission.sourceChanges[0].eventId}"
+         sh "echo ${props_json_params.aggregatedObject.submission.sourceChanges[0].eventId}"
 
      }
+
+
+      stage ('mystage_2') {
+
+              sh "echo ${props_json_params.aggregatedObject.submission.sourceChanges[0].eventId}"
+
+          }
 
 
 }
