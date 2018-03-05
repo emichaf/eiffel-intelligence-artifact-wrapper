@@ -8,6 +8,7 @@ def execute() {
 
             println pipelineDefinition
 
+            println pipelineDefinition.pipelineType
 
     switch(pipelineDefinition.pipelineType) {
         case "python":
