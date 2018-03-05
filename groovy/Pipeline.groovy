@@ -1,5 +1,4 @@
 import org.jenkinsci.plugins.workflow.steps.FlowInterruptedException
-@Library(['github.com/emichaf/jenkins-pipeline-libraries@master']) _
 
 
 def testar() {
@@ -31,6 +30,9 @@ def SC_1() {
 
     unstash "eiffel-intelligence-artifact-wrapper"
 
+    def commitId = shellLib.pipe("git rev-parse HEAD")
+    println commitId
+
     try {
 
         docker.withServer("$DOCKER_HOST", 'remote_docker_host') {
@@ -39,10 +41,10 @@ def SC_1() {
                     println "in stageXXX"
 
                     // testar shared libs in local lib
-                    def shellLib = new shell()
+                    /*def shellLib = new shell()
                     def commitId = shellLib.pipe("git rev-parse HEAD")
                     println commitId
-
+*/
 
 
                     sh "${BUILD_COMMAND}"
