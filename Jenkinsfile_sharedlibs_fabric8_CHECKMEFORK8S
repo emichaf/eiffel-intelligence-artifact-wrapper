@@ -1,0 +1,6 @@
+
+/*
+https://github.com/fabric8io/fabric8-pipeline-library#understanding-how-it-works
+*/
+
+@Library('github.com/fabric8io/fabric8-pipeline-library@master') _
