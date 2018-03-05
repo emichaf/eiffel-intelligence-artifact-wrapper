@@ -12,8 +12,8 @@
 node{
 
       stage ('mystage_1') {
-
-            //checkout scm
+            deleteDir()
+            checkout scm
 
             //def rootDir = pwd()
 
