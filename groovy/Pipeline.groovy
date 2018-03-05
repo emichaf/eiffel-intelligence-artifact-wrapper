@@ -1,6 +1,6 @@
 import org.jenkinsci.plugins.workflow.steps.FlowInterruptedException
 
-import com.wiprodigital.buildit.*
+//import com.wiprodigital.buildit.*
 
 
 def testar() {
@@ -40,6 +40,7 @@ def SC_1() {
                     println "in stageXXX"
 
                     // testar shared libs in local lib
+                    def shellLib = new shell()
                     def commitId = shellLib.pipe("git rev-parse HEAD")
                     println commitId
 
