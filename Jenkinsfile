@@ -1,3 +1,4 @@
+#!groovy
 
 //
 // Test to execute - flow controll
