@@ -11,6 +11,7 @@
      def props_json_params = readJSON text: "${params.jsonparams}"
 
 
+
      def rootDir
 
 node{

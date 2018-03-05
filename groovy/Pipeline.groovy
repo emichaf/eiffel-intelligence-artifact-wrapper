@@ -24,6 +24,7 @@ def testar() {
 
 def testarx() {
     String DOCKER_HOST = "tcp://docker104-eiffel999.lmera.ericsson.se:4243"
+    String BUILD_COMMAND = "mvn clean package -DskipTests"
 
     unstash "eiffel-intelligence-artifact-wrapper"
     try {
@@ -32,7 +33,7 @@ def testarx() {
 
             stage('XXStage GroovyX') {
                 println "in stageXXX"
-
+                sh "${BUILD_COMMAND}"
                 sh "ls"
             }
         }
