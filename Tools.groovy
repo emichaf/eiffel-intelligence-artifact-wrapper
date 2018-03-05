@@ -11,4 +11,4 @@ public class Demo {
     }
 }
 
-return this
+return new Demo();
