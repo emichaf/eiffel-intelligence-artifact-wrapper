@@ -16,9 +16,22 @@ node{
             deleteDir()
             checkout scm
 
+            // To know files are checked out or not
+            sh '''
+                ls -lhrt
+            '''
+
+            def rootDir = pwd()
+                println("Current Directory: " + rootDir)
+
+                // point to exact source file
+                def example = load "${rootDir}/Example.Groovy"
+
+                example.exampleMethod()
+                example.otherExampleMethod()
 
 
-            sh "echo ${props_json_params.aggregatedObject.submission.sourceChanges[0].eventId}"
+            //sh "echo ${props_json_params.aggregatedObject.submission.sourceChanges[0].eventId}"
          }
 
 
