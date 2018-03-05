@@ -26,7 +26,7 @@ node{
 
 def mytools = load '${rootDir}/Tools.groovy'
 
-mytools = new Demo("hello")
+mytools.Demo("hello")
 
 
 
