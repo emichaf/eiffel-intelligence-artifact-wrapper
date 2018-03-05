@@ -1,7 +1,10 @@
 #!/usr/bin/env groovy
 
 
-@Library('buildit')
+//@Library('buildit')
+@Library(['github.com/emichaf/jenkins-pipeline-libraries@master']) _
+
+
 def shellLib = new shell()
 def pomLib = new pom()
 def gitLib = new git()
