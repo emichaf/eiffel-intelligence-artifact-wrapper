@@ -43,7 +43,7 @@ node{       // Node needed
             //{
                 def example = load "${rootDir}/groovy/Pipeline.groovy"
                 //example.testarx()
-                example.$props_json_params.aggregatedObject.submission.sourceChanges[0].TemplateName()
+                example."${props_json_params.aggregatedObject.TemplateName}"()
             //}
 
 } // node
