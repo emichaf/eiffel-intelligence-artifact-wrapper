@@ -7,6 +7,8 @@ def otherExampleMethod() {
     node {
         stage('Stage Groovy') {
             println "in stage"
+
+            sh "ls"
         }
     }
 
