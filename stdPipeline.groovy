@@ -11,11 +11,11 @@ def execute() {
             println pipelineDefinition.pipelineType
 
     switch(pipelineDefinition.pipelineType) {
-        case "python":
+        case python:
             // Instantiate and execute a Python pipeline
             //new pythonPipeline(pipelineDefinition).executePipeline()
             println "python"
-        case "nodejs":
+        case nodejs:
             // Instantiate and execute a NodeJS pipeline
             //new nodeJSPipeline(pipelineDefinition).executePipeline()
             println "nodejs"
