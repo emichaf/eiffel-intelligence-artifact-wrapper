@@ -10,7 +10,7 @@ pipeline {
         stage('Checkout') {
             steps {
                 deleteDir()
-                git 'https://github.com/emichaf/eiffel-intelligence-artifact-wrapper.git'
+                git 'https://github.com/emichaf/eiffel-intelligence-artifact-wrapper'
             }
         }
         stage('Prepare Workspace') {
