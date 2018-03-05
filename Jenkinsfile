@@ -10,9 +10,9 @@ library identifier: 'buildit@master', retriever: modernSCM(
 //def shellLib = buildit.new.shell()
 //@Library(['github.com/emichaf/jenkins-pipeline-libraries@master']) _
 
-@Library(['github.com/emichaf/jenkins-pipeline-libraries@master']) _
+//@Library(['github.com/emichaf/jenkins-pipeline-libraries@master']) _
 
-
+@Library('buildit')
 
 def shellLib = new shell()
 def pomLib = new pom()
@@ -38,7 +38,7 @@ try {
 
             sh("mvn clean package")
 
-            jenkinsUnitRunner = load("test/groovy/jenkinsUnit/runner.groovy")
+            jenkinsnitRunner = load("test/groovy/jenkinsUnit/runner.groovy")
             jenkinsUnitRunner.run("test/groovy/jenkinsUnit/test")
 
             withCredentials([usernamePassword(credentialsId: 'github-jenkins-buildit', passwordVariable: 'PASSWORD', usernameVariable: 'USERNAME')]) {
