@@ -15,14 +15,7 @@ node{
             deleteDir()
             checkout scm
 
-            //def rootDir = pwd()
 
-            //println rootDir
-
-            //def example = load "${rootDir}/Example.Groovy"
-
-            //example.exampleMethod()
-            //example.otherExampleMethod()
 
             sh "echo ${props_json_params.aggregatedObject.submission.sourceChanges[0].eventId}"
          }
