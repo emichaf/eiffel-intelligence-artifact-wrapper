@@ -16,6 +16,7 @@ node{
             deleteDir()
             checkout scm
 
+            //stash "eiffel-intelligence-artifact-wrapper"
 
 
             def rootDir = pwd()
@@ -28,7 +29,7 @@ node{
             example.otherExampleMethod()
 
 
-            //sh "echo ${props_json_params.aggregatedObject.submission.sourceChanges[0].eventId}"
+            sh "echo ${props_json_params.aggregatedObject.submission.sourceChanges[0].eventId}"
          }
 
 
