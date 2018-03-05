@@ -1,0 +1,6 @@
+# /path/to/a/project/repo/pipeline.yaml
+pipelineType: python
+runTests: true
+testCommand: "pytest test.py"
+deployUponTestSuccess: true
+deploymentEnvironment: "staging"

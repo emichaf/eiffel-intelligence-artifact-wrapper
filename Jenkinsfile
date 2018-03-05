@@ -22,13 +22,17 @@ node{
             def rootDir = pwd()
             println("Current Directory: " + rootDir)
 
-            // point to exact source file
+            // Flow test
             if(props_json_params.aggregatedObject.submission.sourceChanges[0].eventId == "788d642f-572d-4232-84fe-6a1a246e2288" )
             {
                 def example = load "${rootDir}/Example.Groovy"
                 example.exampleMethod()
                 example.otherExampleMethod()
             }
+
+
+            def example_2 = load "${rootDir}/stdPipeline.groovy"
+
 
             sh "echo ${props_json_params.aggregatedObject.submission.sourceChanges[0].eventId}"
          }
