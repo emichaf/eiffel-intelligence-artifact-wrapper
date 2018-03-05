@@ -14,11 +14,15 @@ node{
       stage ('mystage_1') {
 
             checkout scm
-            def rootDir = pwd()
-            def example = load "${rootDir}/Example.Groovy"
 
-            example.exampleMethod()
-            example.otherExampleMethod()
+            def rootDir = pwd()
+
+            println rootDir
+
+            //def example = load "${rootDir}/Example.Groovy"
+
+            //example.exampleMethod()
+            //example.otherExampleMethod()
 
             //sh "echo ${props_json_params.aggregatedObject.submission.sourceChanges[0].eventId}"
          }
