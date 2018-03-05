@@ -1,6 +1,5 @@
 import org.jenkinsci.plugins.workflow.steps.FlowInterruptedException
-
-//import com.wiprodigital.buildit.*
+@Library(['github.com/emichaf/jenkins-pipeline-libraries@master']) _
 
 
 def testar() {
