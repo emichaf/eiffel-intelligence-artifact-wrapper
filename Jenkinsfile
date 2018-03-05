@@ -19,7 +19,7 @@ pipeline {
         }
         stage('Prepare Workspace') {
             steps {
-                notifyAtomist("UNSTABLE", "STARTED")
+                //notifyAtomist("UNSTABLE", "STARTED")
             }
         }
         stage('Build') {
@@ -47,7 +47,7 @@ pipeline {
                 if (result == null) {
                     result = "SUCCESS"
                 }
-                notifyAtomist(result)
+                //notifyAtomist(result)
             }
             echo "ALWAYS"
             step([$class: 'WsCleanup', notFailBuild: true])
