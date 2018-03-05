@@ -30,11 +30,12 @@ def testarx() {
     try {
 
         docker.withServer("$DOCKER_HOST", 'remote_docker_host') {
-
-            stage('XXStage GroovyX') {
-                println "in stageXXX"
-                sh "${BUILD_COMMAND}"
-                sh "ls"
+            docker.image('emtrout/nind23').inside("--privileged") {
+                stage('XXStage GroovyX') {
+                    println "in stageXXX"
+                    sh "${BUILD_COMMAND}"
+                    sh "ls"
+                }
             }
         }
     } catch (FlowInterruptedException interruptEx) {
