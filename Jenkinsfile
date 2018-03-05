@@ -10,7 +10,10 @@
      def props_json_params = readJSON text: "${params.jsonparams}"
 
 node{
-sh "${props_json_params.aggregatedObject.submission.sourceChanges[0].eventId}"
+
+    stage ('GERRIT Wrapper Checkout') {
+     sh "${props_json_params.aggregatedObject.submission.sourceChanges[0].eventId}"
+     }
 
 
 }
