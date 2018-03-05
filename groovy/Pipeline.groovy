@@ -30,7 +30,7 @@ def testarx() {
 
         docker.withServer("$DOCKER_HOST", 'remote_docker_host') {
 
-            stage('Stage GroovyX') {
+            stage('XXStage GroovyX') {
                 println "in stageXXX"
 
                 sh "ls"

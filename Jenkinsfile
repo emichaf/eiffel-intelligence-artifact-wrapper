@@ -40,8 +40,8 @@ node{       // Node needed
 
             if(props_json_params.aggregatedObject.submission.sourceChanges[0].eventId == "x788d642f-572d-4232-84fe-6a1a246e2288" )
             {
-                            def example = load "${rootDir}/groovy/Pipeline.groovy"
-                            example.testarx()
+                def example = load "${rootDir}/groovy/Pipeline.groovy"
+                example.testarx()
             }
 
 } // node
