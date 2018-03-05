@@ -22,4 +22,4 @@ def execute() {
     }
 }
 
-return this
+return new Demo();
