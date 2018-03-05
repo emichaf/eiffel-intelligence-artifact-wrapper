@@ -34,12 +34,17 @@ def SC_1() {
             docker.image('emtrout/nind23').inside("--privileged") {
                 stage('XXStage GroovyX') {
                     println "in stageXXX"
+
+                    // testar shared libs in local lib
+                    def commitId = shellLib.pipe("git rev-parse HEAD")
+                    println commitId
+
+
+
                     sh "${BUILD_COMMAND}"
                     sh "ls"
 
-                    def commitId = shellLib.pipe("git rev-parse HEAD")
 
-                    println commitId
                 }
             }
         }
