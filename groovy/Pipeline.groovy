@@ -22,7 +22,7 @@ def testar() {
 }
 
 
-def testarx() {
+def SC_1() {
     String DOCKER_HOST = "tcp://docker104-eiffel999.lmera.ericsson.se:4243"
     String BUILD_COMMAND = "mvn clean package -DskipTests"
 

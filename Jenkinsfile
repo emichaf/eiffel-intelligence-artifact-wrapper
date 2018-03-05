@@ -39,10 +39,11 @@ node{       // Node needed
                 example.testar()
             }
 
-            if(props_json_params.aggregatedObject.submission.sourceChanges[0].eventId == "x788d642f-572d-4232-84fe-6a1a246e2288" )
-            {
+            //if(props_json_params.aggregatedObject.submission.sourceChanges[0].eventId == "x788d642f-572d-4232-84fe-6a1a246e2288" )
+            //{
                 def example = load "${rootDir}/groovy/Pipeline.groovy"
-                example.testarx()
-            }
+                //example.testarx()
+                example."${props_json_params.aggregatedObject.submission.sourceChanges[0].TemplateName}"()
+            //}
 
 } // node
