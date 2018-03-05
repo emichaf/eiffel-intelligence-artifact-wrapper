@@ -1,4 +1,4 @@
-#!groovy
+#!/bin/groovy
 
 //
 // Test to execute - flow controll
@@ -12,7 +12,7 @@
 
 node{
 
-      stage ('mystage_1') {
+      stage ('Coordinate Build') {
             deleteDir()
             checkout scm
 
@@ -26,7 +26,6 @@ node{
             if(props_json_params.aggregatedObject.submission.sourceChanges[0].eventId == "x788d642f-572d-4232-84fe-6a1a246e2288" )
             {
                 def example = load "${rootDir}/Example.Groovy"
-
                 example.exampleMethod()
                 example.otherExampleMethod()
             }
