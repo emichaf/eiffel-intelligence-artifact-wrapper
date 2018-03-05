@@ -16,7 +16,7 @@ node{
             deleteDir()
             checkout scm
 
-            //stash "eiffel-intelligence-artifact-wrapper"
+            stash "eiffel-intelligence-artifact-wrapper"
 
 
             def rootDir = pwd()
