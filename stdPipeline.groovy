@@ -8,9 +8,9 @@ def execute() {
 
             println pipelineDefinition
 
-            println pipelineDefinition.pipelineType.text()
+            println pipelineDefinition.pipelineType
 
-    switch(pipelineDefinition.pipelineType) {
+    switch(pipelineDefinition.pipelineType.text) {
         case 'python':
             // Instantiate and execute a Python pipeline
             //new pythonPipeline(pipelineDefinition).executePipeline()
