@@ -28,8 +28,6 @@ node{
          }
 
 
-      stage ('mystage_2') {
-              sh "echo ${props_json_params.aggregatedObject.submission.sourceChanges[0].eventId}"
-          }
+
 
 }
