@@ -1,4 +1,4 @@
-#!groovy
+#!/usr/bin/env groovy
 
 def BUILD_INFO_FILE = 'build_info.yml'
 def GITHUB_HASH_TO_USE

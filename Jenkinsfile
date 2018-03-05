@@ -1,4 +1,4 @@
-#!/bin/groovy
+#!/usr/bin/env groovy
 
 //
 // Test to execute - flow controll
