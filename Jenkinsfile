@@ -23,7 +23,7 @@ node{
             println("Current Directory: " + rootDir)
 
             // point to exact source file
-            if(props_json_params.aggregatedObject.submission.sourceChanges[0].eventId == "x788d642f-572d-4232-84fe-6a1a246e2288" )
+            if(props_json_params.aggregatedObject.submission.sourceChanges[0].eventId == "788d642f-572d-4232-84fe-6a1a246e2288" )
             {
                 def example = load "${rootDir}/Example.Groovy"
                 example.exampleMethod()
