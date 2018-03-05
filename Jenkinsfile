@@ -10,6 +10,9 @@
      properties([parameters([string(name: "jsonparams", defaultValue: "undefined")])])
      def props_json_params = readJSON text: "${params.jsonparams}"
 
+
+def rootDir
+
 node{
 
       stage ('Coordinate Build') {
@@ -19,34 +22,23 @@ node{
             stash "eiffel-intelligence-artifact-wrapper"
 
 
-            def rootDir = pwd()
+            rootDir = pwd()
             println("Current Directory: " + rootDir)
 
 
 
 
-
-            // Flow test
-            if(props_json_params.aggregatedObject.submission.sourceChanges[0].eventId == "788d642f-572d-4232-84fe-6a1a246e2288" )
-            {
-                /*
-                def example = load "${rootDir}/groovy/Example.groovy"
-                example.exampleMethod()
-                example.otherExampleMethod()
-                */
-                def example = load "${rootDir}/groovy/Pipeline.groovy"
-                example.testar()
-
-            }
-
-
-            //def example_2 = load "${rootDir}/stdPipeline.groovy"
-            //example_2.execute()
-
             sh "echo ${props_json_params.aggregatedObject.submission.sourceChanges[0].eventId}"
          }
 
 
+          // Flow test
+            if(props_json_params.aggregatedObject.submission.sourceChanges[0].eventId == "788d642f-572d-4232-84fe-6a1a246e2288" )
+            {
 
+                def example = load "${rootDir}/groovy/Pipeline.groovy"
+                example.testar()
+
+            }
 
 }
