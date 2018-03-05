@@ -21,27 +21,27 @@ node{
 
             stash "eiffel-intelligence-artifact-wrapper"
 
-
             rootDir = pwd()
             println("Current Directory: " + rootDir)
-
-
-
 
             sh "echo ${props_json_params.aggregatedObject.submission.sourceChanges[0].eventId}"
          }
 
+} // Node
 
 
-
-}
-
-
-node{       // New Node
+node{       // Node needed
             // NEW STAGE COMING
             if(props_json_params.aggregatedObject.submission.sourceChanges[0].eventId == "788d642f-572d-4232-84fe-6a1a246e2288" )
             {
                 def example = load "${rootDir}/groovy/Pipeline.groovy"
                 example.testar()
             }
-}
+
+            if(props_json_params.aggregatedObject.submission.sourceChanges[0].eventId == "x788d642f-572d-4232-84fe-6a1a246e2288" )
+            {
+                            def example = load "${rootDir}/groovy/Pipeline.groovy"
+                            example.testar()
+            }
+
+} // node
