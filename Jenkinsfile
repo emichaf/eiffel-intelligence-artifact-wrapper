@@ -22,6 +22,14 @@ node{
             def rootDir = pwd()
             println("Current Directory: " + rootDir)
 
+
+
+mytools = load '${rootDir}/Tools.groovy'
+
+new mytools.Demo("test")
+
+
+/*
             // Flow test
             if(props_json_params.aggregatedObject.submission.sourceChanges[0].eventId == "788d642f-572d-4232-84fe-6a1a246e2288" )
             {
@@ -33,7 +41,7 @@ node{
 
             def example_2 = load "${rootDir}/stdPipeline.groovy"
             example_2.execute()
-
+*/
             sh "echo ${props_json_params.aggregatedObject.submission.sourceChanges[0].eventId}"
          }
 
