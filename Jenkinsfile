@@ -32,13 +32,17 @@ node{
          }
 
 
-          // Flow test
+
+
+}
+
+
+node{
+
+ // NEW STAGE COMING
             if(props_json_params.aggregatedObject.submission.sourceChanges[0].eventId == "788d642f-572d-4232-84fe-6a1a246e2288" )
             {
-
                 def example = load "${rootDir}/groovy/Pipeline.groovy"
                 example.testar()
-
             }
-
 }
