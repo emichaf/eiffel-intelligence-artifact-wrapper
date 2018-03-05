@@ -13,7 +13,7 @@ node{
 
       stage ('mystage_1') {
 
-            checkout scm
+            //checkout scm
 
             //def rootDir = pwd()
 
