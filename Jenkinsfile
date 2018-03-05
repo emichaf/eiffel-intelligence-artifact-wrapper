@@ -1,6 +1,7 @@
 @Library(['github.com/abnamrocoesd/jenkins-pipeline-library']) _
 pipeline {
-    agent { label 'docker' }
+    //agent { label 'docker' }
+    agent { any }
     options {
         timeout(time: 60, unit: 'MINUTES')
         timestamps()
