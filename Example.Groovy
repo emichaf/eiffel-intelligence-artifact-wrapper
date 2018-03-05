@@ -6,6 +6,7 @@ def otherExampleMethod() {
 
     node {
         stage('Stage Groovy') {
+            unstash "eiffel-intelligence-artifact-wrapper"
             println "in stage"
 
             sh "ls"
