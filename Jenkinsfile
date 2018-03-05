@@ -24,13 +24,8 @@ node{
 
 
 
-def mytools = load '${rootDir}/Tools.groovy'
-
-mytools.Demo("hello")
 
 
-
-/*
             // Flow test
             if(props_json_params.aggregatedObject.submission.sourceChanges[0].eventId == "788d642f-572d-4232-84fe-6a1a246e2288" )
             {
@@ -40,9 +35,9 @@ mytools.Demo("hello")
             }
 
 
-            def example_2 = load "${rootDir}/stdPipeline.groovy"
-            example_2.execute()
-*/
+            //def example_2 = load "${rootDir}/stdPipeline.groovy"
+            //example_2.execute()
+
             sh "echo ${props_json_params.aggregatedObject.submission.sourceChanges[0].eventId}"
          }
 

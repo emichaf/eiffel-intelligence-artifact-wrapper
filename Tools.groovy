@@ -1,5 +1,5 @@
 public class Demo {
-    unstash "eiffel-intelligence-artifact-wrapper"
+
     String message;
 
     Demo(String message) {
