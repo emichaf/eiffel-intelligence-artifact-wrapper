@@ -10,7 +10,10 @@ pipeline {
         stage('Checkout') {
             steps {
                 deleteDir()
-                git branch: 'master', credentialsId: 'GITHUB_CREDENTIALS', url: 'https://github.com/emichaf/eiffel-intelligence-artifact-wrapper.git'
+                //git branch: 'master', credentialsId: 'GITHUB_CREDENTIALS', url: 'https://github.com/emichaf/eiffel-intelligence-artifact-wrapper.git'
+
+                checkout([$class: 'GitSCM', branches: [[name: '*/master']],
+                     userRemoteConfigs: [[url: 'https://github.com/emichaf/eiffel-intelligence-artifact-wrapper.git']]])
             }
         }
         stage('Prepare Workspace') {
