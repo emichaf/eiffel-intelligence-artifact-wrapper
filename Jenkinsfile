@@ -39,7 +39,9 @@ node{
             rootDir = pwd()
             println("Current Directory: " + rootDir)
 
-            sh "echo ${props_json_params.aggregatedObject.submission.sourceChanges[0].eventId}"
+            //sh "echo ${props_json_params.aggregatedObject.submission.sourceChanges[0].eventId}"
+
+            sh "echo ${props_json_params.submission.sourceChanges[0].eventId}"
 
             // TODO: Test uploading Subscriptions to EI
 
@@ -51,7 +53,8 @@ node{
 
 node{       // Node needed
             // NEW STAGE in Pipeline.groovy
-            if(props_json_params.aggregatedObject.submission.sourceChanges[0].eventId == "788d642f-572d-4232-84fe-6a1a246e2288" )
+            //if(props_json_params.aggregatedObject.submission.sourceChanges[0].eventId == "788d642f-572d-4232-84fe-6a1a246e2288" )
+            if(props_json_params.submission.sourceChanges[0].eventId == "788d642f-572d-4232-84fe-6a1a246e2288" )
             {
                 def example = load "${rootDir}/groovy/Pipeline.groovy"
                 example.testar()
@@ -63,7 +66,7 @@ node{       // Node needed
                 //example.testarx()
 
                 // Intiate method call via incoming json param
-                example."${props_json_params.aggregatedObject.TemplateName}"()
+                example."${props_json_params.TemplateName}"()
 
             //}
 
