@@ -18,7 +18,7 @@ def bintray = new bintray()
 
 
      // OBS if changing params in properties, job needs to be re-imported
-     properties([parameters([JSON(name: "jsonparams", defaultValue: "undefined")])])
+     properties([parameters([string(name: "jsonparams", defaultValue: "undefined")])])
      def props_json_params = readJSON text: "${params.jsonparams}"
 
 
