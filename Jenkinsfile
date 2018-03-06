@@ -36,7 +36,7 @@ node{
 
             stash "eiffel-intelligence-artifact-wrapper"
 
-
+            println pipeline
 
 
             rootDir = pwd()
