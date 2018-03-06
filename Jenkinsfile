@@ -20,7 +20,7 @@ def bintray = new bintray()
      // OBS if changing params in properties, job needs to be re-imported
      properties([parameters([
               string(name: "jsonparams", defaultValue: "undefined"),
-              string(name: "pipeline", defaultValue: "undefined")
+              string(name: "runpipeline", defaultValue: "undefined")
               ])])
      def props_json_params = readJSON text: "${params.jsonparams}"
 
@@ -36,7 +36,7 @@ node{
 
             stash "eiffel-intelligence-artifact-wrapper"
 
-            println pipeline
+            println "runpipeline: " + runpipeline
 
 
             rootDir = pwd()
