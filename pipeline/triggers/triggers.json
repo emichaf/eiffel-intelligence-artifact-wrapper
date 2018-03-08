@@ -1,0 +1,33 @@
+[{
+  "notificationMessage" : "{parameter: [{ name: 'jsonparams', value : to_string(@) }, { name: 'runpipeline', value : 'mybuildstep' }]}",
+  "notificationMeta" : "http://docker104-eiffel999.lmera.ericsson.se:8080/job/eiffel-intelligence-artifact-wrapper/job/master/build",
+  "notificationType" : "REST_POST",
+  "repeat" : false,
+  "requirements" : [
+    {
+      "conditions" : [
+        {
+          "jmespath" : "submission.sourceChanges[?submitter.group == 'Team Gophers' && svnIdentifier==null]'"
+        }
+      ]
+    }
+  ],
+  "subscriptionName" : "Subscription9998"
+},
+  {
+    "notificationMessage" : "{parameter: [{ name: 'jsonparams', value : to_string(@) }, { name: 'runpipeline', value : 'mybuildstep' }]}",
+    "notificationMeta" : "http://docker104-eiffel999.lmera.ericsson.se:8080/job/eiffel-intelligence-artifact-wrapper/job/master/build",
+    "notificationType" : "REST_POST",
+    "repeat" : false,
+    "requirements" : [
+      {
+        "conditions" : [
+          {
+            "jmespath" : "submission.sourceChanges[?submitter.group == 'Team Gophers' && svnIdentifier==null]'"
+          }
+        ]
+      }
+    ],
+    "subscriptionName" : "Subscription9999"
+  }
+]

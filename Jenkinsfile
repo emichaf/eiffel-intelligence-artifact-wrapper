@@ -39,6 +39,15 @@ node{
             println "runpipeline: " + runpipeline
 
 
+
+           // Upload triggers to EI
+            def my_RESPONSE = sh(returnStdout: true, script: "curl -i -H 'Content-Type: application/json' -X POST http://docker104-eiffel999.lmera.ericsson.se:8072/subscriptions --data-binary '@pipeline/triggers/triggers.json'").trim()
+            sh "echo ${my_RESPONSE}"
+            //props_ActS = readJSON text: "${RESPONSE_ActS}"
+            //if(props_ActS.events[0].status_code != 200){throw new Exception()}
+
+
+
             rootDir = pwd()
             println("Current Directory: " + rootDir)
 
@@ -65,11 +74,11 @@ node{       // Node needed
 
             //if(props_json_params.aggregatedObject.submission.sourceChanges[0].eventId == "x788d642f-572d-4232-84fe-6a1a246e2288" )
             //{
-                def example = load "${rootDir}/groovy/Pipeline.groovy"
+                def my_pipeline = load "${rootDir}/pipeline/groovy/Pipeline.groovy"
                 //example.testarx()
 
                 // Intiate method call via incoming json param
-                example."${props_json_params.TemplateName}"()
+                my_pipeline."${props_json_params.TemplateName}"()
 
             //}
 
