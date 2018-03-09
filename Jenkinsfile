@@ -23,6 +23,7 @@ def bintray = new bintray()
               string(name: "runpipeline", defaultValue: "undefined")
               ])])
 
+     def rootDir
      def props_json_params
 
      try{
@@ -35,6 +36,7 @@ def bintray = new bintray()
                 stage ('Upload Triggers') {
                     deleteDir()
                     checkout scm
+                    sh "ls"
 
                     // Upload triggers to EI
                    sh "echo 'Upload triggers to EI'"
@@ -56,7 +58,7 @@ def bintray = new bintray()
        throw e   //net.sf.json.JSONException: Invalid JSON String
      }
 
-     def rootDir
+
 
 node{
 
