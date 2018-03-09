@@ -32,7 +32,7 @@ pipeline {
 
         stage('deploy development'){
             steps {
-                deploy(developmentServer, serverPort)
+                //deploy(developmentServer, serverPort)
             }
         }
 
