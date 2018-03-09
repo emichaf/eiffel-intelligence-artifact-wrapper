@@ -18,18 +18,18 @@ node{
          }
 
          stage('checkout SOURCE_CODE_REPO'){
-              deleteDir()
               git branch: "master", url: "$SOURCE_CODE_REPO"
               stash "eiffel-intelligence"
          }
 
-         stage('Compile SOURCE_CODE_REPO'){      // in local lib
+         stage('Compile SOURCE_CODE_REPO'){
              unstash "eiffel-intelligence-artifact-wrapper"
+             sh "ls"
              def my_pipeline = load "${rootDir}/pipeline/groovy/Pipeline.groovy"
              my_pipeline.SC_1
          }
 
-          stage('deploy development'){           // In shared lib
+          stage('deploy development'){
              deploy(developmentServer, serverPort)
           }
 
