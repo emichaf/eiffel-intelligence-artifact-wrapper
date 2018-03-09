@@ -59,7 +59,7 @@ def bintray = new bintray()
      }
 
 
-
+if(params.jsonparams != "undefined" && params.runpipeline != "undefined"){
 node{
 
       stage ('Coordinate Build') {
@@ -117,7 +117,7 @@ node{       // Node needed
             // TODO: Test : use shared libs in local libs
 
 } // node
-
+} // if
 
 // Lägg denna som shared lib
 def calculateNewPomVersion(pomLocation){
