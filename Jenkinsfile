@@ -1,5 +1,6 @@
 #!/usr/bin/env groovy
 
+@Library(['github.com/emichaf/jenkins-pipeline-libraries@master']) _
 @Library(['github.com/emichaf/myshared@master']) _
 
      String WRAPPER_REPO = "https://github.com/emichaf/eiffel-intelligence-artifact-wrapper.git"
