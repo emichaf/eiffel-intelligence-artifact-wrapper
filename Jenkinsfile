@@ -4,7 +4,7 @@ pipeline {
        }
     environment {
         branch = 'master'
-        scmUrl = 'https://github.com/emichaf/myshared.git'
+        scmUrl = 'https://github.com/emichaf/eiffel-intelligence.git'
         serverPort = '22'
         developmentServer = 'seliiuapp00308.lmera.ericsson.se'
         stagingServer = 'staging-myproject.mycompany.com'
