@@ -32,18 +32,21 @@ pipeline {
 
         stage('deploy development'){
             steps {
+                 println "hej"
                 //deploy(developmentServer, serverPort)
             }
         }
 
         stage('deploy staging'){
             steps {
+            println "hej"
              //   deploy(stagingServer, serverPort)
             }
         }
 
         stage('deploy production'){
             steps {
+            println "hej"
              //   deploy(productionServer, serverPort)
             }
         }
