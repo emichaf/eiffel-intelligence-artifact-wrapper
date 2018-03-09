@@ -21,6 +21,9 @@ ex) DO NOT
     docker.image('emtrout/nind23').inside("--privileged"){
 	      sh "${BUILD_COMMAND}"
 	   
+TESTA DETTA
+@Grab('com.amazonaws:aws-java-sdk:1.11.205')
+import ...
 
 
 Qs
@@ -36,6 +39,7 @@ maven release ? använda denna i rel flödet ???
 https://github.com/buildit/jenkins-pipeline-libraries/tree/master/src
 buildit/jenkins-pipeline-libraries
   Finns en del                          <----------------------------------------- kolla verkar vara frikopplade från jenkins ..
+  https://github.com/buildit/jenkins-pipeline-libraries/blob/master/pipelines/release.groovy
   
 https://github.com/abnamrocoesd/jenkins-pipeline-library/tree/master/docs/javaPipeline
 abnamrocoesd/jenkins-pipeline-library  <---------------- kolla javapipleline flödet... även om den använder plugins
@@ -45,15 +49,24 @@ abnamrocoesd/jenkins-pipeline-library  <---------------- kolla javapipleline fl�
 			
 https://github.com/fabric8io/fabric8-pipeline-library/tree/master/vars
 fabric8io/fabric8-pipeline-library			
-          mycket för K8S 
-			
-			
-			
-			
+          mycket för K8S , men även command utillities checka
+		  
+https://github.com/SAP/jenkins-pipelines
+SAP/jenkins-pipelines			
+https://github.com/SAP/jenkins-library			
+SAP/jenkins-library
+
+
 Flöden	#####
---------------		
+--------------	
+https://technology.first8.nl/jenkins-shared-libraries-tested/
+	
 https://jenkins.io/blog/2017/10/02/pipeline-templates-with-shared-libraries/           microservices/technologies/standard pipline concept
 
 http://www.aimtheory.com/blog/jenkins-pipeline-global-shared-library-best-practices/
 			
 https://automatingguy.com/2017/12/29/jenkins-pipelines-shared-libraries/			
+
+
+https://github.com/jenkinsci/JenkinsPipelineUnit
+

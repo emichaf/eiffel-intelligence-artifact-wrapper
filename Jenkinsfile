@@ -39,15 +39,21 @@ node{
             //library 'github.com/emichaf/myshared@master'
              unstash "eiffel-intelligence"
              sh "ls"
-             //deploy(developmentServer, serverPort)
-
 
               docker.withServer("$DOCKER_HOST", 'remote_docker_host') {
                          docker.image('emtrout/myssh').inside("--privileged") {
 
-                                 println "Deployment test"
+                                withCredentials([[$class: 'UsernamePasswordMultiBinding',
+                                                      credentialsId: 'myuser',
+                                                      usernameVariable: 'myuser_USER',
+                                                      passwordVariable: 'myuser_PASSWORD']]) {
 
-                                 deploy(developmentServer, serverPort)
+
+                                    sh "sshpass -p ${myuser_PASSWORD} scp target/*.jar ${myuser_USER}@${developmentServer}:/home/emichaf/myjarbuild.jar"
+
+                                    }
+
+                               //deploy(developmentServer, serverPort)
 
                          }
               }
