@@ -44,7 +44,7 @@ node{
                          docker.image('emtrout/myssh').inside("--privileged") {
 
                                 withCredentials([[$class: 'UsernamePasswordMultiBinding',
-                                                      credentialsId: 'myuser',
+                                                      credentialsId: 'RemoteCredentials',
                                                       usernameVariable: 'myuser_USER',
                                                       passwordVariable: 'myuser_PASSWORD']]) {
 
