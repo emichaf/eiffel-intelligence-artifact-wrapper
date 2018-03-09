@@ -22,9 +22,15 @@ def bintray = new bintray()
               string(name: "jsonparams", defaultValue: "undefined"),
               string(name: "runpipeline", defaultValue: "undefined")
               ])])
-     def props_json_params = readJSON text: "${params.jsonparams}"
 
+     try{
+          def props_json_params = readJSON text: "${params.jsonparams}"
+     }
+     } catch (Exception e) {
 
+      println e
+
+     }
 
      def rootDir
 
