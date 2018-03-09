@@ -49,8 +49,8 @@ node{
                                                       passwordVariable: 'myuser_PASSWORD']]) {
 
 
-                                    ls "echo ${myuser_USER}"
-                                    ls "echo ${developmentServer}"
+                                    sh "echo ${myuser_USER}"
+                                    sh "echo ${developmentServer}"
 
                                     sh "sshpass -p ${myuser_PASSWORD} scp /target/*.jar ${myuser_USER}@${developmentServer}:/home/emichaf/myjarbuild.jar"
 
