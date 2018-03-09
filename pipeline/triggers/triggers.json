@@ -12,7 +12,7 @@
       ]
     }
   ],
-  "subscriptionName" : "Subscription9998"
+  "subscriptionName" : "Subscription_mypipeline_1"
 },
   {
     "notificationMessage" : "{parameter: [{ name: 'jsonparams', value : to_string(@) }, { name: 'runpipeline', value : 'mybuildstep_2' }]}",
@@ -28,6 +28,6 @@
         ]
       }
     ],
-    "subscriptionName" : "Subscription9999"
+    "subscriptionName" : "Subscription_mypipeline_2"
   }
 ]
