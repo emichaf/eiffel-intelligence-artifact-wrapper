@@ -100,31 +100,33 @@ node{
 } // Node
 
 
-node{       // Node needed
-            // NEW STAGE in Pipeline.groovy
-            //if(props_json_params.aggregatedObject.submission.sourceChanges[0].eventId == "788d642f-572d-4232-84fe-6a1a246e2288" )
-/*
-            if(props_json_params.submission.sourceChanges[0].eventId == "788d642f-572d-4232-84fe-6a1a246e2288" )
-            {
-                def example = load "${rootDir}/groovy/Pipeline.groovy"
-                example.testar()
-            }
-*/
+    node{
+
+                 // Node needed
+                // NEW STAGE in Pipeline.groovy
+                //if(props_json_params.aggregatedObject.submission.sourceChanges[0].eventId == "788d642f-572d-4232-84fe-6a1a246e2288" )
+
+                //if(props_json_params.submission.sourceChanges[0].eventId == "788d642f-572d-4232-84fe-6a1a246e2288" )
+                //{
+                //    def example = load "${rootDir}/groovy/Pipeline.groovy"
+                //    example.testar()
+                //}
 
 
-                def my_pipeline = load "${rootDir}/pipeline/groovy/Pipeline.groovy"
 
-                // Intiate method call via incoming json param
-                //my_pipeline."${props_json_params.TemplateName}"()
+                    def my_pipeline = load "${rootDir}/pipeline/groovy/Pipeline.groovy"
 
-                my_pipeline."${props_json_params.runpipeline}"()
+                    // Intiate method call via incoming json param
+                    //my_pipeline."${props_json_params.TemplateName}"()
 
-            //}
+                    my_pipeline."${params.runpipeline}"()
+
+                //}
 
 
-            // TODO: Test : use shared libs in local libs
+                // TODO: Test : use shared libs in local libs
 
-} // node
+    } // node
 } // if
 
 // Lägg denna som shared lib

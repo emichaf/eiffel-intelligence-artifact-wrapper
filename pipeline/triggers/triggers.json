@@ -7,7 +7,7 @@
     {
       "conditions" : [
         {
-          "jmespath" : "submission.sourceChanges[?submitter.group == 'Team Gophers' && svnIdentifier==null]'"
+          "jmespath" : "submission.sourceChanges[?submitter.group == 'Team Gophers' && svnIdentifier==null]"
         }
       ]
     }
@@ -23,7 +23,7 @@
       {
         "conditions" : [
           {
-            "jmespath" : "submission.sourceChanges[?submitter.group == 'Team GophersXX' && svnIdentifier==null]'"
+            "jmespath" : "submission.sourceChanges[?submitter.group == 'Team GophersXX' && svnIdentifier==null]"
           }
         ]
       }
