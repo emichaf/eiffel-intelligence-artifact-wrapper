@@ -40,7 +40,7 @@ pipeline {
         stage('deploy development'){
             steps {
                  println "hej"
-                deploy(developmentServer, serverPort)
+                com.ericsson.myshared.deploy(developmentServer, serverPort)
             }
         }
 
