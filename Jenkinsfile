@@ -1,7 +1,7 @@
 #!/usr/bin/env groovy
 
 @Library(['github.com/emichaf/jenkins-pipeline-libraries@master', 'github.com/emichaf/myshared@master' ]) _
-@Library(['github.com/emichaf/myshared@master']) _
+//@Library(['github.com/emichaf/myshared@master']) _
 
      def WRAPPER_REPO = "https://github.com/emichaf/eiffel-intelligence-artifact-wrapper.git"
      def SOURCE_CODE_REPO = "https://github.com/emichaf/eiffel-intelligence.git"
