@@ -33,18 +33,19 @@ Skapa eget shared-lib proj repo i github, flytta in goodies
 
 maven release ? använda denna i rel flödet ???
 
-
+https://github.com/buildit/jenkins-pipeline-libraries/tree/master/src
 buildit/jenkins-pipeline-libraries
   Finns en del                          <----------------------------------------- kolla verkar vara frikopplade från jenkins ..
   
-
+https://github.com/abnamrocoesd/jenkins-pipeline-library/tree/master/docs/javaPipeline
 abnamrocoesd/jenkins-pipeline-library  <---------------- kolla javapipleline flödet... även om den använder plugins
 	Executes the Standard Java Pipeline.	använder jenkns plugins ex 		hudson.plugins.git.GitTool						 
             förutsetter att maven är installerad etc
 			java pipeline fungerar inte , men kolla på flödet...
 			
-			
-buildit/jenkins-pipeline-libraries
+https://github.com/fabric8io/fabric8-pipeline-library/tree/master/vars
+fabric8io/fabric8-pipeline-library			
+          mycket för K8S 
 			
 			
 			

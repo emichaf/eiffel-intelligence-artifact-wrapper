@@ -22,11 +22,11 @@ def testar() {
 }
 
 
-def SC_1() {
+def SC_1(DOCKER_HOST, BUILD_COMMAND) {
 
 
-    String DOCKER_HOST = "tcp://docker104-eiffel999.lmera.ericsson.se:4243"
-    String BUILD_COMMAND = "mvn clean package -DskipTests"
+    //String DOCKER_HOST = "tcp://docker104-eiffel999.lmera.ericsson.se:4243"
+    //String BUILD_COMMAND = "mvn clean package -DskipTests"
 
     unstash "eiffel-intelligence"
 
