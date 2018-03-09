@@ -1,0 +1,58 @@
+
+When building multiple microservices - e.g. with Spring Boot - the integration and delivery pipelines of your services will most likely be very similar. 
+Surely, you don’t want to copy-and-paste Pipeline code from one Jenkinsfile to another if you develop a new service 
+or if there are adaptions in your delivery process. Instead you would like to define something like a pipeline "template" 
+that can be applied easily to all of your services.
+
+The requirement for a common pipeline that can be used in multiple projects does not only emerge in microservice architectures.
+It’s valid for all areas where applications are built on a similar technology stack or deployed in a standardized way (e.g. pre-packages as containers).
+The most important part here is also mentioned in the official doc: such libraries are considered ‘trusted’
+people with push permissions to the repository containing the Global Library have basically unlimited access to Jenkins
+
+Finding candidates for a library
+When thinking about moving parts of your pipeline to a library, imagine creating a similar script in the next project or creating an additional pipeline 
+that reuses bits of the one you already have. What can/should be extracted to make that possible or painless? Keep in mind that 
+when scaling your delivery pipelines you probably want to introduce a change in a few places as possible.
+
+Do NOT use Jenkins plugins in the pipline, use docker images with build capabilities instead (decoupling build capablities from Jenkins)
+ex) DO NOT  
+       def dockerTool = tool name: 'docker', type: 'org.jenkinsci.plugins.docker.commons.tools.DockerTool'  withEnv(["DOCKER=${dockerTool}/bin"]) {
+	DO 
+    docker.image('emtrout/nind23').inside("--privileged"){
+	      sh "${BUILD_COMMAND}"
+	   
+
+
+Qs
+------------------------------------
+funkar ${env.BUILD_URL}  i docker ?
+	   
+	
+##################################################
+Skapa eget shared-lib proj repo i github, flytta in goodies
+
+maven release ? använda denna i rel flödet ???
+
+
+buildit/jenkins-pipeline-libraries
+  Finns en del                          <----------------------------------------- kolla verkar vara frikopplade från jenkins ..
+  
+
+abnamrocoesd/jenkins-pipeline-library  <---------------- kolla javapipleline flödet... även om den använder plugins
+	Executes the Standard Java Pipeline.	använder jenkns plugins ex 		hudson.plugins.git.GitTool						 
+            förutsetter att maven är installerad etc
+			java pipeline fungerar inte , men kolla på flödet...
+			
+			
+buildit/jenkins-pipeline-libraries
+			
+			
+			
+			
+Flöden	#####
+--------------		
+https://jenkins.io/blog/2017/10/02/pipeline-templates-with-shared-libraries/           microservices/technologies/standard pipline concept
+
+http://www.aimtheory.com/blog/jenkins-pipeline-global-shared-library-best-practices/
+			
+https://automatingguy.com/2017/12/29/jenkins-pipelines-shared-libraries/			
