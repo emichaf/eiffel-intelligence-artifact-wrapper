@@ -32,7 +32,7 @@ def bintray = new bintray()
 
             node{
 
-                stage ('Coordinate Build') {
+                stage ('Upload Triggers') {
                     deleteDir()
                     checkout scm
 
@@ -41,7 +41,10 @@ def bintray = new bintray()
                    def my_RESPONSE = sh(returnStdout: true, script: "curl -H 'Content-Type: application/json' -X POST http://docker104-eiffel999.lmera.ericsson.se:8072/subscriptions --data-binary '@/pipeline/triggers/triggers.json'").trim()
                    sh "echo ${my_RESPONSE}"
 
-                deleteDir()
+                   deleteDir()
+
+                   currentBuild.result = 'SUCCESS'
+                   return
                 }
             }
           }else
