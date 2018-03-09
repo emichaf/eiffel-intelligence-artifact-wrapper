@@ -3,8 +3,10 @@
 @Library(['github.com/emichaf/jenkins-pipeline-libraries@master', 'github.com/emichaf/myshared@master' ]) _
 //@Library(['github.com/emichaf/myshared@master']) _
 
-     String WRAPPER_REPO = "https://github.com/emichaf/eiffel-intelligence-artifact-wrapper.git"
-     String SOURCE_CODE_REPO = "https://github.com/emichaf/eiffel-intelligence.git"
+     def WRAPPER_REPO = "https://github.com/emichaf/eiffel-intelligence-artifact-wrapper.git"
+     def SOURCE_CODE_REPO = "https://github.com/emichaf/eiffel-intelligence.git"
+     def developmentServer = "seliiuapp00308.lmera.ericsson.se"
+     def serverPort = "22"
      def rootDir
 
 node{
@@ -22,7 +24,7 @@ node{
               stash "eiffel-intelligence"
          }
 
-         stage('Compile SOURCE_CODE_REPO'){
+         stage('Compile SOURCE_CODE_REPO'){  // Using local libs
              unstash "eiffel-intelligence-artifact-wrapper"
              sh "ls"
              println("Current Directory: " + rootDir)
@@ -30,7 +32,7 @@ node{
              my_pipeline.SC_1()
          }
 
-          stage('deploy development'){
+          stage('deploy development'){      // using sjared libs
              deploy(developmentServer, serverPort)
           }
 
