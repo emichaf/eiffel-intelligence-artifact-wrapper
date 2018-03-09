@@ -48,11 +48,14 @@ node{
                                                       usernameVariable: 'myuser_USER',
                                                       passwordVariable: 'myuser_PASSWORD']]) {
 
+                                     sh "ls"
+                                     sh "echo ${myuser_USER}"
+                                     sh "echo ${developmentServer}"
 
-                                    sh "echo ${myuser_USER}"
-                                    sh "echo ${developmentServer}"
+                                     def RESPONSE_ssh = sh(returnStdout: true, script: "sshpass -p ${myuser_PASSWORD} scp /target/*.jar ${myuser_USER}@${developmentServer}:/home/emichaf/myjarbuild.jar").trim()
+                                     sh "echo ${RESPONSE_ssh}"
 
-                                    sh "sshpass -p ${myuser_PASSWORD} scp /target/*.jar ${myuser_USER}@${developmentServer}:/home/emichaf/myjarbuild.jar"
+                                     //sh "sshpass -p ${myuser_PASSWORD} scp /target/*.jar ${myuser_USER}@${developmentServer}:/home/emichaf/myjarbuild.jar"
 
                                     }
 
