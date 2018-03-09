@@ -27,11 +27,24 @@ def bintray = new bintray()
 
      try{
           if(params.jsonparams == "undefined" && params.runpipeline == "undefined")
-          { println "all undefined" }
-          props_json_params = readJSON text: "${params.jsonparams}"
+          {
+            println "all undefined"
+            deleteDir()
+            checkout scm
+
+            // Upload triggers to EI
+           sh "echo 'Upload triggers to EI'"
+           def my_RESPONSE = sh(returnStdout: true, script: "curl -H 'Content-Type: application/json' -X POST http://docker104-eiffel999.lmera.ericsson.se:8072/subscriptions --data-binary '@/pipeline/triggers/triggers.json'").trim()
+           sh "echo ${my_RESPONSE}"
+
+            deleteDir()
+          }else
+          {
+            props_json_params = readJSON text: "${params.jsonparams}"
+          }
      } catch (Exception e) {
       println e
-       throw e
+       throw e   //net.sf.json.JSONException: Invalid JSON String
      }
 
      def rootDir
@@ -49,10 +62,7 @@ node{
             sh "ls"
 
 
-           // Upload triggers to EI
-           sh "echo 'Upload triggers to EI'"
-           def my_RESPONSE = sh(returnStdout: true, script: "curl -H 'Content-Type: application/json' -X POST http://docker104-eiffel999.lmera.ericsson.se:8072/subscriptions --data-binary '@/pipeline/triggers/triggers.json'").trim()
-           sh "echo ${my_RESPONSE}"
+
 
 
 
