@@ -25,7 +25,6 @@ def bintray = new bintray()
 
      try{
           def props_json_params = readJSON text: "${params.jsonparams}"
-     }
      } catch (Exception e) {
 
       println e
