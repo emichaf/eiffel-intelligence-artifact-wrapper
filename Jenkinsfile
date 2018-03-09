@@ -25,9 +25,9 @@ node{
          stage('Compile SOURCE_CODE_REPO'){
              unstash "eiffel-intelligence-artifact-wrapper"
              sh "ls"
-             sh "echo ${rootDir}"
+             println("Current Directory: " + rootDir)
              def my_pipeline = load "${rootDir}/pipeline/groovy/Pipeline.groovy"
-             my_pipeline.SC_1
+             my_pipeline.SC_1()
          }
 
           stage('deploy development'){
