@@ -1,3 +1,5 @@
+@Library(['github.com/emichaf/myshared@master']) _
+
 pipeline {
    agent {
            docker { image 'emtrout/nind23' }
@@ -26,8 +28,9 @@ pipeline {
         stage ('test') {
             steps {
                 parallel (
-                    "unit tests": { sh 'mvn test' },
-                    "integration tests": { sh 'mvn integration-test' }
+                   println "unittests"
+                   // "unit tests": { sh 'mvn test' },
+                   // "integration tests": { sh 'mvn integration-test' }
                 )
             }
         }
@@ -35,7 +38,7 @@ pipeline {
         stage('deploy development'){
             steps {
                  println "hej"
-                //deploy(developmentServer, serverPort)
+                deploy(developmentServer, serverPort)
             }
         }
 
