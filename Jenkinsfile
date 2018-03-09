@@ -1,5 +1,7 @@
 pipeline {
-    label docker
+   agent {
+           docker { image 'emtrout/nind23' }
+       }
     environment {
         branch = 'master'
         scmUrl = 'https://github.com/emichaf/myshared.git'
