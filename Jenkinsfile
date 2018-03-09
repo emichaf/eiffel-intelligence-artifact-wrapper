@@ -1,7 +1,7 @@
 #!/usr/bin/env groovy
 
 @Library(['github.com/emichaf/jenkins-pipeline-libraries@master', 'github.com/emichaf/myshared@master' ]) _
-//@Library(['github.com/emichaf/myshared@master']) _
+@Library(['github.com/emichaf/myshared@master']) _
 
      def WRAPPER_REPO = "https://github.com/emichaf/eiffel-intelligence-artifact-wrapper.git"
      def SOURCE_CODE_REPO = "https://github.com/emichaf/eiffel-intelligence.git"
@@ -32,7 +32,9 @@ node{
              my_pipeline.SC_1()
          }
 
-          stage('deploy development'){      // using sjared libs
+          stage('deploy development'){      // using shared libs
+             unstash "eiffel-intelligence-artifact"
+             sh "ls"
              deploy(developmentServer, serverPort)
           }
 
