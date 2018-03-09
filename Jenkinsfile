@@ -11,6 +11,7 @@ node{
          stage('checkout WRAPPER_REPO'){
              deleteDir()
              git branch: "master", url: "$WRAPPER_REPO"
+             stash "eiffel-intelligence-artifact-wrapper"
              rootDir = pwd()
              println("Current Directory: " + rootDir)
          }
@@ -21,15 +22,13 @@ node{
               stash "eiffel-intelligence"
          }
 
-         stage('Compile SOURCE_CODE_REPO'){
-             // run maven build in local lib
+         stage('Compile SOURCE_CODE_REPO'){      // in local lib
+             unstash "eiffel-intelligence-artifact-wrapper"
              def my_pipeline = load "${rootDir}/pipeline/groovy/Pipeline.groovy"
              my_pipeline.SC_1
          }
 
-          stage('deploy development'){
-             println "hej"
-              // deploy in shared lib
+          stage('deploy development'){           // In shared lib
              deploy(developmentServer, serverPort)
           }
 
