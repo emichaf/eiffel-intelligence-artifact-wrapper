@@ -29,15 +29,21 @@ def bintray = new bintray()
           if(params.jsonparams == "undefined" && params.runpipeline == "undefined")
           {
             println "all undefined"
-            deleteDir()
-            checkout scm
 
-            // Upload triggers to EI
-           sh "echo 'Upload triggers to EI'"
-           def my_RESPONSE = sh(returnStdout: true, script: "curl -H 'Content-Type: application/json' -X POST http://docker104-eiffel999.lmera.ericsson.se:8072/subscriptions --data-binary '@/pipeline/triggers/triggers.json'").trim()
-           sh "echo ${my_RESPONSE}"
+            node{
 
-            deleteDir()
+                stage ('Coordinate Build') {
+                    deleteDir()
+                    checkout scm
+
+                    // Upload triggers to EI
+                   sh "echo 'Upload triggers to EI'"
+                   def my_RESPONSE = sh(returnStdout: true, script: "curl -H 'Content-Type: application/json' -X POST http://docker104-eiffel999.lmera.ericsson.se:8072/subscriptions --data-binary '@/pipeline/triggers/triggers.json'").trim()
+                   sh "echo ${my_RESPONSE}"
+
+                deleteDir()
+                }
+            }
           }else
           {
             props_json_params = readJSON text: "${params.jsonparams}"
