@@ -21,18 +21,16 @@ node{
               stash "eiffel-intelligence"
          }
 
-
-         // run maven build in local lib
-         def my_pipeline = load "${rootDir}/pipeline/groovy/Pipeline.groovy"
-         my_pipeline.SC_1
-
+         stage('Compile SOURCE_CODE_REPO'){
+             // run maven build in local lib
+             def my_pipeline = load "${rootDir}/pipeline/groovy/Pipeline.groovy"
+             my_pipeline.SC_1
+         }
 
           stage('deploy development'){
-                     steps {
-                          println "hej"
-                          // deploy in shared lib
-                         deploy(developmentServer, serverPort)
-                     }
+             println "hej"
+              // deploy in shared lib
+             deploy(developmentServer, serverPort)
           }
 
 
