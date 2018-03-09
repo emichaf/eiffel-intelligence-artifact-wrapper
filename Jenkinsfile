@@ -26,6 +26,8 @@ def bintray = new bintray()
      def props_json_params
 
      try{
+          if(${params.jsonparams} == "undefined" && ${params.jsonparams} == "undefined")
+          { println "all undefined" }
           props_json_params = readJSON text: "${params.jsonparams}"
      } catch (Exception e) {
       println e
