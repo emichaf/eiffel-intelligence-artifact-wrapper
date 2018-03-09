@@ -1,4 +1,6 @@
-@Library(['github.com/emichaf/myshared@master'])
+#!/usr/bin/env groovy
+
+@Library(['github.com/emichaf/myshared@master']) _
 
 pipeline {
    agent {
