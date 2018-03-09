@@ -33,7 +33,8 @@ node{
          }
 
           stage('deploy development'){      // using shared libs
-             unstash "eiffel-intelligence-artifact"
+            //library 'github.com/emichaf/myshared@master'
+             unstash "eiffel-intelligence"
              sh "ls"
              deploy(developmentServer, serverPort)
           }
