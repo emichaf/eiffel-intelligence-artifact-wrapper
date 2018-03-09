@@ -27,11 +27,13 @@ pipeline {
 
         stage ('test') {
             steps {
+            println "unittests"
+            /*
                 parallel (
-                   println "unittests"
                    // "unit tests": { sh 'mvn test' },
                    // "integration tests": { sh 'mvn integration-test' }
                 )
+            */
             }
         }
 
