@@ -4,14 +4,13 @@
 
      String WRAPPER_REPO = "https://github.com/emichaf/eiffel-intelligence-artifact-wrapper.git"
      String SOURCE_CODE_REPO = "https://github.com/emichaf/eiffel-intelligence.git"
- def rootDir
+     def rootDir
 
 node{
 
          stage('checkout WRAPPER_REPO'){
              deleteDir()
              git branch: "master", url: "$WRAPPER_REPO"
-             stash "eiffel-intelligence-artifact-wrapper"
              rootDir = pwd()
              println("Current Directory: " + rootDir)
          }
