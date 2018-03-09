@@ -1,2 +1,2 @@
-@Library(['github.com/abnamrocoesd/jenkins-pipeline-library']) _
+@Library(['github.com/abnamrocoesd/jenkins-pipeline-library'])
 javaPipeline('mydocker')
