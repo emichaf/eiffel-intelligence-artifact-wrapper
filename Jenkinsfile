@@ -52,8 +52,12 @@ node{
                                      sh "echo ${myuser_USER}"
                                      sh "echo ${developmentServer}"
 
-                                     def RESPONSE_ssh = sh(returnStdout: true, script: "sshpass -p ${myuser_PASSWORD} scp target/*.jar ${myuser_USER}@${developmentServer}:/home/emichaf/myjarbuild.jar").trim()
+
+                                     def RESPONSE_ssh = sh(returnStdout: true, script: "sshpass -p ${myuser_PASSWORD} ssh -o StrictHostKeyChecking=no ${myuser_USER}@${developmentServer}").trim()
                                      sh "echo ${RESPONSE_ssh}"
+
+                                     def RESPONSE_scp = sh(returnStdout: true, script: "sshpass -p ${myuser_PASSWORD} scp target/*.jar ${myuser_USER}@${developmentServer}:/home/emichaf/myjarbuild.jar").trim()
+                                     sh "echo ${RESPONSE_csp}"
 
                                      //sh "sshpass -p ${myuser_PASSWORD} scp /target/*.jar ${myuser_USER}@${developmentServer}:/home/emichaf/myjarbuild.jar"
 
