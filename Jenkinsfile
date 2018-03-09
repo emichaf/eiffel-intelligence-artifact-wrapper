@@ -2,7 +2,7 @@
 
 @Library(['github.com/emichaf/myshared@master']) _
 
- def scmUrl = "https://github.com/emichaf/eiffel-intelligence.git"
+ def WRAPPER_REPO = "https://github.com/emichaf/eiffel-intelligence.git"
  def rootDir
 
 node{
