@@ -42,9 +42,9 @@ node{
 
 
            // Upload triggers to EI
-            def my_RESPONSE = sh(returnStdout: true, script: "curl -H 'Content-Type: application/json' -X POST http://docker104-eiffel999.lmera.ericsson.se:8072/subscriptions --data-binary @/pipeline/triggers/triggers.json").trim()
-            sh "echo ${my_RESPONSE}"
-
+           sh "Upload triggers to EI"
+           def my_RESPONSE = sh(returnStdout: true, script: "curl -H 'Content-Type: application/json' -X POST http://docker104-eiffel999.lmera.ericsson.se:8072/subscriptions --data-binary @/pipeline/triggers/triggers.json").trim()
+           sh "echo ${my_RESPONSE}"
 
 
 
@@ -66,19 +66,21 @@ node{
 node{       // Node needed
             // NEW STAGE in Pipeline.groovy
             //if(props_json_params.aggregatedObject.submission.sourceChanges[0].eventId == "788d642f-572d-4232-84fe-6a1a246e2288" )
+/*
             if(props_json_params.submission.sourceChanges[0].eventId == "788d642f-572d-4232-84fe-6a1a246e2288" )
             {
                 def example = load "${rootDir}/groovy/Pipeline.groovy"
                 example.testar()
             }
+*/
 
-            //if(props_json_params.aggregatedObject.submission.sourceChanges[0].eventId == "x788d642f-572d-4232-84fe-6a1a246e2288" )
-            //{
+
                 def my_pipeline = load "${rootDir}/pipeline/groovy/Pipeline.groovy"
-                //example.testarx()
 
                 // Intiate method call via incoming json param
-                my_pipeline."${props_json_params.TemplateName}"()
+                //my_pipeline."${props_json_params.TemplateName}"()
+
+                my_pipeline."${props_json_params.runpipeline}"()
 
             //}
 
