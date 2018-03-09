@@ -1,5 +1,5 @@
 pipeline {
-    agent mydocker
+    agent docker
     environment {
         branch = 'master'
         scmUrl = 'https://github.com/emichaf/myshared.git'
