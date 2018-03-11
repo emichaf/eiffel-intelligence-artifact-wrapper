@@ -43,6 +43,10 @@ node{
               docker.withServer("$DOCKER_HOST", 'remote_docker_host') {
                          docker.image('emtrout/myssh').inside("--privileged") {
 
+
+                                sh "ls"
+                                sh "ls target"
+
                                 deploy(developmentServer)
 
 /*
