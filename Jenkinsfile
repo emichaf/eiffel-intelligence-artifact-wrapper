@@ -52,9 +52,11 @@ node{
                                      sh "echo ${myuser_USER}"
                                      sh "echo ${developmentServer}"
 
-//sshpass -p "yourpassword" rsync -rvz -e 'ssh -o StrictHostKeyChecking=no -p 22' --progress  root@111.111.111.111:/backup/origin /backup/destination/
 
+                                    // Create testfile
+                                    sh "echo 'hello">min.txt"
 
+                                    // copy to host
                                     def RESPONSE_scp = sh(returnStdout: true, script: "sshpass -p ${myuser_PASSWORD} scp -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no min.txt ${myuser_USER}@${developmentServer}:/home/emichaf/test/min.txt").trim()
                                      sh "echo ${RESPONSE_scp}"
 
