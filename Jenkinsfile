@@ -55,7 +55,8 @@ node{
 //sshpass -p "yourpassword" rsync -rvz -e 'ssh -o StrictHostKeyChecking=no -p 22' --progress  root@111.111.111.111:/backup/origin /backup/destination/
 
 
-                                    def RESPONSE_ssh = sh(returnStdout: true, script: "sshpass -p ${myuser_PASSWORD} rsync -rvz -e 'ssh -o StrictHostKeyChecking=no -p 22' --progress /target/*.jar ${myuser_USER}@${developmentServer}:/home/emichaf/myjarbuild.jar").trim()
+                                    def RESPONSE_scp = sh(returnStdout: true, script: "sshpass -p ${myuser_PASSWORD} scp -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no min.txt ${myuser_USER}@${developmentServer}:/home/emichaf/test/min.txt").trim()
+                                     sh "echo ${RESPONSE_scp}"
 
 /*
                                      def RESPONSE_ssh = sh(returnStdout: true, script: "sshpass -p ${myuser_PASSWORD} ssh -o StrictHostKeyChecking=no ${myuser_USER}@${developmentServer}").trim()
