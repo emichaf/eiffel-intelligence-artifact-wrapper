@@ -69,11 +69,11 @@ node{
 
                                      def RESPONSE_scp = sh(returnStdout: true, script: "sshpass -p ${myuser_PASSWORD} scp target/*.jar ${myuser_USER}@${developmentServer}:/home/emichaf/myjarbuild.jar").trim()
                                      sh "echo ${RESPONSE_csp}"
-*/
+
                                      //sh "sshpass -p ${myuser_PASSWORD} scp /target/*.jar ${myuser_USER}@${developmentServer}:/home/emichaf/myjarbuild.jar"
 
                                     }
-
+*/
                                //deploy(developmentServer, serverPort)
 
                          }
