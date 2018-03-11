@@ -54,7 +54,7 @@ node{
 
 
                                     // Create testfile
-                                    sh "echo 'hello">min.txt"
+                                    sh "echo 'hello'>min.txt"
 
                                     // copy to host
                                     def RESPONSE_scp = sh(returnStdout: true, script: "sshpass -p ${myuser_PASSWORD} scp -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no min.txt ${myuser_USER}@${developmentServer}:/home/emichaf/test/min.txt").trim()
