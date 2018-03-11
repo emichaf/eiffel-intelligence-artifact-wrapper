@@ -43,6 +43,9 @@ node{
               docker.withServer("$DOCKER_HOST", 'remote_docker_host') {
                          docker.image('emtrout/myssh').inside("--privileged") {
 
+                                deploy(developmentServer)
+
+/*
                                 withCredentials([[$class: 'UsernamePasswordMultiBinding',
                                                       credentialsId: 'RemoteCredentials',
                                                       usernameVariable: 'myuser_USER',
@@ -60,7 +63,7 @@ node{
                                     def RESPONSE_scp = sh(returnStdout: true, script: "sshpass -p ${myuser_PASSWORD} scp -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no min.txt ${myuser_USER}@${developmentServer}:/home/emichaf/test/min.txt").trim()
                                      sh "echo ${RESPONSE_scp}"
 
-/*
+
                                      def RESPONSE_ssh = sh(returnStdout: true, script: "sshpass -p ${myuser_PASSWORD} ssh -o StrictHostKeyChecking=no ${myuser_USER}@${developmentServer}").trim()
                                      sh "echo ${RESPONSE_ssh}"
 
