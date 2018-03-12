@@ -28,7 +28,7 @@ node{
 
  try {
           stage('prepare'){
-
+            println "hello"
 
           }
 
