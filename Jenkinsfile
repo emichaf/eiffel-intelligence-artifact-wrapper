@@ -31,7 +31,7 @@ node{
 
 
             // testar class i shared VAR
-            def testar = new log2.mylog()
+            def testar = new log2()
             testar.info("testar")
 
              // global VAR -> Singleton
