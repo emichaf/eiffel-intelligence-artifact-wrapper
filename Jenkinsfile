@@ -9,9 +9,9 @@
      String serverPort = "22"
      String rootDir
 
-
-node{
 try {
+node{
+
 
 
          stage('checkout WRAPPER_REPO'){
@@ -28,10 +28,11 @@ try {
          }
 
 
+} // node
 
 } catch (FlowInterruptedException interruptEx) {
     throw new Exception()
 }
 
 
-} // node
+
