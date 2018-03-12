@@ -2,6 +2,11 @@
 
 @Library(['github.com/emichaf/jenkins-pipeline-libraries@master', 'github.com/emichaf/myshared@master' ]) _
 
+
+
+node{
+
+
      def DOCKER_HOST = "tcp://docker104-eiffel999.lmera.ericsson.se:4243"
      def WRAPPER_REPO = "https://github.com/emichaf/eiffel-intelligence-artifact-wrapper.git"
      def SOURCE_CODE_REPO = "https://github.com/emichaf/eiffel-intelligence.git"
@@ -14,8 +19,8 @@
 
 
      def EVENT_PARSER_PUB_GEN_URI = 'http://docker104-eiffel999.lmera.ericsson.se:9900/doit/?msgType='
-     def DOMAIN_ID
-     def HOST_NAME
+     def DOMAIN_ID = sh(returnStdout: true, script: " domainname").trim()
+     def HOST_NAME = sh(returnStdout: true, script: "hostname").trim()
      def SOURCE_NAME = "femxxx-eiffelxx"
 
      def JENKINS_DISPLAY_URL = "${RUN_DISPLAY_URL}".replaceAll("unconfigured-jenkins-location","$JENKINS_HOSTNAME"+":"+"${JENKINS_HOSTPORT}")
@@ -23,10 +28,9 @@
 
 
 
-node{
 
-     DOMAIN_ID = sh(returnStdout: true, script: " domainname").trim()
-     HOST_NAME = sh(returnStdout: true, script: "hostname").trim()
+
+
 
 
  try {
