@@ -13,7 +13,7 @@
      def rootDir
 
 
-
+     String EVENT_PARSER_PUB_GEN_URI = 'http://docker104-eiffel999.lmera.ericsson.se:9900/doit/?msgType='
      String HOST_NAME = sh(returnStdout: true, script: "hostname").trim()
      String DOMAIN_ID = sh(returnStdout: true, script: " domainname").trim()
      String SOURCE_NAME = "femxxx-eiffelxx"
