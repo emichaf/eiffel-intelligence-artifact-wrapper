@@ -37,21 +37,21 @@ node{
           stage('prepare'){
             println "hello"
 
-                           // EiffelActivityTriggeredEvent
-                             def json_ActT = """{
-                                                 "meta.source.domainId":"${DOMAIN_ID}",
-                                                 "meta.source.host":"${HOST_NAME}",
-                                                 "meta.source.name":"${SOURCE_NAME}",
-                                                 "meta.source.uri":"${JENKINS_DISPLAY_URL}",
-                                                 "data.name":"Eiffel Intelligence Artifact Backend Component Build started",
-                                                 "data.categories[0]":"System Eiffel 2.0 Component Eiffel Intelligence Artifact Backend Build",
-                                                 "data.triggers[0]":{"type": "SOURCE_CHANGE", "description": "EI Artifact Aggregation Subscription Trigger"},
-                                                 "data.executionType": "AUTOMATED",
-                                                 "data.customData[0]": {"key" : "EI Subscription", "value" : "Subscription XX"},
-                                                 "meta.tags":"<%DELETE%>",
-                                                 "meta.security.sdm":"<%DELETE%>",
-                                                 "links[0]":"<%DELETE%>"
-                                               }"""
+                            // EiffelActivityTriggeredEvent
+                            def json_ActT = """{
+                                                "meta.source.domainId":"${DOMAIN_ID}",
+                                                "meta.source.host":"${HOST_NAME}",
+                                                "meta.source.name":"${SOURCE_NAME}",
+                                                "meta.source.uri":"${JENKINS_DISPLAY_URL}",
+                                                "data.name":"Eiffel Intelligence Artifact Backend Component Build started",
+                                                "data.categories[0]":"System Eiffel 2.0 Component Eiffel Intelligence Artifact Backend Build",
+                                                "data.triggers[0]":{"type": "SOURCE_CHANGE", "description": "EI Artifact Aggregation Subscription Trigger"},
+                                                "data.executionType": "AUTOMATED",
+                                                "data.customData[0]": {"key" : "EI Subscription", "value" : "Subscription XX"},
+                                                "links[0]": {"type" : "CAUSE", "target" : "6c360cd0-cc80-4cf4-bd60-e9af9c33cceb"},
+                                                "meta.tags":"<%DELETE%>",
+                                                "meta.security.sdm":"<%DELETE%>"
+                                              }"""
 
                              // Create ActT Event and publish
                              def RESPONSE_ActT = sh(returnStdout: true, script: "curl -H 'Content-Type: application/json' -X POST --data-binary '${json_ActT}' ${EVENT_PARSER_PUB_GEN_URI}EiffelActivityTriggeredEvent").trim()
