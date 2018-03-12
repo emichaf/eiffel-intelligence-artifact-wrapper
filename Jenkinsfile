@@ -9,7 +9,7 @@
      String serverPort = "22"
      String rootDir
 
-try {
+
 node{
 
 
@@ -27,9 +27,6 @@ node{
 
 } // node
 
-} catch (FlowInterruptedException interruptEx) {
-    throw new Exception()
-}
 
 
 
