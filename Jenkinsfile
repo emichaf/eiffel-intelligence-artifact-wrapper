@@ -95,10 +95,10 @@ currentBuild.result = 'SUCCESS'
 
 
 } catch (FlowInterruptedException interruptEx) {
-
+throw new Exception()
 
 } catch (err) {
-
+throw new Exception()
 
 } finally {
 
