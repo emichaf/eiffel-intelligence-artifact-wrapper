@@ -16,16 +16,13 @@ node{
 
          stage('checkout WRAPPER_REPO'){
              deleteDir()
-             git branch: "master", url: "$WRAPPER_REPO"
+             git branch: "master", url: "https://github.com/emichaf/eiffel-intelligence-artifact-wrapper.git"
              stash "eiffel-intelligence-artifact-wrapper"
              rootDir = pwd()
              println("Current Directory: " + rootDir)
          }
 
-         stage('checkout SOURCE_CODE_REPO'){
-              git branch: "master", url: "$SOURCE_CODE_REPO"
-              stash "eiffel-intelligence"
-         }
+
 
 
 } // node
