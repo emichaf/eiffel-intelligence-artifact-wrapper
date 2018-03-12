@@ -9,10 +9,10 @@
      String serverPort = "22"
      String rootDir
 
-
+try {
 node{
 
-try {
+
 
          stage('checkout WRAPPER_REPO'){
              deleteDir()
