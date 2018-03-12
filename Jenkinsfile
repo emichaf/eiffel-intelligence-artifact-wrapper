@@ -10,13 +10,6 @@
      def rootDir
 
 
-     //def JENKINS_DISPLAY_URL = "${RUN_DISPLAY_URL}".replaceAll("unconfigured-jenkins-location","$JENKINS_HOSTNAME"+":"+"${JENKINS_HOSTPORT}")
-     //def JENKINS_JOB_CONSOLE_URL = "${JENKINS_DISPLAY_URL}".replaceAll("display/redirect","console")
-
-     // In all events -> Meta
-     def DOMAIN_ID = sh(returnStdout: true, script: "domainname").trim()  //TODO not subdomain name, domainid..
-     def HOST_NAME = sh(returnStdout: true, script: "hostname").trim()
-     def SOURCE_NAME = "femxxx-eiffel0xx"
 
 
 node{
