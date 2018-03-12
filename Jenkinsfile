@@ -28,7 +28,7 @@ node{
 
          stage('test shared libs'){
 
-         Pipeline.min("$DOCKER_HOST")
+         Pipeline.min "$DOCKER_HOST"
 
          }
 
