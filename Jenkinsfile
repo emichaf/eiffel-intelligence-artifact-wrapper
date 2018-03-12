@@ -33,7 +33,7 @@ node{
              //log.info("testar")
 
             // global VAR -> Singletons
-             mypipeline.minfunc("$DOCKER_HOST", "")
+             mypipeline.minfunc("$DOCKER_HOST")
 
              //mypipeline.minfuncmap name: "$DOCKER_HOST"
 
