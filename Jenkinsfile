@@ -2,15 +2,15 @@
 
 @Library(['github.com/emichaf/jenkins-pipeline-libraries@master', 'github.com/emichaf/myshared@master' ]) _
 
-
-node{
-
      def DOCKER_HOST = "tcp://docker104-eiffel999.lmera.ericsson.se:4243"
      def WRAPPER_REPO = "https://github.com/emichaf/eiffel-intelligence-artifact-wrapper.git"
      def SOURCE_CODE_REPO = "https://github.com/emichaf/eiffel-intelligence.git"
      def developmentServer = "seliiuapp00308.lmera.ericsson.se"
      def serverPort = "22"
      def rootDir
+
+
+node{
 
 try {
 
@@ -29,63 +29,11 @@ try {
 
 
 
-         stage('test shared libs'){
-
-
-             // global VAR -> Singleton
-             //log.info("testar")
-
-            // global VAR -> Singletons
-
-            // def runpipeline = "minfunc"
-
-             //sh "echo ${runpipeline}"
-             //mypipeline."${runpipeline}"("$DOCKER_HOST")
-
-             //mypipeline.minfuncmap name: "$DOCKER_HOST"
-
-             // funkar om def call används
-             // Pipeline("$DOCKER_HOST")
-
-         }
-
-
-/*
-
-         stage('Compile SOURCE_CODE_REPO'){  // Using local libs
-             unstash "eiffel-intelligence-artifact-wrapper"
-             sh "ls"
-             println("Current Directory: " + rootDir)
-             def my_pipeline = load "${rootDir}/pipeline/groovy/Pipeline.groovy"
-             def BUILD_COMMAND = "mvn clean package -DskipTests"
-             // maven version för att ladda rätt images?
-             my_pipeline.SC_1(DOCKER_HOST, BUILD_COMMAND)
-         }
-
-          stage('deploy development'){      // using shared libs
-            //library 'github.com/emichaf/myshared@master'
-             unstash "eiffel-intelligence"
-             sh "ls"
-
-              docker.withServer("$DOCKER_HOST", 'remote_docker_host') {
-                         docker.image('emtrout/myssh').inside("--privileged") {
-
-                                sh "ls"
-                                sh "ls target"
-
-                                deploy(developmentServer)
-
-                         }
-              }
-          }
-*/
-
 } catch (FlowInterruptedException interruptEx) {
 
 } catch (err) {
 
 } finally {
-
 
 } // finally
 
