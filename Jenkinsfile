@@ -30,8 +30,8 @@ node{
          stage('test shared libs'){
 
 
-            // testar class i shared
-            def testar = new mylog()
+            // testar class i shared VAR
+            def testar = new log2.mylog()
             testar.info("testar")
 
              // global VAR -> Singleton
