@@ -33,7 +33,7 @@ node{
 
          //mypipeline.minfunc("$DOCKER_HOST")
 
-         mypipeline minfunc: "$DOCKER_HOST"
+         mypipeline.minfunc name: "$DOCKER_HOST"
 
          // funkar om def call används
          // Pipeline("$DOCKER_HOST")
