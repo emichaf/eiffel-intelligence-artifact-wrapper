@@ -18,6 +18,8 @@
      def HOST_NAME
      def SOURCE_NAME = "femxxx-eiffelxx"
 
+     def JENKINS_DISPLAY_URL = "${RUN_DISPLAY_URL}".replaceAll("unconfigured-jenkins-location","$JENKINS_HOSTNAME"+":"+"${JENKINS_HOSTPORT}")
+     def JENKINS_JOB_CONSOLE_URL = "${JENKINS_DISPLAY_URL}".replaceAll("display/redirect","console")
 
 
 
