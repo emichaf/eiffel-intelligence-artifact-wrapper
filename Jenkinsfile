@@ -23,30 +23,7 @@
 node{
 
 try {
-        stage('Prepare'){
 
-         // EiffelActivityTriggeredEvent
-          def json_ActT = """{
-                              "meta.source.domainId":"${DOMAIN_ID}",
-                              "meta.source.host":"${HOST_NAME}",
-                              "meta.source.name":"${SOURCE_NAME}",
-                              "meta.source.uri":"${JENKINS_DISPLAY_URL}",
-                              "data.name":"Eiffel Intelligence Artifact Backend Component Build started",
-                              "data.categories[0]":"System Eiffel 2.0 Component Eiffel Intelligence Artifact Backend Build",
-                              "data.triggers[0]":{"type": "SOURCE_CHANGE", "description": "EI Artifact Aggregation Subscription Trigger"},
-                              "data.executionType": "AUTOMATED",
-                              "data.customData[0]": {"key" : "EI Subscription", "value" : "Subscription XX"},
-                              "meta.tags":"<%DELETE%>",
-                              "meta.security.sdm":"<%DELETE%>"
-                            }"""
-
-              // Create ActT Event and publish
-              def RESPONSE_ActT = sh(returnStdout: true, script: "curl -H 'Content-Type: application/json' -X POST --data-binary '${json_ActT}' ${EVENT_PARSER_PUB_GEN_URI}EiffelActivityTriggeredEvent").trim()
-              sh "echo ${RESPONSE_ActT}"
-              props_ActT = readJSON text: "${RESPONSE_ActT}"
-              if(props_ActT.events[0].status_code != 200){throw new Exception()}
-
-         }
 
          stage('checkout WRAPPER_REPO'){
              deleteDir()
