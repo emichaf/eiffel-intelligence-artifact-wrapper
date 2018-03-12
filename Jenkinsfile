@@ -9,7 +9,40 @@
      def serverPort = "22"
      def rootDir
 
+
+     // In all events -> Meta
+     def DOMAIN_ID = sh(returnStdout: true, script: "domainname").trim()  //TODO not subdomain name, domainid..
+     def HOST_NAME = sh(returnStdout: true, script: "hostname").trim()
+     def COMPONENT_NAME = "femxxx-eiffel0xx"
+
+
 node{
+
+try {
+
+         // EiffelActivityTriggeredEvent
+          def json_ActT = """{
+                              "meta.source.domainId":"${DOMAIN_ID}",
+                              "meta.source.host":"${HOST_NAME}",
+                              "meta.source.name":"${SOURCE_NAME}",
+                              "meta.source.uri":"${JENKINS_DISPLAY_URL}",
+                              "data.name":"Eiffel Intelligence Artifact Backend Component Build started",
+                              "data.categories[0]":"System Eiffel 2.0 Component Eiffel Intelligence Artifact Backend Build",
+                              "data.triggers[0]":{"type": "SOURCE_CHANGE", "description": "EI Artifact Aggregation Subscription Trigger"},
+                              "data.executionType": "AUTOMATED",
+                              "data.customData[0]": {"key" : "EI Subscription", "value" : "Subscription XX"},
+                              "links[0]": {"type" : "CAUSE", "target" : "${props_json_params.aggregatedObject.submission.sourceChanges[0].eventId}"},
+                              "meta.tags":"<%DELETE%>",
+                              "meta.security.sdm":"<%DELETE%>"
+                            }"""
+
+          // Create ActT Event and publish
+          def RESPONSE_ActT = sh(returnStdout: true, script: "curl -H 'Content-Type: application/json' -X POST --data-binary '${json_ActT}' ${EVENT_PARSER_PUB_GEN_URI}EiffelActivityTriggeredEvent").trim()
+          sh "echo ${RESPONSE_ActT}"
+          props_ActT = readJSON text: "${RESPONSE_ActT}"
+          if(props_ActT.events[0].status_code != 200){throw new Exception()}
+
+
 
          stage('checkout WRAPPER_REPO'){
              deleteDir()
@@ -34,10 +67,10 @@ node{
 
             // global VAR -> Singletons
 
-             def runpipeline = "minfunc"
+            // def runpipeline = "minfunc"
 
-             sh "echo ${runpipeline}"
-             mypipeline."${runpipeline}"("$DOCKER_HOST")
+             //sh "echo ${runpipeline}"
+             //mypipeline."${runpipeline}"("$DOCKER_HOST")
 
              //mypipeline.minfuncmap name: "$DOCKER_HOST"
 
@@ -77,5 +110,19 @@ node{
           }
 */
 
+currentBuild.result = 'SUCCESS'
 
-}
+
+} catch (FlowInterruptedException interruptEx) {
+
+
+} catch (err) {
+
+
+} finally {
+
+
+} // finally
+
+
+} // node
