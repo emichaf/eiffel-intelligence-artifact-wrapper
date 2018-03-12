@@ -28,7 +28,7 @@ node{
 
          stage('test shared libs'){
 
-         Pipeline.SC_1()
+         Pipeline.SC_1(DOCKER_HOST, "testar")
 
          }
 
