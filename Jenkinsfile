@@ -14,8 +14,6 @@
 
 node{
 
-try {
-
 
          stage('checkout WRAPPER_REPO'){
              deleteDir()
@@ -83,19 +81,6 @@ try {
           }
 */
 
-currentBuild.result = 'SUCCESS'
-
-
-} catch (FlowInterruptedException interruptEx) {
-throw new Exception()
-
-} catch (err) {
-throw new Exception()
-
-} finally {
-
-
-} // finally
 
 
 } // node
