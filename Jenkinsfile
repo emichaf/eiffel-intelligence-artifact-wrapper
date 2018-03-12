@@ -12,7 +12,7 @@
 
 node{
 
-
+try {
 
          stage('checkout WRAPPER_REPO'){
              deleteDir()
@@ -22,8 +22,9 @@ node{
              println("Current Directory: " + rootDir)
          }
 
-
-
+ } catch (Exception e) {
+        throw e; // rethrow so the build is considered failed
+    }
 
 } // node
 
