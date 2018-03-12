@@ -30,7 +30,7 @@ try {
 
 
 } catch (FlowInterruptedException interruptEx) {
-println "hej"
+    throw new Exception()
 }
 
 
