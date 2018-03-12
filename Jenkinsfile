@@ -17,7 +17,7 @@
      // In all events -> Meta
      def DOMAIN_ID = sh(returnStdout: true, script: "domainname").trim()  //TODO not subdomain name, domainid..
      def HOST_NAME = sh(returnStdout: true, script: "hostname").trim()
-     def COMPONENT_NAME = "femxxx-eiffel0xx"
+     def SOURCE_NAME = "femxxx-eiffel0xx"
 
 
 node{
