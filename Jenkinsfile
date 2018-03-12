@@ -14,8 +14,7 @@
 
 
      def EVENT_PARSER_PUB_GEN_URI = 'http://docker104-eiffel999.lmera.ericsson.se:9900/doit/?msgType='
-     def DOMAIN_ID = sh(returnStdout: true, script: " domainname").trim()
-     def HOST_NAME = sh(returnStdout: true, script: "hostname").trim()
+
      def SOURCE_NAME = "femxxx-eiffelxx"
 
 
@@ -23,7 +22,8 @@
 
 node{
 
-
+     def DOMAIN_ID = sh(returnStdout: true, script: " domainname").trim()
+     def HOST_NAME = sh(returnStdout: true, script: "hostname").trim()
 
 
  try {
