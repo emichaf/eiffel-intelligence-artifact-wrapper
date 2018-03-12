@@ -30,11 +30,8 @@ node{
 
 
 } catch (FlowInterruptedException interruptEx) {
+println "hej"
+}
 
-} catch (err) {
-
-} finally {
-
-} // finally
 
 } // node
