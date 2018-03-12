@@ -1,7 +1,6 @@
 #!/usr/bin/env groovy
 
 @Library(['github.com/emichaf/jenkins-pipeline-libraries@master', 'github.com/emichaf/myshared@master' ]) _
-//@Library(['github.com/emichaf/myshared@master']) _
 
      def DOCKER_HOST = "tcp://docker104-eiffel999.lmera.ericsson.se:4243"
      def WRAPPER_REPO = "https://github.com/emichaf/eiffel-intelligence-artifact-wrapper.git"
@@ -25,6 +24,17 @@ node{
               stash "eiffel-intelligence"
          }
 
+
+
+         stage('test shared libs'){
+
+         Pipeline.SC_1()
+
+         }
+
+
+/*
+
          stage('Compile SOURCE_CODE_REPO'){  // Using local libs
              unstash "eiffel-intelligence-artifact-wrapper"
              sh "ls"
@@ -43,46 +53,15 @@ node{
               docker.withServer("$DOCKER_HOST", 'remote_docker_host') {
                          docker.image('emtrout/myssh').inside("--privileged") {
 
-
                                 sh "ls"
                                 sh "ls target"
 
                                 deploy(developmentServer)
 
-/*
-                                withCredentials([[$class: 'UsernamePasswordMultiBinding',
-                                                      credentialsId: 'RemoteCredentials',
-                                                      usernameVariable: 'myuser_USER',
-                                                      passwordVariable: 'myuser_PASSWORD']]) {
-
-                                     sh "ls"
-                                     sh "echo ${myuser_USER}"
-                                     sh "echo ${developmentServer}"
-
-
-                                    // Create testfile
-                                    sh "echo 'hello'>min.txt"
-
-                                    // copy to host
-                                    def RESPONSE_scp = sh(returnStdout: true, script: "sshpass -p ${myuser_PASSWORD} scp -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no min.txt ${myuser_USER}@${developmentServer}:/home/emichaf/test/min.txt").trim()
-                                     sh "echo ${RESPONSE_scp}"
-
-
-                                     def RESPONSE_ssh = sh(returnStdout: true, script: "sshpass -p ${myuser_PASSWORD} ssh -o StrictHostKeyChecking=no ${myuser_USER}@${developmentServer}").trim()
-                                     sh "echo ${RESPONSE_ssh}"
-
-                                     def RESPONSE_scp = sh(returnStdout: true, script: "sshpass -p ${myuser_PASSWORD} scp target/*.jar ${myuser_USER}@${developmentServer}:/home/emichaf/myjarbuild.jar").trim()
-                                     sh "echo ${RESPONSE_csp}"
-
-                                     //sh "sshpass -p ${myuser_PASSWORD} scp /target/*.jar ${myuser_USER}@${developmentServer}:/home/emichaf/myjarbuild.jar"
-
-                                    }
-*/
-                               //deploy(developmentServer, serverPort)
-
                          }
               }
           }
+*/
 
 
 }
