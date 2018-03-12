@@ -14,11 +14,11 @@
 
 
      String EVENT_PARSER_PUB_GEN_URI = 'http://docker104-eiffel999.lmera.ericsson.se:9900/doit/?msgType='
-     String HOST_NAME = sh(returnStdout: true, script: "hostname").trim()
      String DOMAIN_ID = sh(returnStdout: true, script: " domainname").trim()
+     String HOST_NAME = sh(returnStdout: true, script: "hostname").trim()
      String SOURCE_NAME = "femxxx-eiffelxx"
-     String JENKINS_DISPLAY_URL = "${RUN_DISPLAY_URL}".replaceAll("unconfigured-jenkins-location","$JENKINS_HOSTNAME"+":"+"${JENKINS_HOSTPORT}")
-     String JENKINS_JOB_CONSOLE_URL = "${JENKINS_DISPLAY_URL}".replaceAll("display/redirect","console")
+     //String JENKINS_DISPLAY_URL = "${RUN_DISPLAY_URL}".replaceAll("unconfigured-jenkins-location","$JENKINS_HOSTNAME"+":"+"${JENKINS_HOSTPORT}")
+     //String JENKINS_JOB_CONSOLE_URL = "${JENKINS_DISPLAY_URL}".replaceAll("display/redirect","console")
 
 
 node{
@@ -31,7 +31,7 @@ node{
                                                  "meta.source.domainId":"${DOMAIN_ID}",
                                                  "meta.source.host":"${HOST_NAME}",
                                                  "meta.source.name":"${SOURCE_NAME}",
-                                                 "meta.source.uri":"${JENKINS_DISPLAY_URL}",
+                                                 "meta.source.uri":"nisse",
                                                  "data.name":"Eiffel Intelligence Artifact Backend Component Build started",
                                                  "data.categories[0]":"System Eiffel 2.0 Component Eiffel Intelligence Artifact Backend Build",
                                                  "data.triggers[0]":{"type": "SOURCE_CHANGE", "description": "EI Artifact Aggregation Subscription Trigger"},
@@ -43,9 +43,6 @@ node{
 
                              // Create ActT Event and publish
                              def RESPONSE_ActT = sh(returnStdout: true, script: "curl -H 'Content-Type: application/json' -X POST --data-binary '${json_ActT}' ${EVENT_PARSER_PUB_GEN_URI}EiffelActivityTriggeredEvent").trim()
-                             sh "echo ${RESPONSE_ActT}"
-                             props_ActT = readJSON text: "${RESPONSE_ActT}"
-                             if(props_ActT.events[0].status_code != 200){throw new Exception()}
 
           }
 
