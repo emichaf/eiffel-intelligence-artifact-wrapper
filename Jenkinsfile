@@ -31,7 +31,9 @@ node{
 
          log.info("testar")
 
-         mypipeline.minfunc("$DOCKER_HOST")
+         //mypipeline.minfunc("$DOCKER_HOST")
+
+         mypipeline minfunc: "$DOCKER_HOST"
 
          // funkar om def call används
          // Pipeline("$DOCKER_HOST")
