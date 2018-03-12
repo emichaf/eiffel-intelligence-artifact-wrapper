@@ -13,15 +13,17 @@
      def rootDir
 
 
-     String EVENT_PARSER_PUB_GEN_URI = 'http://docker104-eiffel999.lmera.ericsson.se:9900/doit/?msgType='
-     String DOMAIN_ID = sh(returnStdout: true, script: " domainname").trim()
-     String HOST_NAME = sh(returnStdout: true, script: "hostname").trim()
-     String SOURCE_NAME = "femxxx-eiffelxx"
-     //String JENKINS_DISPLAY_URL = "${RUN_DISPLAY_URL}".replaceAll("unconfigured-jenkins-location","$JENKINS_HOSTNAME"+":"+"${JENKINS_HOSTPORT}")
-     //String JENKINS_JOB_CONSOLE_URL = "${JENKINS_DISPLAY_URL}".replaceAll("display/redirect","console")
+     def EVENT_PARSER_PUB_GEN_URI = 'http://docker104-eiffel999.lmera.ericsson.se:9900/doit/?msgType='
+     def DOMAIN_ID = sh(returnStdout: true, script: " domainname").trim()
+     def HOST_NAME = sh(returnStdout: true, script: "hostname").trim()
+     def SOURCE_NAME = "femxxx-eiffelxx"
 
 
 node{
+
+     def JENKINS_DISPLAY_URL = "${RUN_DISPLAY_URL}".replaceAll("unconfigured-jenkins-location","$JENKINS_HOSTNAME"+":"+"${JENKINS_HOSTPORT}")
+     def JENKINS_JOB_CONSOLE_URL = "${JENKINS_DISPLAY_URL}".replaceAll("display/redirect","console")
+
 
  try {
           stage('prepare'){
