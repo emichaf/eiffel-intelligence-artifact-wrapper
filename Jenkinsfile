@@ -29,7 +29,7 @@ node{
 
          stage('test shared libs'){
 
-            def a = new logs()
+            //def a = new logs()
             logs.a()
 
             // testar class i shared VAR
