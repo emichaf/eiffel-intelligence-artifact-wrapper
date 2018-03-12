@@ -1,7 +1,6 @@
 #!/usr/bin/env groovy
 
-//@Library(['github.com/emichaf/jenkins-pipeline-libraries@master', 'github.com/emichaf/myshared@master' ]) _
-@Library(['github.com/emichaf/myshared@master' ]) _
+@Library(['github.com/emichaf/jenkins-pipeline-libraries@master', 'github.com/emichaf/myshared@master' ]) _
 
      def DOCKER_HOST = "tcp://docker104-eiffel999.lmera.ericsson.se:4243"
      def WRAPPER_REPO = "https://github.com/emichaf/eiffel-intelligence-artifact-wrapper.git"
@@ -29,18 +28,13 @@ node{
 
          stage('test shared libs'){
 
-            //def a = new logs()
-            logs.a()
-
-            // testar class i shared VAR
-            //def testar = new log2()
-            //testar.info("testar")
 
              // global VAR -> Singleton
              //log.info("testar")
 
             // global VAR -> Singletons
-             //mypipeline.minfunc("$DOCKER_HOST")
+             mypipeline.minfunc("$DOCKER_HOST", "")
+
              //mypipeline.minfuncmap name: "$DOCKER_HOST"
 
              // funkar om def call används
