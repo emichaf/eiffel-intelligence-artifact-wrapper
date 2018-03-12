@@ -12,8 +12,10 @@
 
 
 
+
 node{
 
+try {
 
          stage('checkout WRAPPER_REPO'){
              deleteDir()
@@ -81,6 +83,13 @@ node{
           }
 */
 
+} catch (FlowInterruptedException interruptEx) {
 
+} catch (err) {
+
+} finally {
+
+
+} // finally
 
 } // node
