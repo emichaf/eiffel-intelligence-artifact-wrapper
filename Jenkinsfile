@@ -31,8 +31,6 @@ node{
 
              log.info("testar")
 
-             com.test.log.info("testar")
-
              mypipeline.minfunc("$DOCKER_HOST")
              mypipeline.minfuncmap name: "$DOCKER_HOST"
 
