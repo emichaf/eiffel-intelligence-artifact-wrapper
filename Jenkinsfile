@@ -2,18 +2,15 @@
 
 @Library(['github.com/emichaf/jenkins-pipeline-libraries@master', 'github.com/emichaf/myshared@master' ]) _
 
+
+node{
+
      def DOCKER_HOST = "tcp://docker104-eiffel999.lmera.ericsson.se:4243"
      def WRAPPER_REPO = "https://github.com/emichaf/eiffel-intelligence-artifact-wrapper.git"
      def SOURCE_CODE_REPO = "https://github.com/emichaf/eiffel-intelligence.git"
      def developmentServer = "seliiuapp00308.lmera.ericsson.se"
      def serverPort = "22"
      def rootDir
-
-
-
-
-
-node{
 
 try {
 
