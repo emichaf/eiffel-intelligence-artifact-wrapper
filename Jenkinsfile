@@ -29,10 +29,17 @@ node{
 
          stage('test shared libs'){
 
-             log.info("testar")
 
-             mypipeline.minfunc("$DOCKER_HOST")
-             mypipeline.minfuncmap name: "$DOCKER_HOST"
+            // testar class i shared
+            def testar = new mylog()
+            testar.info("testar")
+
+             // global VAR -> Singleton
+             //log.info("testar")
+
+            // global VAR -> Singletons
+             //mypipeline.minfunc("$DOCKER_HOST")
+             //mypipeline.minfuncmap name: "$DOCKER_HOST"
 
              // funkar om def call används
              // Pipeline("$DOCKER_HOST")
