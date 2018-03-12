@@ -29,7 +29,7 @@ node{
          stage('test shared libs'){
 
          log.info("testar")
-         //Pipeline.min("$DOCKER_HOST")
+         pipeline.min("$DOCKER_HOST")
 
          // funkar om def call används
          // Pipeline("$DOCKER_HOST")
