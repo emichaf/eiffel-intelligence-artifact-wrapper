@@ -36,7 +36,7 @@ node{
 
              def runpipeline = "minfunc"
 
-             sh "${runpipeline}"
+             sh "echo ${runpipeline}"
              mypipeline."${runpipeline}"("$DOCKER_HOST")
 
              //mypipeline.minfuncmap name: "$DOCKER_HOST"
