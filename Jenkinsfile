@@ -32,13 +32,13 @@ node{
 
             // testar class i shared VAR
             //def testar = new log2()
-            log2.info("testar")
+            //log2.info("testar")
 
              // global VAR -> Singleton
              //log.info("testar")
 
             // global VAR -> Singletons
-             //mypipeline.minfunc("$DOCKER_HOST")
+             mypipeline.minfunc("$DOCKER_HOST")
              //mypipeline.minfuncmap name: "$DOCKER_HOST"
 
              // funkar om def call används
