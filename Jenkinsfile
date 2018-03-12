@@ -29,14 +29,13 @@ node{
 
          stage('test shared libs'){
 
-         log.info("testar")
+             log.info("testar")
 
-         //mypipeline.minfunc("$DOCKER_HOST")
+             mypipeline.minfunc("$DOCKER_HOST")
+             mypipeline.minfuncmap name: "$DOCKER_HOST"
 
-         mypipeline.minfunc name: "$DOCKER_HOST"
-
-         // funkar om def call används
-         // Pipeline("$DOCKER_HOST")
+             // funkar om def call används
+             // Pipeline("$DOCKER_HOST")
 
          }
 
