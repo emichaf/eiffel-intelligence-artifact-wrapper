@@ -9,9 +9,9 @@
      String serverPort = "22"
      String rootDir
 
-try {
-node{
 
+node{
+try {
 
 
          stage('checkout WRAPPER_REPO'){
