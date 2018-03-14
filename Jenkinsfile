@@ -43,7 +43,7 @@ node{
           stage('prepare'){
               //echo sh(returnStdout: true, script: 'env')
 
-              println $currentBuild.currentResult
+              println currentBuild.currentResult()
 
 
                             // EiffelActivityTriggeredEvent
