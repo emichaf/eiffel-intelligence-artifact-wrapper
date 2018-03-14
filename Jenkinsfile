@@ -39,7 +39,7 @@ node{
 
  try {
           stage('prepare'){
-              echo sh(returnStdout: true, script: 'env')
+              //echo sh(returnStdout: true, script: 'env')
 
                             // EiffelActivityTriggeredEvent
                             def json_ActT = """{
