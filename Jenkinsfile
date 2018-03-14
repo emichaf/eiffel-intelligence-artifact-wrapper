@@ -47,7 +47,7 @@ node{
 
              echo "Init Branch: ${env.BRANCH_NAME}"
 
-             println "Init absoluteUrl: ${currentBuild.buildVariables}"
+             //println "Init absoluteUrl: ${currentBuild.buildVariables}"
 
 
 
