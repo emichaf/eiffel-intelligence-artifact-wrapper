@@ -2,6 +2,8 @@
 
 @Library(['github.com/emichaf/jenkins-pipeline-libraries@master', 'github.com/emichaf/myshared@master' ]) _
 
+    // Global vars
+    def EVENT_PARSER_PUB_GEN_URI = 'http://docker104-eiffel999.lmera.ericsson.se:9900/doit/?msgType='
 
 
 node{
@@ -18,7 +20,6 @@ node{
      def rootDir
 
 
-     def EVENT_PARSER_PUB_GEN_URI = 'http://docker104-eiffel999.lmera.ericsson.se:9900/doit/?msgType='
      def DOMAIN_ID = sh(returnStdout: true, script: " domainname").trim()
      def HOST_NAME = sh(returnStdout: true, script: "hostname").trim()
      def SOURCE_NAME = "femxxx-eiffelxx"
@@ -56,8 +57,8 @@ node{
                                                 "meta.security.sdm":"<%DELETE%>"
                                               }"""
 
-// error handling in shared
-eventhandling.send(json_ActT, "EiffelActivityTriggeredEventx")
+                            // error handling in shared
+                            eventhandling.send(json_ActT, "EiffelActivityTriggeredEventx")
 
 
                              // Create ActT Event and publish
