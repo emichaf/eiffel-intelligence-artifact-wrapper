@@ -57,15 +57,9 @@ node{
                                                 "meta.security.sdm":"<%DELETE%>"
                                               }"""
 
-                            // error handling in shared
-                            eventhandling.send(json_ActT, "EiffelActivityTriggeredEventx")
+                            // Create and Send event
+                            eventhandling.send(json_ActT, "EiffelActivityTriggeredEvent")
 
-
-                             // Create ActT Event and publish
-                             //def RESPONSE_ActT = sh(returnStdout: true, script: "curl -H 'Content-Type: application/json' -X POST --data-binary '${json_ActT}' ${EVENT_PARSER_PUB_GEN_URI}EiffelActivityTriggeredEvent").trim()
-                             //sh "echo ${RESPONSE_ActT}"
-                             //props_ActT = readJSON text: "${RESPONSE_ActT}"
-                             //if(props_ActT.events[0].status_code != 200){throw new Exception()}
 
 
           }
