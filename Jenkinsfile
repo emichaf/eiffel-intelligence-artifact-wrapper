@@ -40,7 +40,7 @@ node{
  try {
           stage('prepare'){
               //echo sh(returnStdout: true, script: 'env')
-              echo sh(returnStdout: true, script: 'currentBuild')
+              echo sh(returnStdout: true, script: '${currentBuild}')
 
 
                             // EiffelActivityTriggeredEvent
