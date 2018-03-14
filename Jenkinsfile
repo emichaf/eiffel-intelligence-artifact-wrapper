@@ -4,9 +4,14 @@
 
     // Global vars
    env.EVENT_PARSER_PUB_GEN_URI = 'http://docker104-eiffel999.lmera.ericsson.se:9900/doit/?msgType='
+   env.EIFFEL_DOMAIN_ID = ""
+   env.EIFFEL_COMPONENT = sh(returnStdout: true, script: "hostname").trim()
 
 
 node{
+
+
+
 
      // Set vars  ...
      def DOCKER_HOST = "tcp://docker104-eiffel999.lmera.ericsson.se:4243"
@@ -59,6 +64,10 @@ node{
                                                 "meta.tags":"<%DELETE%>",
                                                 "meta.security.sdm":"<%DELETE%>"
                                               }"""
+
+                            // testload
+                            //def my_pipeline = load "${rootDir}/pipeline/groovy/Pipeline.groovy"
+                            //def BUILD_COMMAND = "mvn clean package -DskipTests"
 
                             // Create and Send event
                             eventhandling.send(json_ActT, "EiffelActivityTriggeredEvent")
