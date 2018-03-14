@@ -56,9 +56,9 @@ node{
                                                 "meta.security.sdm":"<%DELETE%>"
                                               }"""
 
-
-def RESPONSE_ActT = parseSendEvent(json_ActT, "EiffelActivityTriggeredEvent")
-sh "echo ${RESPONSE_ActT}"
+parseSendEvent()
+//def RESPONSE_ActT = parseSendEvent()
+//sh "echo ${RESPONSE_ActT}"
 
                              // Create ActT Event and publish
                              //def RESPONSE_ActT = sh(returnStdout: true, script: "curl -H 'Content-Type: application/json' -X POST --data-binary '${json_ActT}' ${EVENT_PARSER_PUB_GEN_URI}EiffelActivityTriggeredEvent").trim()
