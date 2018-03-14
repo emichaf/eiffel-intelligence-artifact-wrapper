@@ -4,7 +4,7 @@
 
 node{
     // Global vars, visible in ${currentBuild.buildVariables}
-   def EVENT_PARSER_PUB_GEN_URI = 'http://docker104-eiffel999.lmera.ericsson.se:9900/doit/?msgType='
+   env.EIFFEL_EVENT_PARSER_PUB_GEN_URI = 'http://docker104-eiffel999.lmera.ericsson.se:9900/doit/?msgType='
    env.EIFFEL_DOMAIN_ID = "er001-eiffelxxx"
    env.EIFFEL_COMPONENT = "myrabbitmq-rabbitmq"
    env.EIFFEL_HOST = sh(returnStdout: true, script: "hostname").trim()
