@@ -5,6 +5,10 @@
     // Global vars
     def EVENT_PARSER_PUB_GEN_URI = 'http://docker104-eiffel999.lmera.ericsson.se:9900/doit/?msgType='
 
+environment {
+        CC = 'clang'
+    }
+
 
 node{
 
