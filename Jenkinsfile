@@ -47,7 +47,7 @@ node{
 
              println "Init absoluteUrl: ${currentBuild.absoluteUrl}"
 
-             println "Init currentResult: ${currentBuild.currentResult}"
+             //println "Init currentResult: ${currentBuild.currentResult}"
 
 
                             // EiffelActivityTriggeredEvent
