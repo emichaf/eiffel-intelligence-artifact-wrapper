@@ -44,7 +44,9 @@ node{
              echo sh(returnStdout: true, script: 'env')
 
              echo "Init Branch: ${env.BRANCH_NAME}"
-             //echo "Init absoluteUrl: ${currentBuild.absoluteUrl}"
+
+             echo "Init absoluteUrl: ${currentBuild.absoluteUrl}"
+
              echo "Init currentResult: ${currentBuild.currentResult}"
 
 
