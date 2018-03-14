@@ -41,9 +41,9 @@ node{
 
  try {
           stage('prepare'){
-              //echo sh(returnStdout: true, script: 'env')
+              echo sh(returnStdout: true, script: 'env.BUILD_TAG')
 
-              echo "Init result: ${currentBuild.result}"
+              echo "Init result: ${currentBuild.absoluteUrl}"
 
 
                             // EiffelActivityTriggeredEvent
