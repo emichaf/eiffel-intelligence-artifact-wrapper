@@ -56,7 +56,7 @@ node{
                                                 "meta.security.sdm":"<%DELETE%>"
                                               }"""
 
-def RESPONSE_ActT = eventhandling.parseSend(json_ActT, "EiffelActivityTriggeredEvent")
+def RESPONSE_ActT = eventhandling.send(json_ActT, "EiffelActivityTriggeredEvent")
 sh "echo ${RESPONSE_ActT}"
 
                              // Create ActT Event and publish
