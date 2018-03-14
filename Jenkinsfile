@@ -27,9 +27,9 @@ node{
      def JENKINS_JOB_CONSOLE_URL = "${JENKINS_DISPLAY_URL}".replaceAll("display/redirect","console")
 
 
-      // kolla envs i jenkins containern
+      // SÄTT ENV VARS på Jenkins domainId & Component -> kolla envs i jenkins containern
      // "meta.source.domainId" -> DomainId in Eiffel Message Bus Configuration
-     // "meta.source.host" ->  0b4d96a70c00 ?
+     // "meta.source.host" ->    0b4d96a70c00 ?   cmd hostname
      // "meta.source.name"  ->   "Component" name in Eiffel Message Bus Configuration
 
 
@@ -56,11 +56,15 @@ node{
                                                 "meta.security.sdm":"<%DELETE%>"
                                               }"""
 
+
+def RESPONSE_ActT = parseSendEvent(json_ActT, "EiffelActivityTriggeredEvent")
+sh "echo ${RESPONSE_ActT}"
+
                              // Create ActT Event and publish
-                             def RESPONSE_ActT = sh(returnStdout: true, script: "curl -H 'Content-Type: application/json' -X POST --data-binary '${json_ActT}' ${EVENT_PARSER_PUB_GEN_URI}EiffelActivityTriggeredEvent").trim()
-                             sh "echo ${RESPONSE_ActT}"
-                             props_ActT = readJSON text: "${RESPONSE_ActT}"
-                             if(props_ActT.events[0].status_code != 200){throw new Exception()}
+                             //def RESPONSE_ActT = sh(returnStdout: true, script: "curl -H 'Content-Type: application/json' -X POST --data-binary '${json_ActT}' ${EVENT_PARSER_PUB_GEN_URI}EiffelActivityTriggeredEvent").trim()
+                             //sh "echo ${RESPONSE_ActT}"
+                             //props_ActT = readJSON text: "${RESPONSE_ActT}"
+                             //if(props_ActT.events[0].status_code != 200){throw new Exception()}
 
 
           }
