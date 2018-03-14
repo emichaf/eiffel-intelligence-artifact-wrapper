@@ -43,11 +43,11 @@ node{
           stage('prepare'){
              echo sh(returnStdout: true, script: 'env')
 
-             println "Init currentResult: ${currentBuild.currentResult}"
+             println "Init currentResult: ${currentBuild.changeSets}"
 
              echo "Init Branch: ${env.BRANCH_NAME}"
 
-             println "Init absoluteUrl: ${currentBuild.absoluteUrl}"
+             println "Init absoluteUrl: ${currentBuild.buildVariables}"
 
 
 
