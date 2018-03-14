@@ -56,7 +56,7 @@ node{
                                                 "meta.security.sdm":"<%DELETE%>"
                                               }"""
 
-parseSendEvent()
+parsesendevent()
 //def RESPONSE_ActT = parseSendEvent()
 //sh "echo ${RESPONSE_ActT}"
 
