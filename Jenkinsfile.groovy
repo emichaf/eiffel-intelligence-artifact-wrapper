@@ -6,7 +6,7 @@
 
 node{
 
-
+     // Set vars  ...
      def DOCKER_HOST = "tcp://docker104-eiffel999.lmera.ericsson.se:4243"
      def WRAPPER_REPO = "https://github.com/emichaf/eiffel-intelligence-artifact-wrapper.git"
      def SOURCE_CODE_REPO = "https://github.com/emichaf/eiffel-intelligence.git"
@@ -27,7 +27,10 @@ node{
      def JENKINS_JOB_CONSOLE_URL = "${JENKINS_DISPLAY_URL}".replaceAll("display/redirect","console")
 
 
-
+      // kolla envs i jenkins containern
+     // "meta.source.domainId" -> DomainId in Eiffel Message Bus Configuration
+     // "meta.source.host" ->  0b4d96a70c00 ?
+     // "meta.source.name"  ->   "Component" name in Eiffel Message Bus Configuration
 
 
 
@@ -35,7 +38,7 @@ node{
 
  try {
           stage('prepare'){
-            println "hello"
+              echo sh(returnStdout: true, script: 'env')
 
                             // EiffelActivityTriggeredEvent
                             def json_ActT = """{
