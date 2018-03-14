@@ -45,9 +45,9 @@ node{
 
              echo "Init Branch: ${env.BRANCH_NAME}"
 
-             echo "Init absoluteUrl: ${currentBuild.absoluteUrl}"
+             println "Init absoluteUrl: ${currentBuild.absoluteUrl}"
 
-             echo "Init currentResult: ${currentBuild.currentResult}"
+             println "Init currentResult: ${currentBuild.currentResult}"
 
 
                             // EiffelActivityTriggeredEvent
