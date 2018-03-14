@@ -2,7 +2,7 @@
 
 @Library(['github.com/emichaf/jenkins-pipeline-libraries@master', 'github.com/emichaf/myshared@master' ]) _
 
-    // Global vars
+    // Global vars, visible in ${currentBuild.buildVariables}
    env.EVENT_PARSER_PUB_GEN_URI = 'http://docker104-eiffel999.lmera.ericsson.se:9900/doit/?msgType='
    //env.EIFFEL_DOMAIN_ID = ""
    //env.EIFFEL_COMPONENT = sh(returnStdout: true, script: "hostname").trim()
@@ -72,7 +72,7 @@ node{
                             //def BUILD_COMMAND = "mvn clean package -DskipTests"
 
                             // Create and Send event
-                            eventhandling.send(json_ActT, "EiffelActivityTriggeredEvent")
+                            eventhandling.send(JSON_IN : '${json_ActT}', EVENT_TYPE_IN : "EiffelActivityTriggeredEvent")
 
 
 
