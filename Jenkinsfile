@@ -5,7 +5,7 @@
     // Global vars
    env.EVENT_PARSER_PUB_GEN_URI = 'http://docker104-eiffel999.lmera.ericsson.se:9900/doit/?msgType='
    //env.EIFFEL_DOMAIN_ID = ""
-   env.EIFFEL_COMPONENT = sh(returnStdout: true, script: "hostname").trim()
+   //env.EIFFEL_COMPONENT = sh(returnStdout: true, script: "hostname").trim()
 
 
 node{
@@ -43,7 +43,7 @@ node{
           stage('prepare'){
               //echo sh(returnStdout: true, script: 'env')
 
-              println currentBuild.currentResult
+              println $currentBuild.currentResult
 
 
                             // EiffelActivityTriggeredEvent
