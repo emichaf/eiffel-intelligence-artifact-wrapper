@@ -41,7 +41,7 @@ node{
 
  try {
           stage('prepare'){
-              echo sh(returnStdout: true, script: 'env.BUILD_TAG')
+              echo sh(returnStdout: true, script: 'env.BRANCH_NAME')
 
               echo "Init result: ${currentBuild.absoluteUrl}"
 
