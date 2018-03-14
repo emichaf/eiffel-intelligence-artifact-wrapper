@@ -72,7 +72,7 @@ node{
                             //def BUILD_COMMAND = "mvn clean package -DskipTests"
 
                             // Create and Send event
-                            eventhandling.send(JSON_IN : '${json_ActT}', EVENT_TYPE_IN : "EiffelActivityTriggeredEvent")
+                            eventhandling.send(JSON_IN : "${json_ActT}", EVENT_TYPE_IN : "EiffelActivityTriggeredEvent")
 
 
 
