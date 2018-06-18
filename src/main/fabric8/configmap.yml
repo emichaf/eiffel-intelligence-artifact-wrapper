@@ -4,10 +4,23 @@ metadata:
 data:
   application.properties: |
     # spring application properties file
-    rabbitmq.host: myrabbitmq-rabbitmq
-    rabbitmq.port: 5672
-    rabbitmq.user: myuser
-    rabbitmq.password: myuser
-    mongodb.host: mymongodb-mongodb
-    mongodb.port: 27017
     spring.application.name: ${project.artifactId}
+    SpringApplicationName=eiffel-intelligence-artifact
+    rules.path=/ArtifactRules_new.json
+    rabbitmq.host=myrabbitmq-rabbitmq
+    rabbitmq.domainId=ei001-eiffel2
+    rabbitmq.componentName=eiffelintelligence-artifact
+    rabbitmq.waitlist.queue.suffix=waitlist-artifact
+    rabbitmq.port=5672
+    rabbitmq.user=myuser
+    rabbitmq.password=myuser
+    mongodb.host=mymongodb-mongodb
+    mongodb.port=27017
+    database.name=eiffel_intelligence-artifact
+    missedNotificationDataBaseName=MissedNotification-artifact
+    spring.mail.host=mail.lmera.ericsson.se
+    spring.mail.port=25
+    spring.mail.username=
+    spring.mail.password=
+    spring.mail.properties.mail.smtp.auth=false
+    spring.mail.properties.mail.smtp.starttls.enable=false

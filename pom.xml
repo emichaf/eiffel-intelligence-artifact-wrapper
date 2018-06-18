@@ -29,9 +29,10 @@
 
     <dependencies>
         <dependency>
-            <groupId>com.github.emichaf</groupId>
+            <groupId>com.github.Ericsson</groupId>
             <artifactId>eiffel-intelligence</artifactId>
-            <version>master-SNAPSHOT</version>
+            <version>0.0.9</version>
+            <!--<version>master-SNAPSHOT</version>-->
             <!--<version>v1.0.0-alpha</version>-->
         </dependency>
     </dependencies>
@@ -86,7 +87,7 @@
                         <configuration>
                             <artifactItems>
                                 <artifactItem>
-                                    <groupId>com.github.emichaf</groupId>
+                                    <groupId>com.github.Ericsson</groupId>
                                     <artifactId>eiffel-intelligence</artifactId>
                                     <overWrite>true</overWrite>
                                     <outputDirectory>${basedir}/src/main/docker/maven</outputDirectory>
