@@ -91,7 +91,7 @@
                                     <artifactId>eiffel-intelligence</artifactId>
                                     <overWrite>true</overWrite>
                                     <outputDirectory>${basedir}/src/main/docker/maven</outputDirectory>
-                                    <!--<destFileName>ei_fat.jar</destFileName>-->
+                                    <destFileName>app.jar</destFileName>-->
                                     <!--<destFileName>${project.artifactId}-${project.version}-${maven.build.timestamp}.jar</destFileName>-->
                                 </artifactItem>
                             </artifactItems>
