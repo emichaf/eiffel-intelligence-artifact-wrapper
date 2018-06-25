@@ -1,0 +1,12 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+spec:
+  rules:
+  - host: ${project.artifactId}.iris.seli.gic.ericsson.se
+    http:
+      paths:
+      - backend:
+          serviceName: ${project.artifactId}
+          servicePort: 8090
+        path: /

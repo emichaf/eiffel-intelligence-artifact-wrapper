@@ -7,7 +7,7 @@ data:
     spring.application.name: ${project.artifactId}
     SpringApplicationName=eiffel-intelligence-artifact
     rules.path=/ArtifactRules_new.json
-    rabbitmq.host=myrabbitmq-rabbitmq
+    rabbitmq.host=myrabbitmq
     rabbitmq.domainId=ei001-eiffel2
     rabbitmq.componentName=eiffelintelligence-artifact
     rabbitmq.waitlist.queue.suffix=waitlist-artifact

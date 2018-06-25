@@ -31,7 +31,7 @@
         <dependency>
             <groupId>com.github.Ericsson</groupId>
             <artifactId>eiffel-intelligence</artifactId>
-            <version>0.0.9</version>
+            <version>master-98333d7008-1</version>
             <!--<version>master-SNAPSHOT</version>-->
             <!--<version>v1.0.0-alpha</version>-->
         </dependency>
@@ -112,7 +112,7 @@
             <plugin>
                 <groupId>io.fabric8</groupId>
                 <artifactId>fabric8-maven-plugin</artifactId>
-                <version>3.5.26</version>
+                <version>3.5.39</version>
                 <configuration>
                     <images>
                         <image>
