@@ -4,6 +4,9 @@ import org.jenkinsci.plugins.workflow.steps.FlowInterruptedException
 
 node{
 
+
+
+
   // ######### NOTES & INFORMATION & WARNINGS ##############################################################################
   //
   // OBS change dir in containers not working, so fetching scm in containers is required. Stash/unstash dir() not working..
@@ -41,6 +44,7 @@ node{
 
      String OUTCOME_CONCLUSION
 
+     //String BUILD_COMMAND = "mvn clean package -DskipTests"
      String BUILD_COMMAND = "mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V"
 
      // OBS if changing params in properties, job needs to be re-imported
@@ -77,8 +81,10 @@ try {
 
            dir ('wrapper') {
 
+
                             git branch: "master", url: "$WRAPPER_REPO"
                             //git branch: "$env.BRANCH_NAME", url: "$WRAPPER_REPO"
+
 
                             // Read build info file with github hash
                             sh "cat $build_info_file"
@@ -86,6 +92,10 @@ try {
                             GITHUB_HASH_TO_USE = props.commit
 
                             sh "echo hash -> $GITHUB_HASH_TO_USE"
+
+                            sh "pwd"
+                            sh "ls"
+                            sh "ls src"
 
               }
 
@@ -173,6 +183,7 @@ try {
                       sh "${BUILD_COMMAND}"
 
                       sh 'ls target'
+
               }
 
 
@@ -183,10 +194,18 @@ try {
 
                         def travis_datas = readYaml file: ".travis.yml"
 
+                        //def travis_text = readFile file: ".travis.yml"
+                        //travis_text = "${travis_text}".replaceAll("\"","'").replaceAll(":",";")
+                        //"data.parameters[0]":{"name" : "Travis File" : "${travis_text}"},
+
+
                         // Execute tests (steps) in travis file, ie same file which is used in travis build (open source)
                         travis_datas.script.each { item ->
-                               sh "$item"
+                           //     sh "$item"
                         };
+
+                        sh "ls"
+                        //sh "ls target"
               }
 
 
@@ -198,6 +217,8 @@ try {
                                               credentialsId: 'NEXUS_CREDENTIALS_EIFFEL_NEXUS_EXTENSION',
                                               usernameVariable: 'EIFFEL_NEXUS_USER',
                                               passwordVariable: 'EIFFEL_NEXUS_PASSWORD']]) {
+
+                              sh 'ls'
 
                               // Upload to ARM (ex eiffel-intelligence-0.0.1-SNAPSHOT.war)
                               sh "curl -v -u ${EIFFEL_NEXUS_USER}:${EIFFEL_NEXUS_PASSWORD} --upload-file ./target/${ARM_ARTIFACT} ${ARM_ARTIFACT_PATH}"
