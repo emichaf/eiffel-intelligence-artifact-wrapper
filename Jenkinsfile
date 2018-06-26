@@ -224,7 +224,7 @@ try {
 
 
 
-              stage('Publish Artifact ARM -> JAR)') {
+              stage('Publish Artifact ARM -> WAR/JAR)') {
 
                        withCredentials([[$class: 'UsernamePasswordMultiBinding',
                                               credentialsId: 'NEXUS_CREDENTIALS_EIFFEL_NEXUS_EXTENSION',
@@ -233,7 +233,7 @@ try {
 
                               sh 'ls'
 
-                              // Upload to ARM (ex eiffel-intelligence-0.0.1-SNAPSHOT.jar)
+                              // Upload to ARM (ex eiffel-intelligence-0.0.1-SNAPSHOT.war)
                               sh "curl -v -u ${EIFFEL_NEXUS_USER}:${EIFFEL_NEXUS_PASSWORD} --upload-file ./target/${ARM_ARTIFACT} ${ARM_ARTIFACT_PATH}"
                       }
                 }
@@ -266,8 +266,8 @@ try {
 
 
 
-                                   // Fetch Artifact (jar) from ARM
-                                   sh "curl -X GET -u ${EIFFEL_NEXUS_USER}:${EIFFEL_NEXUS_PASSWORD} ${ARM_ARTIFACT_PATH} -o src/main/docker/app.jar"
+                                   // Fetch Artifact (jar/war) from ARM
+                                   sh "curl -X GET -u ${EIFFEL_NEXUS_USER}:${EIFFEL_NEXUS_PASSWORD} ${ARM_ARTIFACT_PATH} -o src/main/docker/app.war"
 
                                    sh "ls src/main/docker/"
 
