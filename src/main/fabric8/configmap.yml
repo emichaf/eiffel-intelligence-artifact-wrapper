@@ -14,7 +14,7 @@ data:
     rabbitmq.port=5672
     rabbitmq.user=myuser
     rabbitmq.password=myuser
-    mongodb.host=mymongodb-mongodb
+    mongodb.host=mymongo-mongodb
     mongodb.port=27017
     database.name=eiffel_intelligence-artifact
     missedNotificationDataBaseName=MissedNotification-artifact
