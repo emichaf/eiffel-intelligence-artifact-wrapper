@@ -15,23 +15,21 @@ node{
   // ######### NOTES & INFORMATION & WARNINGS ##############################################################################
 
 
-     String EVENT_PARSER_PUB_GEN_URI = 'http://docker104-eiffel999.lmera.ericsson.se:9900/doit/?msgType='
      String GIT_SHORT_COMMIT
      String GIT_LONG_COMMIT
      String GITHUB_HASH_TO_USE
      String ARM_ARTIFACT
      String ARM_ARTIFACT_PATH
      Object POM
+     String OUTCOME_CONCLUSION
+
+     // ### properties
      String ARM_URL = "https://eiffel.lmera.ericsson.se/nexus/content/repositories/releases/test/com/ericsson/eiffel/eiffel-intelligence-artifact-wrapper"
      String DOCKER_HOST = "tcp://docker104-eiffel999.lmera.ericsson.se:4243"
      String WRAPPER_REPO = "https://github.com/emichaf/eiffel-intelligence-artifact-wrapper.git"
      String SOURCE_CODE_REPO = "https://github.com/emichaf/eiffel-intelligence.git"
      String SONARQUBE_LOGIN_TOKEN = "8829c73e-19b0-4f77-b74c-e112bbacd4d5"
      String build_info_file = 'build_info.yml'
-
-
-     String OUTCOME_CONCLUSION
-
      String BUILD_COMMAND = "mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V"
 
 
