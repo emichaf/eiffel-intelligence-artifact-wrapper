@@ -10,7 +10,7 @@ Java_CI_Pipeline_Travisfile_Test {
      WRAPPER_REPO = "https://github.com/emichaf/eiffel-intelligence-artifact-wrapper.git"
      BUILD_INFO_FILE = 'build_info.yml'
      BUILD_COMMAND = "mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V"
-     SONARQUBE_LOGIN_TOKEN = "8829c73e-19b0-4f77-b74c-e112bbacd4d5" // flytta TILL JENKINS CREDS ??
+     SONARQUBE_LOGIN_TOKEN = "75dde79d93be2d19e9b2496b408b8824b8bf7c0e" // flytta TILL JENKINS CREDS ??
      SONAR_HOST_URL = "http://docker104-eiffel999.lmera.ericsson.se:9000"
      // https://sonarqube.lmera.ericsson.se"
      DOCKERIMAGE_BUILD_TEST = "emtrout/nind23"
