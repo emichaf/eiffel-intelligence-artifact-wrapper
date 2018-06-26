@@ -29,31 +29,13 @@ node{
      String SONARQUBE_LOGIN_TOKEN = "8829c73e-19b0-4f77-b74c-e112bbacd4d5"
      String build_info_file = 'build_info.yml'
 
-     String HOST_NAME = sh(returnStdout: true, script: "hostname").trim()
-     String DOMAIN_ID = sh(returnStdout: true, script: " domainname").trim()
-     String SOURCE_NAME = "Jenkins"
-
-     String JENKINS_DISPLAY_URL = "${RUN_DISPLAY_URL}".replaceAll("unconfigured-jenkins-location","$JENKINS_HOSTNAME"+":"+"${JENKINS_HOSTPORT}")
-     String JENKINS_JOB_CONSOLE_URL = "${JENKINS_DISPLAY_URL}".replaceAll("display/redirect","console")
-
-     String EiffelActivityTriggeredEvent_id
-     String EiffelArtifactCreatedEvent_id
 
      String OUTCOME_CONCLUSION
 
      String BUILD_COMMAND = "mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V"
 
-     // OBS if changing params in properties, job needs to be re-imported
-     //properties([parameters([string(name: "jsonparams", defaultValue: "undefined")])])
-     //def props_json_params = readJSON text: "${params.jsonparams}"
-
-     // Test NodeLabel Parameter Plugin
-     // properties([parameters([$class: "LabelParameterValue"(name: "NODE_NAME", label: "label1")])])
-
 
 try {
-
-
 
 
  docker.withServer("$DOCKER_HOST", 'remote_docker_host') {
