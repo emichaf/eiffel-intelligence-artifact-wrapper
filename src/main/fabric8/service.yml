@@ -6,5 +6,5 @@ spec:
     - name: http
       port: 8090
       protocol: TCP
-      targetPort: 8090
+      targetPort: eiartifact
     type: LoadBalancer
