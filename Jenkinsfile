@@ -44,7 +44,8 @@ node{
 
      String OUTCOME_CONCLUSION
 
-     String BUILD_COMMAND = "mvn clean package -DskipTests"
+     //String BUILD_COMMAND = "mvn clean package -DskipTests"
+     String BUILD_COMMAND = "mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V"
 
      // OBS if changing params in properties, job needs to be re-imported
      //properties([parameters([string(name: "jsonparams", defaultValue: "undefined")])])
