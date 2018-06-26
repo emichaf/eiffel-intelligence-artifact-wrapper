@@ -1,6 +1,6 @@
 #!/usr/bin/env groovy
 
-@Library(['github.com/emichaf/jenkins-pipeline-libraries@master', 'github.com/emichaf/myshared@master' ]) _
+@Library(['github.com/emichaf/myshared@master']) _
 
 javapipeline {
     branch = 'master'
