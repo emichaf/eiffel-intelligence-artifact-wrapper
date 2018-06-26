@@ -6,7 +6,6 @@ spec:
   rules:
   - host: ${project.artifactId}.iris.seli.gic.ericsson.se
     http:
-      port: 8090
       paths:
       - backend:
           serviceName: ${project.artifactId}

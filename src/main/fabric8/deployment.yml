@@ -13,14 +13,9 @@ spec:
             - key: application.properties
               path: application.properties
       containers:
-      - env:
-        ports:
-          - containerPort: 8090
-            name: ei
-            protocol: TCP
-        volumeMounts:
+        - volumeMounts:
             - name: config
               mountPath: "/deployments/config"
-        imagePullPolicy : Always
+          imagePullPolicy : Always
       imagePullSecrets:
       - name: registrypullsecret
