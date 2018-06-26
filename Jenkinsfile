@@ -47,8 +47,8 @@ node{
      String BUILD_COMMAND = "mvn clean package -DskipTests"
 
      // OBS if changing params in properties, job needs to be re-imported
-     properties([parameters([string(name: "jsonparams", defaultValue: "undefined")])])
-     def props_json_params = readJSON text: "${params.jsonparams}"
+     //properties([parameters([string(name: "jsonparams", defaultValue: "undefined")])])
+     //def props_json_params = readJSON text: "${params.jsonparams}"
 
      // Test NodeLabel Parameter Plugin
      // properties([parameters([$class: "LabelParameterValue"(name: "NODE_NAME", label: "label1")])])
