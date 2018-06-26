@@ -253,9 +253,9 @@ try {
            stage('Build and Push Docker Image to Registry') {
 
 
-                               def exists = fileExists '/src/main/docker/app.jar'
+                               def exists = fileExists '/src/main/docker/app.war'
                                if (exists) {
-                                   sh "rm /src/main/docker/app.jar"
+                                   sh "rm /src/main/docker/app.war"
                                }
 
 
