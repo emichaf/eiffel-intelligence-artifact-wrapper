@@ -11,7 +11,6 @@ Java_CI_Pipeline_Travisfile_Test {
      BUILD_INFO_FILE = 'build_info.yml'
      BUILD_COMMAND = "mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V"
      SONARQUBE_HOST_URL = "https://sonarqube.lmera.ericsson.se"
-     //SONARQUBE_LOGIN_TOKEN = "61a8817154aa0f92524cbd4079d389bc7db6b0c4" // flytta TILL JENKINS CREDS ??
      DOCKERIMAGE_BUILD_TEST = "emtrout/nind23"
      DOCKERIMAGE_DOCKER_BUILD_PUSH = "emtrout/nind23"
      JAR_WAR_EXTENSION = "war"
