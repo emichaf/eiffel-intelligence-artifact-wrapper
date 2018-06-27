@@ -4,7 +4,7 @@
 
 Java_CI_Pipeline_Travisfile_Test {
 
-     ARM_URL = "https://eiffel.lmera.ericsson.se/nexus/content/repositories/releases/test/com/ericsson/eiffel/eiffel-intelligence-artifact-wrapper"
+     ARM_URL = "https://eiffel.lmera.ericsson.se/nexus/content/repositories/releases/eiffel2_devops_test/com/ericsson/eiffel/eiffel-intelligence-backend"
      DOCKER_HOST = "tcp://docker104-eiffel999.lmera.ericsson.se:4243"
      SOURCE_CODE_REPO = "https://github.com/ericsson/eiffel-intelligence.git"
      WRAPPER_REPO = "https://github.com/emichaf/eiffel-intelligence-artifact-wrapper.git"
